@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Экзаменационный тест из PDF и DOCX — 1.14</title>
+<title>MedQuiz — персональный тренажёр</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
@@ -23,152 +23,38 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 </script>
 
 <style>
-body{
-  font-family:Arial,sans-serif;
-  max-width:950px;
-  margin:30px auto;
-  padding:10px;
-  font-size:18px;
-  line-height:1.4;
-}
-button{
-  display:block;
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  font-size:17px;
-  border-radius:10px;
-  border:1px solid #bbb;
-  background:#f7f7f7;
-  cursor:pointer;
-}
-button:disabled{
-  opacity:.55;
-  cursor:default;
-}
-.selected{
-  background:#dbeafe;
-  border-color:#3b82f6;
-}
-.correct{
-  background:#b8f7b8!important;
-}
-.wrong{
-  background:#ffb5b5!important;
-}
-.action{
-  background:#222;
-  color:white;
-}
-.small{
-  width:auto;
-  display:inline-block;
-}
-.card{
-  padding:14px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  margin:14px 0;
-  background:#fafafa;
-}
-.optionReview{
-  padding:10px;
-  margin:6px 0;
-  border:1px solid #ccc;
-  border-radius:10px;
-  background:#f7f7f7;
-}
-input[type="number"]{
-  font-size:17px;
-  padding:5px;
-}
-input[type="file"]{
-  font-size:16px;
-  max-width:100%;
-}
-.info{
-  font-size:15px;
-  color:#555;
-}
-.warning{
-  padding:10px 12px;
-  border:1px solid #d5a000;
-  border-radius:10px;
-  background:#fff9dc;
-  margin:12px 0;
-}
-.hidden{
-  display:none!important;
-}
+:root{--navy:#17324d;--muted:#697b8c;--line:#dce7ec;--brand:#087e8b;--brand-dark:#086570;--mint:#e7f7f5;--bg:#f4f8f9;--surface:#fff;--danger:#d95865;--warning:#d88738;--shadow:0 18px 50px rgba(23,50,77,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--navy);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.5;background:radial-gradient(circle at 90% 0,#dff5f3 0,transparent 30%),var(--bg);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:28px 20px;border-right:1px solid var(--line);background:rgba(255,255,255,.88);backdrop-filter:blur(18px)}
+.logo{display:flex;align-items:center;gap:11px;margin:0 10px 36px;font-size:21px;font-weight:800;letter-spacing:-.03em}.logo-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;color:#fff;background:linear-gradient(135deg,var(--brand),#19aa9b);box-shadow:0 10px 24px rgba(8,126,139,.22)}
+.nav-button{display:flex;width:100%;align-items:center;gap:12px;margin:5px 0;padding:12px 14px;border:0;border-radius:12px;color:#52687a;background:transparent;text-align:left}.nav-button.active{color:var(--brand-dark);font-weight:700;background:var(--mint)}.nav-icon{width:22px;text-align:center}.profile-chip{position:absolute;left:20px;right:20px;bottom:24px;display:flex;gap:11px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:#fff;font-weight:800;background:var(--brand)}
+.main{width:100%;max-width:1180px;margin:0 auto;padding:38px 42px 80px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.eyebrow{margin:0 0 5px;color:var(--brand);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.topbar h1{margin:0;font-size:clamp(27px,3vw,40px);line-height:1.15;letter-spacing:-.04em}.ghost-button,.action,.secondary{width:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 17px;border-radius:12px;font-weight:700}.ghost-button,.secondary{color:var(--navy);border:1px solid var(--line);background:#fff}.action{color:#fff;border:0;background:var(--brand);box-shadow:0 10px 24px rgba(8,126,139,.2)}.action:hover{background:var(--brand-dark)}
+.hero{display:grid;grid-template-columns:1.55fr .9fr;gap:18px;margin-bottom:20px}.panel,.card{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.hero-main{padding:28px;background:linear-gradient(135deg,#0a7d89,#0a9389);color:#fff;overflow:hidden;position:relative}.hero-main:after{content:"";position:absolute;width:230px;height:230px;right:-70px;bottom:-110px;border-radius:50%;border:35px solid rgba(255,255,255,.1)}.hero-main h2{position:relative;margin:5px 0 8px;font-size:28px;letter-spacing:-.035em}.hero-main p{position:relative;margin:0 0 22px;color:#dff8f5}.hero-main .action{position:relative;color:var(--brand-dark);background:#fff;box-shadow:none}.hero-side{padding:25px}.hero-side h3{margin:0 0 8px;font-size:18px}.error-count{font-size:43px;font-weight:800;letter-spacing:-.06em;color:var(--warning)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}.stat{padding:18px;border:1px solid var(--line);border-radius:16px;background:#fff}.stat strong{display:block;font-size:25px;letter-spacing:-.04em}.stat span{color:var(--muted);font-size:13px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:31px 0 14px}.section-head h2{margin:0;font-size:23px;letter-spacing:-.03em}.section-head p{margin:3px 0 0;color:var(--muted)}
+.library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.test-card{padding:22px}.test-icon{display:grid;place-items:center;width:44px;height:44px;margin-bottom:20px;border-radius:13px;color:var(--brand-dark);background:var(--mint);font-size:20px}.test-card h3{margin:0 0 7px;font-size:19px}.test-card p{margin:0 0 18px;color:var(--muted)}.progress{height:7px;margin:14px 0 8px;overflow:hidden;border-radius:999px;background:#e8eff2}.progress span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--brand),#36b7a6)}
+.upload-card{padding:24px}.dropzone{display:block;padding:28px;border:1.5px dashed #94bdc4;border-radius:17px;background:#f8fcfc;text-align:center}.dropzone input{display:block;max-width:100%;margin:14px auto 0}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:8px}.choice-row label{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}.choice-row input[type=radio]{accent-color:var(--brand)}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
+#startBtn{margin-top:18px}.quiz-shell{max-width:850px;margin:0 auto}.card{padding:24px;margin:16px 0}.card button:not(.action){display:block;width:100%;padding:14px;margin:9px 0;border:1px solid var(--line);border-radius:13px;color:var(--navy);background:#fff;text-align:left}.card button:hover{border-color:#98bcc4;background:#f8fbfc}.selected{background:#e5f4f8!important;border-color:var(--brand)!important}.correct{background:#dff6e9!important;border-color:#50a779!important}.wrong{background:#ffe6e8!important;border-color:var(--danger)!important}.optionReview{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:11px;background:#fff}.warning{padding:12px 14px;border:1px solid #edc278;border-radius:12px;background:#fff7e5;margin:12px 0}.hidden{display:none!important}#next{width:100%;margin-top:14px}.mobile-nav{display:none}
+.app.testing{display:block;background:#fff}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:1700px;padding:42px 7vw 70px}.app.testing .quiz-shell{max-width:none;margin:0}.app.testing #quizProgress{display:block!important;margin:0 0 38px;font-size:24px;font-weight:500;color:#111}.app.testing #quiz h3{margin:0 0 34px;color:#080808;font-size:clamp(27px,3vw,40px);line-height:1.25;letter-spacing:-.025em}.app.testing #quiz button{display:flex;align-items:center;justify-content:center;width:100%;min-height:80px;margin:14px 0;padding:15px 25px;border:2px solid #c9c9c9;border-radius:17px;color:#0b0b0b;background:#f8f8f8;box-shadow:none;text-align:center;font-size:clamp(20px,2.05vw,31px);font-weight:500;line-height:1.25}.app.testing #quiz button:hover{border-color:#8b8b8b;background:#f3f3f3}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#aef0b4!important;border-color:#3b8cff!important}.app.testing #quiz button.wrong{background:#ffc7c7!important;border-color:#ef5b67!important}.app.testing #result{min-height:42px;margin:12px 0 4px;color:#0b0b0b;font-size:28px;font-weight:700}.app.testing #next{min-height:78px;border-radius:17px;color:#fff;background:#202020;box-shadow:none;font-size:25px}.app.testing #next:hover{background:#080808}
+@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.library,.settings-grid{grid-template-columns:1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}}
 </style>
 </head>
 
-<body>
-
-<h2>Экзаменационный тест из PDF или Word — версия 1.14</h2>
-
-<input type="file" id="file"
-       accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-
-<p class="info">
-Поддерживаются PDF и DOCX. Для Word правильный ответ определяется по зелёной заливке текста.
-Для PDF можно использовать зелёный фон или жирный шрифт.
-</p>
-
-<div id="pdfSettings">
-  <p><b>Как искать правильные ответы в PDF:</b></p>
-  <label><input type="radio" name="detect" value="auto" checked> Авто: зелёный фон</label><br>
-  <label><input type="radio" name="detect" value="green"> Только зелёный фон</label><br>
-  <label><input type="radio" name="detect" value="bold"> Только жирный шрифт</label><br><br>
-</div>
-
-<p class="info">
-Вопросы, где в текстовом слое есть галочка или крестик, полностью исключаются.
-Графические отметки в PDF распознаются приблизительно.
-</p>
-
-<p><b>Режим теста:</b></p>
-<label><input type="radio" name="mode" value="instant" checked> Показывать ответы сразу</label><br>
-<label><input type="radio" name="mode" value="end"> Показывать ответы только в конце</label><br><br>
-
-<p><b>Количество вопросов для случайного теста:</b></p>
-<label><input type="radio" name="count" value="20"> 20</label><br>
-<label><input type="radio" name="count" value="50" checked> 50</label><br>
-<label><input type="radio" name="count" value="100"> 100</label><br>
-<label><input type="radio" name="count" value="150"> 150</label><br>
-<label><input type="radio" name="count" value="200"> 200</label><br><br>
-
-<p><b>Источник вопросов:</b></p>
-
-<label>
-  <input type="radio" name="source" value="random" checked>
-  Случайные вопросы
-</label><br>
-
-<label>
-  <input type="radio" name="source" value="rangeRandom">
-  Случайные 20% из диапазона: с №
-  <input id="fromNum" type="number" value="1" style="width:70px">
-  до №
-  <input id="toNum" type="number" value="50" style="width:70px">
-</label><br>
-
-<label>
-  <input type="radio" name="source" value="rangeOrdered">
-  Все вопросы подряд из диапазона: с №
-  <input id="fromNum2" type="number" value="1" style="width:70px">
-  до №
-  <input id="toNum2" type="number" value="50" style="width:70px">
-</label><br><br>
-
-<button id="startBtn" onclick="start()" class="small action">Начать тест</button>
-
-<p id="status">Выберите PDF или DOCX и настройки теста.</p>
-
-<div id="quiz"></div>
-<div id="result"></div>
-
-<button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button>
+<body><div class="app">
+<aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
+<button class="nav-button active"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button"><span class="nav-icon">◷</span>История</button></nav>
+<div class="profile-chip"><span class="avatar">Г</span><div><strong>Гость</strong><div class="info">Войти в аккаунт</div></div></div></aside>
+<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1>Добрый день!</h1></div><button class="ghost-button">Войти</button></header>
+<section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button class="secondary" disabled>Работа над ошибками</button></div></section>
+<section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
+<div class="section-head"><div><h2>Мои тесты</h2><p>Готовые и загруженные вами материалы</p></div></div><section class="library"><article class="panel test-card"><div class="test-icon">＋</div><h3>Добавьте первый тест</h3><p>После обработки он появится в библиотеке с названием исходного файла.</p><div class="progress"><span></span></div></article></section>
+<div class="section-head"><div><h2>Загрузить свой тест</h2><p>Все прежние настройки сохранены</p></div></div><section class="panel upload-card">
+<label class="dropzone"><strong>Выберите PDF или DOCX</strong><div class="info">Файл обрабатывается в браузере</div><input type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
+<div class="settings-grid"><div class="setting-block"><p><b>Режим проверки</b></p><div class="choice-row"><label><input type="radio" name="mode" value="instant" checked>Сразу</label><label><input type="radio" name="mode" value="end">В конце</label></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
+<div class="setting-block"><p><b>Источник вопросов</b></p><div class="choice-row"><label><input type="radio" name="source" value="random" checked>Случайные</label><label><input type="radio" name="source" value="rangeRandom">20% диапазона</label><label><input type="radio" name="source" value="rangeOrdered">Весь диапазон</label></div><p class="info">Диапазон: <input id="fromNum" type="number" value="1"> — <input id="toNum" type="number" value="50"><input id="fromNum2" type="hidden" value="1"><input id="toNum2" type="hidden" value="50"></p></div></div>
+<details id="pdfSettings"><summary>Дополнительные настройки распознавания PDF</summary><div class="choice-row" style="margin-top:12px"><label><input type="radio" name="detect" value="auto" checked>Авто</label><label><input type="radio" name="detect" value="green">Зелёный фон</label><label><input type="radio" name="detect" value="bold">Жирный шрифт</label></div></details>
+<button id="startBtn" onclick="start()" class="action">Начать тест</button><p id="status" class="info">Выберите PDF или DOCX и настройки теста.</p></section>
+<div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div></main>
+<nav class="mobile-nav"><button class="active">⌂<br>Главная</button><button>▤<br>Тесты</button><button>↻<br>Ошибки</button><button>○<br>Профиль</button></nav></div>
 
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -1808,6 +1694,9 @@ function resetRun(qs){
 
   document.getElementById("result").innerHTML = "";
 
+  document.querySelector(".app").classList.add("testing");
+  window.scrollTo({top:0, behavior:"smooth"});
+
   showQ();
 }
 
@@ -1828,6 +1717,9 @@ function showQ(){
     (current + 1) +
     " / " +
     test.length;
+
+  document.getElementById("quizProgress").textContent =
+    "Вопрос " + (current + 1) + " / " + test.length;
 
   let html =
     `<h3>${escapeHtml(q.num)}. ${
@@ -1917,6 +1809,9 @@ function finishTest(){
 
   document.getElementById("next").style.display =
     "none";
+
+  document.querySelector(".app").classList.remove("testing");
+  document.getElementById("quizProgress").style.display = "none";
 
   document.getElementById("status").textContent =
     "Тест завершён";
