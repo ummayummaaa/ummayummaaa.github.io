@@ -6,6 +6,7 @@
 <title>MedQuiz — персональный тренажёр</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /*!
 
@@ -35,16 +36,18 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 .upload-card{padding:24px}.dropzone{display:block;padding:28px;border:1.5px dashed #94bdc4;border-radius:17px;background:#f8fcfc;text-align:center}.dropzone input{display:block;max-width:100%;margin:14px auto 0}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:8px}.choice-row label{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}.choice-row input[type=radio]{accent-color:var(--brand)}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
 #startBtn{margin-top:18px}.quiz-shell{max-width:850px;margin:0 auto}.card{padding:24px;margin:16px 0}.card button:not(.action){display:block;width:100%;padding:14px;margin:9px 0;border:1px solid var(--line);border-radius:13px;color:var(--navy);background:#fff;text-align:left}.card button:hover{border-color:#98bcc4;background:#f8fbfc}.selected{background:#e5f4f8!important;border-color:var(--brand)!important}.correct{background:#dff6e9!important;border-color:#50a779!important}.wrong{background:#ffe6e8!important;border-color:var(--danger)!important}.optionReview{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:11px;background:#fff}.warning{padding:12px 14px;border:1px solid #edc278;border-radius:12px;background:#fff7e5;margin:12px 0}.hidden{display:none!important}#next{width:100%;margin-top:14px}.mobile-nav{display:none}
 .app.testing{display:block;background:#fff}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:1700px;padding:42px 7vw 70px}.app.testing .quiz-shell{max-width:none;margin:0}.app.testing #quizProgress{display:block!important;margin:0 0 38px;font-size:24px;font-weight:500;color:#111}.app.testing #quiz h3{margin:0 0 34px;color:#080808;font-size:clamp(27px,3vw,40px);line-height:1.25;letter-spacing:-.025em}.app.testing #quiz button{display:flex;align-items:center;justify-content:center;width:100%;min-height:80px;margin:14px 0;padding:15px 25px;border:2px solid #c9c9c9;border-radius:17px;color:#0b0b0b;background:#f8f8f8;box-shadow:none;text-align:center;font-size:clamp(20px,2.05vw,31px);font-weight:500;line-height:1.25}.app.testing #quiz button:hover{border-color:#8b8b8b;background:#f3f3f3}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#aef0b4!important;border-color:#3b8cff!important}.app.testing #quiz button.wrong{background:#ffc7c7!important;border-color:#ef5b67!important}.app.testing #result{min-height:42px;margin:12px 0 4px;color:#0b0b0b;font-size:28px;font-weight:700}.app.testing #next{min-height:78px;border-radius:17px;color:#fff;background:#202020;box-shadow:none;font-size:25px}.app.testing #next:hover{background:#080808}
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.favorite-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important;font-size:27px!important}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
 @media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.library,.settings-grid{grid-template-columns:1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}}
 </style>
 </head>
 
 <body><div class="app">
 <aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
-<button class="nav-button active"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button"><span class="nav-icon">◷</span>История</button></nav>
-<div class="profile-chip"><span class="avatar">Г</span><div><strong>Гость</strong><div class="info">Войти в аккаунт</div></div></div></aside>
-<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1>Добрый день!</h1></div><button class="ghost-button">Войти</button></header>
-<section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button class="secondary" disabled>Работа над ошибками</button></div></section>
+<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button></nav>
+<div class="profile-chip" onclick="handleProfileClick()"><span class="avatar" id="profileAvatar">Г</span><div><strong id="profileName">Гость</strong><div class="info" id="profileHint">Войти в аккаунт</div></div></div></aside>
+<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1 id="welcomeTitle">Добрый день!</h1></div><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></header>
+<div id="dashboardView">
+<section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Работа над ошибками</button></div></section>
 <section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
 <div class="section-head"><div><h2>Мои тесты</h2><p>Готовые и загруженные вами материалы</p></div></div><section class="library"><article class="panel test-card"><div class="test-icon">＋</div><h3>Добавьте первый тест</h3><p>После обработки он появится в библиотеке с названием исходного файла.</p><div class="progress"><span></span></div></article></section>
 <div class="section-head"><div><h2>Загрузить свой тест</h2><p>Все прежние настройки сохранены</p></div></div><section class="panel upload-card">
@@ -52,9 +55,11 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 <div class="settings-grid"><div class="setting-block"><p><b>Режим проверки</b></p><div class="choice-row"><label><input type="radio" name="mode" value="instant" checked>Сразу</label><label><input type="radio" name="mode" value="end">В конце</label></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
 <div class="setting-block"><p><b>Источник вопросов</b></p><div class="choice-row"><label><input type="radio" name="source" value="random" checked>Случайные</label><label><input type="radio" name="source" value="rangeRandom">20% диапазона</label><label><input type="radio" name="source" value="rangeOrdered">Весь диапазон</label></div><p class="info">Диапазон: <input id="fromNum" type="number" value="1"> — <input id="toNum" type="number" value="50"><input id="fromNum2" type="hidden" value="1"><input id="toNum2" type="hidden" value="50"></p></div></div>
 <details id="pdfSettings"><summary>Дополнительные настройки распознавания PDF</summary><div class="choice-row" style="margin-top:12px"><label><input type="radio" name="detect" value="auto" checked>Авто</label><label><input type="radio" name="detect" value="green">Зелёный фон</label><label><input type="radio" name="detect" value="bold">Жирный шрифт</label></div></details>
-<button id="startBtn" onclick="start()" class="action">Начать тест</button><p id="status" class="info">Выберите PDF или DOCX и настройки теста.</p></section>
+<button id="startBtn" onclick="start()" class="action">Начать тест</button><p id="status" class="info">Выберите PDF или DOCX и настройки теста.</p></section></div>
+<section id="sectionView" class="panel section-panel hidden"></section>
 <div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div></main>
-<nav class="mobile-nav"><button class="active">⌂<br>Главная</button><button>▤<br>Тесты</button><button>↻<br>Ошибки</button><button>○<br>Профиль</button></nav></div>
+<nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)">▤<br>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
+<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 6 символов"><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p id="authMessage" class="auth-message"></p></div></div>
 
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -87,6 +92,17 @@ let cachedFileKey = "";
 let cachedQuestions = [];
 let cachedDiagnostics = null;
 
+const SUPABASE_URL = "https://hfgiknokcjrwyddflmtq.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kxI2RbWK_CIzq0pf0dWQmw_KhBqipHv";
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+let currentUser = null;
+let currentTestId = "";
+let currentTestName = "";
+let favoriteKeys = new Set();
+
 document.getElementById("file").addEventListener("change", updateFileUI);
 
 function updateFileUI(){
@@ -104,6 +120,15 @@ function updateFileUI(){
   cachedFileKey = "";
   cachedQuestions = [];
   cachedDiagnostics = null;
+
+  currentTestName = file.name.replace(/\.(pdf|docx)$/i, "");
+  currentTestId = currentTestName
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[^a-z0-9\u0370-\u03ff\u0400-\u04ff]+/g, "-")
+    .replace(/^-|-$/g, "") || "test";
+  renderLoadedTestCard();
+  loadFavoritesForCurrentTest();
 
   document.getElementById("status").textContent =
     type === "docx"
@@ -1721,14 +1746,16 @@ function showQ(){
   document.getElementById("quizProgress").textContent =
     "Вопрос " + (current + 1) + " / " + test.length;
 
+  const key = questionKey(q);
+  const favorite = favoriteKeys.has(key);
   let html =
-    `<h3>${escapeHtml(q.num)}. ${
+    `<div class="question-head"><h3>${escapeHtml(q.num)}. ${
       escapeHtml(q.q)
-    }</h3>`;
+    }</h3><button class="favorite-button" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div>`;
 
   q.opts.forEach((option, index) => {
     html +=
-      `<button onclick="answer(${index}, this)">
+      `<button class="answer-option" onclick="answer(${index}, this)">
         ${escapeHtml(optionLetter(q, index))})
         ${escapeHtml(option)}
       </button>`;
@@ -1745,7 +1772,7 @@ function answer(index, button){
   userAnswers[current] = index;
 
   const buttons =
-    document.querySelectorAll("#quiz button");
+    document.querySelectorAll("#quiz .answer-option");
 
   buttons.forEach(btn => {
     btn.classList.remove(
@@ -1864,6 +1891,9 @@ function finishTest(){
 
   document.getElementById("result").innerHTML = html;
   window.lastMistakes = mistakes;
+  saveCompletedAttempt().catch(error => {
+    console.error("Не удалось сохранить попытку", error);
+  });
 }
 
 function retrySame(){
@@ -1881,6 +1911,305 @@ function retryMistakes(){
 
   resetRun(window.lastMistakes);
 }
+
+function questionKey(q){
+  return String(q.num) + "_" + String(q.q).slice(0, 90);
+}
+
+function openAuthModal(){
+  if(currentUser){
+    handleProfileClick();
+    return;
+  }
+  document.getElementById("authModal").classList.remove("hidden");
+  document.getElementById("authMessage").textContent = "";
+}
+
+function closeAuthModal(event){
+  if(event && event.target !== event.currentTarget) return;
+  document.getElementById("authModal").classList.add("hidden");
+}
+
+function setAuthMessage(message, isError=false){
+  const target = document.getElementById("authMessage");
+  target.textContent = message;
+  target.classList.toggle("danger-text", isError);
+}
+
+async function signUp(){
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const displayName = document.getElementById("authName").value.trim();
+  if(!email || password.length < 6){
+    setAuthMessage("Введите email и пароль не короче 6 символов.", true);
+    return;
+  }
+  setAuthMessage("Создаём аккаунт…");
+  const {data, error} = await supabaseClient.auth.signUp({
+    email,
+    password,
+    options:{
+      data:{display_name:displayName || email.split("@")[0]},
+      emailRedirectTo:location.origin + location.pathname
+    }
+  });
+  if(error){
+    setAuthMessage(error.message, true);
+    return;
+  }
+  if(data.session){
+    setAuthMessage("Аккаунт создан. Вход выполнен.");
+    setTimeout(closeAuthModal, 700);
+  }else{
+    setAuthMessage("Проверьте почту и подтвердите регистрацию.");
+  }
+}
+
+async function signIn(){
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  if(!email || !password){
+    setAuthMessage("Введите email и пароль.", true);
+    return;
+  }
+  setAuthMessage("Входим…");
+  const {error} = await supabaseClient.auth.signInWithPassword({email,password});
+  if(error){
+    setAuthMessage(error.message, true);
+    return;
+  }
+  closeAuthModal();
+}
+
+async function handleProfileClick(){
+  if(!currentUser){
+    openAuthModal();
+    return;
+  }
+  if(confirm("Выйти из аккаунта? Локальный тест останется открыт.")){
+    await supabaseClient.auth.signOut();
+  }
+}
+
+async function applySession(session){
+  currentUser = session?.user || null;
+  const name = currentUser?.user_metadata?.display_name ||
+    currentUser?.email?.split("@")[0] || "Гость";
+  document.getElementById("profileName").textContent = name;
+  document.getElementById("profileAvatar").textContent = name.charAt(0).toUpperCase();
+  document.getElementById("profileHint").textContent = currentUser ? currentUser.email : "Войти в аккаунт";
+  document.getElementById("authButton").textContent = currentUser ? "Выйти" : "Войти";
+  document.getElementById("welcomeTitle").textContent = currentUser ? "Добрый день, " + name + "!" : "Добрый день!";
+  if(currentUser){
+    await Promise.all([loadDashboardStats(), loadFavoritesForCurrentTest()]);
+  }else{
+    renderGuestStats();
+    favoriteKeys.clear();
+  }
+}
+
+function renderGuestStats(){
+  const values = document.querySelectorAll(".stats .stat strong");
+  values[0].textContent = "0";
+  values[1].textContent = "—";
+  values[2].textContent = "0";
+  values[3].textContent = "0";
+  document.querySelector(".error-count").textContent = "0";
+  document.getElementById("errorsButton").disabled = true;
+}
+
+async function loadDashboardStats(){
+  if(!currentUser) return;
+  const [{data:attempts},{data:stats}] = await Promise.all([
+    supabaseClient.from("medquiz_attempts").select("total_questions,correct_answers"),
+    supabaseClient.from("medquiz_question_stats").select("mistake_count,correct_streak,favorite")
+  ]);
+  const allAttempts = attempts || [];
+  const allStats = stats || [];
+  const answeredTotal = allAttempts.reduce((sum,item)=>sum + item.total_questions,0);
+  const correctTotal = allAttempts.reduce((sum,item)=>sum + item.correct_answers,0);
+  const errors = allStats.filter(item=>item.mistake_count > 0 && item.correct_streak < 2).length;
+  const favorites = allStats.filter(item=>item.favorite).length;
+  const values = document.querySelectorAll(".stats .stat strong");
+  values[0].textContent = answeredTotal;
+  values[1].textContent = answeredTotal ? Math.round(correctTotal / answeredTotal * 100) + "%" : "—";
+  values[2].textContent = allAttempts.length;
+  values[3].textContent = favorites;
+  document.querySelector(".error-count").textContent = errors;
+  document.getElementById("errorsButton").disabled = errors === 0;
+}
+
+function renderLoadedTestCard(){
+  const library = document.querySelector(".library");
+  if(!currentTestName) return;
+  library.innerHTML = `<article class="panel test-card"><div class="test-icon">▤</div><h3>${escapeHtml(currentTestName)}</h3><p>Файл выбран и готов к настройке.</p><div class="progress"><span></span></div><button class="secondary" onclick="showSection('home')">Открыть настройки</button></article>`;
+}
+
+async function loadFavoritesForCurrentTest(){
+  favoriteKeys.clear();
+  if(!currentUser || !currentTestId) return;
+  const {data} = await supabaseClient
+    .from("medquiz_question_stats")
+    .select("question_key")
+    .eq("test_id", currentTestId)
+    .eq("favorite", true);
+  (data || []).forEach(item=>favoriteKeys.add(item.question_key));
+}
+
+async function toggleFavorite(){
+  if(!currentUser){
+    openAuthModal();
+    return;
+  }
+  const q = test[current];
+  const key = questionKey(q);
+  const favorite = !favoriteKeys.has(key);
+  const {data:existing} = await supabaseClient
+    .from("medquiz_question_stats")
+    .select("mistake_count,correct_streak,last_answer_correct")
+    .eq("test_id", currentTestId)
+    .eq("question_key", key)
+    .maybeSingle();
+  const {error} = await supabaseClient.from("medquiz_question_stats").upsert({
+    user_id:currentUser.id,
+    test_id:currentTestId,
+    question_key:key,
+    mistake_count:existing?.mistake_count || 0,
+    correct_streak:existing?.correct_streak || 0,
+    last_answer_correct:existing?.last_answer_correct ?? null,
+    favorite,
+    updated_at:new Date().toISOString()
+  });
+  if(error){
+    alert("Не удалось сохранить избранное.");
+    return;
+  }
+  favorite ? favoriteKeys.add(key) : favoriteKeys.delete(key);
+  showQ();
+  await loadDashboardStats();
+}
+
+async function saveCompletedAttempt(){
+  if(!currentUser){
+    const local = JSON.parse(localStorage.getItem("medquiz_guest_history") || "[]");
+    local.unshift({test_name:currentTestName || "Локальный тест", total_questions:test.length, correct_answers:score, completed_at:new Date().toISOString()});
+    localStorage.setItem("medquiz_guest_history", JSON.stringify(local.slice(0,50)));
+    return;
+  }
+  const safeTestId = currentTestId || "local-test";
+  const safeTestName = currentTestName || "Локальный тест";
+  const {data:attempt,error:attemptError} = await supabaseClient
+    .from("medquiz_attempts")
+    .insert({user_id:currentUser.id,test_id:safeTestId,test_name:safeTestName,mode,total_questions:test.length,correct_answers:score,completed_at:new Date().toISOString()})
+    .select("id").single();
+  if(attemptError) throw attemptError;
+  const answerRows = test.map((q,index)=>({
+    attempt_id:attempt.id,
+    user_id:currentUser.id,
+    test_id:safeTestId,
+    question_key:questionKey(q),
+    selected_index:userAnswers[index],
+    correct_index:q.correct,
+    is_correct:userAnswers[index] === q.correct
+  }));
+  const {error:answersError} = await supabaseClient.from("medquiz_answers").insert(answerRows);
+  if(answersError) throw answersError;
+  const keys = answerRows.map(row=>row.question_key);
+  const {data:oldStats} = await supabaseClient
+    .from("medquiz_question_stats")
+    .select("question_key,mistake_count,correct_streak,favorite")
+    .eq("test_id",safeTestId)
+    .in("question_key",keys);
+  const oldMap = new Map((oldStats || []).map(item=>[item.question_key,item]));
+  const statRows = answerRows.map(row=>{
+    const previous = oldMap.get(row.question_key) || {};
+    return {
+      user_id:currentUser.id,
+      test_id:safeTestId,
+      question_key:row.question_key,
+      mistake_count:(previous.mistake_count || 0) + (row.is_correct ? 0 : 1),
+      correct_streak:row.is_correct ? (previous.correct_streak || 0) + 1 : 0,
+      favorite:previous.favorite || favoriteKeys.has(row.question_key),
+      last_answer_correct:row.is_correct,
+      updated_at:new Date().toISOString()
+    };
+  });
+  const {error:statsError} = await supabaseClient.from("medquiz_question_stats").upsert(statRows);
+  if(statsError) throw statsError;
+  await loadDashboardStats();
+}
+
+function requireAccountHtml(title){
+  return `<h2>${title}</h2><p>Войдите, чтобы синхронизировать данные между устройствами.</p><div class="empty-state"><button class="action" onclick="openAuthModal()">Войти или зарегистрироваться</button></div>`;
+}
+
+async function showSection(section, button){
+  document.querySelectorAll(".nav-button,.mobile-nav button").forEach(item=>item.classList.remove("active"));
+  if(button) button.classList.add("active");
+  const dashboard = document.getElementById("dashboardView");
+  const view = document.getElementById("sectionView");
+  if(section === "home"){
+    dashboard.classList.remove("hidden");
+    view.classList.add("hidden");
+    return;
+  }
+  dashboard.classList.add("hidden");
+  view.classList.remove("hidden");
+  view.innerHTML = "<p>Загрузка…</p>";
+  if(section === "tests"){
+    view.innerHTML = `<h2>Мои тесты</h2><p>Тесты, открытые на этом устройстве.</p><div class="section-list">${currentTestName ? `<div class="section-item"><div><strong>${escapeHtml(currentTestName)}</strong><p>${questions.length ? questions.length + " вопросов загружено" : "Файл выбран"}</p></div><button class="secondary" onclick="showSection('home')">Открыть</button></div>` : `<div class="empty-state">Пока нет загруженных тестов.</div>`}</div>`;
+    return;
+  }
+  if(!currentUser){
+    view.innerHTML = requireAccountHtml(section === "errors" ? "Мои ошибки" : section === "favorites" ? "Избранное" : "История");
+    return;
+  }
+  if(section === "history") await renderHistory(view);
+  if(section === "errors") await renderQuestionStats(view,false);
+  if(section === "favorites") await renderQuestionStats(view,true);
+}
+
+async function renderHistory(view){
+  const {data,error} = await supabaseClient.from("medquiz_attempts").select("*").order("completed_at",{ascending:false}).limit(100);
+  if(error){ view.innerHTML = `<p class="danger-text">${escapeHtml(error.message)}</p>`; return; }
+  const items = (data || []).map(item=>{
+    const percent = Math.round(item.correct_answers / item.total_questions * 100);
+    const date = new Date(item.completed_at || item.started_at).toLocaleString("ru-RU");
+    return `<div class="section-item"><div><strong>${escapeHtml(item.test_name)}</strong><p>${date}</p></div><b>${item.correct_answers}/${item.total_questions} · ${percent}%</b></div>`;
+  }).join("");
+  view.innerHTML = `<h2>История</h2><p>Все завершённые попытки вашего аккаунта.</p><div class="section-list">${items || `<div class="empty-state">История пока пуста.</div>`}</div>`;
+}
+
+async function renderQuestionStats(view,favoritesOnly){
+  let query = supabaseClient.from("medquiz_question_stats").select("*").order("updated_at",{ascending:false});
+  if(favoritesOnly) query = query.eq("favorite",true);
+  else query = query.gt("mistake_count",0).lt("correct_streak",2);
+  const {data,error} = await query;
+  if(error){ view.innerHTML = `<p class="danger-text">${escapeHtml(error.message)}</p>`; return; }
+  const items = (data || []).map(item=>{
+    const q = questions.find(question=>questionKey(question) === item.question_key && currentTestId === item.test_id);
+    const label = q ? `${q.num}. ${q.q}` : item.question_key.replace(/^.*?_/,"");
+    return `<div class="section-item"><div><strong>${escapeHtml(label)}</strong><p>Ошибок: ${item.mistake_count}${item.favorite ? " · ★ В избранном" : ""}</p></div></div>`;
+  }).join("");
+  const title = favoritesOnly ? "Избранное" : "Мои ошибки";
+  const action = !favoritesOnly && data?.length && questions.length ? `<button class="action" onclick="startSavedErrors()">Пройти только ошибки текущего теста</button>` : "";
+  view.innerHTML = `<h2>${title}</h2><p>${favoritesOnly ? "Вопросы, которые вы отметили звездой." : "Вопрос остаётся здесь, пока вы не ответите правильно два раза подряд."}</p>${action}<div class="section-list">${items || `<div class="empty-state">Здесь пока ничего нет.</div>`}</div>`;
+}
+
+async function startSavedErrors(){
+  if(!currentUser || !questions.length) return;
+  const {data} = await supabaseClient.from("medquiz_question_stats").select("question_key").eq("test_id",currentTestId).gt("mistake_count",0).lt("correct_streak",2);
+  const keys = new Set((data || []).map(item=>item.question_key));
+  const selected = questions.filter(q=>keys.has(questionKey(q)));
+  if(!selected.length){ alert("Ошибок для этого теста нет."); return; }
+  document.getElementById("sectionView").classList.add("hidden");
+  resetRun(selected);
+}
+
+supabaseClient.auth.getSession().then(({data})=>applySession(data.session));
+supabaseClient.auth.onAuthStateChange((_event,session)=>{
+  setTimeout(()=>applySession(session),0);
+});
 </script>
 
 </body>
