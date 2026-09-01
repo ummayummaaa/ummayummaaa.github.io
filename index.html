@@ -49,7 +49,7 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 <div id="dashboardView">
 <section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Работа над ошибками</button></div></section>
 <section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
-<div class="section-head"><div><h2>Мои тесты</h2><p>Готовые и загруженные вами материалы</p></div></div><section class="library"><article class="panel test-card"><div class="test-icon">＋</div><h3>Добавьте первый тест</h3><p>После обработки он появится в библиотеке с названием исходного файла.</p><div class="progress"><span></span></div></article></section>
+<div id="libraryHeading" class="section-head hidden"><div><h2>Мои тесты</h2><p>Готовые и загруженные вами материалы</p></div></div><section class="library hidden"></section>
 <div class="section-head"><div><h2>Загрузить свой тест</h2><p>Все прежние настройки сохранены</p></div></div><section class="panel upload-card">
 <label class="dropzone"><strong>Выберите PDF или DOCX</strong><div class="info">Файл обрабатывается в браузере</div><input type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
 <div class="settings-grid"><div class="setting-block"><p><b>Режим проверки</b></p><div class="choice-row"><label><input type="radio" name="mode" value="instant" checked>Сразу</label><label><input type="radio" name="mode" value="end">В конце</label></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
@@ -2042,6 +2042,8 @@ async function loadDashboardStats(){
 function renderLoadedTestCard(){
   const library = document.querySelector(".library");
   if(!currentTestName) return;
+  document.getElementById("libraryHeading").classList.remove("hidden");
+  library.classList.remove("hidden");
   library.innerHTML = `<article class="panel test-card"><div class="test-icon">▤</div><h3>${escapeHtml(currentTestName)}</h3><p>Файл выбран и готов к настройке.</p><div class="progress"><span></span></div><button class="secondary" onclick="showSection('home')">Открыть настройки</button></article>`;
 }
 
