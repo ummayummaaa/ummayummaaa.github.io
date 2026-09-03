@@ -32,26 +32,26 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 .main{width:100%;max-width:1180px;margin:0 auto;padding:38px 42px 80px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.eyebrow{margin:0 0 5px;color:var(--brand);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.topbar h1{margin:0;font-size:clamp(27px,3vw,40px);line-height:1.15;letter-spacing:-.04em}.ghost-button,.action,.secondary{width:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 17px;border-radius:12px;font-weight:700}.ghost-button,.secondary{color:var(--navy);border:1px solid var(--line);background:#fff}.action{color:#fff;border:0;background:var(--brand);box-shadow:0 10px 24px rgba(8,126,139,.2)}.action:hover{background:var(--brand-dark)}
 .hero{display:grid;grid-template-columns:1.55fr .9fr;gap:18px;margin-bottom:20px}.panel,.card{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.hero-main{padding:28px;background:linear-gradient(135deg,#0a7d89,#0a9389);color:#fff;overflow:hidden;position:relative}.hero-main:after{content:"";position:absolute;width:230px;height:230px;right:-70px;bottom:-110px;border-radius:50%;border:35px solid rgba(255,255,255,.1)}.hero-main h2{position:relative;margin:5px 0 8px;font-size:28px;letter-spacing:-.035em}.hero-main p{position:relative;margin:0 0 22px;color:#dff8f5}.hero-main .action{position:relative;color:var(--brand-dark);background:#fff;box-shadow:none}.hero-side{padding:25px}.hero-side h3{margin:0 0 8px;font-size:18px}.error-count{font-size:43px;font-weight:800;letter-spacing:-.06em;color:var(--warning)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}.stat{padding:18px;border:1px solid var(--line);border-radius:16px;background:#fff}.stat strong{display:block;font-size:25px;letter-spacing:-.04em}.stat span{color:var(--muted);font-size:13px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:31px 0 14px}.section-head h2{margin:0;font-size:23px;letter-spacing:-.03em}.section-head p{margin:3px 0 0;color:var(--muted)}
-.library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.test-card{padding:22px}.test-icon{display:grid;place-items:center;width:44px;height:44px;margin-bottom:20px;border-radius:13px;color:var(--brand-dark);background:var(--mint);font-size:20px}.test-card h3{margin:0 0 7px;font-size:19px}.test-card p{margin:0 0 18px;color:var(--muted)}.progress{height:7px;margin:14px 0 8px;overflow:hidden;border-radius:999px;background:#e8eff2}.progress span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--brand),#36b7a6)}
-.upload-card{padding:24px}.dropzone{display:block;padding:28px;border:1.5px dashed #94bdc4;border-radius:17px;background:#f8fcfc;text-align:center}.dropzone input{display:block;max-width:100%;margin:14px auto 0}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:8px}.choice-row label{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}.choice-row input[type=radio]{accent-color:var(--brand)}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
+.library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.test-card{position:relative;padding:22px;transition:.2s ease}.test-card:hover{transform:translateY(-2px);box-shadow:0 18px 45px rgba(23,50,77,.12)}.test-card.active-test{border-color:#69b9b3;box-shadow:0 0 0 3px rgba(8,126,139,.1)}.test-icon{display:grid;place-items:center;width:44px;height:44px;margin-bottom:20px;border-radius:13px;color:var(--brand-dark);background:var(--mint);font-size:20px}.test-card h3{margin:0 0 7px;font-size:19px;overflow-wrap:anywhere}.test-card p{margin:0 0 18px;color:var(--muted)}.test-card .secondary{width:100%}.test-badge{position:absolute;top:20px;right:20px;padding:5px 9px;border-radius:999px;color:var(--brand-dark);background:var(--mint);font-size:12px;font-weight:800}.progress{height:7px;margin:14px 0 8px;overflow:hidden;border-radius:999px;background:#e8eff2}.progress span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--brand),#36b7a6)}
+.upload-card{padding:24px}.dropzone{display:flex;align-items:center;justify-content:center;gap:15px;min-height:150px;padding:26px;border:1.5px dashed #83b8c0;border-radius:18px;background:linear-gradient(145deg,#f9fdfd,#f1f9fa);text-align:left;cursor:pointer;transition:.2s ease}.dropzone:hover{border-color:var(--brand);background:#f1fbfa;transform:translateY(-1px)}.dropzone input{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}.upload-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border-radius:16px;color:var(--brand-dark);background:var(--mint);font-size:25px}.upload-copy strong{display:block;font-size:18px}.upload-copy .info{display:block;margin-top:3px}.selected-file{display:none;align-items:center;gap:8px;margin-top:9px;color:var(--brand-dark);font-size:14px;font-weight:700}.dropzone.has-file .upload-prompt{display:none}.dropzone.has-file .selected-file{display:flex}.file-remove{width:27px;height:27px;padding:0;border:0;border-radius:50%;color:#64798a;background:#e4eff1;font-size:18px;line-height:1}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:7px}.choice-row label{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:9px 15px;border:1px solid var(--line);border-radius:11px;color:#405a6e;background:#f8fbfc;font-weight:650;cursor:pointer;transition:.18s ease}.choice-row label:hover{border-color:#8eb9c0;background:#f1f8f9}.choice-row input[type=radio]{position:absolute;opacity:0;pointer-events:none}.choice-row label:has(input[type=radio]:checked){color:#fff;border-color:var(--brand);background:var(--brand);box-shadow:0 7px 17px rgba(8,126,139,.18)}.choice-row label:focus-within{outline:3px solid rgba(8,126,139,.18);outline-offset:2px}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
 #startBtn{margin-top:18px}.quiz-shell{max-width:850px;margin:0 auto}.card{padding:24px;margin:16px 0}.card button:not(.action){display:block;width:100%;padding:14px;margin:9px 0;border:1px solid var(--line);border-radius:13px;color:var(--navy);background:#fff;text-align:left}.card button:hover{border-color:#98bcc4;background:#f8fbfc}.selected{background:#e5f4f8!important;border-color:var(--brand)!important}.correct{background:#dff6e9!important;border-color:#50a779!important}.wrong{background:#ffe6e8!important;border-color:var(--danger)!important}.optionReview{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:11px;background:#fff}.warning{padding:12px 14px;border:1px solid #edc278;border-radius:12px;background:#fff7e5;margin:12px 0}.hidden{display:none!important}#next{width:100%;margin-top:14px}.mobile-nav{display:none}
-.app.testing{display:block;background:#fff}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:1700px;padding:42px 7vw 70px}.app.testing .quiz-shell{max-width:none;margin:0}.app.testing #quizProgress{display:block!important;margin:0 0 38px;font-size:24px;font-weight:500;color:#111}.app.testing #quiz h3{margin:0 0 34px;color:#080808;font-size:clamp(27px,3vw,40px);line-height:1.25;letter-spacing:-.025em}.app.testing #quiz button{display:flex;align-items:center;justify-content:center;width:100%;min-height:80px;margin:14px 0;padding:15px 25px;border:2px solid #c9c9c9;border-radius:17px;color:#0b0b0b;background:#f8f8f8;box-shadow:none;text-align:center;font-size:clamp(20px,2.05vw,31px);font-weight:500;line-height:1.25}.app.testing #quiz button:hover{border-color:#8b8b8b;background:#f3f3f3}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#aef0b4!important;border-color:#3b8cff!important}.app.testing #quiz button.wrong{background:#ffc7c7!important;border-color:#ef5b67!important}.app.testing #result{min-height:42px;margin:12px 0 4px;color:#0b0b0b;font-size:28px;font-weight:700}.app.testing #next{min-height:78px;border-radius:17px;color:#fff;background:#202020;box-shadow:none;font-size:25px}.app.testing #next:hover{background:#080808}
-.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.favorite-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important;font-size:27px!important}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
-@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.library,.settings-grid{grid-template-columns:1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}}
+.app.testing{display:block;background:#fff}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:1120px;padding:34px 32px 60px}.app.testing .quiz-shell{max-width:1000px;margin:0 auto}.app.testing #quizProgress{display:block!important;margin:0 0 26px;font-size:18px;font-weight:600;color:#536675}.app.testing #quiz h3{margin:0 0 25px;color:#080808;font-size:clamp(23px,2.2vw,32px);line-height:1.3;letter-spacing:-.02em}.app.testing #quiz button{display:flex;align-items:center;justify-content:flex-start;width:100%;min-height:60px;margin:10px 0;padding:13px 19px;border:1.5px solid #c9c9c9;border-radius:14px;color:#0b0b0b;background:#f8f8f8;box-shadow:none;text-align:left;font-size:clamp(17px,1.35vw,21px);font-weight:500;line-height:1.35}.app.testing #quiz button:hover{border-color:#8b8b8b;background:#f3f3f3}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#aef0b4!important;border-color:#3b8cff!important}.app.testing #quiz button.wrong{background:#ffc7c7!important;border-color:#ef5b67!important}.app.testing #result{min-height:34px;margin:10px 0 3px;color:#0b0b0b;font-size:21px;font-weight:700}.app.testing #next{min-height:60px;border-radius:14px;color:#fff;background:#202020;box-shadow:none;font-size:19px}.app.testing #next:hover{background:#080808}
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important}.favorite-button{font-size:27px!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-answer-list{display:grid;gap:7px;margin:12px 0}.admin-answer{display:flex;gap:9px;align-items:flex-start;padding:9px;border-radius:10px;background:#f7fafb}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
+@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.library,.settings-grid{grid-template-columns:1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}.app.testing .main{padding:22px 15px 38px}.app.testing #quizProgress{margin-bottom:20px;font-size:15px}.app.testing #quiz h3{margin-bottom:20px;font-size:21px}.app.testing #quiz button{min-height:54px;padding:12px 14px;font-size:16px}.app.testing #next{min-height:56px;font-size:17px}}
 </style>
 </head>
 
 <body><div class="app">
 <aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
-<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button></nav>
+<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚑</span>Проверка вопросов</button></nav>
 <div class="profile-chip" onclick="handleProfileClick()"><span class="avatar" id="profileAvatar">Г</span><div><strong id="profileName">Гость</strong><div class="info" id="profileHint">Войти в аккаунт</div></div></div></aside>
 <main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1 id="welcomeTitle">Добрый день!</h1></div><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></header>
 <div id="dashboardView">
 <section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Работа над ошибками</button></div></section>
 <section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
-<div id="libraryHeading" class="section-head hidden"><div><h2>Мои тесты</h2><p>Готовые и загруженные вами материалы</p></div></div><section class="library hidden"></section>
+<div id="libraryHeading" class="section-head"><div><h2>Готовые предметы</h2><p>Выберите предмет и сразу переходите к настройкам тестирования</p></div></div><section class="library" id="testLibrary"></section>
 <div class="section-head"><div><h2>Загрузить свой тест</h2><p>Все прежние настройки сохранены</p></div></div><section class="panel upload-card">
-<label class="dropzone"><strong>Выберите PDF или DOCX</strong><div class="info">Файл обрабатывается в браузере</div><input type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
+<label class="dropzone" id="dropzone"><span class="upload-icon">⇧</span><span class="upload-copy"><span class="upload-prompt"><strong>Выбрать PDF или DOCX</strong><span class="info">Нажмите здесь или перетащите файл в эту область</span></span><span class="selected-file"><span id="selectedFileName"></span><button class="file-remove" type="button" title="Убрать файл" aria-label="Убрать выбранный файл" onclick="clearSelectedFile(event)">×</button></span></span><input type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
 <div class="settings-grid"><div class="setting-block"><p><b>Режим проверки</b></p><div class="choice-row"><label><input type="radio" name="mode" value="instant" checked>Сразу</label><label><input type="radio" name="mode" value="end">В конце</label></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
 <div class="setting-block"><p><b>Источник вопросов</b></p><div class="choice-row"><label><input type="radio" name="source" value="random" checked>Случайные</label><label><input type="radio" name="source" value="rangeRandom">20% диапазона</label><label><input type="radio" name="source" value="rangeOrdered">Весь диапазон</label></div><p class="info">Диапазон: <input id="fromNum" type="number" value="1"> — <input id="toNum" type="number" value="50"><input id="fromNum2" type="hidden" value="1"><input id="toNum2" type="hidden" value="50"></p></div></div>
 <details id="pdfSettings"><summary>Дополнительные настройки распознавания PDF</summary><div class="choice-row" style="margin-top:12px"><label><input type="radio" name="detect" value="auto" checked>Авто</label><label><input type="radio" name="detect" value="green">Зелёный фон</label><label><input type="radio" name="detect" value="bold">Жирный шрифт</label></div></details>
@@ -99,22 +99,43 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 let currentUser = null;
+let currentUserIsAdmin = false;
 let currentTestId = "";
 let currentTestName = "";
 let favoriteKeys = new Set();
+let activeLibraryId = "";
+
+const BUILT_IN_TESTS = [
+  {id:"stomatologia",name:"ΣΤΟΜΑΤΟΛΟΓΙΑ-1",file:"tests/stomatologia.js",count:739},
+  {id:"aktinodiagnostiki",name:"ΑΚΤΙΝΟΔΙΑΓΝΩΣΤΙΚΗ-1",file:"tests/aktinodiagnostiki.js",count:665},
+  {id:"exaktiki",name:"ΕΞΑΚΤΙΚΗ-1",file:"tests/exaktiki.js",count:769},
+  {id:"periodontologia",name:"ΠΕΡΙΟΔΟΝΤΟΛΟΓΙΑ",file:"tests/periodontologia.js",count:450},
+  {id:"endodontologia",name:"ΕΝΔΟΔΟΝΤΟΛΟΓΙΑ",file:"tests/endodontologia.js",count:644},
+  {id:"odontiki-xeirourgiki",name:"ΟΔΟΝΤΙΚΗ ΧΕΙΡΟΥΡΓΙΚΗ",file:"tests/odontiki-xeirourgiki.js",count:698},
+  {id:"akiniti-prosthetiki",name:"ΑΚΙΝΗΤΗ ΠΡΟΣΘΕΤΙΚΗ-1",file:"tests/akiniti-prosthetiki.js",count:670},
+  {id:"kiniti-prosthetiki",name:"ΚΙΝΗΤΗ ΠΡΟΣΘΕΤΙΚΗ",file:"tests/kiniti-prosthetiki.js",count:773}
+];
 
 document.getElementById("file").addEventListener("change", updateFileUI);
 
 function updateFileUI(){
   const file = document.getElementById("file").files[0];
   const pdfSettings = document.getElementById("pdfSettings");
+  const dropzone = document.getElementById("dropzone");
+  const selectedFileName = document.getElementById("selectedFileName");
 
   if(!file){
+    dropzone.classList.remove("has-file");
+    selectedFileName.textContent = "";
     pdfSettings.classList.remove("hidden");
     return;
   }
 
+  dropzone.classList.add("has-file");
+  selectedFileName.textContent = file.name;
+
   const type = getFileType(file);
+  activeLibraryId = "";
   pdfSettings.classList.toggle("hidden", type === "docx");
 
   cachedFileKey = "";
@@ -134,6 +155,18 @@ function updateFileUI(){
     type === "docx"
       ? "Выбран DOCX. Правильные ответы будут определяться по зелёной заливке Word."
       : "Выбран PDF. Используются настройки распознавания PDF.";
+}
+
+function clearSelectedFile(event){
+  event.preventDefault();
+  event.stopPropagation();
+  document.getElementById("file").value = "";
+  cachedFileKey = "";
+  cachedQuestions = [];
+  cachedDiagnostics = null;
+  updateFileUI();
+  document.getElementById("status").textContent =
+    "Выберите PDF или DOCX и настройки теста.";
 }
 
 function getFileType(file){
@@ -476,6 +509,16 @@ function splitRunsIntoSegments(paragraph){
       .filter(x => x.ch.trim())
       .length;
 
+    const labelGreenCount = markerChars
+      .filter(x => x.green && /[A-F]/.test(x.ch))
+      .length;
+    const bodyGreenCount = optionChars
+      .filter(x => x.green && x.ch.trim())
+      .length;
+    const bodyCharacterCount = optionChars
+      .filter(x => x.ch.trim())
+      .length;
+
     pieces.push({
       type:"option",
       letter:m.letter,
@@ -484,6 +527,12 @@ function splitRunsIntoSegments(paragraph){
       greenCharacterCount:greenCount,
       totalCharacterCount:totalCount,
       greenRatio:totalCount ? greenCount / totalCount : 0,
+      labelGreen:labelGreenCount > 0,
+      bodyGreenCharacterCount:bodyGreenCount,
+      bodyCharacterCount,
+      bodyGreenRatio:bodyCharacterCount
+        ? bodyGreenCount / bodyCharacterCount
+        : 0,
       hasCheckOrCross:hasCheckOrCross(
         markerChars.map(x => x.ch).join("") +
         optionChars.map(x => x.ch).join("")
@@ -577,6 +626,10 @@ function buildDocxQuestions(paragraphs){
         greenCharacterCount:paragraph.greenCharacterCount || 0,
         totalCharacterCount:paragraph.totalCharacterCount || 0,
         greenRatio:paragraph.greenRatio || 0,
+        labelGreen:false,
+        bodyGreenCharacterCount:paragraph.greenCharacterCount || 0,
+        bodyCharacterCount:paragraph.totalCharacterCount || 0,
+        bodyGreenRatio:paragraph.greenRatio || 0,
         hasCheckOrCross:paragraph.hasCheckOrCross,
         paragraphIndex:paragraph.paragraphIndex
       });
@@ -584,6 +637,38 @@ function buildDocxQuestions(paragraphs){
       currentQuestion.hasCheckOrCross =
         currentQuestion.hasCheckOrCross ||
         paragraph.hasCheckOrCross;
+
+      return;
+    }
+
+    const pieces = splitRunsIntoSegments(paragraph);
+    const explicitOptions = pieces.filter(piece => piece.type === "option");
+
+    if(explicitOptions.length){
+      const leadingText = pieces
+        .filter(piece => piece.type === "text")
+        .map(piece => piece.text)
+        .filter(Boolean);
+
+      if(leadingText.length){
+        pendingQuestionText.push(...leadingText);
+      }
+
+      const startsNewSet = explicitOptions[0].letter === "A";
+      if(!currentQuestion || startsNewSet){
+        if(currentQuestion) finishCurrent();
+        startCurrent(paragraph);
+        currentQuestion.numId = "explicit-" + paragraph.paragraphIndex;
+      }
+
+      explicitOptions.forEach(option => {
+        currentQuestion.opts.push({
+          ...option,
+          marked:option.hasGreen,
+          green:option.hasGreen,
+          bold:false
+        });
+      });
 
       return;
     }
@@ -628,11 +713,23 @@ function finalizeDocxQuestions(rawQuestions){
       opt.marked = opt.hasGreen;
     });
 
+    const bodyOptions = q.opts.filter(opt =>
+      opt.bodyGreenRatio >= 0.5 ||
+      opt.bodyGreenCharacterCount >= 3
+    );
+    const labelOptions = q.opts.filter(opt => opt.labelGreen);
     const greenOptions = q.opts.filter(opt => opt.hasGreen);
+    const resolvedOptions = bodyOptions.length === 1
+      ? bodyOptions
+      : bodyOptions.length === 0 && labelOptions.length === 1
+        ? labelOptions
+        : greenOptions.length === 1
+          ? greenOptions
+          : [];
 
     q.correctCandidates = greenOptions.map(opt => opt.letter);
     q.answerStatus =
-      greenOptions.length === 1
+      resolvedOptions.length === 1
         ? "confirmed"
         : greenOptions.length === 0
           ? "missing"
@@ -648,17 +745,17 @@ function finalizeDocxQuestions(rawQuestions){
       return;
     }
 
-    if(greenOptions.length === 0){
+    if(resolvedOptions.length === 0 && greenOptions.length === 0){
       q.rejectReason = "noCorrect";
       return;
     }
 
-    if(greenOptions.length > 1){
-      q.rejectReason = "manyCorrect";
-      return;
-    }
+    const needsReview = resolvedOptions.length === 0;
+    const chosenOption = needsReview
+      ? [...greenOptions].sort((a,b) => b.answerScore - a.answerScore)[0]
+      : resolvedOptions[0];
 
-    const correctLetter = greenOptions[0].letter;
+    const correctLetter = chosenOption.letter;
     const correctIndex =
       q.opts.findIndex(opt => opt.letter === correctLetter);
 
@@ -668,6 +765,14 @@ function finalizeDocxQuestions(rawQuestions){
       opts:q.opts.map(opt => opt.text),
       letters:q.opts.map(opt => opt.letter),
       correct:correctIndex,
+      answerMethod:bodyOptions.length === 1
+        ? "green_text"
+        : labelOptions.length === 1
+          ? "green_label"
+          : needsReview
+            ? "provisional"
+            : "single_green_mark",
+      needsReview,
       source:"docx"
     });
   });
@@ -704,11 +809,11 @@ function buildDocxDiagnostics(rawQuestions, cleanQuestions, paragraphCount){
       diagnostics.tooFewOptions.push(q.num);
     }
 
-    if(greenOptions.length === 0){
+    if(q.rejectReason === "noCorrect"){
       diagnostics.noCorrect.push(q.num);
     }
 
-    if(greenOptions.length > 1){
+    if(q.answerStatus === "ambiguous"){
       diagnostics.manyCorrect.push(
         q.num + " (" + greenOptions.map(o => o.letter).join(", ") + ")"
       );
@@ -726,6 +831,7 @@ function buildDocxDiagnostics(rawQuestions, cleanQuestions, paragraphCount){
 
     if(
       q.rejectReason ||
+      q.answerStatus === "ambiguous" ||
       q.duplicateOptionLetters?.length ||
       !q.q
     ){
@@ -739,7 +845,8 @@ function buildDocxDiagnostics(rawQuestions, cleanQuestions, paragraphCount){
           greenRatio:o.greenRatio,
           score:o.answerScore
         })),
-        rejectReason:q.rejectReason || "",
+        rejectReason:q.rejectReason ||
+          (q.answerStatus === "ambiguous" ? "needsReview" : ""),
         startParagraph:q.startParagraph
       });
     }
@@ -1555,7 +1662,7 @@ async function parsePDF(file){
 async function start(){
   const file = document.getElementById("file").files[0];
 
-  if(!file){
+  if(!file && !activeLibraryId){
     alert("Сначала выберите PDF или DOCX.");
     return;
   }
@@ -1583,24 +1690,21 @@ async function start(){
   document.getElementById("quiz").innerHTML = "";
   document.getElementById("result").innerHTML = "";
 
-  setBusy(true);
-
-  try{
-    questions = await parseSelectedFile(file, true);
-  }catch(error){
-    console.error(error);
-    alert(
-      "Ошибка чтения файла: " + error.message
-    );
-
-    document.getElementById("status").textContent =
-      "Ошибка чтения файла: " + error.message;
-
+  if(file){
+    setBusy(true);
+    try{
+      questions = await parseSelectedFile(file, true);
+      questions = await applyRememberedAnswers(questions);
+    }catch(error){
+      console.error(error);
+      alert("Ошибка чтения файла: " + error.message);
+      document.getElementById("status").textContent =
+        "Ошибка чтения файла: " + error.message;
+      setBusy(false);
+      return;
+    }
     setBusy(false);
-    return;
   }
-
-  setBusy(false);
 
   if(!questions.length){
     alert(
@@ -1748,10 +1852,13 @@ function showQ(){
 
   const key = questionKey(q);
   const favorite = favoriteKeys.has(key);
+  const reviewBadge = q.needsReview
+    ? `<span class="review-badge">Требуется проверка</span>`
+    : "";
   let html =
-    `<div class="question-head"><h3>${escapeHtml(q.num)}. ${
+    `${reviewBadge}<div class="question-head"><h3>${escapeHtml(q.num)}. ${
       escapeHtml(q.q)
-    }</h3><button class="favorite-button" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div>`;
+    }</h3><div class="question-actions"><button class="report-button" onclick="reportCurrentQuestion()" title="Отправить администратору" aria-label="Отправить вопрос администратору">⚑</button><button class="favorite-button" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>`;
 
   q.opts.forEach((option, index) => {
     html +=
@@ -1790,7 +1897,9 @@ function answer(index, button){
     if(index === q.correct){
       button.classList.add("correct");
       document.getElementById("result").textContent =
-        "Правильно";
+        q.needsReview
+          ? "Предварительно правильно. Вопрос требует проверки."
+          : "Правильно";
     }else{
       button.classList.add("wrong");
 
@@ -1799,7 +1908,9 @@ function answer(index, button){
       }
 
       document.getElementById("result").textContent =
-        "Неправильно";
+        q.needsReview
+          ? "Предварительно неправильно. Вопрос требует проверки."
+          : "Неправильно";
     }
   }
 }
@@ -1916,6 +2027,86 @@ function questionKey(q){
   return String(q.num) + "_" + String(q.q).slice(0, 90);
 }
 
+function reviewQuestionKey(q){
+  const normalized = [q.q, ...(q.opts || [])]
+    .map(value => normalizeText(value).toLocaleLowerCase("el-GR"))
+    .join("\u241f");
+
+  let hash = 2166136261;
+  for(let i = 0; i < normalized.length; i++){
+    hash ^= normalized.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return "q_" + (hash >>> 0).toString(16).padStart(8, "0");
+}
+
+async function applyRememberedAnswers(items){
+  if(!items.length) return items;
+
+  const keys = items.map(reviewQuestionKey);
+  const {data, error} = await supabaseClient
+    .from("medquiz_answer_library")
+    .select("question_key,correct_index")
+    .in("question_key", keys);
+
+  if(error){
+    console.warn("Библиотека подтверждённых ответов недоступна", error);
+    return items;
+  }
+
+  const remembered = new Map(
+    (data || []).map(row => [row.question_key, row.correct_index])
+  );
+
+  return items.map(q => {
+    const saved = remembered.get(reviewQuestionKey(q));
+    if(!Number.isInteger(saved) || saved < 0 || saved >= q.opts.length){
+      return q;
+    }
+    return {
+      ...q,
+      correct:saved,
+      answerMethod:"admin_library",
+      needsReview:false
+    };
+  });
+}
+
+async function reportCurrentQuestion(){
+  if(!currentUser){
+    alert("Войдите в аккаунт, чтобы отправить вопрос администратору.");
+    openAuthModal();
+    return;
+  }
+
+  const q = test[current];
+  const comment = prompt(
+    "Что нужно проверить? Комментарий можно оставить пустым."
+  );
+  if(comment === null) return;
+
+  const {error} = await supabaseClient
+    .from("medquiz_question_reports")
+    .insert({
+      question_key:reviewQuestionKey(q),
+      question_text:q.q,
+      options:q.opts,
+      detected_correct_index:q.correct,
+      user_selected_index:userAnswers[current],
+      test_id:currentTestId || null,
+      test_name:currentTestName || null,
+      reported_by:currentUser.id,
+      comment:normalizeText(comment) || null
+    });
+
+  if(error){
+    alert("Не удалось отправить вопрос. Попробуйте ещё раз.");
+    return;
+  }
+
+  alert("Вопрос отправлен администратору на проверку.");
+}
+
 function openAuthModal(){
   if(currentUser){
     handleProfileClick();
@@ -1993,6 +2184,17 @@ async function handleProfileClick(){
 
 async function applySession(session){
   currentUser = session?.user || null;
+  currentUserIsAdmin = false;
+  if(currentUser){
+    const {data:profile} = await supabaseClient
+      .from("medquiz_profiles")
+      .select("is_admin")
+      .eq("user_id", currentUser.id)
+      .maybeSingle();
+    currentUserIsAdmin = profile?.is_admin === true;
+  }
+  document.getElementById("adminNav")
+    .classList.toggle("hidden", !currentUserIsAdmin);
   const name = currentUser?.user_metadata?.display_name ||
     currentUser?.email?.split("@")[0] || "Гость";
   document.getElementById("profileName").textContent = name;
@@ -2040,11 +2242,70 @@ async function loadDashboardStats(){
 }
 
 function renderLoadedTestCard(){
-  const library = document.querySelector(".library");
-  if(!currentTestName) return;
-  document.getElementById("libraryHeading").classList.remove("hidden");
-  library.classList.remove("hidden");
-  library.innerHTML = `<article class="panel test-card"><div class="test-icon">▤</div><h3>${escapeHtml(currentTestName)}</h3><p>Файл выбран и готов к настройке.</p><div class="progress"><span></span></div><button class="secondary" onclick="showSection('home')">Открыть настройки</button></article>`;
+  renderLibrary();
+}
+
+const builtInCache = new Map();
+
+function renderLibrary(){
+  const library = document.getElementById("testLibrary");
+  if(!library) return;
+  const localCard = currentTestName && !activeLibraryId
+    ? `<article class="panel test-card active-test"><span class="test-badge">Выбран</span><div class="test-icon">⇧</div><h3>${escapeHtml(currentTestName)}</h3><p>${questions.length ? questions.length + " вопросов" : "Ваш файл готов к обработке"}</p><button class="secondary" onclick="showSection('home');document.querySelector('.upload-card').scrollIntoView({behavior:'smooth'})">Открыть настройки</button></article>`
+    : "";
+  const cards = BUILT_IN_TESTS.map(item => {
+    const active = activeLibraryId === item.id;
+    return `<article class="panel test-card ${active ? "active-test" : ""}">${active ? `<span class="test-badge">Выбран</span>` : ""}<div class="test-icon">▤</div><h3>${escapeHtml(item.name)}</h3><p>${item.count} готовых вопросов</p><button class="secondary" onclick="loadBuiltInTest('${item.id}')">${active ? "Открыть настройки" : "Выбрать предмет"}</button></article>`;
+  }).join("");
+  library.innerHTML = localCard + cards;
+}
+
+function loadTestScript(item){
+  if(builtInCache.has(item.id)) return Promise.resolve(builtInCache.get(item.id));
+  return new Promise((resolve,reject)=>{
+    const script = document.createElement("script");
+    script.src = item.file;
+    script.onload = ()=>{
+      const data = window.MEDQUIZ_TEST_DATA;
+      if(!Array.isArray(data) || !data.length){
+        reject(new Error("Файл теста пуст."));
+        return;
+      }
+      builtInCache.set(item.id,data);
+      window.MEDQUIZ_TEST_DATA = null;
+      script.remove();
+      resolve(data);
+    };
+    script.onerror = ()=>reject(new Error("Не удалось загрузить данные предмета."));
+    document.head.appendChild(script);
+  });
+}
+
+async function loadBuiltInTest(id){
+  const item = BUILT_IN_TESTS.find(testItem=>testItem.id === id);
+  if(!item) return;
+  document.getElementById("status").textContent = "Открываю предмет…";
+  try{
+    const data = await loadTestScript(item);
+    document.getElementById("file").value = "";
+    updateFileUI();
+    activeLibraryId = item.id;
+    questions = await applyRememberedAnswers(data);
+    currentTestId = "library-" + item.id;
+    currentTestName = item.name;
+    ["fromNum","fromNum2"].forEach(id=>document.getElementById(id).value = 1);
+    ["toNum","toNum2"].forEach(id=>document.getElementById(id).value = data.length);
+    document.getElementById("status").textContent =
+      `Выбран предмет «${item.name}». Доступно вопросов: ${data.length}.`;
+    renderLibrary();
+    await loadFavoritesForCurrentTest();
+    showSection("home");
+    document.querySelector(".upload-card").scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(error){
+    console.error(error);
+    document.getElementById("status").textContent = "Ошибка: " + error.message;
+    alert(error.message);
+  }
 }
 
 async function loadFavoritesForCurrentTest(){
@@ -2159,7 +2420,16 @@ async function showSection(section, button){
   view.classList.remove("hidden");
   view.innerHTML = "<p>Загрузка…</p>";
   if(section === "tests"){
-    view.innerHTML = `<h2>Мои тесты</h2><p>Тесты, открытые на этом устройстве.</p><div class="section-list">${currentTestName ? `<div class="section-item"><div><strong>${escapeHtml(currentTestName)}</strong><p>${questions.length ? questions.length + " вопросов загружено" : "Файл выбран"}</p></div><button class="secondary" onclick="showSection('home')">Открыть</button></div>` : `<div class="empty-state">Пока нет загруженных тестов.</div>`}</div>`;
+    const items = BUILT_IN_TESTS.map(item=>`<div class="section-item"><div><strong>${escapeHtml(item.name)}</strong><p>${item.count} готовых вопросов</p></div><button class="secondary" onclick="loadBuiltInTest('${item.id}')">Выбрать</button></div>`).join("");
+    view.innerHTML = `<h2>Мои тесты</h2><p>Готовые предметы и загруженный вами материал.</p><div class="section-list">${items}</div>`;
+    return;
+  }
+  if(section === "admin"){
+    if(!currentUserIsAdmin){
+      view.innerHTML = `<h2>Проверка вопросов</h2><div class="empty-state">Этот раздел доступен только администратору.</div>`;
+      return;
+    }
+    await renderAdminReview(view);
     return;
   }
   if(!currentUser){
@@ -2180,6 +2450,99 @@ async function renderHistory(view){
     return `<div class="section-item"><div><strong>${escapeHtml(item.test_name)}</strong><p>${date}</p></div><b>${item.correct_answers}/${item.total_questions} · ${percent}%</b></div>`;
   }).join("");
   view.innerHTML = `<h2>История</h2><p>Все завершённые попытки вашего аккаунта.</p><div class="section-list">${items || `<div class="empty-state">История пока пуста.</div>`}</div>`;
+}
+
+async function renderAdminReview(view){
+  const {data, error} = await supabaseClient
+    .from("medquiz_question_reports")
+    .select("*")
+    .eq("status", "pending")
+    .order("created_at", {ascending:true});
+
+  if(error){
+    view.innerHTML = `<h2>Проверка вопросов</h2><p class="danger-text">${escapeHtml(error.message)}</p>`;
+    return;
+  }
+
+  const cards = (data || []).map(report => {
+    const options = Array.isArray(report.options) ? report.options : [];
+    const answers = options.map((option, index) =>
+      `<label class="admin-answer"><input type="radio" name="review-${report.id}" value="${index}" ${index === report.detected_correct_index ? "checked" : ""}><span><b>${String.fromCharCode(65 + index)})</b> ${escapeHtml(option)}</span></label>`
+    ).join("");
+    const source = [report.test_name, report.comment]
+      .filter(Boolean)
+      .map(escapeHtml)
+      .join(" · ");
+
+    return `<article class="card" id="report-${report.id}"><h3>${escapeHtml(report.question_text)}</h3>${source ? `<p class="info">${source}</p>` : ""}<div class="admin-answer-list">${answers}</div><label><input id="remember-${report.id}" type="checkbox" checked> Запомнить правильный ответ для следующих тестов</label><br><br><button class="action" onclick="resolveQuestionReport('${report.id}')">Подтвердить ответ</button></article>`;
+  }).join("");
+
+  view.innerHTML = `<h2>Проверка вопросов</h2><p>Здесь находятся вопросы, которые пользователи попросили проверить.</p>${cards || `<div class="empty-state">Новых вопросов для проверки нет.</div>`}`;
+}
+
+async function resolveQuestionReport(reportId){
+  if(!currentUserIsAdmin) return;
+
+  const selected = document.querySelector(
+    `input[name="review-${reportId}"]:checked`
+  );
+  if(!selected){
+    alert("Выберите правильный ответ.");
+    return;
+  }
+
+  const correctIndex = Number(selected.value);
+  const remember = document.getElementById("remember-" + reportId)?.checked;
+  const {data:report, error:loadError} = await supabaseClient
+    .from("medquiz_question_reports")
+    .select("question_key,question_text,options")
+    .eq("id", reportId)
+    .single();
+
+  if(loadError || !report){
+    alert("Не удалось открыть вопрос.");
+    return;
+  }
+
+  if(remember){
+    const {error:libraryError} = await supabaseClient
+      .from("medquiz_answer_library")
+      .upsert({
+        question_key:report.question_key,
+        question_text:report.question_text,
+        options:report.options,
+        correct_index:correctIndex,
+        confirmed_by:currentUser.id,
+        confirmed_at:new Date().toISOString(),
+        updated_at:new Date().toISOString()
+      });
+    if(libraryError){
+      alert("Ответ не удалось сохранить в библиотеке.");
+      return;
+    }
+  }
+
+  const {error:updateError} = await supabaseClient
+    .from("medquiz_question_reports")
+    .update({
+      status:"resolved",
+      resolved_correct_index:correctIndex,
+      resolved_by:currentUser.id,
+      resolved_at:new Date().toISOString()
+    })
+    .eq("id", reportId);
+
+  if(updateError){
+    alert("Не удалось завершить проверку.");
+    return;
+  }
+
+  questions = await applyRememberedAnswers(questions);
+  test = await applyRememberedAnswers(test);
+  document.getElementById("report-" + reportId)?.remove();
+  alert(remember
+    ? "Ответ подтверждён и сохранён в библиотеке."
+    : "Ответ подтверждён для этой заявки.");
 }
 
 async function renderQuestionStats(view,favoritesOnly){
@@ -2212,6 +2575,7 @@ supabaseClient.auth.getSession().then(({data})=>applySession(data.session));
 supabaseClient.auth.onAuthStateChange((_event,session)=>{
   setTimeout(()=>applySession(session),0);
 });
+renderLibrary();
 </script>
 
 </body>
