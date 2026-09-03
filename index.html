@@ -36,14 +36,14 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 .upload-card{padding:24px}.dropzone{display:flex;align-items:center;justify-content:center;gap:15px;min-height:150px;padding:26px;border:1.5px dashed #83b8c0;border-radius:18px;background:linear-gradient(145deg,#f9fdfd,#f1f9fa);text-align:left;cursor:pointer;transition:.2s ease}.dropzone:hover{border-color:var(--brand);background:#f1fbfa;transform:translateY(-1px)}.dropzone input{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}.upload-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border-radius:16px;color:var(--brand-dark);background:var(--mint);font-size:25px}.upload-copy strong{display:block;font-size:18px}.upload-copy .info{display:block;margin-top:3px}.selected-file{display:none;align-items:center;gap:8px;margin-top:9px;color:var(--brand-dark);font-size:14px;font-weight:700}.dropzone.has-file .upload-prompt{display:none}.dropzone.has-file .selected-file{display:flex}.file-remove{width:27px;height:27px;padding:0;border:0;border-radius:50%;color:#64798a;background:#e4eff1;font-size:18px;line-height:1}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:7px}.choice-row label{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:9px 15px;border:1px solid var(--line);border-radius:11px;color:#405a6e;background:#f8fbfc;font-weight:650;cursor:pointer;transition:.18s ease}.choice-row label:hover{border-color:#8eb9c0;background:#f1f8f9}.choice-row input[type=radio]{position:absolute;opacity:0;pointer-events:none}.choice-row label:has(input[type=radio]:checked){color:#fff;border-color:var(--brand);background:var(--brand);box-shadow:0 7px 17px rgba(8,126,139,.18)}.choice-row label:focus-within{outline:3px solid rgba(8,126,139,.18);outline-offset:2px}.timer-settings{margin:12px 0 16px;padding:12px;border-radius:12px;background:#f3f9fa}.timer-settings .info{display:block;margin-bottom:8px}.timer-toggle{display:flex;align-items:center;gap:9px;color:#405a6e;font-size:14px;font-weight:700;cursor:pointer}.timer-toggle input{width:18px;height:18px;accent-color:var(--brand)}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
 #startBtn{margin-top:18px}.quiz-shell{max-width:850px;margin:0 auto}.card{padding:24px;margin:16px 0}.card button:not(.action){display:block;width:100%;padding:14px;margin:9px 0;border:1px solid var(--line);border-radius:13px;color:var(--navy);background:#fff;text-align:left}.card button:hover{border-color:#98bcc4;background:#f8fbfc}.selected{background:#e5f4f8!important;border-color:var(--brand)!important}.correct{background:#dff6e9!important;border-color:#50a779!important}.wrong{background:#ffe6e8!important;border-color:var(--danger)!important}.optionReview{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:11px;background:#fff}.warning{padding:12px 14px;border:1px solid #edc278;border-radius:12px;background:#fff7e5;margin:12px 0}.hidden{display:none!important}#next{width:100%;margin-top:14px}.mobile-nav{display:none}
 .app.testing{display:block;background:#f3f7f8}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:900px;padding:24px 22px 44px}.app.testing .quiz-shell{max-width:800px;margin:0 auto;padding:22px;border:1px solid #d7e5e8;border-radius:20px;background:#fff;box-shadow:0 18px 50px rgba(23,50,77,.1)}.app.testing #quizProgress{display:flex!important;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid #e3ecee;font-size:15px;font-weight:750;color:#607487}.quiz-timer{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;color:var(--brand-dark);background:var(--mint);font-variant-numeric:tabular-nums}.quiz-timer.urgent{color:#a92d39;background:#ffe6e8}.app.testing #quiz h3{margin:0 0 18px;color:#101820;font-size:clamp(20px,2vw,27px);line-height:1.3;letter-spacing:-.015em}.app.testing #quiz button{display:flex;align-items:center;justify-content:flex-start;width:100%;min-height:50px;margin:8px 0;padding:11px 15px;border:1px solid #ccd8dc;border-radius:12px;color:#15202a;background:#f8fafb;box-shadow:none;text-align:left;font-size:clamp(15px,1.2vw,18px);font-weight:550;line-height:1.3}.app.testing #quiz button:hover{border-color:#8bafb5;background:#f1f7f7}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#d8f3df!important;border-color:#54a872!important}.app.testing #quiz button.wrong{background:#ffe0e3!important;border-color:#dc6670!important}.app.testing #result{min-height:27px;margin:8px 0 2px;color:#0b0b0b;font-size:17px;font-weight:750}.app.testing #next{min-height:50px;margin-top:10px;border-radius:12px;color:#fff;background:var(--navy);box-shadow:none;font-size:17px}.app.testing #next:hover{background:#0c263d}
-.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important}.favorite-button{font-size:27px!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-answer-list{display:grid;gap:7px;margin:12px 0}.admin-answer{display:flex;gap:9px;align-items:flex-start;padding:9px;border-radius:10px;background:#f7fafb}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
-@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.settings-grid{grid-template-columns:1fr}.subject-picker{align-items:flex-start;padding:14px}.subject-picker-icon{width:42px;height:42px;flex-basis:42px}.subject-count{display:none}.subject-menu{left:14px;right:14px;top:80px}.subject-option{padding:10px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}.app.testing .main{padding:10px}.app.testing .quiz-shell{padding:15px;border-radius:16px}.app.testing #quizProgress{margin-bottom:14px;font-size:14px}.app.testing #quiz h3{margin-bottom:14px;font-size:19px}.app.testing #quiz button{min-height:46px;padding:10px 12px;font-size:15px}.app.testing #next{min-height:48px;font-size:16px}}
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important}.favorite-button{font-size:27px!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.admin-header p{margin:5px 0 0;color:var(--muted)}.admin-counter{padding:8px 12px;border-radius:999px;color:#8a5418;background:#fff1d6;font-weight:800;white-space:nowrap}.admin-card{padding:20px;border:1px solid #d9e6e8;border-radius:17px;background:#fff;box-shadow:0 9px 25px rgba(23,50,77,.07)}.admin-card+.admin-card{margin-top:14px}.admin-card h3{margin:0 0 7px;font-size:18px;line-height:1.4}.admin-meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px}.admin-meta span{padding:5px 8px;border-radius:8px;color:#607487;background:#f1f6f7;font-size:12px;font-weight:700}.admin-answer-list{display:grid;gap:8px;margin:13px 0}.admin-answer{position:relative;display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid #dbe6e8;border-radius:11px;background:#f9fbfb;cursor:pointer}.admin-answer:hover,.admin-answer:has(input:checked){border-color:var(--brand);background:var(--mint)}.admin-answer input{margin-top:3px;accent-color:var(--brand)}.admin-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px}.admin-remember{display:flex;align-items:center;gap:8px;color:#526879;font-size:14px}.admin-remember input{accent-color:var(--brand)}.nav-badge{display:inline-grid;place-items:center;min-width:21px;height:21px;margin-left:auto;padding:0 6px;border-radius:999px;color:#fff;background:var(--danger);font-size:11px;font-weight:800}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
+@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.settings-grid{grid-template-columns:1fr}.subject-picker{align-items:flex-start;padding:14px}.subject-picker-icon{width:42px;height:42px;flex-basis:42px}.subject-count{display:none}.subject-menu{left:14px;right:14px;top:80px}.subject-option{padding:10px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(auto-fit,minmax(58px,1fr));left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}.admin-header{align-items:flex-start}.admin-actions{align-items:stretch;flex-direction:column}.app.testing .main{padding:10px}.app.testing .quiz-shell{padding:15px;border-radius:16px}.app.testing #quizProgress{margin-bottom:14px;font-size:14px}.app.testing #quiz h3{margin-bottom:14px;font-size:19px}.app.testing #quiz button{min-height:46px;padding:10px 12px;font-size:15px}.app.testing #next{min-height:48px;font-size:16px}}
 </style>
 </head>
 
 <body><div class="app">
 <aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
-<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚑</span>Проверка вопросов</button></nav>
+<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚑</span>Проверка вопросов<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
 <div class="profile-chip" onclick="handleProfileClick()"><span class="avatar" id="profileAvatar">Г</span><div><strong id="profileName">Гость</strong><div class="info" id="profileHint">Войти в аккаунт</div></div></div></aside>
 <main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1 id="welcomeTitle">Добрый день!</h1></div><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></header>
 <div id="dashboardView">
@@ -58,7 +58,7 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 <button id="startBtn" onclick="start()" class="action">Начать тест</button><p id="status" class="info">Выберите PDF или DOCX и настройки теста.</p></section></div>
 <section id="sectionView" class="panel section-panel hidden"></section>
 <div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div></main>
-<nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)">▤<br>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
+<nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)">▤<br>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button id="adminMobileNav" class="hidden" onclick="showSection('admin',this)">⚑<br>Проверка</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
 <div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 6 символов"><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p id="authMessage" class="auth-message"></p></div></div>
 
 <script>
@@ -91,6 +91,7 @@ let testStartedAt = 0;
 let testTimeLimit = 0;
 let timerInterval = null;
 let showTrainingTimer = true;
+const autoQueuedReviewKeys = new Set();
 
 let cachedFileKey = "";
 let cachedQuestions = [];
@@ -1921,6 +1922,7 @@ function showQ(){
 
   document.getElementById("quiz").innerHTML = html;
   document.getElementById("result").innerHTML = "";
+  if(q.needsReview && currentUser) queueDetectedQuestionForReview(q);
 }
 
 function answer(index, button){
@@ -2155,11 +2157,49 @@ async function reportCurrentQuestion(){
     });
 
   if(error){
+    if(error.code === "23505"){
+      alert("Этот вопрос уже находится на проверке.");
+      return;
+    }
     alert("Не удалось отправить вопрос. Попробуйте ещё раз.");
     return;
   }
 
   alert("Вопрос отправлен администратору на проверку.");
+}
+
+async function queueDetectedQuestionForReview(q){
+  const key = reviewQuestionKey(q);
+  if(autoQueuedReviewKeys.has(key)) return;
+  autoQueuedReviewKeys.add(key);
+  const {error} = await supabaseClient
+    .from("medquiz_question_reports")
+    .insert({
+      question_key:key,
+      question_text:q.q,
+      options:q.opts,
+      detected_correct_index:q.correct,
+      user_selected_index:null,
+      test_id:currentTestId || null,
+      test_name:currentTestName || null,
+      reported_by:currentUser.id,
+      comment:"Автоматически отмечен системой распознавания"
+    });
+  if(error && error.code !== "23505"){
+    autoQueuedReviewKeys.delete(key);
+    console.warn("Не удалось добавить сомнительный вопрос в очередь", error);
+  }
+}
+
+async function refreshAdminQueueCount(){
+  if(!currentUserIsAdmin) return;
+  const {count} = await supabaseClient
+    .from("medquiz_question_reports")
+    .select("id", {count:"exact", head:true})
+    .eq("status", "pending");
+  const badge = document.getElementById("adminBadge");
+  badge.textContent = String(count || 0);
+  badge.classList.toggle("hidden", !count);
 }
 
 function openAuthModal(){
@@ -2250,6 +2290,8 @@ async function applySession(session){
   }
   document.getElementById("adminNav")
     .classList.toggle("hidden", !currentUserIsAdmin);
+  document.getElementById("adminMobileNav")
+    .classList.toggle("hidden", !currentUserIsAdmin);
   const name = currentUser?.user_metadata?.display_name ||
     currentUser?.email?.split("@")[0] || "Гость";
   document.getElementById("profileName").textContent = name;
@@ -2259,6 +2301,7 @@ async function applySession(session){
   document.getElementById("welcomeTitle").textContent = currentUser ? "Добрый день, " + name + "!" : "Добрый день!";
   if(currentUser){
     await Promise.all([loadDashboardStats(), loadFavoritesForCurrentTest()]);
+    if(currentUserIsAdmin) await refreshAdminQueueCount();
   }else{
     renderGuestStats();
     favoriteKeys.clear();
@@ -2546,11 +2589,15 @@ async function renderAdminReview(view){
       .filter(Boolean)
       .map(escapeHtml)
       .join(" · ");
+    const date = new Date(report.created_at).toLocaleString("ru-RU");
+    const detected = Number.isInteger(report.detected_correct_index)
+      ? `Предполагаемый ответ: ${String.fromCharCode(65 + report.detected_correct_index)}`
+      : "Ответ не распознан";
 
-    return `<article class="card" id="report-${report.id}"><h3>${escapeHtml(report.question_text)}</h3>${source ? `<p class="info">${source}</p>` : ""}<div class="admin-answer-list">${answers}</div><label><input id="remember-${report.id}" type="checkbox" checked> Запомнить правильный ответ для следующих тестов</label><br><br><button class="action" onclick="resolveQuestionReport('${report.id}')">Подтвердить ответ</button></article>`;
+    return `<article class="admin-card" id="report-${report.id}"><div class="admin-meta"><span>${escapeHtml(report.test_name || "Без названия")}</span><span>${date}</span><span>${detected}</span></div><h3>${escapeHtml(report.question_text)}</h3>${source ? `<p class="info">${source}</p>` : ""}<div class="admin-answer-list">${answers}</div><div class="admin-actions"><label class="admin-remember"><input id="remember-${report.id}" type="checkbox" checked>Сохранить исправление для всех следующих тестов</label><button class="action" onclick="resolveQuestionReport('${report.id}')">Подтвердить правильный ответ</button></div></article>`;
   }).join("");
 
-  view.innerHTML = `<h2>Проверка вопросов</h2><p>Здесь находятся вопросы, которые пользователи попросили проверить.</p>${cards || `<div class="empty-state">Новых вопросов для проверки нет.</div>`}`;
+  view.innerHTML = `<div class="admin-header"><div><h2>Проверка вопросов</h2><p>Выберите правильный вариант — исправление начнёт применяться ко всем тестам.</p></div><span class="admin-counter">${(data || []).length} в очереди</span></div>${cards || `<div class="empty-state">Новых вопросов для проверки нет.</div>`}`;
 }
 
 async function resolveQuestionReport(reportId){
@@ -2613,6 +2660,10 @@ async function resolveQuestionReport(reportId){
   questions = await applyRememberedAnswers(questions);
   test = await applyRememberedAnswers(test);
   document.getElementById("report-" + reportId)?.remove();
+  await refreshAdminQueueCount();
+  const remaining = document.querySelectorAll(".admin-card").length;
+  const counter = document.querySelector(".admin-counter");
+  if(counter) counter.textContent = remaining + " в очереди";
   alert(remember
     ? "Ответ подтверждён и сохранён в библиотеке."
     : "Ответ подтверждён для этой заявки.");
