@@ -2305,7 +2305,9 @@ async function refreshNotificationCount(){
 }
 
 function profileHasFullAccess(profile){
-  if(!profile || profile.account_status === "blocked") return false;
+  if(profile?.account_status === "blocked") return false;
+  if(SITE_CONFIG.testModeFullAccess && currentUser) return true;
+  if(!profile) return false;
   if(profile.is_admin || profile.access_type === "lifetime") return true;
   if(profile.access_type === "admin_grant" && !profile.access_expires_at) return true;
   if(["trial","subscription","admin_grant"].includes(profile.access_type)){
@@ -2317,6 +2319,7 @@ function profileHasFullAccess(profile){
 function accessLabel(profile){
   if(!profileHasFullAccess(profile)) return "Полная версия";
   if(profile?.is_admin) return "Администратор";
+  if(SITE_CONFIG.testModeFullAccess && currentUser) return "Тестовый полный доступ";
   if(profile?.access_type === "trial") return "Пробный доступ";
   if(profile?.access_type === "lifetime") return "Доступ навсегда";
   return "Полная версия активна";
