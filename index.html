@@ -52,7 +52,7 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 <div id="dashboardView">
 <section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Работа над ошибками</button></div></section>
 <section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
-<div id="libraryHeading" class="section-head"><div><h2>Готовые предметы</h2><p>Выберите предмет и сразу переходите к настройкам тестирования</p></div></div><section class="library" id="testLibrary"></section>
+<div id="libraryHeading" class="section-head"><div><h2>Экзаменационные тесты</h2><p>Три объединённых блока в том же составе, что и у студентов</p></div></div><section class="library" id="testLibrary"></section>
 <div class="section-head"><div><h2>Загрузить свой тест</h2><p>Все прежние настройки сохранены</p></div></div><section class="panel upload-card">
 <label class="dropzone" id="dropzone"><span class="upload-icon">⇧</span><span class="upload-copy"><span class="upload-prompt"><strong>Выбрать PDF или DOCX</strong><span class="info">Нажмите здесь или перетащите файл в эту область</span></span><span class="selected-file"><span id="selectedFileName"></span><button class="file-remove" type="button" title="Убрать файл" aria-label="Убрать выбранный файл" onclick="clearSelectedFile(event)">×</button></span></span><input type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
 <div class="settings-grid"><div class="setting-block"><p><b>Режим теста</b></p><div class="choice-row"><label><input type="radio" name="mode" value="training" checked onchange="updateModeSettings()">Тренировочный</label><label><input type="radio" name="mode" value="exam" onchange="updateModeSettings()">Экзаменационный</label></div><div id="trainingTimerSettings" class="timer-settings"><label class="timer-toggle"><input id="trainingTimerEnabled" type="checkbox" checked><span>Показывать затраченное время</span></label></div><div id="examTimerSettings" class="timer-settings hidden"><span class="info">Время на один вопрос</span><div class="choice-row"><label><input type="radio" name="examPace" value="60" checked>1 мин</label><label><input type="radio" name="examPace" value="90">1,5 мин</label><label><input type="radio" name="examPace" value="120">2 мин</label></div></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
@@ -113,7 +113,7 @@ let currentTestName = "";
 let favoriteKeys = new Set();
 let activeLibraryId = "";
 
-const BUILT_IN_TESTS = [
+const SUBJECT_TESTS = [
   {id:"stomatologia",name:"Στοματολογία",file:"tests/stomatologia.js",count:739},
   {id:"aktinodiagnostiki",name:"Ακτινοδιαγνωστική",file:"tests/aktinodiagnostiki.js",count:665},
   {id:"exaktiki",name:"Εξακτική",file:"tests/exaktiki.js",count:769},
@@ -122,6 +122,27 @@ const BUILT_IN_TESTS = [
   {id:"odontiki-xeirourgiki",name:"Οδοντική χειρουργική",file:"tests/odontiki-xeirourgiki.js",count:698},
   {id:"akiniti-prosthetiki",name:"Ακίνιτη προσθετική",file:"tests/akiniti-prosthetiki.js",count:670},
   {id:"kiniti-prosthetiki",name:"Κινητή προσθετική",file:"tests/kiniti-prosthetiki.js",count:773}
+];
+
+const BUILT_IN_TESTS = [
+  {
+    id:"stomatologia-exaktiki-aktinodiagnostiki",
+    name:"Στοματολογία + Εξακτική + Ακτινοδιαγνωστική",
+    subjects:["stomatologia","exaktiki","aktinodiagnostiki"],
+    count:2173
+  },
+  {
+    id:"periodontologia-endodontologia-odontiki-xeirourgiki",
+    name:"Περιοδοντολογία + Ενδοδοντολογία + Οδοντική χειρουργική",
+    subjects:["periodontologia","endodontologia","odontiki-xeirourgiki"],
+    count:1792
+  },
+  {
+    id:"kiniti-akiniti-prosthetiki",
+    name:"Κινητή προσθετική + Ακίνητη προσθετική",
+    subjects:["kiniti-prosthetiki","akiniti-prosthetiki"],
+    count:1443
+  }
 ];
 
 document.getElementById("file").addEventListener("change", updateFileUI);
@@ -2363,7 +2384,7 @@ function renderLibrary(){
   const options = BUILT_IN_TESTS.map(item =>
     `<button type="button" class="subject-option ${item.id === activeLibraryId ? "active" : ""}" onclick="chooseSubject('${item.id}')"><span class="subject-option-name">${escapeHtml(item.name)}</span><span class="subject-option-count">${item.count} вопросов</span></button>`
   ).join("");
-  library.innerHTML = `<div class="subject-picker"><span class="subject-picker-icon">▤</span><div class="subject-picker-copy"><span class="subject-picker-label">Предмет</span><button type="button" class="subject-trigger" aria-expanded="false" onclick="toggleSubjectMenu(event)"><span>${selectedItem ? escapeHtml(selectedItem.name) : "Выберите предмет"}</span><span class="subject-chevron">⌄</span></button></div><span class="subject-count">${selectedItem ? selectedItem.count + " вопросов" : BUILT_IN_TESTS.length + " предметов"}</span><div id="subjectMenu" class="subject-menu hidden">${options}</div></div>`;
+  library.innerHTML = `<div class="subject-picker"><span class="subject-picker-icon">▤</span><div class="subject-picker-copy"><span class="subject-picker-label">Состав экзамена</span><button type="button" class="subject-trigger" aria-expanded="false" onclick="toggleSubjectMenu(event)"><span>${selectedItem ? escapeHtml(selectedItem.name) : "Выберите экзаменационный тест"}</span><span class="subject-chevron">⌄</span></button></div><span class="subject-count">${selectedItem ? selectedItem.count + " вопросов" : BUILT_IN_TESTS.length + " теста"}</span><div id="subjectMenu" class="subject-menu hidden">${options}</div></div>`;
 }
 
 function toggleSubjectMenu(event){
@@ -2387,8 +2408,9 @@ function chooseSubject(id){
 
 document.addEventListener("click", closeSubjectMenu);
 
-function loadTestScript(item){
-  if(builtInCache.has(item.id)) return Promise.resolve(builtInCache.get(item.id));
+function loadQuestionFile(item){
+  const cacheKey = "subject:" + item.id;
+  if(builtInCache.has(cacheKey)) return Promise.resolve(builtInCache.get(cacheKey));
   return new Promise((resolve,reject)=>{
     const script = document.createElement("script");
     script.src = item.file;
@@ -2398,7 +2420,7 @@ function loadTestScript(item){
         reject(new Error("Файл теста пуст."));
         return;
       }
-      builtInCache.set(item.id,data);
+      builtInCache.set(cacheKey,data);
       window.MEDQUIZ_TEST_DATA = null;
       script.remove();
       resolve(data);
@@ -2408,10 +2430,32 @@ function loadTestScript(item){
   });
 }
 
+async function loadTestScript(item){
+  if(builtInCache.has(item.id)) return builtInCache.get(item.id);
+  const subjectIds = item.subjects || [item.id];
+  const merged = [];
+
+  for(const subjectId of subjectIds){
+    const subject = SUBJECT_TESTS.find(testItem => testItem.id === subjectId);
+    if(!subject) throw new Error("Не найден предмет в составе экзамена.");
+    const data = await loadQuestionFile(subject);
+    data.forEach(question => merged.push({
+      ...question,
+      originalNum:question.originalNum || question.num,
+      subjectId:subject.id,
+      subjectName:subject.name
+    }));
+  }
+
+  const numbered = merged.map((question,index) => ({...question,num:index + 1}));
+  builtInCache.set(item.id,numbered);
+  return numbered;
+}
+
 async function loadBuiltInTest(id){
   const item = BUILT_IN_TESTS.find(testItem=>testItem.id === id);
   if(!item) return;
-  document.getElementById("status").textContent = "Открываю предмет…";
+  document.getElementById("status").textContent = "Открываю экзаменационный тест…";
   try{
     const data = await loadTestScript(item);
     document.getElementById("file").value = "";
@@ -2423,7 +2467,7 @@ async function loadBuiltInTest(id){
     ["fromNum","fromNum2"].forEach(id=>document.getElementById(id).value = 1);
     ["toNum","toNum2"].forEach(id=>document.getElementById(id).value = data.length);
     document.getElementById("status").textContent =
-      `Выбран предмет «${item.name}». Доступно вопросов: ${data.length}.`;
+      `Выбран тест «${item.name}». Доступно вопросов: ${data.length}.`;
     renderLibrary();
     await loadFavoritesForCurrentTest();
     showSection("home");
@@ -2548,7 +2592,7 @@ async function showSection(section, button){
   view.innerHTML = "<p>Загрузка…</p>";
   if(section === "tests"){
     const items = BUILT_IN_TESTS.map(item=>`<div class="section-item"><div><strong>${escapeHtml(item.name)}</strong><p>${item.count} готовых вопросов</p></div><button class="secondary" onclick="loadBuiltInTest('${item.id}')">Выбрать</button></div>`).join("");
-    view.innerHTML = `<h2>Мои тесты</h2><p>Готовые предметы и загруженный вами материал.</p><div class="section-list">${items}</div>`;
+    view.innerHTML = `<h2>Мои тесты</h2><p>Три объединённых экзаменационных блока и загруженный вами материал.</p><div class="section-list">${items}</div>`;
     return;
   }
   if(section === "admin"){
@@ -2703,7 +2747,8 @@ async function startSingleSavedQuestion(testId, key){
   if(!currentUser) return;
   let sourceQuestions = currentTestId === testId ? questions : [];
   const libraryId = String(testId || "").replace(/^library-/, "");
-  const libraryItem = BUILT_IN_TESTS.find(item => item.id === libraryId);
+  const libraryItem = BUILT_IN_TESTS.find(item => item.id === libraryId) ||
+    SUBJECT_TESTS.find(item => item.id === libraryId);
 
   if(!sourceQuestions.length && libraryItem){
     try{
@@ -2712,7 +2757,9 @@ async function startSingleSavedQuestion(testId, key){
       questions = sourceQuestions;
       currentTestId = testId;
       currentTestName = libraryItem.name;
-      activeLibraryId = libraryItem.id;
+      activeLibraryId = BUILT_IN_TESTS.some(item => item.id === libraryItem.id)
+        ? libraryItem.id
+        : "";
       renderLibrary();
     }catch(error){
       alert("Не удалось загрузить предмет для тренировки.");
