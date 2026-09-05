@@ -7,6 +7,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="site-config.js"></script>
 <script>
 /*!
 
@@ -36,19 +37,23 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 .upload-card{padding:24px}.dropzone{display:flex;align-items:center;justify-content:center;gap:15px;min-height:150px;padding:26px;border:1.5px dashed #83b8c0;border-radius:18px;background:linear-gradient(145deg,#f9fdfd,#f1f9fa);text-align:left;cursor:pointer;transition:.2s ease}.dropzone:hover{border-color:var(--brand);background:#f1fbfa;transform:translateY(-1px)}.dropzone input{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}.upload-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border-radius:16px;color:var(--brand-dark);background:var(--mint);font-size:25px}.upload-copy strong{display:block;font-size:18px}.upload-copy .info{display:block;margin-top:3px}.selected-file{display:none;align-items:center;gap:8px;margin-top:9px;color:var(--brand-dark);font-size:14px;font-weight:700}.dropzone.has-file .upload-prompt{display:none}.dropzone.has-file .selected-file{display:flex}.file-remove{width:27px;height:27px;padding:0;border:0;border-radius:50%;color:#64798a;background:#e4eff1;font-size:18px;line-height:1}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:7px}.choice-row label{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:9px 15px;border:1px solid var(--line);border-radius:11px;color:#405a6e;background:#f8fbfc;font-weight:650;cursor:pointer;transition:.18s ease}.choice-row label:hover{border-color:#8eb9c0;background:#f1f8f9}.choice-row input[type=radio]{position:absolute;opacity:0;pointer-events:none}.choice-row label:has(input[type=radio]:checked){color:#fff;border-color:var(--brand);background:var(--brand);box-shadow:0 7px 17px rgba(8,126,139,.18)}.choice-row label:focus-within{outline:3px solid rgba(8,126,139,.18);outline-offset:2px}.timer-settings{margin:12px 0 16px;padding:12px;border-radius:12px;background:#f3f9fa}.timer-settings .info{display:block;margin-bottom:8px}.timer-toggle{display:flex;align-items:center;gap:9px;color:#405a6e;font-size:14px;font-weight:700;cursor:pointer}.timer-toggle input{width:18px;height:18px;accent-color:var(--brand)}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
 #startBtn{margin-top:18px}.quiz-shell{max-width:850px;margin:0 auto}.card{padding:24px;margin:16px 0}.card button:not(.action){display:block;width:100%;padding:14px;margin:9px 0;border:1px solid var(--line);border-radius:13px;color:var(--navy);background:#fff;text-align:left}.card button:hover{border-color:#98bcc4;background:#f8fbfc}.selected{background:#e5f4f8!important;border-color:var(--brand)!important}.correct{background:#dff6e9!important;border-color:#50a779!important}.wrong{background:#ffe6e8!important;border-color:var(--danger)!important}.optionReview{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:11px;background:#fff}.warning{padding:12px 14px;border:1px solid #edc278;border-radius:12px;background:#fff7e5;margin:12px 0}.hidden{display:none!important}#next{width:100%;margin-top:14px}.mobile-nav{display:none}
 .app.testing{display:block;background:#f3f7f8}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:900px;padding:24px 22px 44px}.app.testing .quiz-shell{max-width:800px;margin:0 auto;padding:22px;border:1px solid #d7e5e8;border-radius:20px;background:#fff;box-shadow:0 18px 50px rgba(23,50,77,.1)}.app.testing #quizProgress{display:flex!important;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid #e3ecee;font-size:15px;font-weight:750;color:#607487}.quiz-timer{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;color:var(--brand-dark);background:var(--mint);font-variant-numeric:tabular-nums}.quiz-timer.urgent{color:#a92d39;background:#ffe6e8}.app.testing #quiz h3{margin:0 0 18px;color:#101820;font-size:clamp(20px,2vw,27px);line-height:1.3;letter-spacing:-.015em}.app.testing #quiz button{display:flex;align-items:center;justify-content:flex-start;width:100%;min-height:50px;margin:8px 0;padding:11px 15px;border:1px solid #ccd8dc;border-radius:12px;color:#15202a;background:#f8fafb;box-shadow:none;text-align:left;font-size:clamp(15px,1.2vw,18px);font-weight:550;line-height:1.3}.app.testing #quiz button:hover{border-color:#8bafb5;background:#f1f7f7}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#d8f3df!important;border-color:#54a872!important}.app.testing #quiz button.wrong{background:#ffe0e3!important;border-color:#dc6670!important}.app.testing #result{min-height:27px;margin:8px 0 2px;color:#0b0b0b;font-size:17px;font-weight:750}.app.testing #next{min-height:50px;margin-top:10px;border-radius:12px;color:#fff;background:var(--navy);box-shadow:none;font-size:17px}.app.testing #next:hover{background:#0c263d}
-.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important}.favorite-button{font-size:27px!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.admin-header p{margin:5px 0 0;color:var(--muted)}.admin-counter{padding:8px 12px;border-radius:999px;color:#8a5418;background:#fff1d6;font-weight:800;white-space:nowrap}.admin-card{padding:20px;border:1px solid #d9e6e8;border-radius:17px;background:#fff;box-shadow:0 9px 25px rgba(23,50,77,.07)}.admin-card+.admin-card{margin-top:14px}.admin-card h3{margin:0 0 7px;font-size:18px;line-height:1.4}.admin-meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px}.admin-meta span{padding:5px 8px;border-radius:8px;color:#607487;background:#f1f6f7;font-size:12px;font-weight:700}.admin-answer-list{display:grid;gap:8px;margin:13px 0}.admin-answer{position:relative;display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid #dbe6e8;border-radius:11px;background:#f9fbfb;cursor:pointer}.admin-answer:hover,.admin-answer:has(input:checked){border-color:var(--brand);background:var(--mint)}.admin-answer input{margin-top:3px;accent-color:var(--brand)}.admin-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px}.admin-remember{display:flex;align-items:center;gap:8px;color:#526879;font-size:14px}.admin-remember input{accent-color:var(--brand)}.nav-badge{display:inline-grid;place-items:center;min-width:21px;height:21px;margin-left:auto;padding:0 6px;border-radius:999px;color:#fff;background:var(--danger);font-size:11px;font-weight:800}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
-@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.settings-grid{grid-template-columns:1fr}.subject-picker{align-items:flex-start;padding:14px}.subject-picker-icon{width:42px;height:42px;flex-basis:42px}.subject-count{display:none}.subject-menu{left:14px;right:14px;top:80px}.subject-option{padding:10px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(auto-fit,minmax(58px,1fr));left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}.admin-header{align-items:flex-start}.admin-actions{align-items:stretch;flex-direction:column}.app.testing .main{padding:10px}.app.testing .quiz-shell{padding:15px;border-radius:16px}.app.testing #quizProgress{margin-bottom:14px;font-size:14px}.app.testing #quiz h3{margin-bottom:14px;font-size:19px}.app.testing #quiz button{min-height:46px;padding:10px 12px;font-size:15px}.app.testing #next{min-height:48px;font-size:16px}}
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important}.favorite-button{font-size:27px!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-shell{display:grid;gap:22px}.admin-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.admin-heading p{margin:6px 0 0;color:var(--muted)}.admin-identity{padding:8px 11px;border-radius:10px;color:#526879;background:#f1f6f7;font-size:13px;font-weight:700;white-space:nowrap}.admin-tabs{display:flex;gap:8px;padding:6px;overflow-x:auto;border:1px solid var(--line);border-radius:15px;background:#f4f8f9}.admin-tab{flex:0 0 auto;padding:10px 14px;border:0;border-radius:10px;color:#526879;background:transparent;font:inherit;font-size:14px;font-weight:750;cursor:pointer}.admin-tab:hover{color:var(--brand-dark);background:#fff}.admin-tab.active{color:#fff;background:var(--brand);box-shadow:0 6px 15px rgba(8,126,139,.18)}.admin-workspace{min-height:330px;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff}.admin-workspace h3{margin:0 0 7px;font-size:21px}.admin-workspace>p{margin:0;color:var(--muted)}.admin-stage-note{display:flex;align-items:flex-start;gap:13px;margin-top:22px;padding:18px;border-radius:14px;background:#f3f9fa}.admin-stage-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:12px;color:var(--brand-dark);background:var(--mint);font-size:19px}.admin-stage-note strong{display:block;margin-bottom:4px}.admin-stage-note p{margin:0;color:var(--muted);font-size:14px}.nav-badge{display:inline-grid;place-items:center;min-width:21px;height:21px;margin-left:auto;padding:0 6px;border-radius:999px;color:#fff;background:var(--danger);font-size:11px;font-weight:800}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
+.auth-link{display:inline-block;margin-top:12px;border:0;color:var(--brand-dark);background:transparent;font:inherit;font-size:14px;font-weight:750;text-decoration:underline;cursor:pointer}.auth-note{padding:11px 13px;border-radius:10px;background:#f3f9fa}.site-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;margin:34px 0 8px;padding:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.site-footer a,.site-footer button{padding:0;border:0;color:var(--muted);background:transparent;font:inherit;text-decoration:underline;cursor:pointer}.site-footer a:hover,.site-footer button:hover{color:var(--brand-dark)}
+@media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.settings-grid{grid-template-columns:1fr}.subject-picker{align-items:flex-start;padding:14px}.subject-picker-icon{width:42px;height:42px;flex-basis:42px}.subject-count{display:none}.subject-menu{left:14px;right:14px;top:80px}.subject-option{padding:10px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(auto-fit,minmax(58px,1fr));left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}.admin-heading{display:block}.admin-identity{display:inline-block;margin-top:12px}.admin-workspace{min-height:280px;padding:19px}.app.testing .main{padding:10px}.app.testing .quiz-shell{padding:15px;border-radius:16px}.app.testing #quizProgress{margin-bottom:14px;font-size:14px}.app.testing #quiz h3{margin-bottom:14px;font-size:19px}.app.testing #quiz button{min-height:46px;padding:10px 12px;font-size:15px}.app.testing #next{min-height:48px;font-size:16px}}
 .quiz-progress-actions{display:flex;align-items:center;gap:8px}.finish-early{padding:7px 10px;border:1px solid #d6e1e4;border-radius:999px;color:#607487;background:#fff;font:inherit;font-size:13px;font-weight:750}.finish-early:hover{color:#a92d39;border-color:#e5aab0;background:#fff5f6}
 .question-practice-card{width:100%;font:inherit;text-align:left;cursor:pointer;transition:.18s ease}.question-practice-card:hover{border-color:var(--brand);background:#f4fbfb;transform:translateY(-1px);box-shadow:0 8px 22px rgba(23,50,77,.08)}.practice-arrow{flex:0 0 auto;color:var(--brand);font-size:13px;font-weight:800;white-space:nowrap}
+.topbar-actions{display:flex;align-items:center;gap:9px}.notification-button{position:relative;width:43px;height:43px;padding:0;border:1px solid var(--line);border-radius:12px;color:var(--navy);background:#fff;font-size:20px;cursor:pointer}.notification-button:hover{border-color:var(--brand);background:var(--mint)}.notification-count{position:absolute;right:-5px;top:-6px;display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border:2px solid #fff;border-radius:999px;color:#fff;background:var(--danger);font-size:10px;font-weight:800}.report-card{width:min(560px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.report-card h2{margin:0 0 6px}.report-card>p{margin:0 0 19px;color:var(--muted)}.report-card label{display:block;margin:13px 0 6px;font-weight:750}.report-card select,.report-card textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;color:var(--navy);background:#fff;font:inherit}.report-card textarea{min-height:105px;resize:vertical}.report-file{padding:13px;border:1px dashed #9abfc5;border-radius:11px;background:#f6fbfb}.report-file input{width:100%}.report-question-preview{max-height:100px;padding:11px 13px;overflow:auto;border-radius:10px;color:#405a6e;background:#f3f7f8;font-size:14px}.report-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.report-message{min-height:20px;margin:10px 0 0!important;font-size:14px}.admin-report-list{display:grid;gap:13px;margin-top:20px}.admin-report-card{padding:19px;border:1px solid #d9e6e8;border-radius:15px;background:#fff}.admin-report-card h4{margin:9px 0;font-size:17px;line-height:1.4}.admin-report-card p{margin:7px 0;color:#526879}.admin-report-meta{display:flex;flex-wrap:wrap;gap:6px}.admin-report-meta span{padding:5px 8px;border-radius:8px;color:#607487;background:#f1f6f7;font-size:12px;font-weight:700}.admin-report-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.admin-test-upload{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,1.5fr) auto;gap:10px;align-items:end;margin-top:20px;padding:18px;border-radius:14px;background:#f3f9fa}.admin-test-upload label{display:grid;gap:6px;color:#405a6e;font-size:13px;font-weight:750}.admin-test-upload select,.admin-test-upload input{min-height:43px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit}.admin-version-list{display:grid;gap:9px;margin-top:18px}.admin-version{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid var(--line);border-radius:12px}.admin-version p{margin:4px 0 0;color:var(--muted);font-size:13px}.status-pill{padding:5px 8px;border-radius:999px;color:#267353;background:#e1f5ea;font-size:12px;font-weight:800}.admin-subtabs{display:flex;gap:7px;margin-top:16px}.admin-subtab{padding:8px 11px;border:1px solid var(--line);border-radius:9px;color:#526879;background:#fff;font:inherit;font-size:13px;font-weight:750}.admin-subtab.active{color:var(--brand-dark);border-color:#89bbc2;background:var(--mint)}
+.access-button{padding:9px 12px;border:1px solid #79b4bb;border-radius:11px;color:var(--brand-dark);background:var(--mint);font:inherit;font-size:13px;font-weight:800}.access-button.full{color:#fff;border-color:var(--brand);background:var(--brand)}.upgrade-card{width:min(760px,100%);max-height:92vh;padding:28px;overflow:auto;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.upgrade-card h2{margin:0 0 7px}.trial-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0;padding:17px;border-radius:14px;background:linear-gradient(135deg,var(--mint),#f4fbfa)}.trial-banner p{margin:4px 0 0;color:var(--muted);font-size:14px}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.plan-card{display:flex;flex-direction:column;padding:18px;border:1px solid var(--line);border-radius:14px}.plan-card h3{margin:0 0 6px}.plan-card p{flex:1;margin:0 0 16px;color:var(--muted);font-size:14px}.plan-card button{width:100%}.locked-panel{padding:34px;border:1px solid #b8d5d9;border-radius:16px;background:linear-gradient(145deg,#f8fcfc,#eff8f7);text-align:center}.locked-panel h3{margin:0 0 7px}.locked-panel p{max-width:560px;margin:0 auto 18px;color:var(--muted)}.admin-toolbar{display:flex;gap:9px;margin-top:18px}.admin-search{flex:1;min-height:43px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}.admin-user-list{display:grid;gap:10px;margin-top:17px}.admin-user{padding:16px;border:1px solid var(--line);border-radius:13px}.admin-user-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.admin-user h4{margin:0 0 3px}.admin-user p{margin:3px 0;color:var(--muted);font-size:13px}.admin-user-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;margin-top:13px}.danger-button{padding:9px 12px;border:1px solid #e2a5aa;border-radius:9px;color:#a92d39;background:#fff5f6;font:inherit;font-weight:750}.admin-access-form{display:grid;grid-template-columns:1fr 1fr 1.4fr auto;gap:8px;align-items:end;margin-top:13px;padding:13px;border-radius:11px;background:#f4f8f9}.admin-access-form label{display:grid;gap:4px;color:#526879;font-size:12px;font-weight:750}.admin-access-form select,.admin-access-form input{min-height:39px;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff}.audit-list{display:grid;gap:9px;margin-top:18px}.audit-item{padding:14px;border-left:4px solid var(--brand);border-radius:9px;background:#f5f9fa}.audit-item p{margin:4px 0 0;color:var(--muted);font-size:13px}.billing-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.billing-stat{padding:16px;border:1px solid var(--line);border-radius:12px}.billing-stat strong{display:block;font-size:24px}.billing-stat span{color:var(--muted);font-size:13px}
 @media(max-width:520px){.finish-early{padding:7px 9px;font-size:0}.finish-early:before{content:"Завершить";font-size:12px}}
+@media(max-width:700px){.admin-test-upload,.admin-access-form{grid-template-columns:1fr}.report-actions{align-items:stretch;flex-direction:column-reverse}.report-actions button{width:100%}.topbar-actions{gap:6px}.plan-grid,.billing-summary{grid-template-columns:1fr}.access-button{display:none}.admin-user-head{display:block}}
 </style>
 </head>
 
 <body><div class="app">
 <aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
-<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚑</span>Проверка вопросов<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
+<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚙</span>Админка<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
 <div class="profile-chip" onclick="handleProfileClick()"><span class="avatar" id="profileAvatar">Г</span><div><strong id="profileName">Гость</strong><div class="info" id="profileHint">Войти в аккаунт</div></div></div></aside>
-<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1 id="welcomeTitle">Добрый день!</h1></div><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></header>
+<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1 id="welcomeTitle">Добрый день!</h1></div><div class="topbar-actions"><button id="accessButton" class="access-button hidden" onclick="openUpgradeModal()">Полная версия</button><button id="notificationButton" class="notification-button hidden" onclick="showSection('notifications',this)" title="Уведомления" aria-label="Уведомления">🔔<span id="notificationBadge" class="notification-count hidden">0</span></button><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></div></header>
 <div id="dashboardView">
 <section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Работа над ошибками</button></div></section>
 <section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
@@ -60,9 +65,12 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 <details id="pdfSettings"><summary>Дополнительные настройки распознавания PDF</summary><div class="choice-row" style="margin-top:12px"><label><input type="radio" name="detect" value="auto" checked>Авто</label><label><input type="radio" name="detect" value="green">Зелёный фон</label><label><input type="radio" name="detect" value="bold">Жирный шрифт</label></div></details>
 <button id="startBtn" onclick="start()" class="action">Начать тест</button><p id="status" class="info">Выберите PDF или DOCX и настройки теста.</p></section></div>
 <section id="sectionView" class="panel section-panel hidden"></section>
-<div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div></main>
-<nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)">▤<br>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button id="adminMobileNav" class="hidden" onclick="showSection('admin',this)">⚑<br>Проверка</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
-<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 6 символов"><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p id="authMessage" class="auth-message"></p></div></div>
+<div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div><footer class="site-footer"><a href="privacy.html">Конфиденциальность</a><a href="terms.html">Условия использования</a><button type="button" onclick="contactSupport()">Связаться с администратором</button></footer></main>
+<nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)">▤<br>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button id="adminMobileNav" class="hidden" onclick="showSection('admin',this)">⚙<br>Админка</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
+<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 8 символов"><button class="auth-link" type="button" onclick="requestPasswordReset()">Забыли пароль?</button><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p class="auth-note">Регистрируясь, вы принимаете <a href="terms.html">условия использования</a> и <a href="privacy.html">политику конфиденциальности</a>.</p><button id="resendConfirmationButton" class="auth-link hidden" type="button" onclick="resendConfirmationEmail()">Отправить письмо подтверждения ещё раз</button><p id="authMessage" class="auth-message"></p></div></div>
+<div id="passwordModal" class="modal-backdrop hidden" onclick="closePasswordModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closePasswordModal()">×</button><h2>Новый пароль</h2><p>Придумайте новый пароль длиной не менее 8 символов.</p><label for="newPassword">Новый пароль</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8"><label for="newPasswordRepeat">Повторите пароль</label><input id="newPasswordRepeat" type="password" autocomplete="new-password" minlength="8"><div class="auth-actions"><button class="action" onclick="saveNewPassword()">Сохранить пароль</button></div><p id="passwordMessage" class="auth-message"></p></div></div>
+<div id="reportModal" class="modal-backdrop hidden" onclick="closeReportModal(event)"><div class="report-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeReportModal()">×</button><h2>Сообщить об ошибке</h2><p>Обращение увидит администратор сайта.</p><div id="reportQuestionPreview" class="report-question-preview"></div><label for="reportReason">Причина</label><select id="reportReason"><option value="typo">Опечатка или техническая ошибка</option><option value="options_error">Ошибка в вариантах ответа</option><option value="outdated">Вопрос или ответ устарел</option><option value="exam_answer_changed">На экзамене был указан другой ответ</option><option value="other">Другое</option></select><label for="reportComment">Комментарий</label><textarea id="reportComment" placeholder="Опишите, что нужно проверить"></textarea><label for="reportFile">Подтверждающий файл</label><div class="report-file"><input id="reportFile" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,image/jpeg,image/png,image/webp,application/pdf"><span class="info">JPG, PNG, WebP или PDF, не более 10 МБ. Необязательно.</span></div><div class="report-actions"><button class="secondary" onclick="closeReportModal()">Отмена</button><button id="reportSubmitButton" class="action" onclick="submitQuestionReport()">Отправить</button></div><p id="reportMessage" class="report-message"></p></div></div>
+<div id="upgradeModal" class="modal-backdrop hidden" onclick="closeUpgradeModal(event)"><div class="upgrade-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeUpgradeModal()">×</button><p class="eyebrow">MedQuiz</p><h2>Полная версия</h2><p id="accessSummary" class="info">Сохраняйте ошибки, избранное, историю и прогресс.</p><div id="trialBanner" class="trial-banner"><div><strong>7 дней бесплатно</strong><p>Без банковской карты и автоматического списания.</p></div><button id="trialButton" class="action" onclick="startFreeTrial()">Попробовать бесплатно</button></div><div id="subscriptionControls"></div><div class="plan-grid"><article class="plan-card"><h3>На месяц</h3><p>Полный доступ с автоматическим ежемесячным продлением.</p><button class="secondary" disabled>Скоро</button></article><article class="plan-card"><h3>На год</h3><p>Полный доступ на год со скидкой и автоматическим продлением.</p><button class="secondary" disabled>Скоро</button></article><article class="plan-card"><h3>Навсегда</h3><p>Все функции, будущие тесты и обновления без ограничения срока.</p><button class="secondary" disabled>Скоро</button></article></div><p id="upgradeMessage" class="report-message">Оплата будет подключена позже.</p></div></div>
 
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -94,7 +102,7 @@ let testStartedAt = 0;
 let testTimeLimit = 0;
 let timerInterval = null;
 let showTrainingTimer = true;
-const autoQueuedReviewKeys = new Set();
+let reportQuestionContext = null;
 
 let cachedFileKey = "";
 let cachedQuestions = [];
@@ -106,8 +114,11 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
+const SITE_CONFIG = window.MEDQUIZ_CONFIG || {};
 let currentUser = null;
 let currentUserIsAdmin = false;
+let currentUserProfile = null;
+let currentUserHasFullAccess = false;
 let currentTestId = "";
 let currentTestName = "";
 let favoriteKeys = new Set();
@@ -1922,6 +1933,10 @@ function optionLetter(q, index){
   );
 }
 
+function questionExplanation(q){
+  return normalizeText(q?.explanation || q?.explain || q?.answerExplanation || "");
+}
+
 function showQ(){
   answered = false;
 
@@ -1955,7 +1970,6 @@ function showQ(){
 
   document.getElementById("quiz").innerHTML = html;
   document.getElementById("result").innerHTML = "";
-  if(q.needsReview && currentUser) queueDetectedQuestionForReview(q);
 }
 
 function answer(index, button){
@@ -1982,10 +1996,11 @@ function answer(index, button){
 
     if(index === q.correct){
       button.classList.add("correct");
-      document.getElementById("result").textContent =
-        q.needsReview
-          ? "Предварительно правильно. Вопрос требует проверки."
-          : "Правильно";
+      const feedback = q.needsReview
+        ? "Предварительно правильно. Вопрос требует проверки."
+        : "Правильно";
+      const explanation = questionExplanation(q);
+      document.getElementById("result").innerHTML = `<strong>${feedback}</strong>${explanation ? `<p class="info">${escapeHtml(explanation)}</p>` : ""}`;
     }else{
       button.classList.add("wrong");
 
@@ -1993,10 +2008,11 @@ function answer(index, button){
         buttons[q.correct].classList.add("correct");
       }
 
-      document.getElementById("result").textContent =
-        q.needsReview
-          ? "Предварительно неправильно. Вопрос требует проверки."
-          : "Неправильно";
+      const feedback = q.needsReview
+        ? "Предварительно неправильно. Вопрос требует проверки."
+        : "Неправильно";
+      const explanation = questionExplanation(q);
+      document.getElementById("result").innerHTML = `<strong>${feedback}</strong>${explanation ? `<p class="info">${escapeHtml(explanation)}</p>` : ""}`;
     }
   }
 }
@@ -2047,7 +2063,7 @@ function finishTest(timedOut = false, finishedEarly = false){
     `<h2>${timedOut ? "Время вышло · " : finishedEarly ? "Завершено досрочно · " : ""}Итог: ${score} / ${test.length}</h2>
      <p class="info">Затраченное время: ${formatDuration(elapsedSeconds)}</p>
      <button class="action" onclick="retrySame()">Пройти заново те же вопросы</button>
-     <button class="action" onclick="retryMistakes()">Пройти только ошибки</button>
+     <button class="action" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">${currentUserHasFullAccess ? "Пройти только ошибки" : "Повторение ошибок · полная версия"}</button>
      <button class="action" onclick="start()">Новый тест с выбранными настройками</button>`;
 
   let html = "<h3>Разбор ответов</h3>";
@@ -2087,6 +2103,11 @@ function finishTest(timedOut = false, finishedEarly = false){
         </div>`;
     });
 
+    const explanation = questionExplanation(q);
+    if(explanation){
+      html += `<p class="info"><b>Объяснение:</b> ${escapeHtml(explanation)}</p>`;
+    }
+
     html += "</div>";
   });
 
@@ -2102,6 +2123,10 @@ function retrySame(){
 }
 
 function retryMistakes(){
+  if(!currentUserHasFullAccess){
+    openUpgradeModal();
+    return;
+  }
   if(
     !window.lastMistakes ||
     window.lastMistakes.length === 0
@@ -2131,38 +2156,10 @@ function reviewQuestionKey(q){
 }
 
 async function applyRememberedAnswers(items){
-  if(!items.length) return items;
-
-  const keys = items.map(reviewQuestionKey);
-  const {data, error} = await supabaseClient
-    .from("medquiz_answer_library")
-    .select("question_key,correct_index")
-    .in("question_key", keys);
-
-  if(error){
-    console.warn("Библиотека подтверждённых ответов недоступна", error);
-    return items;
-  }
-
-  const remembered = new Map(
-    (data || []).map(row => [row.question_key, row.correct_index])
-  );
-
-  return items.map(q => {
-    const saved = remembered.get(reviewQuestionKey(q));
-    if(!Number.isInteger(saved) || saved < 0 || saved >= q.opts.length){
-      return q;
-    }
-    return {
-      ...q,
-      correct:saved,
-      answerMethod:"admin_library",
-      needsReview:false
-    };
-  });
+  return items;
 }
 
-async function reportCurrentQuestion(){
+function reportCurrentQuestion(){
   if(!currentUser){
     alert("Войдите в аккаунт, чтобы отправить вопрос администратору.");
     openAuthModal();
@@ -2170,15 +2167,92 @@ async function reportCurrentQuestion(){
   }
 
   const q = test[current];
-  const comment = prompt(
-    "Что нужно проверить? Комментарий можно оставить пустым."
-  );
-  if(comment === null) return;
+  if(!q) return;
+  reportQuestionContext = q;
+  document.getElementById("reportQuestionPreview").textContent =
+    `Вопрос ${q.num || current + 1}: ${q.q}`;
+  document.getElementById("reportReason").value = "typo";
+  document.getElementById("reportComment").value = "";
+  document.getElementById("reportFile").value = "";
+  document.getElementById("reportMessage").textContent = "";
+  document.getElementById("reportModal").classList.remove("hidden");
+}
+
+function closeReportModal(event){
+  if(event && event.target !== document.getElementById("reportModal")) return;
+  document.getElementById("reportModal").classList.add("hidden");
+  reportQuestionContext = null;
+}
+
+const REPORT_FILE_TYPES = {
+  "application/pdf":{extension:"pdf",signature:bytes=>String.fromCharCode(...bytes.slice(0,5)) === "%PDF-"},
+  "image/jpeg":{extension:"jpg",signature:bytes=>bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff},
+  "image/png":{extension:"png",signature:bytes=>bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47},
+  "image/webp":{extension:"webp",signature:bytes=>String.fromCharCode(...bytes.slice(0,4)) === "RIFF" && String.fromCharCode(...bytes.slice(8,12)) === "WEBP"}
+};
+
+async function validatedReportFile(file){
+  if(!file) return null;
+  if(file.size <= 0 || file.size > 10 * 1024 * 1024) throw new Error("Разрешены JPG, PNG, WebP и PDF размером до 10 МБ.");
+  const rule = REPORT_FILE_TYPES[String(file.type || "").toLowerCase()];
+  if(!rule) throw new Error("Разрешены только файлы JPG, PNG, WebP и PDF.");
+  const bytes = new Uint8Array(await file.slice(0,16).arrayBuffer());
+  if(!rule.signature(bytes)) throw new Error("Содержимое файла не соответствует его формату.");
+  return {file,contentType:file.type.toLowerCase(),extension:rule.extension};
+}
+
+function safeDisplayFileName(name){
+  return String(name || "file").replace(/[\u0000-\u001f\u007f]/g, "").slice(0,150) || "file";
+}
+
+function safeStorageFileName(name){
+  const parts = String(name || "file").split(".");
+  const extension = parts.length > 1 ? "." + parts.pop().replace(/[^a-z0-9]/gi, "").toLowerCase() : "";
+  return (parts.join(".") || "file")
+    .normalize("NFKD")
+    .replace(/[^a-z0-9_-]+/gi, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0,70) + extension;
+}
+
+async function submitQuestionReport(){
+  if(!currentUser || !reportQuestionContext) return;
+  const button = document.getElementById("reportSubmitButton");
+  const message = document.getElementById("reportMessage");
+  const file = document.getElementById("reportFile").files[0];
+  let checkedFile = null;
+  try{
+    checkedFile = await validatedReportFile(file);
+  }catch(error){
+    message.textContent = error.message;
+    message.classList.add("danger-text");
+    return;
+  }
+
+  button.disabled = true;
+  message.classList.remove("danger-text");
+  message.textContent = "Отправляю…";
+  const q = reportQuestionContext;
+  let attachmentPath = null;
+
+  if(checkedFile){
+    attachmentPath = `${currentUser.id}/${crypto.randomUUID()}.${checkedFile.extension}`;
+    const {error:uploadError} = await supabaseClient.storage
+      .from("medquiz-report-files")
+      .upload(attachmentPath,checkedFile.file,{contentType:checkedFile.contentType,upsert:false});
+    if(uploadError){
+      button.disabled = false;
+      message.textContent = "Не удалось прикрепить файл. Попробуйте ещё раз.";
+      message.classList.add("danger-text");
+      return;
+    }
+  }
 
   const {error} = await supabaseClient
     .from("medquiz_question_reports")
     .insert({
       question_key:reviewQuestionKey(q),
+      question_number:String(q.num || current + 1),
       question_text:q.q,
       options:q.opts,
       detected_correct_index:q.correct,
@@ -2186,42 +2260,26 @@ async function reportCurrentQuestion(){
       test_id:currentTestId || null,
       test_name:currentTestName || null,
       reported_by:currentUser.id,
-      comment:normalizeText(comment) || null
+      reason:document.getElementById("reportReason").value,
+      comment:normalizeText(document.getElementById("reportComment").value) || null,
+      attachment_path:attachmentPath,
+      attachment_name:file ? safeDisplayFileName(file.name) : null,
+      attachment_type:checkedFile?.contentType || null
     });
 
   if(error){
-    if(error.code === "23505"){
-      alert("Этот вопрос уже находится на проверке.");
-      return;
+    if(attachmentPath){
+      await supabaseClient.storage.from("medquiz-report-files").remove([attachmentPath]);
     }
-    alert("Не удалось отправить вопрос. Попробуйте ещё раз.");
+    button.disabled = false;
+    message.textContent = "Не удалось отправить обращение. Попробуйте ещё раз.";
+    message.classList.add("danger-text");
     return;
   }
 
-  alert("Вопрос отправлен администратору на проверку.");
-}
-
-async function queueDetectedQuestionForReview(q){
-  const key = reviewQuestionKey(q);
-  if(autoQueuedReviewKeys.has(key)) return;
-  autoQueuedReviewKeys.add(key);
-  const {error} = await supabaseClient
-    .from("medquiz_question_reports")
-    .insert({
-      question_key:key,
-      question_text:q.q,
-      options:q.opts,
-      detected_correct_index:q.correct,
-      user_selected_index:null,
-      test_id:currentTestId || null,
-      test_name:currentTestName || null,
-      reported_by:currentUser.id,
-      comment:"Автоматически отмечен системой распознавания"
-    });
-  if(error && error.code !== "23505"){
-    autoQueuedReviewKeys.delete(key);
-    console.warn("Не удалось добавить сомнительный вопрос в очередь", error);
-  }
+  button.disabled = false;
+  message.textContent = "Обращение отправлено. Спасибо!";
+  setTimeout(()=>closeReportModal(),700);
 }
 
 async function refreshAdminQueueCount(){
@@ -2235,6 +2293,125 @@ async function refreshAdminQueueCount(){
   badge.classList.toggle("hidden", !count);
 }
 
+async function refreshNotificationCount(){
+  if(!currentUser) return;
+  const {count} = await supabaseClient
+    .from("medquiz_notifications")
+    .select("id",{count:"exact",head:true})
+    .is("read_at",null);
+  const badge = document.getElementById("notificationBadge");
+  badge.textContent = String(count || 0);
+  badge.classList.toggle("hidden",!count);
+}
+
+function profileHasFullAccess(profile){
+  if(!profile || profile.account_status === "blocked") return false;
+  if(profile.is_admin || profile.access_type === "lifetime") return true;
+  if(profile.access_type === "admin_grant" && !profile.access_expires_at) return true;
+  if(["trial","subscription","admin_grant"].includes(profile.access_type)){
+    return Boolean(profile.access_expires_at && new Date(profile.access_expires_at) > new Date());
+  }
+  return false;
+}
+
+function accessLabel(profile){
+  if(!profileHasFullAccess(profile)) return "Полная версия";
+  if(profile?.is_admin) return "Администратор";
+  if(profile?.access_type === "trial") return "Пробный доступ";
+  if(profile?.access_type === "lifetime") return "Доступ навсегда";
+  return "Полная версия активна";
+}
+
+function lockedFeatureHtml(title){
+  return `<div class="locked-panel"><h3>${escapeHtml(title)}</h3><p>Эта функция доступна в полной версии. Все вопросы и тесты остаются бесплатными.</p><button class="action" onclick="openUpgradeModal()">Посмотреть полную версию</button></div>`;
+}
+
+async function openUpgradeModal(){
+  if(!currentUser){
+    openAuthModal();
+    return;
+  }
+  const modal = document.getElementById("upgradeModal");
+  const summary = document.getElementById("accessSummary");
+  const trialBanner = document.getElementById("trialBanner");
+  const trialAvailable = !currentUserProfile?.trial_started_at && currentUserProfile?.access_type === "free";
+  if(currentUserHasFullAccess){
+    const until = currentUserProfile?.access_expires_at
+      ? ` до ${new Date(currentUserProfile.access_expires_at).toLocaleDateString("ru-RU")}`
+      : "";
+    summary.textContent = accessLabel(currentUserProfile) + until + ".";
+    trialBanner.classList.add("hidden");
+  }else{
+    summary.textContent = "Сохраняйте ошибки, избранное, историю и прогресс.";
+    trialBanner.classList.toggle("hidden",!trialAvailable);
+  }
+  document.getElementById("upgradeMessage").textContent = currentUserHasFullAccess
+    ? ""
+    : trialAvailable
+      ? "Оплата будет подключена позже. Сейчас доступен пробный период."
+      : "Пробный период уже использован. Оплата будет подключена позже.";
+  const controls = document.getElementById("subscriptionControls");
+  controls.innerHTML = "";
+  if(currentUserProfile?.access_type === "subscription"){
+    const {data:subscription} = await supabaseClient
+      .from("medquiz_subscriptions")
+      .select("id,plan_type,auto_renew,cancel_at_period_end,ends_at")
+      .eq("user_id",currentUser.id)
+      .eq("status","active")
+      .order("created_at",{ascending:false})
+      .limit(1)
+      .maybeSingle();
+    if(subscription){
+      const renewal = subscription.auto_renew && !subscription.cancel_at_period_end;
+      controls.innerHTML = `<div class="trial-banner"><div><strong>${renewal ? "Автоматическое продление включено" : "Подписка завершится в конце периода"}</strong><p>${subscription.ends_at ? "Доступ действует до " + new Date(subscription.ends_at).toLocaleDateString("ru-RU") : "Подписка активна"}.</p></div>${renewal ? `<button class="secondary" onclick="cancelSubscriptionRenewal('${subscription.id}')">Отключить продление</button>` : ""}</div>`;
+    }
+  }
+  modal.classList.remove("hidden");
+}
+
+function closeUpgradeModal(event){
+  if(event && event.target !== document.getElementById("upgradeModal")) return;
+  document.getElementById("upgradeModal").classList.add("hidden");
+}
+
+async function startFreeTrial(){
+  if(!currentUser) return;
+  const button = document.getElementById("trialButton");
+  const message = document.getElementById("upgradeMessage");
+  button.disabled = true;
+  message.textContent = "Включаю пробный доступ…";
+  const {error} = await supabaseClient.rpc("medquiz_start_trial");
+  if(error){
+    button.disabled = false;
+    message.textContent = error.message || "Не удалось включить пробный период.";
+    message.classList.add("danger-text");
+    return;
+  }
+  message.classList.remove("danger-text");
+  message.textContent = "Полная версия включена на 7 дней.";
+  await applySession({user:currentUser});
+  setTimeout(closeUpgradeModal,900);
+}
+
+function showPaymentPending(){
+  const message = document.getElementById("upgradeMessage");
+  message.classList.remove("danger-text");
+  message.textContent = "Оплата будет подключена после выбора цен и платёжного сервиса.";
+}
+
+async function cancelSubscriptionRenewal(subscriptionId){
+  const message = document.getElementById("upgradeMessage");
+  const {error} = await supabaseClient.rpc("medquiz_cancel_subscription_renewal",{target_subscription_id:subscriptionId});
+  if(error){
+    message.textContent = "Не удалось отключить продление: " + error.message;
+    message.classList.add("danger-text");
+    return;
+  }
+  await openUpgradeModal();
+  message.classList.remove("danger-text");
+  message.textContent = "Автоматическое продление отключено. Доступ сохранится до конца оплаченного периода.";
+}
+
 function openAuthModal(){
   if(currentUser){
     handleProfileClick();
@@ -2242,6 +2419,7 @@ function openAuthModal(){
   }
   document.getElementById("authModal").classList.remove("hidden");
   document.getElementById("authMessage").textContent = "";
+  document.getElementById("resendConfirmationButton").classList.add("hidden");
 }
 
 function closeAuthModal(event){
@@ -2255,12 +2433,99 @@ function setAuthMessage(message, isError=false){
   target.classList.toggle("danger-text", isError);
 }
 
+function authRedirectUrl(){
+  return location.href.split(/[?#]/)[0];
+}
+
+function authErrorMessage(error){
+  const text = String(error?.message || "").toLowerCase();
+  if(text.includes("invalid login credentials")) return "Неверный email или пароль.";
+  if(text.includes("email not confirmed")) return "Сначала подтвердите email по ссылке из письма.";
+  if(text.includes("already registered")) return "Аккаунт с таким email уже существует.";
+  if(text.includes("rate limit")) return "Слишком много попыток. Подождите немного и повторите.";
+  return error?.message || "Не удалось выполнить действие. Попробуйте ещё раз.";
+}
+
+async function requestPasswordReset(){
+  const email = document.getElementById("authEmail").value.trim();
+  if(!email){
+    setAuthMessage("Введите email, к которому привязан аккаунт.", true);
+    return;
+  }
+  setAuthMessage("Отправляем письмо…");
+  const {error} = await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
+  if(error){
+    setAuthMessage(authErrorMessage(error), true);
+    return;
+  }
+  setAuthMessage("Если аккаунт существует, на этот адрес придёт письмо для смены пароля.");
+}
+
+async function resendConfirmationEmail(){
+  const email = document.getElementById("authEmail").value.trim();
+  if(!email){
+    setAuthMessage("Введите email.", true);
+    return;
+  }
+  setAuthMessage("Отправляем письмо…");
+  const {error} = await supabaseClient.auth.resend({type:"signup",email,options:{emailRedirectTo:authRedirectUrl()}});
+  setAuthMessage(error ? authErrorMessage(error) : "Письмо подтверждения отправлено повторно.",Boolean(error));
+}
+
+function openPasswordModal(){
+  document.getElementById("authModal").classList.add("hidden");
+  document.getElementById("newPassword").value = "";
+  document.getElementById("newPasswordRepeat").value = "";
+  document.getElementById("passwordMessage").textContent = "";
+  document.getElementById("passwordModal").classList.remove("hidden");
+}
+
+function closePasswordModal(event){
+  if(event && event.target !== event.currentTarget) return;
+  document.getElementById("passwordModal").classList.add("hidden");
+}
+
+async function saveNewPassword(){
+  const password = document.getElementById("newPassword").value;
+  const repeated = document.getElementById("newPasswordRepeat").value;
+  const message = document.getElementById("passwordMessage");
+  message.classList.remove("danger-text");
+  if(password.length < 8){
+    message.textContent = "Пароль должен содержать не менее 8 символов.";
+    message.classList.add("danger-text");
+    return;
+  }
+  if(password !== repeated){
+    message.textContent = "Пароли не совпадают.";
+    message.classList.add("danger-text");
+    return;
+  }
+  message.textContent = "Сохраняем…";
+  const {error} = await supabaseClient.auth.updateUser({password});
+  if(error){
+    message.textContent = authErrorMessage(error);
+    message.classList.add("danger-text");
+    return;
+  }
+  message.textContent = "Пароль изменён.";
+  setTimeout(closePasswordModal,700);
+}
+
+function contactSupport(){
+  const email = String(SITE_CONFIG.supportEmail || "").trim();
+  if(!email){
+    alert("Адрес поддержки будет указан перед публикацией сайта.");
+    return;
+  }
+  location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent("Поддержка MedQuiz")}`;
+}
+
 async function signUp(){
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
   const displayName = document.getElementById("authName").value.trim();
-  if(!email || password.length < 6){
-    setAuthMessage("Введите email и пароль не короче 6 символов.", true);
+  if(!email || password.length < 8){
+    setAuthMessage("Введите email и пароль не короче 8 символов.", true);
     return;
   }
   setAuthMessage("Создаём аккаунт…");
@@ -2273,7 +2538,7 @@ async function signUp(){
     }
   });
   if(error){
-    setAuthMessage(error.message, true);
+    setAuthMessage(authErrorMessage(error), true);
     return;
   }
   if(data.session){
@@ -2281,6 +2546,7 @@ async function signUp(){
     setTimeout(closeAuthModal, 700);
   }else{
     setAuthMessage("Проверьте почту и подтвердите регистрацию.");
+    document.getElementById("resendConfirmationButton").classList.remove("hidden");
   }
 }
 
@@ -2294,7 +2560,7 @@ async function signIn(){
   setAuthMessage("Входим…");
   const {error} = await supabaseClient.auth.signInWithPassword({email,password});
   if(error){
-    setAuthMessage(error.message, true);
+    setAuthMessage(authErrorMessage(error), true);
     return;
   }
   closeAuthModal();
@@ -2313,31 +2579,63 @@ async function handleProfileClick(){
 async function applySession(session){
   currentUser = session?.user || null;
   currentUserIsAdmin = false;
+  currentUserProfile = null;
+  currentUserHasFullAccess = false;
   if(currentUser){
-    const {data:profile} = await supabaseClient
+    let {data:profile,error:profileError} = await supabaseClient
       .from("medquiz_profiles")
-      .select("is_admin")
+      .select("is_admin,account_status,access_type,access_expires_at,trial_started_at,trial_ends_at")
       .eq("user_id", currentUser.id)
       .maybeSingle();
+    if(profileError){
+      const fallback = await supabaseClient
+        .from("medquiz_profiles")
+        .select("is_admin")
+        .eq("user_id",currentUser.id)
+        .maybeSingle();
+      profile = fallback.data ? {...fallback.data,account_status:"active",access_type:"free"} : null;
+    }
+    currentUserProfile = profile;
     currentUserIsAdmin = profile?.is_admin === true;
+    currentUserHasFullAccess = profileHasFullAccess(profile);
+    if(profile?.account_status === "blocked"){
+      alert("Этот аккаунт заблокирован администратором.");
+      await supabaseClient.auth.signOut();
+      return;
+    }
   }
   document.getElementById("adminNav")
     .classList.toggle("hidden", !currentUserIsAdmin);
   document.getElementById("adminMobileNav")
     .classList.toggle("hidden", !currentUserIsAdmin);
+  document.getElementById("notificationButton")
+    .classList.toggle("hidden", !currentUser);
+  const accessButton = document.getElementById("accessButton");
+  accessButton.classList.toggle("hidden",!currentUser);
+  accessButton.classList.toggle("full",currentUserHasFullAccess);
+  accessButton.textContent = accessLabel(currentUserProfile);
   const name = currentUser?.user_metadata?.display_name ||
     currentUser?.email?.split("@")[0] || "Гость";
   document.getElementById("profileName").textContent = name;
   document.getElementById("profileAvatar").textContent = name.charAt(0).toUpperCase();
-  document.getElementById("profileHint").textContent = currentUser ? currentUser.email : "Войти в аккаунт";
+  document.getElementById("profileHint").textContent = currentUser
+    ? currentUser.email + " · " + (currentUserHasFullAccess ? "полный доступ" : "бесплатно")
+    : "Войти в аккаунт";
   document.getElementById("authButton").textContent = currentUser ? "Выйти" : "Войти";
   document.getElementById("welcomeTitle").textContent = currentUser ? "Добрый день, " + name + "!" : "Добрый день!";
   if(currentUser){
-    await Promise.all([loadDashboardStats(), loadFavoritesForCurrentTest()]);
+    if(currentUserHasFullAccess){
+      await Promise.all([loadDashboardStats(), loadFavoritesForCurrentTest(), refreshNotificationCount()]);
+    }else{
+      renderGuestStats();
+      favoriteKeys.clear();
+      await refreshNotificationCount();
+    }
     if(currentUserIsAdmin) await refreshAdminQueueCount();
   }else{
     renderGuestStats();
     favoriteKeys.clear();
+    document.getElementById("notificationBadge").classList.add("hidden");
   }
 }
 
@@ -2348,11 +2646,13 @@ function renderGuestStats(){
   values[2].textContent = "0";
   values[3].textContent = "0";
   document.querySelector(".error-count").textContent = "0";
-  document.getElementById("errorsButton").disabled = true;
+  const errorsButton = document.getElementById("errorsButton");
+  errorsButton.disabled = !currentUser;
+  errorsButton.textContent = currentUser ? "Доступно в полной версии" : "Работа над ошибками";
 }
 
 async function loadDashboardStats(){
-  if(!currentUser) return;
+  if(!currentUser || !currentUserHasFullAccess) return;
   const [{data:attempts},{data:stats}] = await Promise.all([
     supabaseClient.from("medquiz_attempts").select("total_questions,correct_answers"),
     supabaseClient.from("medquiz_question_stats").select("mistake_count,correct_streak,favorite")
@@ -2369,7 +2669,9 @@ async function loadDashboardStats(){
   values[2].textContent = allAttempts.length;
   values[3].textContent = favorites;
   document.querySelector(".error-count").textContent = errors;
-  document.getElementById("errorsButton").disabled = errors === 0;
+  const errorsButton = document.getElementById("errorsButton");
+  errorsButton.disabled = errors === 0;
+  errorsButton.textContent = "Работа над ошибками";
 }
 
 function renderLoadedTestCard(){
@@ -2409,9 +2711,35 @@ function chooseSubject(id){
 
 document.addEventListener("click", closeSubjectMenu);
 
-function loadQuestionFile(item){
+async function loadQuestionFile(item){
   const cacheKey = "subject:" + item.id;
-  if(builtInCache.has(cacheKey)) return Promise.resolve(builtInCache.get(cacheKey));
+  if(builtInCache.has(cacheKey)) return builtInCache.get(cacheKey);
+
+  try{
+    const {data:version,error:versionError} = await supabaseClient
+      .from("medquiz_test_versions")
+      .select("data_path")
+      .eq("test_id",item.id)
+      .eq("is_active",true)
+      .order("created_at",{ascending:false})
+      .limit(1)
+      .maybeSingle();
+    if(!versionError && version?.data_path){
+      const {data:fileData,error:fileError} = await supabaseClient.storage
+        .from("medquiz-test-files")
+        .download(version.data_path);
+      if(!fileError && fileData){
+        const payload = JSON.parse(await fileData.text());
+        if(Array.isArray(payload.questions) && payload.questions.length){
+          builtInCache.set(cacheKey,payload.questions);
+          return payload.questions;
+        }
+      }
+    }
+  }catch(error){
+    console.warn("Не удалось проверить обновлённую версию теста",error);
+  }
+
   return new Promise((resolve,reject)=>{
     const script = document.createElement("script");
     script.src = item.file;
@@ -2482,7 +2810,7 @@ async function loadBuiltInTest(id){
 
 async function loadFavoritesForCurrentTest(){
   favoriteKeys.clear();
-  if(!currentUser || !currentTestId) return;
+  if(!currentUser || !currentUserHasFullAccess || !currentTestId) return;
   const {data} = await supabaseClient
     .from("medquiz_question_stats")
     .select("question_key")
@@ -2494,6 +2822,10 @@ async function loadFavoritesForCurrentTest(){
 async function toggleFavorite(){
   if(!currentUser){
     openAuthModal();
+    return;
+  }
+  if(!currentUserHasFullAccess){
+    openUpgradeModal();
     return;
   }
   const q = test[current];
@@ -2525,12 +2857,7 @@ async function toggleFavorite(){
 }
 
 async function saveCompletedAttempt(){
-  if(!currentUser){
-    const local = JSON.parse(localStorage.getItem("medquiz_guest_history") || "[]");
-    local.unshift({test_name:currentTestName || "Локальный тест", total_questions:test.length, correct_answers:score, completed_at:new Date().toISOString()});
-    localStorage.setItem("medquiz_guest_history", JSON.stringify(local.slice(0,50)));
-    return;
-  }
+  if(!currentUser || !currentUserHasFullAccess) return;
   const safeTestId = currentTestId || "local-test";
   const safeTestName = currentTestName || "Локальный тест";
   const {data:attempt,error:attemptError} = await supabaseClient
@@ -2598,19 +2925,26 @@ async function showSection(section, button){
   }
   if(section === "admin"){
     if(!currentUserIsAdmin){
-      view.innerHTML = `<h2>Проверка вопросов</h2><div class="empty-state">Этот раздел доступен только администратору.</div>`;
+      view.innerHTML = `<h2>Админка</h2><div class="empty-state">Этот раздел доступен только администратору.</div>`;
       return;
     }
-    await renderAdminReview(view);
+    await renderAdminPanel(view);
     return;
   }
   if(!currentUser){
-    view.innerHTML = requireAccountHtml(section === "errors" ? "Мои ошибки" : section === "favorites" ? "Избранное" : "История");
+    const title = section === "errors" ? "Мои ошибки" : section === "favorites" ? "Избранное" : section === "notifications" ? "Уведомления" : "История";
+    view.innerHTML = requireAccountHtml(title);
+    return;
+  }
+  if(["errors","favorites","history"].includes(section) && !currentUserHasFullAccess){
+    const title = section === "errors" ? "История ошибок" : section === "favorites" ? "Избранные вопросы" : "История тестов";
+    view.innerHTML = lockedFeatureHtml(title);
     return;
   }
   if(section === "history") await renderHistory(view);
   if(section === "errors") await renderQuestionStats(view,false);
   if(section === "favorites") await renderQuestionStats(view,true);
+  if(section === "notifications") await renderNotifications(view);
 }
 
 async function renderHistory(view){
@@ -2624,105 +2958,353 @@ async function renderHistory(view){
   view.innerHTML = `<h2>История</h2><p>Все завершённые попытки вашего аккаунта.</p><div class="section-list">${items || `<div class="empty-state">История пока пуста.</div>`}</div>`;
 }
 
-async function renderAdminReview(view){
-  const {data, error} = await supabaseClient
-    .from("medquiz_question_reports")
-    .select("*")
-    .eq("status", "pending")
-    .order("created_at", {ascending:true});
-
+async function renderNotifications(view){
+  const {data,error} = await supabaseClient
+    .from("medquiz_notifications")
+    .select("id,title,body,read_at,created_at")
+    .order("created_at",{ascending:false})
+    .limit(100);
   if(error){
-    view.innerHTML = `<h2>Проверка вопросов</h2><p class="danger-text">${escapeHtml(error.message)}</p>`;
+    view.innerHTML = `<h2>Уведомления</h2><p class="danger-text">Не удалось загрузить уведомления.</p>`;
     return;
   }
-
-  const cards = (data || []).map(report => {
-    const options = Array.isArray(report.options) ? report.options : [];
-    const answers = options.map((option, index) =>
-      `<label class="admin-answer"><input type="radio" name="review-${report.id}" value="${index}" ${index === report.detected_correct_index ? "checked" : ""}><span><b>${String.fromCharCode(65 + index)})</b> ${escapeHtml(option)}</span></label>`
-    ).join("");
-    const source = [report.test_name, report.comment]
-      .filter(Boolean)
-      .map(escapeHtml)
-      .join(" · ");
-    const date = new Date(report.created_at).toLocaleString("ru-RU");
-    const detected = Number.isInteger(report.detected_correct_index)
-      ? `Предполагаемый ответ: ${String.fromCharCode(65 + report.detected_correct_index)}`
-      : "Ответ не распознан";
-
-    return `<article class="admin-card" id="report-${report.id}"><div class="admin-meta"><span>${escapeHtml(report.test_name || "Без названия")}</span><span>${date}</span><span>${detected}</span></div><h3>${escapeHtml(report.question_text)}</h3>${source ? `<p class="info">${source}</p>` : ""}<div class="admin-answer-list">${answers}</div><div class="admin-actions"><label class="admin-remember"><input id="remember-${report.id}" type="checkbox" checked>Сохранить исправление для всех следующих тестов</label><button class="action" onclick="resolveQuestionReport('${report.id}')">Подтвердить правильный ответ</button></div></article>`;
+  const items = (data || []).map(item=>{
+    const date = new Date(item.created_at).toLocaleString("ru-RU");
+    return `<div class="section-item"><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.body)} · ${date}</p></div>${item.read_at ? "" : `<span class="status-pill">Новое</span>`}</div>`;
   }).join("");
+  view.innerHTML = `<h2>Уведомления</h2><p>Здесь появится сообщение после обработки обращения.</p><div class="section-list">${items || `<div class="empty-state">Новых уведомлений нет.</div>`}</div>`;
+  const unreadIds = (data || []).filter(item=>!item.read_at).map(item=>item.id);
+  if(unreadIds.length){
+    await supabaseClient.from("medquiz_notifications").update({read_at:new Date().toISOString()}).in("id",unreadIds);
+    await refreshNotificationCount();
+  }
+}
 
-  view.innerHTML = `<div class="admin-header"><div><h2>Проверка вопросов</h2><p>Выберите правильный вариант — исправление начнёт применяться ко всем тестам.</p></div><span class="admin-counter">${(data || []).length} в очереди</span></div>${cards || `<div class="empty-state">Новых вопросов для проверки нет.</div>`}`;
+const ADMIN_SECTIONS = {
+  reports:{title:"Жалобы на вопросы",description:"Обращения зарегистрированных пользователей, комментарии и подтверждающие файлы.",icon:"⚑"},
+  tests:{title:"Файлы тестов",description:"Текущие версии тестов и загрузка обновлённого PDF или DOCX.",icon:"▤"},
+  users:{title:"Пользователи",description:"Поиск аккаунтов, активность, блокировка и ручная выдача полного доступа.",icon:"◎"},
+  payments:{title:"Платежи и подписки",description:"Месячная, годовая и бессрочная версии, а также состояние платежей.",icon:"₽"},
+  audit:{title:"История действий",description:"Запись административных действий с датой и причиной.",icon:"◷"}
+};
+
+async function renderAdminPanel(view,activeSection="reports"){
+  if(!currentUserIsAdmin) return;
+  const section = ADMIN_SECTIONS[activeSection] || ADMIN_SECTIONS.reports;
+  const tabs = Object.entries(ADMIN_SECTIONS).map(([key,item])=>
+    `<button type="button" class="admin-tab ${key === activeSection ? "active" : ""}" onclick="openAdminSection('${key}')">${item.title}</button>`
+  ).join("");
+  view.innerHTML = `<div class="admin-shell"><div class="admin-heading"><div><p class="eyebrow">Управление сайтом</p><h2>Админка</h2><p>Раздел виден только аккаунту администратора.</p></div><span class="admin-identity">${escapeHtml(currentUser?.email || "Администратор")}</span></div><nav class="admin-tabs" aria-label="Разделы админки">${tabs}</nav><section class="admin-workspace" id="adminWorkspace"><h3>${section.icon} ${section.title}</h3><p>${section.description}</p><div class="admin-stage-note"><span class="admin-stage-icon">${section.icon}</span><div><strong>Загрузка…</strong></div></div></section></div>`;
+  await renderAdminSection(activeSection);
+}
+
+async function openAdminSection(section){
+  if(!currentUserIsAdmin) return;
+  const view = document.getElementById("sectionView");
+  await renderAdminPanel(view,section);
+}
+
+async function renderAdminSection(section){
+  const workspace = document.getElementById("adminWorkspace");
+  if(!workspace) return;
+  if(section === "reports") return renderAdminReports(workspace,"pending");
+  if(section === "tests") return renderAdminTests(workspace);
+  if(section === "users") return renderAdminUsers(workspace);
+  if(section === "payments") return renderAdminBilling(workspace);
+  if(section === "audit") return renderAdminAudit(workspace);
+  const item = ADMIN_SECTIONS[section] || ADMIN_SECTIONS.users;
+  workspace.innerHTML = `<h3>${item.icon} ${item.title}</h3><p>${item.description}</p>`;
+}
+
+const REPORT_REASON_LABELS = {
+  typo:"Опечатка или техническая ошибка",
+  options_error:"Ошибка в вариантах ответа",
+  outdated:"Вопрос или ответ устарел",
+  exam_answer_changed:"На экзамене был указан другой ответ",
+  other:"Другое"
+};
+
+async function renderAdminReports(workspace,status="pending"){
+  workspace.innerHTML = `<h3>⚑ Жалобы на вопросы</h3><p>Проверяй сообщение и подтверждающий файл, затем отмечай обращение решённым.</p><div class="admin-subtabs"><button class="admin-subtab ${status === "pending" ? "active" : ""}" onclick="renderAdminReports(document.getElementById('adminWorkspace'),'pending')">Новые</button><button class="admin-subtab ${status === "resolved" ? "active" : ""}" onclick="renderAdminReports(document.getElementById('adminWorkspace'),'resolved')">Решённые</button></div><div id="adminReportList" class="admin-report-list"><p>Загрузка…</p></div>`;
+  const {data,error} = await supabaseClient
+    .from("medquiz_question_reports")
+    .select("id,question_number,question_text,options,test_name,reported_by,reason,comment,attachment_path,attachment_name,status,created_at,resolved_at")
+    .eq("status",status)
+    .order("created_at",{ascending:false});
+  const list = document.getElementById("adminReportList");
+  if(!list) return;
+  if(error){
+    list.innerHTML = `<p class="danger-text">Не удалось загрузить обращения. Сначала примените файл настройки базы данных второго этапа.</p>`;
+    return;
+  }
+  const userIds = [...new Set((data || []).map(item=>item.reported_by).filter(Boolean))];
+  const profileMap = new Map();
+  if(userIds.length){
+    const {data:profiles} = await supabaseClient
+      .from("medquiz_profiles")
+      .select("user_id,display_name")
+      .in("user_id",userIds);
+    (profiles || []).forEach(profile=>profileMap.set(profile.user_id,profile.display_name));
+  }
+  const cards = (data || []).map(report=>{
+    const date = new Date(report.created_at).toLocaleString("ru-RU");
+    const user = profileMap.get(report.reported_by) || "Зарегистрированный пользователь";
+    const attachment = report.attachment_path
+      ? `<button class="secondary" data-path="${escapeHtml(report.attachment_path)}" onclick="openReportAttachment(this.dataset.path)">Открыть файл${report.attachment_name ? ": " + escapeHtml(report.attachment_name) : ""}</button>`
+      : "";
+    const action = status === "pending"
+      ? `<button class="action" onclick="resolveQuestionReport('${report.id}')">Решено</button>`
+      : `<span class="status-pill">Решено</span>`;
+    return `<article class="admin-report-card" id="report-${report.id}"><div class="admin-report-meta"><span>${escapeHtml(report.test_name || "Тест без названия")}</span><span>Вопрос ${escapeHtml(report.question_number || "—")}</span><span>${date}</span><span>${escapeHtml(user)}</span></div><h4>${escapeHtml(report.question_text)}</h4><p><b>Причина:</b> ${escapeHtml(REPORT_REASON_LABELS[report.reason] || report.reason || "Другое")}</p>${report.comment ? `<p><b>Комментарий:</b> ${escapeHtml(report.comment)}</p>` : ""}<div class="admin-report-actions">${attachment}${action}</div></article>`;
+  }).join("");
+  list.innerHTML = cards || `<div class="empty-state">${status === "pending" ? "Новых обращений нет." : "Решённых обращений пока нет."}</div>`;
+}
+
+async function openReportAttachment(path){
+  if(!currentUserIsAdmin || !path) return;
+  const {data,error} = await supabaseClient.storage
+    .from("medquiz-report-files")
+    .createSignedUrl(path,300);
+  if(error || !data?.signedUrl){
+    alert("Не удалось открыть прикреплённый файл.");
+    return;
+  }
+  window.open(data.signedUrl,"_blank","noopener");
 }
 
 async function resolveQuestionReport(reportId){
   if(!currentUserIsAdmin) return;
-
-  const selected = document.querySelector(
-    `input[name="review-${reportId}"]:checked`
-  );
-  if(!selected){
-    alert("Выберите правильный ответ.");
-    return;
-  }
-
-  const correctIndex = Number(selected.value);
-  const remember = document.getElementById("remember-" + reportId)?.checked;
-  const {data:report, error:loadError} = await supabaseClient
+  const {error} = await supabaseClient
     .from("medquiz_question_reports")
-    .select("question_key,question_text,options")
-    .eq("id", reportId)
-    .single();
-
-  if(loadError || !report){
-    alert("Не удалось открыть вопрос.");
+    .update({status:"resolved",resolved_by:currentUser.id,resolved_at:new Date().toISOString()})
+    .eq("id",reportId);
+  if(error){
+    alert("Не удалось отметить обращение решённым.");
     return;
   }
+  await refreshAdminQueueCount();
+  await renderAdminReports(document.getElementById("adminWorkspace"),"pending");
+}
 
-  if(remember){
-    const {error:libraryError} = await supabaseClient
-      .from("medquiz_answer_library")
-      .upsert({
-        question_key:report.question_key,
-        question_text:report.question_text,
-        options:report.options,
-        correct_index:correctIndex,
-        confirmed_by:currentUser.id,
-        confirmed_at:new Date().toISOString(),
-        updated_at:new Date().toISOString()
-      });
-    if(libraryError){
-      alert("Ответ не удалось сохранить в библиотеке.");
-      return;
+async function renderAdminTests(workspace){
+  const options = SUBJECT_TESTS.map(item=>`<option value="${item.id}">${escapeHtml(item.name)}</option>`).join("");
+  workspace.innerHTML = `<h3>▤ Файлы тестов</h3><p>Выбери предмет и загрузи полную обновлённую версию. Отдельные вопросы здесь не редактируются.</p><div class="admin-test-upload"><label>Предмет<select id="adminTestId">${options}</select></label><label>Обновлённый файл<input id="adminTestFile" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label><button id="adminTestUploadButton" class="action" onclick="uploadAdminTestVersion()">Загрузить версию</button></div><p id="adminTestMessage" class="report-message"></p><div id="adminVersionList" class="admin-version-list"><p>Загрузка…</p></div>`;
+  const {data,error} = await supabaseClient
+    .from("medquiz_test_versions")
+    .select("id,test_id,original_filename,question_count,created_at,is_active")
+    .eq("is_active",true)
+    .order("created_at",{ascending:false});
+  const list = document.getElementById("adminVersionList");
+  if(!list) return;
+  if(error){
+    list.innerHTML = `<p class="danger-text">Список версий станет доступен после применения настройки базы данных второго этапа.</p>`;
+    return;
+  }
+  const rows = (data || []).map(version=>{
+    const subject = SUBJECT_TESTS.find(item=>item.id === version.test_id);
+    const date = new Date(version.created_at).toLocaleString("ru-RU");
+    return `<div class="admin-version"><div><strong>${escapeHtml(subject?.name || version.test_id)}</strong><p>${escapeHtml(version.original_filename)} · ${version.question_count} вопросов · ${date}</p></div><span class="status-pill">Текущая</span></div>`;
+  }).join("");
+  list.innerHTML = rows || `<div class="empty-state">Обновлённых версий пока нет. Используются файлы, включённые в сайт.</div>`;
+}
+
+async function uploadAdminTestVersion(){
+  if(!currentUserIsAdmin) return;
+  const testId = document.getElementById("adminTestId").value;
+  const file = document.getElementById("adminTestFile").files[0];
+  const message = document.getElementById("adminTestMessage");
+  const button = document.getElementById("adminTestUploadButton");
+  const item = SUBJECT_TESTS.find(subject=>subject.id === testId);
+  if(!file || !item){
+    message.textContent = "Выберите предмет и файл PDF или DOCX.";
+    message.classList.add("danger-text");
+    return;
+  }
+  if(getFileType(file) === "unknown" || file.size > 50 * 1024 * 1024){
+    message.textContent = "Разрешены PDF и DOCX размером до 50 МБ.";
+    message.classList.add("danger-text");
+    return;
+  }
+  button.disabled = true;
+  message.classList.remove("danger-text");
+  message.textContent = "Проверяю и загружаю файл…";
+  try{
+    cachedFileKey = "";
+    cachedQuestions = [];
+    const parsed = await parseSelectedFile(file,true);
+    if(!parsed.length) throw new Error("В файле не найдено ни одного вопроса.");
+    const token = Date.now() + "-" + crypto.randomUUID();
+    const sourcePath = `${testId}/${token}-${safeStorageFileName(file.name)}`;
+    const dataPath = `${testId}/${token}.json`;
+    const payload = new Blob([JSON.stringify({test_id:testId,test_name:item.name,questions:parsed})],{type:"application/json"});
+    const sourceUpload = await supabaseClient.storage.from("medquiz-test-files").upload(sourcePath,file,{contentType:file.type || undefined,upsert:false});
+    if(sourceUpload.error) throw sourceUpload.error;
+    const dataUpload = await supabaseClient.storage.from("medquiz-test-files").upload(dataPath,payload,{contentType:"application/json",upsert:false});
+    if(dataUpload.error){
+      await supabaseClient.storage.from("medquiz-test-files").remove([sourcePath]);
+      throw dataUpload.error;
+    }
+    const {data:oldVersions} = await supabaseClient.from("medquiz_test_versions").select("id").eq("test_id",testId).eq("is_active",true);
+    const {data:newVersion,error:insertError} = await supabaseClient.from("medquiz_test_versions").insert({test_id:testId,test_name:item.name,original_filename:file.name,source_path:sourcePath,data_path:dataPath,question_count:parsed.length,uploaded_by:currentUser.id,is_active:false}).select("id").single();
+    if(insertError) throw insertError;
+    if(oldVersions?.length){
+      await supabaseClient.from("medquiz_test_versions").update({is_active:false}).eq("test_id",testId).eq("is_active",true);
+    }
+    const {error:activateError} = await supabaseClient.from("medquiz_test_versions").update({is_active:true}).eq("id",newVersion.id);
+    if(activateError){
+      if(oldVersions?.[0]) await supabaseClient.from("medquiz_test_versions").update({is_active:true}).eq("id",oldVersions[0].id);
+      throw activateError;
+    }
+    builtInCache.clear();
+    document.getElementById("adminTestFile").value = "";
+    await renderAdminTests(document.getElementById("adminWorkspace"));
+    const successMessage = document.getElementById("adminTestMessage");
+    if(successMessage) successMessage.textContent = `Версия загружена: ${parsed.length} вопросов.`;
+  }catch(error){
+    console.error(error);
+    message.textContent = "Не удалось загрузить версию: " + (error.message || "неизвестная ошибка");
+    message.classList.add("danger-text");
+  }finally{
+    const activeButton = document.getElementById("adminTestUploadButton");
+    if(activeButton) activeButton.disabled = false;
+  }
+}
+
+function effectiveAccessText(user){
+  if(user.access_type === "lifetime") return "Навсегда";
+  if(["trial","subscription","admin_grant"].includes(user.access_type)){
+    if(!user.access_expires_at) return user.access_type === "admin_grant" ? "Полный доступ без срока" : "Полный доступ";
+    if(new Date(user.access_expires_at) > new Date()){
+      const label = user.access_type === "trial" ? "Пробный" : user.access_type === "subscription" ? "Подписка" : "Выдан администратором";
+      return `${label} до ${new Date(user.access_expires_at).toLocaleDateString("ru-RU")}`;
     }
   }
+  return "Бесплатный";
+}
 
-  const {error:updateError} = await supabaseClient
-    .from("medquiz_question_reports")
-    .update({
-      status:"resolved",
-      resolved_correct_index:correctIndex,
-      resolved_by:currentUser.id,
-      resolved_at:new Date().toISOString()
-    })
-    .eq("id", reportId);
+async function renderAdminUsers(workspace){
+  workspace.innerHTML = `<h3>◎ Пользователи</h3><p>Ищи аккаунты, смотри активность, выдавай полный доступ или блокируй вход.</p><div class="admin-toolbar"><input id="adminUserSearch" class="admin-search" placeholder="Имя или email" onkeydown="if(event.key==='Enter')searchAdminUsers()"><button class="action" onclick="searchAdminUsers()">Найти</button></div><p id="adminUserMessage" class="report-message"></p><div id="adminUserList" class="admin-user-list"><p>Загрузка…</p></div>`;
+  await loadAdminUsers("");
+}
 
-  if(updateError){
-    alert("Не удалось завершить проверку.");
+async function searchAdminUsers(){
+  await loadAdminUsers(document.getElementById("adminUserSearch")?.value.trim() || "");
+}
+
+async function loadAdminUsers(search){
+  const list = document.getElementById("adminUserList");
+  if(!list) return;
+  list.innerHTML = "<p>Загрузка…</p>";
+  const {data,error} = await supabaseClient.rpc("medquiz_admin_list_users",{search_text:search,result_limit:100});
+  if(error){
+    list.innerHTML = `<p class="danger-text">Не удалось загрузить пользователей. Примените настройку базы данных третьего этапа.</p>`;
     return;
   }
+  const rows = (data || []).map(user=>{
+    const blocked = user.account_status === "blocked";
+    const lastActive = user.last_active_at ? new Date(user.last_active_at).toLocaleString("ru-RU") : "ещё не проходил тесты";
+    const created = new Date(user.created_at).toLocaleDateString("ru-RU");
+    return `<article class="admin-user"><div class="admin-user-head"><div><h4>${escapeHtml(user.display_name || "Без имени")}</h4><p>${escapeHtml(user.email || "Email не указан")} · зарегистрирован ${created}</p><p>Попыток: ${Number(user.attempt_count || 0)} · последняя активность: ${lastActive}</p></div><span class="status-pill">${blocked ? "Заблокирован" : escapeHtml(effectiveAccessText(user))}</span></div><div class="admin-access-form"><label>Срок<select id="grant-duration-${user.user_id}"><option value="30">30 дней</option><option value="365">1 год</option><option value="forever">Без срока</option></select></label><label>Причина<select id="grant-reason-${user.user_id}"><option value="gift">Подарок</option><option value="teacher">Преподаватель</option><option value="test_account">Тестовый аккаунт</option><option value="compensation">Компенсация</option><option value="other">Другое</option></select></label><label>Комментарий<input id="grant-comment-${user.user_id}" placeholder="Необязательно"></label><button class="action" onclick="grantAdminAccess('${user.user_id}')">Выдать доступ</button></div><div class="admin-user-actions"><button class="secondary" onclick="revokeAdminAccess('${user.user_id}')">Вернуть бесплатный</button><button class="danger-button" onclick="setUserBlocked('${user.user_id}',${!blocked})">${blocked ? "Разблокировать" : "Заблокировать"}</button></div></article>`;
+  }).join("");
+  list.innerHTML = rows || `<div class="empty-state">Пользователи не найдены.</div>`;
+}
 
-  questions = await applyRememberedAnswers(questions);
-  test = await applyRememberedAnswers(test);
-  document.getElementById("report-" + reportId)?.remove();
-  await refreshAdminQueueCount();
-  const remaining = document.querySelectorAll(".admin-card").length;
-  const counter = document.querySelector(".admin-counter");
-  if(counter) counter.textContent = remaining + " в очереди";
-  alert(remember
-    ? "Ответ подтверждён и сохранён в библиотеке."
-    : "Ответ подтверждён для этой заявки.");
+async function grantAdminAccess(userId){
+  const duration = document.getElementById("grant-duration-" + userId).value;
+  const reason = document.getElementById("grant-reason-" + userId).value;
+  const comment = document.getElementById("grant-comment-" + userId).value.trim();
+  const reasonLabels = {gift:"Подарок",teacher:"Преподаватель",test_account:"Тестовый аккаунт",compensation:"Компенсация",other:"Другое"};
+  const expires = duration === "forever"
+    ? null
+    : new Date(Date.now() + Number(duration) * 86400000).toISOString();
+  const {error} = await supabaseClient.rpc("medquiz_admin_set_access",{
+    target_id:userId,
+    new_access_type:"admin_grant",
+    new_expires_at:expires,
+    grant_reason:comment ? reasonLabels[reason] + ": " + comment : reasonLabels[reason]
+  });
+  if(error){
+    alert("Не удалось выдать доступ: " + error.message);
+    return;
+  }
+  await searchAdminUsers();
+}
+
+async function revokeAdminAccess(userId){
+  const {error} = await supabaseClient.rpc("medquiz_admin_set_access",{
+    target_id:userId,
+    new_access_type:"free",
+    new_expires_at:null,
+    grant_reason:"Отменено администратором"
+  });
+  if(error){
+    alert("Не удалось изменить доступ: " + error.message);
+    return;
+  }
+  await searchAdminUsers();
+}
+
+async function setUserBlocked(userId,blocked){
+  const {error} = await supabaseClient.rpc("medquiz_admin_set_blocked",{target_id:userId,blocked});
+  if(error){
+    alert("Не удалось изменить состояние аккаунта: " + error.message);
+    return;
+  }
+  await searchAdminUsers();
+}
+
+async function renderAdminBilling(workspace){
+  workspace.innerHTML = `<h3>₽ Платежи и подписки</h3><p>Месячные, годовые и бессрочные покупки появятся здесь после подключения оплаты.</p><div id="billingContent"><p>Загрузка…</p></div>`;
+  const [{data:subscriptions,error:subscriptionError},{data:payments,error:paymentError}] = await Promise.all([
+    supabaseClient.from("medquiz_subscriptions").select("*").order("created_at",{ascending:false}).limit(100),
+    supabaseClient.from("medquiz_payments").select("*").order("created_at",{ascending:false}).limit(100)
+  ]);
+  const content = document.getElementById("billingContent");
+  if(!content) return;
+  if(subscriptionError || paymentError){
+    content.innerHTML = `<p class="danger-text">Данные станут доступны после применения настройки базы данных третьего этапа.</p>`;
+    return;
+  }
+  const active = (subscriptions || []).filter(item=>item.status === "active").length;
+  const paid = (payments || []).filter(item=>item.status === "paid");
+  const revenue = paid.filter(item=>item.currency === "EUR").reduce((sum,item)=>sum + Number(item.amount_minor || 0),0) / 100;
+  const planLabels = {monthly:"На месяц",yearly:"На год",lifetime:"Навсегда"};
+  const subscriptionRows = (subscriptions || []).slice(0,30).map(item=>{
+    const period = item.ends_at ? " · до " + new Date(item.ends_at).toLocaleDateString("ru-RU") : "";
+    const renewal = item.plan_type === "lifetime" ? "" : item.auto_renew && !item.cancel_at_period_end ? " · автопродление" : " · без продления";
+    return `<div class="admin-version"><div><strong>${escapeHtml(planLabels[item.plan_type] || item.plan_type)}</strong><p>${escapeHtml(item.status)}${period}${renewal}</p></div><span class="status-pill">${escapeHtml(item.status === "active" ? "Активна" : item.status)}</span></div>`;
+  }).join("");
+  const recent = paid.slice(0,30).map(item=>{
+    const amount = new Intl.NumberFormat("ru-RU",{style:"currency",currency:item.currency || "EUR"}).format(Number(item.amount_minor || 0) / 100);
+    return `<div class="admin-version"><div><strong>${amount}</strong><p>${new Date(item.paid_at || item.created_at).toLocaleString("ru-RU")} · ${escapeHtml(item.provider || "Платёжная система")}</p></div><span class="status-pill">Оплачено</span></div>`;
+  }).join("");
+  content.innerHTML = `<div class="billing-summary"><div class="billing-stat"><strong>${active}</strong><span>активных подписок</span></div><div class="billing-stat"><strong>${paid.length}</strong><span>успешных платежей</span></div><div class="billing-stat"><strong>${new Intl.NumberFormat("ru-RU",{style:"currency",currency:"EUR"}).format(revenue)}</strong><span>получено в EUR</span></div></div><h4>Подписки</h4><div class="admin-version-list">${subscriptionRows || `<div class="empty-state">Подписок пока нет.</div>`}</div><h4>Платежи</h4><div class="admin-version-list">${recent || `<div class="empty-state">Платежей пока нет.</div>`}</div>`;
+}
+
+const ADMIN_ACTION_LABELS = {
+  access_granted:"Выдан полный доступ",
+  access_revoked:"Отменён полный доступ",
+  user_blocked:"Пользователь заблокирован",
+  user_unblocked:"Пользователь разблокирован",
+  report_resolved:"Жалоба отмечена решённой",
+  test_version_activated:"Загружена новая версия теста"
+};
+
+async function renderAdminAudit(workspace){
+  workspace.innerHTML = `<h3>◷ История действий</h3><p>Кто, когда и что изменил в админке.</p><div id="auditList" class="audit-list"><p>Загрузка…</p></div>`;
+  const {data,error} = await supabaseClient.from("medquiz_admin_actions").select("*").order("created_at",{ascending:false}).limit(200);
+  const list = document.getElementById("auditList");
+  if(!list) return;
+  if(error){
+    list.innerHTML = `<p class="danger-text">История станет доступна после применения настройки базы данных третьего этапа.</p>`;
+    return;
+  }
+  const rows = (data || []).map(item=>{
+    const target = item.target_test_id || item.details?.filename || (item.target_user_id ? "Аккаунт " + item.target_user_id.slice(0,8) : "Сайт");
+    const reason = item.details?.reason ? ` · ${item.details.reason}` : "";
+    return `<article class="audit-item"><strong>${escapeHtml(ADMIN_ACTION_LABELS[item.action_type] || item.action_type)}</strong><p>${escapeHtml(target)}${escapeHtml(reason)} · ${new Date(item.created_at).toLocaleString("ru-RU")}</p></article>`;
+  }).join("");
+  list.innerHTML = rows || `<div class="empty-state">Действий пока нет.</div>`;
 }
 
 async function renderQuestionStats(view,favoritesOnly){
@@ -2792,7 +3374,8 @@ async function startSavedErrors(){
 }
 
 supabaseClient.auth.getSession().then(({data})=>applySession(data.session));
-supabaseClient.auth.onAuthStateChange((_event,session)=>{
+supabaseClient.auth.onAuthStateChange((event,session)=>{
+  if(event === "PASSWORD_RECOVERY") setTimeout(openPasswordModal,0);
   setTimeout(()=>applySession(session),0);
 });
 renderLibrary();
