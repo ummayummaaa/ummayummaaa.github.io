@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="site-config.js"></script>
+<script src="learning-model.js"></script>
 <script>
 /*!
 
@@ -37,37 +38,44 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 .upload-card{padding:24px}.dropzone{display:flex;align-items:center;justify-content:center;gap:15px;min-height:150px;padding:26px;border:1.5px dashed #83b8c0;border-radius:18px;background:linear-gradient(145deg,#f9fdfd,#f1f9fa);text-align:left;cursor:pointer;transition:.2s ease}.dropzone:hover{border-color:var(--brand);background:#f1fbfa;transform:translateY(-1px)}.dropzone input{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}.upload-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border-radius:16px;color:var(--brand-dark);background:var(--mint);font-size:25px}.upload-copy strong{display:block;font-size:18px}.upload-copy .info{display:block;margin-top:3px}.selected-file{display:none;align-items:center;gap:8px;margin-top:9px;color:var(--brand-dark);font-size:14px;font-weight:700}.dropzone.has-file .upload-prompt{display:none}.dropzone.has-file .selected-file{display:flex}.file-remove{width:27px;height:27px;padding:0;border:0;border-radius:50%;color:#64798a;background:#e4eff1;font-size:18px;line-height:1}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.setting-block{padding:19px;border:1px solid var(--line);border-radius:16px;background:#fff}.setting-block>p:first-child{margin-top:0}.choice-row{display:flex;flex-wrap:wrap;gap:7px}.choice-row label{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:9px 15px;border:1px solid var(--line);border-radius:11px;color:#405a6e;background:#f8fbfc;font-weight:650;cursor:pointer;transition:.18s ease}.choice-row label:hover{border-color:#8eb9c0;background:#f1f8f9}.choice-row input[type=radio]{position:absolute;opacity:0;pointer-events:none}.choice-row label:has(input[type=radio]:checked){color:#fff;border-color:var(--brand);background:var(--brand);box-shadow:0 7px 17px rgba(8,126,139,.18)}.choice-row label:focus-within{outline:3px solid rgba(8,126,139,.18);outline-offset:2px}.timer-settings{margin:12px 0 16px;padding:12px;border-radius:12px;background:#f3f9fa}.timer-settings .info{display:block;margin-bottom:8px}.timer-toggle{display:flex;align-items:center;gap:9px;color:#405a6e;font-size:14px;font-weight:700;cursor:pointer}.timer-toggle input{width:18px;height:18px;accent-color:var(--brand)}input[type=number]{width:72px;padding:7px;border:1px solid var(--line);border-radius:8px}.info{font-size:14px;color:var(--muted)}
 #startBtn{margin-top:18px}.quiz-shell{max-width:850px;margin:0 auto}.card{padding:24px;margin:16px 0}.card button:not(.action){display:block;width:100%;padding:14px;margin:9px 0;border:1px solid var(--line);border-radius:13px;color:var(--navy);background:#fff;text-align:left}.card button:hover{border-color:#98bcc4;background:#f8fbfc}.selected{background:#e5f4f8!important;border-color:var(--brand)!important}.correct{background:#dff6e9!important;border-color:#50a779!important}.wrong{background:#ffe6e8!important;border-color:var(--danger)!important}.optionReview{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:11px;background:#fff}.warning{padding:12px 14px;border:1px solid #edc278;border-radius:12px;background:#fff7e5;margin:12px 0}.hidden{display:none!important}#next{width:100%;margin-top:14px}.mobile-nav{display:none}
 .app.testing{display:block;background:#f3f7f8}.app.testing .sidebar,.app.testing .mobile-nav,.app.testing .main>:not(.quiz-shell){display:none!important}.app.testing .main{max-width:900px;padding:24px 22px 44px}.app.testing .quiz-shell{max-width:800px;margin:0 auto;padding:22px;border:1px solid #d7e5e8;border-radius:20px;background:#fff;box-shadow:0 18px 50px rgba(23,50,77,.1)}.app.testing #quizProgress{display:flex!important;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid #e3ecee;font-size:15px;font-weight:750;color:#607487}.quiz-timer{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;color:var(--brand-dark);background:var(--mint);font-variant-numeric:tabular-nums}.quiz-timer.urgent{color:#a92d39;background:#ffe6e8}.app.testing #quiz h3{margin:0 0 18px;color:#101820;font-size:clamp(20px,2vw,27px);line-height:1.3;letter-spacing:-.015em}.app.testing #quiz button{display:flex;align-items:center;justify-content:flex-start;width:100%;min-height:50px;margin:8px 0;padding:11px 15px;border:1px solid #ccd8dc;border-radius:12px;color:#15202a;background:#f8fafb;box-shadow:none;text-align:left;font-size:clamp(15px,1.2vw,18px);font-weight:550;line-height:1.3}.app.testing #quiz button:hover{border-color:#8bafb5;background:#f1f7f7}.app.testing #quiz button.selected{border-color:#3b8cff!important}.app.testing #quiz button.correct{background:#d8f3df!important;border-color:#54a872!important}.app.testing #quiz button.wrong{background:#ffe0e3!important;border-color:#dc6670!important}.app.testing #result{min-height:27px;margin:8px 0 2px;color:#0b0b0b;font-size:17px;font-weight:750}.app.testing #next{min-height:50px;margin-top:10px;border-radius:12px;color:#fff;background:var(--navy);box-shadow:none;font-size:17px}.app.testing #next:hover{background:#0c263d}
-.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:5px!important;border-radius:50%!important}.favorite-button{font-size:27px!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-shell{display:grid;gap:22px}.admin-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.admin-heading p{margin:6px 0 0;color:var(--muted)}.admin-identity{padding:8px 11px;border-radius:10px;color:#526879;background:#f1f6f7;font-size:13px;font-weight:700;white-space:nowrap}.admin-tabs{display:flex;gap:8px;padding:6px;overflow-x:auto;border:1px solid var(--line);border-radius:15px;background:#f4f8f9}.admin-tab{flex:0 0 auto;padding:10px 14px;border:0;border-radius:10px;color:#526879;background:transparent;font:inherit;font-size:14px;font-weight:750;cursor:pointer}.admin-tab:hover{color:var(--brand-dark);background:#fff}.admin-tab.active{color:#fff;background:var(--brand);box-shadow:0 6px 15px rgba(8,126,139,.18)}.admin-workspace{min-height:330px;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff}.admin-workspace h3{margin:0 0 7px;font-size:21px}.admin-workspace>p{margin:0;color:var(--muted)}.admin-stage-note{display:flex;align-items:flex-start;gap:13px;margin-top:22px;padding:18px;border-radius:14px;background:#f3f9fa}.admin-stage-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:12px;color:var(--brand-dark);background:var(--mint);font-size:19px}.admin-stage-note strong{display:block;margin-bottom:4px}.admin-stage-note p{margin:0;color:var(--muted);font-size:14px}.nav-badge{display:inline-grid;place-items:center;min-width:21px;height:21px;margin-left:auto;padding:0 6px;border-radius:999px;color:#fff;background:var(--danger);font-size:11px;font-weight:800}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
-.auth-link{display:inline-block;margin-top:12px;border:0;color:var(--brand-dark);background:transparent;font:inherit;font-size:14px;font-weight:750;text-decoration:underline;cursor:pointer}.auth-note{padding:11px 13px;border-radius:10px;background:#f3f9fa}.site-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;margin:34px 0 8px;padding:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.site-footer a,.site-footer button{padding:0;border:0;color:var(--muted);background:transparent;font:inherit;text-decoration:underline;cursor:pointer}.site-footer a:hover,.site-footer button:hover{color:var(--brand-dark)}
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(13,34,49,.48);backdrop-filter:blur(8px)}.auth-card{width:min(440px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.auth-card h2{margin:0 0 7px;font-size:27px}.auth-card>p{margin:0 0 22px;color:var(--muted)}.auth-card label{display:block;margin:13px 0 5px;font-weight:700}.auth-card input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px}.auth-actions{display:flex;gap:10px;margin-top:20px}.auth-actions button{flex:1}.close-modal{float:right;border:0;background:transparent;font-size:24px}.auth-message{min-height:22px;margin-top:12px!important;font-size:14px}.section-panel{padding:26px}.section-panel h2{margin:0 0 6px}.section-list{display:grid;gap:11px;margin-top:20px}.section-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.section-item p{margin:3px 0;color:var(--muted)}.empty-state{padding:35px;border:1px dashed #aac6cc;border-radius:16px;color:var(--muted);text-align:center}.question-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.question-actions{display:flex;flex:0 0 auto;gap:8px}.favorite-button,.report-button{display:grid!important;place-items:center!important;justify-content:center!important;align-items:center!important;flex:0 0 auto!important;width:54px!important;min-height:54px!important;margin:0!important;padding:0!important;border-radius:50%!important;line-height:1!important}.favorite-button{font-size:27px!important}.favorite-button.active{color:#d99a00!important;border-color:#e1b33c!important;background:#fff7d6!important;box-shadow:0 5px 14px rgba(217,154,0,.18)!important}.report-button{font-size:21px!important}.review-badge{display:inline-block;margin:0 0 12px;padding:6px 10px;border-radius:999px;color:#8a5418;background:#fff1d6;font-size:13px;font-weight:800}.admin-shell{display:grid;gap:22px}.admin-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.admin-heading p{margin:6px 0 0;color:var(--muted)}.admin-identity{padding:8px 11px;border-radius:10px;color:#526879;background:#f1f6f7;font-size:13px;font-weight:700;white-space:nowrap}.admin-tabs{display:flex;gap:8px;padding:6px;overflow-x:auto;border:1px solid var(--line);border-radius:15px;background:#f4f8f9}.admin-tab{flex:0 0 auto;padding:10px 14px;border:0;border-radius:10px;color:#526879;background:transparent;font:inherit;font-size:14px;font-weight:750;cursor:pointer}.admin-tab:hover{color:var(--brand-dark);background:#fff}.admin-tab.active{color:#fff;background:var(--brand);box-shadow:0 6px 15px rgba(8,126,139,.18)}.admin-workspace{min-height:330px;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff}.admin-workspace h3{margin:0 0 7px;font-size:21px}.admin-workspace>p{margin:0;color:var(--muted)}.admin-stage-note{display:flex;align-items:flex-start;gap:13px;margin-top:22px;padding:18px;border-radius:14px;background:#f3f9fa}.admin-stage-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:12px;color:var(--brand-dark);background:var(--mint);font-size:19px}.admin-stage-note strong{display:block;margin-bottom:4px}.admin-stage-note p{margin:0;color:var(--muted);font-size:14px}.nav-badge{display:inline-grid;place-items:center;min-width:21px;height:21px;margin-left:auto;padding:0 6px;border-radius:999px;color:#fff;background:var(--danger);font-size:11px;font-weight:800}.sync-note{margin-top:12px;color:var(--muted);font-size:14px}.profile-chip{cursor:pointer}.danger-text{color:var(--danger)}
+.auth-link{display:inline-block;margin-top:12px;border:0;color:var(--brand-dark);background:transparent;font:inherit;font-size:14px;font-weight:750;text-decoration:underline;cursor:pointer}.google-auth-button{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:46px;margin-top:20px;padding:11px 16px;border:1px solid #c6d2d8;border-radius:11px;color:#243745;background:#fff;font:inherit;font-weight:750;cursor:pointer;transition:border-color .18s,box-shadow .18s,background .18s}.google-auth-button:hover{border-color:#8fa7b1;background:#f9fbfc;box-shadow:0 4px 14px rgba(18,61,78,.09)}.google-auth-button:focus-visible{outline:3px solid rgba(38,123,202,.22);outline-offset:2px}.google-auth-button:disabled{cursor:wait;opacity:.65}.google-auth-icon{flex:0 0 auto;width:20px;height:20px}.auth-divider{display:flex;align-items:center;gap:12px;margin:18px 0 4px;color:var(--muted);font-size:13px}.auth-divider::before,.auth-divider::after{content:"";height:1px;flex:1;background:var(--line)}.auth-note{padding:11px 13px;border-radius:10px;background:#f3f9fa}.site-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;margin:34px 0 8px;padding:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.site-footer a,.site-footer button{padding:0;border:0;color:var(--muted);background:transparent;font:inherit;text-decoration:underline;cursor:pointer}.site-footer a:hover,.site-footer button:hover{color:var(--brand-dark)}
 @media(max-width:850px){.app{display:block}.sidebar{display:none}.main{padding:24px 18px 92px}.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.settings-grid{grid-template-columns:1fr}.subject-picker{align-items:flex-start;padding:14px}.subject-picker-icon{width:42px;height:42px;flex-basis:42px}.subject-count{display:none}.subject-menu{left:14px;right:14px;top:80px}.subject-option{padding:10px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(auto-fit,minmax(58px,1fr));left:10px;right:10px;bottom:10px;z-index:10;padding:7px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.94);box-shadow:0 12px 35px rgba(23,50,77,.15);backdrop-filter:blur(15px)}.mobile-nav button{padding:8px 3px;border:0;color:var(--muted);background:transparent;font-size:12px}.mobile-nav .active{color:var(--brand);font-weight:800}.topbar .ghost-button{display:none}.admin-heading{display:block}.admin-identity{display:inline-block;margin-top:12px}.admin-workspace{min-height:280px;padding:19px}.app.testing .main{padding:10px}.app.testing .quiz-shell{padding:15px;border-radius:16px}.app.testing #quizProgress{margin-bottom:14px;font-size:14px}.app.testing #quiz h3{margin-bottom:14px;font-size:19px}.app.testing #quiz button{min-height:46px;padding:10px 12px;font-size:15px}.app.testing #next{min-height:48px;font-size:16px}}
 .quiz-progress-actions{display:flex;align-items:center;gap:8px}.finish-early{padding:7px 10px;border:1px solid #d6e1e4;border-radius:999px;color:#607487;background:#fff;font:inherit;font-size:13px;font-weight:750}.finish-early:hover{color:#a92d39;border-color:#e5aab0;background:#fff5f6}
 .question-practice-card{width:100%;font:inherit;text-align:left;cursor:pointer;transition:.18s ease}.question-practice-card:hover{border-color:var(--brand);background:#f4fbfb;transform:translateY(-1px);box-shadow:0 8px 22px rgba(23,50,77,.08)}.practice-arrow{flex:0 0 auto;color:var(--brand);font-size:13px;font-weight:800;white-space:nowrap}
+.question-stats-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:20px 0 4px}.question-stats-filters{display:flex;gap:7px;overflow-x:auto;padding:2px 0}.question-stats-summary{color:var(--muted);font-size:14px;white-space:nowrap}.question-stat-copy{min-width:0}.question-stat-copy strong{display:block;overflow:hidden;text-overflow:ellipsis}.question-stat-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px!important}.subject-label{display:inline-flex;padding:4px 8px;border-radius:999px;color:var(--brand-dark);background:var(--mint);font-size:12px;font-weight:800}.correction-progress{display:inline-flex;align-items:center;gap:4px}.correction-progress i{display:block;width:8px;height:8px;border-radius:50%;background:#d3e0e2}.correction-progress i.done{background:var(--brand)}.correction-progress b{margin-left:3px;color:var(--brand-dark);font-size:13px}.batch-practice{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:15px 0;padding:16px;border-radius:14px;background:#eff8f7}.batch-practice p{margin:0;color:var(--muted)}
+.blocks-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:20px}.block-card{display:grid;gap:14px;padding:19px;border:1px solid var(--line);border-left:5px solid #b9c9cc;border-radius:15px;background:#fff}.block-card.failed{border-left-color:#d85d68}.block-card.passed{border-left-color:#42a06a}.block-card.passed-before{border-left-color:#d39535}.block-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.block-card h3{margin:0 0 4px}.block-card p{margin:0;color:var(--muted);font-size:14px}.block-status{display:inline-flex;padding:5px 9px;border-radius:999px;color:#5c707c;background:#edf2f3;font-size:12px;font-weight:850;white-space:nowrap}.block-card.failed .block-status{color:#a52b36;background:#fff0f1}.block-card.passed .block-status{color:#17623f;background:#e7f7ed}.block-card.passed-before .block-status{color:#8a5418;background:#fff1d6}.block-actions{display:flex;gap:8px}.block-actions button{flex:1}.block-result-note{padding:12px;border-radius:11px;background:#f4f8f9;font-size:13px}.block-legend{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.block-legend span{padding:6px 9px;border-radius:999px;background:#f2f6f7;color:var(--muted);font-size:12px;font-weight:750}
+.result-summary.block-passed{background:linear-gradient(135deg,#17623f,#329463)}.result-summary.block-failed{background:linear-gradient(135deg,#7d2731,#c84d59)}
 .topbar-actions{display:flex;align-items:center;gap:9px}.notification-button{position:relative;width:43px;height:43px;padding:0;border:1px solid var(--line);border-radius:12px;color:var(--navy);background:#fff;font-size:20px;cursor:pointer}.notification-button:hover{border-color:var(--brand);background:var(--mint)}.notification-count{position:absolute;right:-5px;top:-6px;display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border:2px solid #fff;border-radius:999px;color:#fff;background:var(--danger);font-size:10px;font-weight:800}.report-card{width:min(560px,100%);padding:28px;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.report-card h2{margin:0 0 6px}.report-card>p{margin:0 0 19px;color:var(--muted)}.report-card label{display:block;margin:13px 0 6px;font-weight:750}.report-card select,.report-card textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;color:var(--navy);background:#fff;font:inherit}.report-card textarea{min-height:105px;resize:vertical}.report-file{padding:13px;border:1px dashed #9abfc5;border-radius:11px;background:#f6fbfb}.report-file input{width:100%}.report-question-preview{max-height:100px;padding:11px 13px;overflow:auto;border-radius:10px;color:#405a6e;background:#f3f7f8;font-size:14px}.report-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.report-message{min-height:20px;margin:10px 0 0!important;font-size:14px}.admin-report-list{display:grid;gap:13px;margin-top:20px}.admin-report-card{padding:19px;border:1px solid #d9e6e8;border-radius:15px;background:#fff}.admin-report-card h4{margin:9px 0;font-size:17px;line-height:1.4}.admin-report-card p{margin:7px 0;color:#526879}.admin-report-meta{display:flex;flex-wrap:wrap;gap:6px}.admin-report-meta span{padding:5px 8px;border-radius:8px;color:#607487;background:#f1f6f7;font-size:12px;font-weight:700}.admin-report-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.admin-test-upload{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,1.5fr) auto;gap:10px;align-items:end;margin-top:20px;padding:18px;border-radius:14px;background:#f3f9fa}.admin-test-upload label{display:grid;gap:6px;color:#405a6e;font-size:13px;font-weight:750}.admin-test-upload select,.admin-test-upload input{min-height:43px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit}.admin-version-list{display:grid;gap:9px;margin-top:18px}.admin-version{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid var(--line);border-radius:12px}.admin-version p{margin:4px 0 0;color:var(--muted);font-size:13px}.status-pill{padding:5px 8px;border-radius:999px;color:#267353;background:#e1f5ea;font-size:12px;font-weight:800}.admin-subtabs{display:flex;gap:7px;margin-top:16px}.admin-subtab{padding:8px 11px;border:1px solid var(--line);border-radius:9px;color:#526879;background:#fff;font:inherit;font-size:13px;font-weight:750}.admin-subtab.active{color:var(--brand-dark);border-color:#89bbc2;background:var(--mint)}
 .access-button{padding:9px 12px;border:1px solid #79b4bb;border-radius:11px;color:var(--brand-dark);background:var(--mint);font:inherit;font-size:13px;font-weight:800}.access-button.full{color:#fff;border-color:var(--brand);background:var(--brand)}.upgrade-card{width:min(760px,100%);max-height:92vh;padding:28px;overflow:auto;border-radius:22px;background:#fff;box-shadow:0 30px 90px rgba(8,36,50,.28)}.upgrade-card h2{margin:0 0 7px}.trial-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0;padding:17px;border-radius:14px;background:linear-gradient(135deg,var(--mint),#f4fbfa)}.trial-banner p{margin:4px 0 0;color:var(--muted);font-size:14px}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.plan-card{display:flex;flex-direction:column;padding:18px;border:1px solid var(--line);border-radius:14px}.plan-card h3{margin:0 0 6px}.plan-card p{flex:1;margin:0 0 16px;color:var(--muted);font-size:14px}.plan-card button{width:100%}.locked-panel{padding:34px;border:1px solid #b8d5d9;border-radius:16px;background:linear-gradient(145deg,#f8fcfc,#eff8f7);text-align:center}.locked-panel h3{margin:0 0 7px}.locked-panel p{max-width:560px;margin:0 auto 18px;color:var(--muted)}.admin-toolbar{display:flex;gap:9px;margin-top:18px}.admin-search{flex:1;min-height:43px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}.admin-user-list{display:grid;gap:10px;margin-top:17px}.admin-user{padding:16px;border:1px solid var(--line);border-radius:13px}.admin-user-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.admin-user h4{margin:0 0 3px}.admin-user p{margin:3px 0;color:var(--muted);font-size:13px}.admin-user-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;margin-top:13px}.danger-button{padding:9px 12px;border:1px solid #e2a5aa;border-radius:9px;color:#a92d39;background:#fff5f6;font:inherit;font-weight:750}.admin-access-form{display:grid;grid-template-columns:1fr 1fr 1.4fr auto;gap:8px;align-items:end;margin-top:13px;padding:13px;border-radius:11px;background:#f4f8f9}.admin-access-form label{display:grid;gap:4px;color:#526879;font-size:12px;font-weight:750}.admin-access-form select,.admin-access-form input{min-height:39px;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff}.audit-list{display:grid;gap:9px;margin-top:18px}.audit-item{padding:14px;border-left:4px solid var(--brand);border-radius:9px;background:#f5f9fa}.audit-item p{margin:4px 0 0;color:var(--muted);font-size:13px}.billing-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.billing-stat{padding:16px;border:1px solid var(--line);border-radius:12px}.billing-stat strong{display:block;font-size:24px}.billing-stat span{color:var(--muted);font-size:13px}
 @media(max-width:520px){.finish-early{padding:7px 9px;font-size:0}.finish-early:before{content:"Завершить";font-size:12px}}
 @media(max-width:700px){.admin-test-upload,.admin-access-form{grid-template-columns:1fr}.report-actions{align-items:stretch;flex-direction:column-reverse}.report-actions button{width:100%}.topbar-actions{gap:6px}.plan-grid,.billing-summary{grid-template-columns:1fr}.access-button{display:none}.admin-user-head{display:block}}
+.space-switcher{display:flex;gap:5px;padding:5px;border:1px solid var(--line);border-radius:14px;background:#f3f8f8}.space-choice{padding:9px 13px;border:0;border-radius:10px;color:#536b7c;background:transparent;font:inherit;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}.space-choice.active{color:#fff;background:var(--brand);box-shadow:0 5px 13px rgba(24,111,120,.18)}.space-select{display:none;min-height:44px;padding:9px 34px 9px 12px;border:1px solid var(--line);border-radius:12px;color:var(--navy);background:#fff;font:inherit;font-weight:800}.learning-home{display:grid;gap:22px}.activity-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:26px;border-radius:20px;color:#fff;background:linear-gradient(135deg,#153f55,#176f78 72%,#258d8d)}.activity-card h2{margin:5px 0 7px;font-size:28px}.activity-card p{margin:4px 0;color:#d8eeee}.activity-score{text-align:right}.activity-score strong{display:block;font-size:34px}.activity-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.activity-actions .action{background:#fff;color:var(--brand-dark)}.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.summary-item{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff}.summary-item strong{display:block;font-size:25px}.summary-item span{color:var(--muted);font-size:13px}.subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subject-card{display:grid;gap:14px;padding:21px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:0 7px 22px rgba(21,63,85,.05)}.subject-card h3{margin:0;font-size:20px}.subject-card p{margin:4px 0 0;color:var(--muted)}.subject-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.subject-meta span{padding:9px;border-radius:10px;color:#526879;background:#f3f8f8;font-size:13px}.subject-card .secondary{justify-self:start}.section-title-row{display:flex;align-items:end;justify-content:space-between;gap:18px}.section-title-row h2{margin:0}.section-title-row p{margin:5px 0 0;color:var(--muted)}.subject-overview{display:grid;gap:18px}.subject-banner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;padding:26px;border-radius:20px;background:linear-gradient(145deg,#f4fbfa,#e8f6f4)}.subject-banner h2{margin:5px 0}.blocks-entry-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:22px;padding:22px 26px;border:1px solid #b9dadd;border-radius:18px;background:linear-gradient(135deg,#f3fbfa,#e4f4f2)}.blocks-entry-card h3{margin:0 0 6px;font-size:22px}.blocks-entry-card p{margin:0;color:var(--muted)}.blocks-entry-card .action{min-width:190px}.subject-actions{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:12px}.mode-card{padding:20px;border:1px solid var(--line);border-radius:16px;background:#fff}.mode-card.primary{color:#fff;border-color:transparent;background:var(--brand)}.mode-card h3{margin:0 0 6px}.mode-card p{margin:0 0 16px;color:inherit;opacity:.82}.mode-card button{width:100%}.subject-tabs{display:flex;gap:7px;overflow:auto;padding-bottom:3px}.subject-tab{padding:9px 12px;border:1px solid var(--line);border-radius:999px;color:#526879;background:#fff;font:inherit;font-weight:750;white-space:nowrap}.subject-tab.active{color:var(--brand-dark);border-color:#78b6ba;background:var(--mint)}.setup-shell{margin-top:4px}.setup-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.setup-heading h2{margin:0}.setup-subject{padding:12px 14px;border-radius:12px;background:var(--mint);font-weight:800}.empty-learning{padding:34px;border:1px dashed #a8c6c9;border-radius:17px;background:#f8fbfb;text-align:center}.empty-learning h2{margin-top:0}.question-navigator{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;margin:16px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#f7fafb}.question-number{min-height:38px;border:1px solid #cbdcdf;border-radius:9px;color:#526879;background:#fff;font:inherit;font-weight:800;cursor:pointer}.question-number.current{color:#fff;border-color:#267bca;background:#267bca}.question-number.correct{color:#17623f;border-color:#8dccad;background:#e7f7ed}.question-number.wrong{color:#a52b36;border-color:#e1a0a6;background:#fff0f1}.attempt-result{display:grid;gap:18px}.result-summary{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:25px;border-radius:18px;color:#fff;background:linear-gradient(135deg,#153f55,#176f78)}.result-summary h2{margin:0 0 6px}.result-percent{font-size:42px;font-weight:850}.result-actions{display:flex;flex-wrap:wrap;gap:9px}.attempt-review-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px}.review-question{padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff}.review-question h3{margin-top:0}.review-answer{margin:8px 0;padding:11px;border-radius:10px;background:#f3f7f8}.review-answer.correct{background:#e5f6eb}.review-answer.wrong{background:#fff0f1}.review-sidebar{align-self:start;position:sticky;top:16px}.review-sidebar .question-navigator{grid-template-columns:repeat(5,1fr);margin:0}
+.question-number.answered{color:#185f83;border-color:#81b8d1;background:#eaf6fb}
+.question-number.current{color:#fff;border-color:#267bca;background:#267bca}
+@media(max-width:950px){.space-switcher{display:none}.space-select{display:block}.subject-actions{grid-template-columns:1fr}.attempt-review-layout{grid-template-columns:1fr}.review-sidebar{position:static}.review-sidebar .question-navigator{grid-template-columns:repeat(auto-fill,minmax(38px,1fr))}}
+@media(max-width:700px){.topbar{align-items:flex-start}.space-select{width:100%;margin-top:8px}.activity-card,.subject-banner,.blocks-entry-card,.result-summary{grid-template-columns:1fr}.blocks-entry-card .action{width:100%;min-width:0}.activity-score{text-align:left}.summary-grid{grid-template-columns:repeat(2,1fr)}.subject-grid,.blocks-grid{grid-template-columns:1fr}.section-title-row,.setup-heading,.question-stats-toolbar,.batch-practice{align-items:stretch;flex-direction:column}.question-stats-summary{white-space:normal}.block-actions{flex-direction:column}.activity-card h2{font-size:23px}}
 </style>
 </head>
 
 <body><div class="app">
 <aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
-<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Мои тесты</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚙</span>Админка<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
+<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Предметы</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚙</span>Админка<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
 <div class="profile-chip" onclick="handleProfileClick()"><span class="avatar" id="profileAvatar">Г</span><div><strong id="profileName">Гость</strong><div class="info" id="profileHint">Войти в аккаунт</div></div></div></aside>
-<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный тренажёр</p><h1 id="welcomeTitle">Добрый день!</h1></div><div class="topbar-actions"><button id="accessButton" class="access-button hidden" onclick="openUpgradeModal()">Полная версия</button><button id="notificationButton" class="notification-button hidden" onclick="showSection('notifications',this)" title="Уведомления" aria-label="Уведомления">🔔<span id="notificationBadge" class="notification-count hidden">0</span></button><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></div></header>
-<div id="dashboardView">
-<section class="hero"><div class="panel hero-main"><p class="eyebrow" style="color:#bff3ed">Продолжить обучение</p><h2>Ваш следующий тест появится здесь</h2><p>Загрузите PDF или DOCX — название теста будет взято из имени файла.</p><button class="action" onclick="document.getElementById('file').click()">Добавить тест</button></div><div class="panel hero-side"><span class="error-count">0</span><h3>Вопросов на повторение</h3><p class="info">Ошибки будут собраны здесь автоматически.</p><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Работа над ошибками</button></div></section>
-<section class="stats"><div class="stat"><strong>0</strong><span>решено вопросов</span></div><div class="stat"><strong>—</strong><span>точность ответов</span></div><div class="stat"><strong>0</strong><span>пройдено тестов</span></div><div class="stat"><strong>0</strong><span>в избранном</span></div></section>
-<div id="libraryHeading" class="section-head"><div><h2>Готовые тесты</h2><p>Отдельные предметы и три объединённых экзаменационных блока</p></div></div><section class="library" id="testLibrary"></section>
-<div class="section-head"><div><h2>Загрузить свой тест</h2><p>Все прежние настройки сохранены</p></div></div><section class="panel upload-card">
+<main class="main"><header class="topbar"><div><p class="eyebrow">Персональный учебный кабинет</p><h1 id="welcomeTitle">Добрый день!</h1><select id="spaceSelect" class="space-select" aria-label="Учебное пространство" onchange="selectLearningSpace(this.value)"></select></div><div class="topbar-actions"><div id="spaceSwitcher" class="space-switcher" aria-label="Учебное пространство"></div><button id="accessButton" class="access-button hidden" onclick="openUpgradeModal()">Полная версия</button><button id="notificationButton" class="notification-button hidden" onclick="showSection('notifications',this)" title="Уведомления" aria-label="Уведомления">🔔<span id="notificationBadge" class="notification-count hidden">0</span></button><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></div></header>
+<div id="dashboardView"><div id="learningHome" class="learning-home"></div></div>
+<section id="quizSetupPanel" class="panel upload-card setup-shell hidden"><div class="setup-heading"><div><p class="eyebrow">Тренировка</p><h2>Настройте диапазон</h2></div><div id="setupSubjectName" class="setup-subject">Предмет</div></div>
+<div id="importControls" class="hidden">
 <label class="dropzone" id="dropzone"><span class="upload-icon">⇧</span><span class="upload-copy"><span class="upload-prompt"><strong>Выбрать PDF или DOCX</strong><span class="info">Нажмите здесь или перетащите файл в эту область</span></span><span class="selected-file"><span id="selectedFileName"></span><button class="file-remove" type="button" title="Убрать файл" aria-label="Убрать выбранный файл" onclick="clearSelectedFile(event)">×</button></span></span><input type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
+</div>
 <div class="settings-grid"><div class="setting-block"><p><b>Режим теста</b></p><div class="choice-row"><label><input type="radio" name="mode" value="training" checked onchange="updateModeSettings()">Тренировочный</label><label><input type="radio" name="mode" value="exam" onchange="updateModeSettings()">Экзаменационный</label></div><div id="trainingTimerSettings" class="timer-settings"><label class="timer-toggle"><input id="trainingTimerEnabled" type="checkbox" checked><span>Показывать затраченное время</span></label></div><div id="examTimerSettings" class="timer-settings hidden"><span class="info">Время на один вопрос</span><div class="choice-row"><label><input type="radio" name="examPace" value="60" checked>1 мин</label><label><input type="radio" name="examPace" value="90">1,5 мин</label><label><input type="radio" name="examPace" value="120">2 мин</label></div></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
-<div class="setting-block"><p><b>Источник вопросов</b></p><div class="choice-row"><label><input type="radio" name="source" value="random" checked>Случайные</label><label><input type="radio" name="source" value="rangeRandom">20% диапазона</label><label><input type="radio" name="source" value="rangeOrdered">Весь диапазон</label></div><p class="info">Диапазон: <input id="fromNum" type="number" value="1"> — <input id="toNum" type="number" value="50"><input id="fromNum2" type="hidden" value="1"><input id="toNum2" type="hidden" value="50"></p></div></div>
+<div class="setting-block"><p><b>Источник вопросов</b></p><div class="choice-row"><label><input type="radio" name="source" value="rangeOrdered" checked>Последовательно</label><label><input type="radio" name="source" value="random">Случайные</label><label><input type="radio" name="source" value="rangeRandom">20% диапазона</label></div><p class="info">Диапазон: <input id="fromNum" type="number" value="1"> — <input id="toNum" type="number" value="50"><input id="fromNum2" type="hidden" value="1"><input id="toNum2" type="hidden" value="50"></p></div></div>
 <details id="pdfSettings"><summary>Дополнительные настройки распознавания PDF</summary><div class="choice-row" style="margin-top:12px"><label><input type="radio" name="detect" value="auto" checked>Авто</label><label><input type="radio" name="detect" value="green">Зелёный фон</label><label><input type="radio" name="detect" value="bold">Жирный шрифт</label></div></details>
-<button id="startBtn" onclick="start()" class="action">Начать тест</button><p id="status" class="info">Выберите PDF или DOCX и настройки теста.</p></section></div>
+<div class="activity-actions"><button id="startBtn" onclick="start()" class="action">Начать тренировку</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">Вернуться к предмету</button></div><p id="status" class="info">Выберите диапазон вопросов.</p></section>
 <section id="sectionView" class="panel section-panel hidden"></section>
-<div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div><footer class="site-footer"><a href="privacy.html">Конфиденциальность</a><a href="terms.html">Условия использования</a><button type="button" onclick="contactSupport()">Связаться с администратором</button></footer></main>
+<div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><div id="questionNavigator" class="question-navigator hidden"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div><footer class="site-footer"><a href="privacy.html">Конфиденциальность</a><a href="terms.html">Условия использования</a><button type="button" onclick="contactSupport()">Связаться с администратором</button></footer></main>
 <nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)">▤<br>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button id="adminMobileNav" class="hidden" onclick="showSection('admin',this)">⚙<br>Админка</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
-<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 8 символов"><button class="auth-link" type="button" onclick="requestPasswordReset()">Забыли пароль?</button><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p class="auth-note">Регистрируясь, вы принимаете <a href="terms.html">условия использования</a> и <a href="privacy.html">политику конфиденциальности</a>.</p><button id="resendConfirmationButton" class="auth-link hidden" type="button" onclick="resendConfirmationEmail()">Отправить письмо подтверждения ещё раз</button><p id="authMessage" class="auth-message"></p></div></div>
+<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><button id="googleAuthButton" class="google-auth-button" type="button" onclick="signInWithGoogle()"><svg class="google-auth-icon" aria-hidden="true" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.91h5.38a4.6 4.6 0 0 1-2 3.02v2.54h3.24c1.9-1.75 2.98-4.33 2.98-7.4Z"/><path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.37l-3.24-2.54c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.62A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.39 13.92A6 6 0 0 1 6.08 12c0-.67.12-1.32.31-1.92V7.46H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.54l3.35-2.62Z"/><path fill="#EA4335" d="M12 5.95c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.64 9.64 0 0 0 12 2a10 10 0 0 0-8.96 5.46l3.35 2.62C7.18 7.71 9.39 5.95 12 5.95Z"/></svg><span>Продолжить с Google</span></button><div class="auth-divider" aria-hidden="true"><span>или по email</span></div><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 8 символов"><button class="auth-link" type="button" onclick="requestPasswordReset()">Забыли пароль?</button><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p class="auth-note">Продолжая, вы принимаете <a href="terms.html">условия использования</a> и <a href="privacy.html">политику конфиденциальности</a>.</p><button id="resendConfirmationButton" class="auth-link hidden" type="button" onclick="resendConfirmationEmail()">Отправить письмо подтверждения ещё раз</button><p id="authMessage" class="auth-message" role="status" aria-live="polite"></p></div></div>
 <div id="passwordModal" class="modal-backdrop hidden" onclick="closePasswordModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closePasswordModal()">×</button><h2>Новый пароль</h2><p>Придумайте новый пароль длиной не менее 8 символов.</p><label for="newPassword">Новый пароль</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8"><label for="newPasswordRepeat">Повторите пароль</label><input id="newPasswordRepeat" type="password" autocomplete="new-password" minlength="8"><div class="auth-actions"><button class="action" onclick="saveNewPassword()">Сохранить пароль</button></div><p id="passwordMessage" class="auth-message"></p></div></div>
 <div id="reportModal" class="modal-backdrop hidden" onclick="closeReportModal(event)"><div class="report-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeReportModal()">×</button><h2>Сообщить об ошибке</h2><p>Обращение увидит администратор сайта.</p><div id="reportQuestionPreview" class="report-question-preview"></div><label for="reportReason">Причина</label><select id="reportReason"><option value="typo">Опечатка или техническая ошибка</option><option value="options_error">Ошибка в вариантах ответа</option><option value="outdated">Вопрос или ответ устарел</option><option value="exam_answer_changed">На экзамене был указан другой ответ</option><option value="other">Другое</option></select><label for="reportComment">Комментарий</label><textarea id="reportComment" placeholder="Опишите, что нужно проверить"></textarea><label for="reportFile">Подтверждающий файл</label><div class="report-file"><input id="reportFile" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,image/jpeg,image/png,image/webp,application/pdf"><span class="info">JPG, PNG, WebP или PDF, не более 10 МБ. Необязательно.</span></div><div class="report-actions"><button class="secondary" onclick="closeReportModal()">Отмена</button><button id="reportSubmitButton" class="action" onclick="submitQuestionReport()">Отправить</button></div><p id="reportMessage" class="report-message"></p></div></div>
 <div id="upgradeModal" class="modal-backdrop hidden" onclick="closeUpgradeModal(event)"><div class="upgrade-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeUpgradeModal()">×</button><p class="eyebrow">MedQuiz</p><h2>Полная версия</h2><p id="accessSummary" class="info">Сохраняйте ошибки, избранное, историю и прогресс.</p><div id="trialBanner" class="trial-banner"><div><strong>7 дней бесплатно</strong><p>Без банковской карты и автоматического списания.</p></div><button id="trialButton" class="action" onclick="startFreeTrial()">Попробовать бесплатно</button></div><div id="subscriptionControls"></div><div class="plan-grid"><article class="plan-card"><h3>На месяц</h3><p>Полный доступ с автоматическим ежемесячным продлением.</p><button class="secondary" disabled>Скоро</button></article><article class="plan-card"><h3>На год</h3><p>Полный доступ на год со скидкой и автоматическим продлением.</p><button class="secondary" disabled>Скоро</button></article><article class="plan-card"><h3>Навсегда</h3><p>Все функции, будущие тесты и обновления без ограничения срока.</p><button class="secondary" disabled>Скоро</button></article></div><p id="upgradeMessage" class="report-message">Оплата будет подключена позже.</p></div></div>
@@ -123,6 +131,134 @@ let currentTestId = "";
 let currentTestName = "";
 let favoriteKeys = new Set();
 let activeLibraryId = "";
+let activeSpaceId = window.MEDQUIZ_LEARNING.getSelectedSpace(window.localStorage);
+let attemptReviewData = null;
+let attemptReviewIndex = 0;
+let lastSavedAttemptId = null;
+let currentAttemptPromise = null;
+let currentAttemptKind = "training";
+let currentBlockMeta = null;
+let studyAllQuestions = [];
+let studyFilter = "all";
+let browserNavigationRestoring = false;
+let browserNavigationInitialized = false;
+let liveAttemptToken = "";
+let lastResultScreen = null;
+
+function browserScreenHash(state){
+  const subjectId = encodeURIComponent(state.subjectId || "");
+  if(state.screen === "subject-section") return `#subject/${subjectId}/${encodeURIComponent(state.section || "errors")}`;
+  if(state.screen === "subject") return `#subject/${subjectId}`;
+  if(state.screen === "blocks") return `#blocks/${subjectId}`;
+  if(state.screen === "setup") return `#setup/${subjectId}`;
+  if(state.screen === "study") return `#study/${subjectId}`;
+  if(state.screen === "section") return `#section/${encodeURIComponent(state.section || "home")}`;
+  if(state.screen === "attempt") return `#attempt/${subjectId}`;
+  if(state.screen === "result") return `#result/${subjectId}`;
+  if(state.screen === "review") return `#review/${subjectId}`;
+  return "#home";
+}
+
+function navigationStateFromHash(){
+  const parts = location.hash.replace(/^#/,"").split("/");
+  const screen = parts[0] || "home";
+  const value = decodeURIComponent(parts[1] || "");
+  if(screen === "subject" && value && parts[2]){
+    return {screen:"subject-section",subjectId:value,section:decodeURIComponent(parts[2]),spaceId:activeSpaceId};
+  }
+  if(["subject","blocks","setup","study"].includes(screen) && value){
+    return {screen,subjectId:value,spaceId:activeSpaceId};
+  }
+  if(screen === "section" && value) return {screen,section:value,spaceId:activeSpaceId};
+  return {screen:"home",spaceId:activeSpaceId};
+}
+
+function setBrowserScreen(state,{replace = false} = {}){
+  if(browserNavigationRestoring) return;
+  const next = {spaceId:activeSpaceId,...state};
+  const previous = history.state?.medquizScreen;
+  if(previous && JSON.stringify(previous) === JSON.stringify(next)) return;
+  if(!browserNavigationInitialized){
+    browserNavigationInitialized = true;
+    replace = true;
+  }
+  history[replace ? "replaceState" : "pushState"]({medquizScreen:next},"",browserScreenHash(next));
+}
+
+function showLiveAttemptScreen(){
+  if(!test.length) return renderSubjectOverview(activeLibraryId);
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  document.getElementById("next").style.display = "block";
+  document.getElementById("result").innerHTML = "";
+  document.querySelector(".app").classList.add("testing");
+  startTestTimer(true);
+  showQ();
+}
+
+function showLastResultScreen(){
+  if(!lastResultScreen) return renderSubjectOverview(activeLibraryId);
+  clearInterval(timerInterval);
+  timerInterval = null;
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  document.querySelector(".app").classList.remove("testing");
+  document.getElementById("quizProgress").style.display = "none";
+  document.getElementById("questionNavigator").classList.add("hidden");
+  document.getElementById("next").style.display = "none";
+  document.getElementById("status").textContent = lastResultScreen.status;
+  document.getElementById("quiz").innerHTML = lastResultScreen.html;
+  document.getElementById("result").innerHTML = "";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function restoreBrowserScreen(state){
+  const target = state || {screen:"home",spaceId:activeSpaceId};
+  browserNavigationRestoring = true;
+  try{
+    if(target.spaceId && target.spaceId !== activeSpaceId){
+      activeSpaceId = window.MEDQUIZ_LEARNING.setSelectedSpace(target.spaceId,window.localStorage);
+      activeLibraryId = "";
+      renderSpaceControls();
+    }
+    if(target.screen === "subject") await openSubject(target.subjectId);
+    else if(target.screen === "subject-section") await openSubjectQuestionStats(target.subjectId,target.section === "favorites");
+    else if(target.screen === "blocks") await openBlocks(target.subjectId);
+    else if(target.screen === "setup") await openTrainingSetup(target.subjectId);
+    else if(target.screen === "study") await openStudyMode(target.subjectId);
+    else if(target.screen === "section") await showSection(target.section);
+    else if(target.screen === "attempt"){
+      if(target.token && target.token === liveAttemptToken) showLiveAttemptScreen();
+      else if(target.attemptId) await resumeAttempt(target.attemptId);
+      else await renderSpaceDashboard();
+    }else if(target.screen === "result"){
+      if(lastResultScreen) showLastResultScreen();
+      else if(target.attemptId) await openAttempt(target.attemptId);
+      else await renderSpaceDashboard();
+    }else if(target.screen === "review"){
+      if(target.attemptId) await openAttempt(target.attemptId);
+      else if(attemptReviewData) renderAttemptReview(attemptReviewData,attemptReviewIndex);
+      else showLastResultScreen();
+    }else await renderSpaceDashboard();
+  }finally{
+    browserNavigationRestoring = false;
+  }
+}
+
+async function initializeBrowserNavigation(){
+  browserNavigationInitialized = true;
+  const initial = history.state?.medquizScreen || navigationStateFromHash();
+  history.replaceState({medquizScreen:initial},"",browserScreenHash(initial));
+  await restoreBrowserScreen(initial);
+}
+
+window.addEventListener("popstate",event=>{
+  restoreBrowserScreen(event.state?.medquizScreen || navigationStateFromHash()).catch(error=>{
+    console.error("Не удалось восстановить экран",error);
+  });
+});
 
 const SUBJECT_TESTS = [
   {id:"stomatologia",name:"Στοματολογία",file:"tests/stomatologia.js",count:739},
@@ -156,6 +292,425 @@ const BUILT_IN_TESTS = [
     count:1443
   }
 ];
+
+function renderSpaceControls(){
+  const spaces = window.MEDQUIZ_LEARNING.SPACES;
+  document.getElementById("spaceSwitcher").innerHTML = spaces.map(space =>
+    `<button type="button" class="space-choice ${space.id === activeSpaceId ? "active" : ""}" onclick="selectLearningSpace('${space.id}')">${escapeHtml(space.nameRu)}</button>`
+  ).join("");
+  const select = document.getElementById("spaceSelect");
+  select.innerHTML = spaces.map(space =>
+    `<option value="${space.id}" ${space.id === activeSpaceId ? "selected" : ""}>${escapeHtml(space.nameRu)}</option>`
+  ).join("");
+}
+
+async function selectLearningSpace(spaceId){
+  activeSpaceId = window.MEDQUIZ_LEARNING.setSelectedSpace(spaceId,window.localStorage);
+  activeLibraryId = "";
+  renderSpaceControls();
+  await renderSpaceDashboard();
+}
+
+function subjectCardsHtml(){
+  const subjects = SUBJECT_TESTS.filter(item => activeSpaceId === "dentistry");
+  return subjects.map(item =>
+    `<article class="subject-card"><div><h3>${escapeHtml(item.name)}</h3><p>${item.count} вопросов</p></div><div class="subject-meta"><span id="subjectBlocks-${item.id}">Сдано блоков: 0 из ${Math.ceil(item.count / 50)}</span><span id="subjectErrors-${item.id}">Ошибок: 0</span></div><button class="secondary" onclick="openSubject('${item.id}')">Открыть предмет</button></article>`
+  ).join("");
+}
+
+async function renderSpaceDashboard(){
+  setBrowserScreen({screen:"home"});
+  clearInterval(timerInterval);
+  timerInterval = null;
+  document.querySelector(".app").classList.remove("testing");
+  const dashboard = document.getElementById("dashboardView");
+  const home = document.getElementById("learningHome");
+  const view = document.getElementById("sectionView");
+  const setup = document.getElementById("quizSetupPanel");
+  dashboard.classList.remove("hidden");
+  view.classList.add("hidden");
+  setup.classList.add("hidden");
+  document.querySelector(".quiz-shell").classList.remove("attempt-review-open");
+  document.getElementById("quizProgress").style.display = "none";
+  document.getElementById("questionNavigator").classList.add("hidden");
+  document.getElementById("next").style.display = "none";
+  document.getElementById("quiz").innerHTML = "";
+  document.getElementById("result").innerHTML = "";
+
+  const space = window.MEDQUIZ_LEARNING.SPACES.find(item => item.id === activeSpaceId);
+  const cards = subjectCardsHtml();
+  const empty = activeSpaceId === "medicine"
+    ? `<div class="empty-learning"><h2>Предметы появятся здесь</h2><p class="info">Базы Лечебного дела ещё не добавлены. Пространство уже отделено от Стоматологии.</p></div>`
+    : `<div class="empty-learning"><h2>Добавьте свой тест</h2><p class="info">Импортированные материалы будут храниться отдельно от баз специальностей.</p><button class="action" onclick="openCustomImport()">Добавить тест</button></div>`;
+  home.innerHTML = `<section id="lastActivityCard" class="activity-card"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(space.nameRu)}</p><h2>Начните обучение</h2><p>Выберите предмет, чтобы открыть тренировку и историю результатов.</p><div class="activity-actions">${activeSpaceId === "dentistry" ? `<button class="action" onclick="openSubject('stomatologia')">Выбрать предмет</button>` : ""}</div></div><div class="activity-score"><strong class="error-count">0</strong><span>ошибок</span><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Открыть ошибки</button></div></section><section class="stats summary-grid"><div class="stat summary-item"><strong>0</strong><span>вопросов в попытках</span></div><div class="stat summary-item"><strong>—</strong><span>точность завершённых попыток</span></div><div class="stat summary-item"><strong>0</strong><span>завершено попыток</span></div><div class="stat summary-item"><strong>0</strong><span>в избранном</span></div></section><div class="section-title-row"><div><h2>${activeSpaceId === "custom" ? "Мои предметы" : "Предметы"}</h2><p>Откройте предмет, чтобы выбрать режим и диапазон.</p></div></div>${cards ? `<section class="subject-grid">${cards}</section>` : empty}`;
+  if(currentUser && currentUserHasFullAccess){
+    await Promise.all([loadDashboardStats(),loadSpaceLastActivity(),loadSubjectCardProgress()]);
+  }else{
+    renderGuestStats();
+  }
+}
+
+async function loadSpaceLastActivity(){
+  if(!currentUser || !currentUserHasFullAccess) return;
+  const {data,error} = await supabaseClient
+    .from("medquiz_attempts")
+    .select("id,test_name,subject_id,attempt_kind,status,total_questions,correct_answers,range_start,range_end,completed_at,started_at")
+    .eq("space_id",activeSpaceId)
+    .order("last_activity_at",{ascending:false})
+    .limit(1)
+    .maybeSingle();
+  if(error || !data) return;
+  const card = document.getElementById("lastActivityCard");
+  if(!card) return;
+  const completed = data.status !== "active";
+  const percent = data.total_questions ? Math.round(data.correct_answers / data.total_questions * 100) : 0;
+  const range = data.range_start && data.range_end ? ` · вопросы ${data.range_start}–${data.range_end}` : "";
+  const isGeneralExam = data.attempt_kind === "general_exam";
+  const isBlockExam = data.attempt_kind === "block_exam";
+  card.querySelector("h2").textContent = completed
+    ? (isGeneralExam ? "Последний общий экзамен" : isBlockExam ? "Последняя проверка блока" : "Последняя тренировка")
+    : (isGeneralExam ? "Незавершённый общий экзамен" : isBlockExam ? "Незавершённая проверка блока" : "Незавершённая тренировка");
+  card.querySelector("p:nth-of-type(2)").textContent = `${data.test_name}${range}`;
+  const actions = card.querySelector(".activity-actions");
+  actions.innerHTML = completed
+    ? `<button class="action" onclick="openAttempt('${data.id}')">Результат: ${data.correct_answers}/${data.total_questions} · ${percent}%</button>${data.subject_id ? `<button class="secondary" onclick="openSubject('${data.subject_id}')">Открыть предмет</button>` : ""}`
+    : `<button class="action" onclick="resumeAttempt('${data.id}')">Продолжить попытку</button>`;
+}
+
+async function loadSubjectCardProgress(){
+  if(!currentUser || !currentUserHasFullAccess || activeSpaceId !== "dentistry") return;
+  const [blockResult,errorResult] = await Promise.all([
+    supabaseClient.from("medquiz_block_states").select("subject_id,ever_passed"),
+    supabaseClient.from("medquiz_question_stats").select("subject_id,active_error").eq("space_id","dentistry").eq("active_error",true)
+  ]);
+  const blockRows = blockResult.error ? [] : blockResult.data || [];
+  const errorRows = errorResult.error ? [] : errorResult.data || [];
+  SUBJECT_TESTS.forEach(subject=>{
+    const passed = blockRows.filter(row=>row.subject_id === subject.id && row.ever_passed).length;
+    const errors = errorRows.filter(row=>row.subject_id === subject.id).length;
+    const blockNode = document.getElementById(`subjectBlocks-${subject.id}`);
+    const errorNode = document.getElementById(`subjectErrors-${subject.id}`);
+    if(blockNode) blockNode.textContent = `Сдано блоков: ${passed} из ${Math.ceil(subject.count / 50)}`;
+    if(errorNode) errorNode.textContent = `Ошибок: ${errors}`;
+  });
+}
+
+function renderSubjectOverview(subjectId){
+  clearInterval(timerInterval);
+  timerInterval = null;
+  document.querySelector(".app").classList.remove("testing");
+  const item = SUBJECT_TESTS.find(subject => subject.id === subjectId);
+  if(!item) return renderSpaceDashboard();
+  setBrowserScreen({screen:"subject",subjectId:item.id});
+  activeLibraryId = item.id;
+  const dashboard = document.getElementById("dashboardView");
+  const setup = document.getElementById("quizSetupPanel");
+  const view = document.getElementById("sectionView");
+  dashboard.classList.add("hidden");
+  setup.classList.add("hidden");
+  document.getElementById("quizProgress").style.display = "none";
+  document.getElementById("questionNavigator").classList.add("hidden");
+  document.getElementById("next").style.display = "none";
+  document.getElementById("quiz").innerHTML = "";
+  document.getElementById("result").innerHTML = "";
+  view.classList.remove("hidden");
+  view.innerHTML = `<div class="subject-overview">
+    <div class="subject-tabs">
+      <button class="subject-tab active">Обзор</button>
+      <button class="subject-tab" onclick="openSubjectQuestionStats('${item.id}',false)">Ошибки</button>
+      <button class="subject-tab" onclick="openSubjectQuestionStats('${item.id}',true)">Избранное</button>
+    </div>
+    <section class="subject-banner">
+      <div><p class="eyebrow">Стоматология</p><h2>${escapeHtml(item.name)}</h2><p class="info">${item.count} вопросов · ${Math.ceil(item.count / 50)} последовательных блоков</p></div>
+      <button class="secondary" onclick="renderSpaceDashboard()">Все предметы</button>
+    </section>
+    <section class="blocks-entry-card">
+      <div><h3>Блоки по 50 вопросов</h3><p>${Math.ceil(item.count / 50)} последовательных блоков для изучения и отдельной проверки знаний.</p></div>
+      <button class="action" onclick="openBlocks('${item.id}')">Открыть блоки</button>
+    </section>
+    <section class="subject-actions">
+      <article class="mode-card"><h3>Тренировка</h3><p>Сразу показываем правильность и объяснение.</p><button class="secondary" onclick="openTrainingSetup('${item.id}')">Начать тренировку</button></article>
+      <article class="mode-card primary"><h3>Общий экзамен</h3><p>50 случайных вопросов. Ответы — после завершения.</p><button class="action" onclick="openGeneralExam('${item.id}')">Начать общий экзамен</button></article>
+      <article class="mode-card"><h3>Изучение</h3><p>Просмотр базы без влияния на прогресс.</p><button class="secondary" onclick="openStudyMode('${item.id}')">Открыть изучение</button></article>
+    </section>
+    <section class="summary-grid">
+      <div class="summary-item"><strong>${item.count}</strong><span>вопросов</span></div>
+      <div class="summary-item"><strong id="subjectErrorCount">0</strong><span>ошибок</span></div>
+      <div class="summary-item"><strong id="subjectFavoriteCount">0</strong><span>в избранном</span></div>
+      <div class="summary-item"><strong id="subjectLastResult">—</strong><span>последний результат</span></div>
+    </section>
+    <section><div class="section-title-row"><div><h2>Последние попытки</h2><p>Результаты именно этого предмета.</p></div><button class="secondary" onclick="showSection('history')">Вся история</button></div><div id="subjectRecentAttempts" class="section-list"><div class="empty-state">Попыток пока нет.</div></div></section>
+  </div>`;
+  loadSubjectOverviewData(item);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function loadSubjectOverviewData(item){
+  if(!currentUser || !currentUserHasFullAccess) return;
+  let [attemptResult,statsResult] = await Promise.all([
+    supabaseClient.from("medquiz_attempts").select("id,attempt_kind,correct_answers,total_questions,completed_at,started_at,range_start,range_end").eq("subject_id",item.id).neq("status","active").order("completed_at",{ascending:false}).limit(5),
+    supabaseClient.from("medquiz_question_stats").select("active_error,favorite").eq("subject_id",item.id)
+  ]);
+  if((attemptResult.error || statsResult.error) && missingLearningSchema(attemptResult.error || statsResult.error)){
+    [attemptResult,statsResult] = await Promise.all([
+      supabaseClient.from("medquiz_attempts").select("id,correct_answers,total_questions,completed_at,started_at").eq("test_id","library-" + item.id).order("completed_at",{ascending:false}).limit(5),
+      supabaseClient.from("medquiz_question_stats").select("mistake_count,correct_streak,favorite").eq("test_id","library-" + item.id)
+    ]);
+  }
+  const attempts = attemptResult.data || [];
+  const stats = statsResult.data || [];
+  const errors = stats.filter(row=>typeof row.active_error === "boolean" ? row.active_error : row.mistake_count > 0 && row.correct_streak < 3).length;
+  const favorites = stats.filter(row=>row.favorite).length;
+  const latest = attempts[0];
+  const errorNode = document.getElementById("subjectErrorCount");
+  const favoriteNode = document.getElementById("subjectFavoriteCount");
+  const resultNode = document.getElementById("subjectLastResult");
+  if(errorNode) errorNode.textContent = errors;
+  if(favoriteNode) favoriteNode.textContent = favorites;
+  if(resultNode && latest) resultNode.textContent = `${latest.correct_answers}/${latest.total_questions}`;
+  const list = document.getElementById("subjectRecentAttempts");
+  if(!list || !attempts.length) return;
+  list.innerHTML = attempts.map(attempt=>{
+    const date = new Date(attempt.completed_at || attempt.started_at).toLocaleString("ru-RU");
+    const range = attempt.range_start && attempt.range_end ? `Вопросы ${attempt.range_start}–${attempt.range_end} · ` : "";
+    const label = attempt.attempt_kind === "general_exam" ? "Общий экзамен" : attempt.attempt_kind === "block_exam" ? "Проверка блока" : "Тренировка";
+    return `<button type="button" class="section-item question-practice-card" onclick="openAttempt('${attempt.id}')"><div><strong>${label}</strong><p>${range}${date}</p></div><b>${attempt.correct_answers}/${attempt.total_questions}</b></button>`;
+  }).join("");
+}
+
+async function openSubject(subjectId){
+  await loadBuiltInTest(subjectId,false);
+}
+
+async function openTrainingSetup(subjectId){
+  if(activeLibraryId !== subjectId || !questions.length){
+    await loadBuiltInTest(subjectId,true);
+    return;
+  }
+  showTrainingSetup(SUBJECT_TESTS.find(item => item.id === subjectId));
+}
+
+function showTrainingSetup(item){
+  if(!item) return;
+  setBrowserScreen({screen:"setup",subjectId:item.id});
+  document.querySelector(".app").classList.remove("testing");
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
+  const setup = document.getElementById("quizSetupPanel");
+  setup.classList.remove("hidden");
+  document.getElementById("importControls").classList.add("hidden");
+  document.getElementById("pdfSettings").classList.add("hidden");
+  document.getElementById("setupSubjectName").textContent = `${item.name} · ${item.count} вопросов`;
+  document.querySelector('input[name="source"][value="rangeOrdered"]').checked = true;
+  document.getElementById("fromNum2").value = 1;
+  document.getElementById("toNum2").value = Math.min(50,item.count);
+  document.getElementById("fromNum").value = 1;
+  document.getElementById("toNum").value = Math.min(50,item.count);
+  document.getElementById("status").textContent = "Выбран диапазон 1–50.";
+  currentAttemptKind = "training";
+  currentBlockMeta = null;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function ensureSubjectLoaded(subjectId){
+  const item = SUBJECT_TESTS.find(subject=>subject.id === subjectId);
+  if(!item) throw new Error("Предмет не найден.");
+  if(activeLibraryId !== subjectId || !questions.length){
+    const data = await loadTestScript(item);
+    activeLibraryId = item.id;
+    questions = await applyRememberedAnswers(data);
+    currentTestId = "library-" + item.id;
+    currentTestName = item.name;
+    await loadFavoritesForCurrentTest();
+  }
+  return item;
+}
+
+async function openGeneralExam(subjectId){
+  try{
+    const item = await ensureSubjectLoaded(subjectId);
+    mode = "exam";
+    currentAttemptKind = "general_exam";
+    currentBlockMeta = null;
+    const selected = [...questions];
+    shuffle(selected);
+    originalTest = selected.slice(0,Math.min(50,selected.length));
+    document.querySelector('input[name="mode"][value="exam"]').checked = true;
+    updateModeSettings();
+    document.getElementById("status").textContent = `Общий экзамен · ${item.name} · ${originalTest.length} вопросов`;
+    resetRun(originalTest);
+  }catch(error){
+    console.error(error);
+    alert("Не удалось открыть общий экзамен.");
+  }
+}
+
+async function openStudyMode(subjectId){
+  try{
+    const item = await ensureSubjectLoaded(subjectId);
+    setBrowserScreen({screen:"study",subjectId:item.id});
+    clearInterval(timerInterval);
+    timerInterval = null;
+    mode = "study";
+    currentAttemptKind = "study";
+    currentBlockMeta = null;
+    currentAttemptPromise = null;
+    studyAllQuestions = [...questions].sort((a,b)=>Number(a.num) - Number(b.num));
+    studyFilter = "all";
+    test = [...studyAllQuestions];
+    originalTest = [...test];
+    userAnswers = new Array(test.length).fill(null);
+    current = 0;
+    document.getElementById("dashboardView").classList.add("hidden");
+    document.getElementById("sectionView").classList.add("hidden");
+    document.getElementById("quizSetupPanel").classList.add("hidden");
+    document.querySelector(".app").classList.add("testing");
+    document.getElementById("next").style.display = "none";
+    document.getElementById("questionNavigator").classList.remove("hidden");
+    document.getElementById("status").textContent = `Изучение · ${item.name}`;
+    renderStudyQuestion();
+  }catch(error){
+    console.error(error);
+    alert("Не удалось открыть режим изучения.");
+  }
+}
+
+function setStudyFilter(filter){
+  studyFilter = filter;
+  test = filter === "favorites"
+    ? studyAllQuestions.filter(q=>favoriteKeys.has(questionKey(q)))
+    : [...studyAllQuestions];
+  current = 0;
+  userAnswers = new Array(test.length).fill(null);
+  renderStudyQuestion();
+}
+
+function renderStudyQuestion(){
+  document.getElementById("quizProgress").innerHTML = `<span>Изучение · ${test.length ? `вопрос ${current + 1} из ${test.length}` : "нет вопросов"}</span><span class="quiz-progress-actions"><button class="subject-tab ${studyFilter === "all" ? "active" : ""}" onclick="setStudyFilter('all')">Все</button><button class="subject-tab ${studyFilter === "favorites" ? "active" : ""}" onclick="setStudyFilter('favorites')">Избранное</button></span>`;
+  if(!test.length){
+    document.getElementById("quiz").innerHTML = `<div class="empty-learning"><h2>В избранном пока ничего нет</h2><button class="secondary" onclick="setStudyFilter('all')">Показать все вопросы</button></div>`;
+    document.getElementById("result").innerHTML = `<button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">Вернуться к предмету</button>`;
+    document.getElementById("questionNavigator").classList.add("hidden");
+    return;
+  }
+  const q = test[current];
+  const favorite = favoriteKeys.has(questionKey(q));
+  const options = q.opts.map((option,index)=>`<div class="review-answer ${index === q.correct ? "correct" : ""}">${escapeHtml(optionLetter(q,index))}) ${escapeHtml(option)}${index === q.correct ? " · правильный ответ" : ""}</div>`).join("");
+  document.getElementById("quiz").innerHTML = `<div class="question-head"><h3>${escapeHtml(q.num)}. ${escapeHtml(q.q)}</h3><div class="question-actions"><button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>${options}`;
+  const explanation = questionExplanation(q);
+  document.getElementById("result").innerHTML = `${explanation ? `<p class="info"><b>Объяснение:</b> ${escapeHtml(explanation)}</p>` : ""}<div class="result-actions"><button class="secondary" onclick="goToStudyQuestion(${Math.max(0,current - 1)})" ${current === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="goToStudyQuestion(${Math.min(test.length - 1,current + 1)})" ${current === test.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">К предмету</button></div>`;
+  const navigator = document.getElementById("questionNavigator");
+  navigator.classList.remove("hidden");
+  navigator.innerHTML = test.map((_item,index)=>`<button type="button" class="question-number ${index === current ? "current" : ""}" onclick="goToStudyQuestion(${index})">${index + 1}</button>`).join("");
+}
+
+function goToStudyQuestion(index){
+  if(index < 0 || index >= test.length) return;
+  current = index;
+  renderStudyQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function blockStatePresentation(state){
+  const presentations = {
+    not_started:{label:"Не начат",className:"",detail:"Проверок пока не было."},
+    failed:{label:"Не сдан",className:"failed",detail:`Последняя проверка: ${Math.round(state.last_percent || 0)}%. Нужно 90%.`},
+    passed:{label:"Сдан",className:"passed",detail:`Последняя проверка: ${Math.round(state.last_percent || 0)}%. Лучший результат: ${Math.round(state.best_percent || state.last_percent || 0)}%.`},
+    passed_before:{label:"Был сдан ранее",className:"passed-before",detail:`Последняя проверка: ${Math.round(state.last_percent || 0)}%. Лучший результат: ${Math.round(state.best_percent || 0)}%.`}
+  };
+  const status = window.MEDQUIZ_LEARNING.blockStatus(state ? {
+    hasChecks:state.has_checks,
+    everPassed:state.ever_passed,
+    lastPercent:state.last_percent
+  } : null);
+  return presentations[status];
+}
+
+async function openBlocks(subjectId){
+  let item;
+  try{
+    item = await ensureSubjectLoaded(subjectId);
+  }catch(error){
+    console.error(error);
+    alert("Не удалось загрузить блоки предмета.");
+    return;
+  }
+  setBrowserScreen({screen:"blocks",subjectId:item.id});
+  document.querySelector(".app").classList.remove("testing");
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  const view = document.getElementById("sectionView");
+  view.classList.remove("hidden");
+  view.innerHTML = "<p>Загрузка блоков…</p>";
+  let states = [];
+  let stateUnavailable = false;
+  if(currentUser && currentUserHasFullAccess){
+    const {data,error} = await supabaseClient
+      .from("medquiz_block_states")
+      .select("*")
+      .eq("subject_id",subjectId)
+      .order("block_start",{ascending:true});
+    if(error) stateUnavailable = true;
+    else states = data || [];
+  }
+  const stateMap = new Map(states.map(state=>[state.block_start,state]));
+  const blocks = [];
+  for(let start = 1,index = 1; start <= item.count; start += 50,index++){
+    const end = Math.min(item.count,start + 49);
+    const state = stateMap.get(start) || null;
+    const presentation = blockStatePresentation(state);
+    blocks.push(`<article class="block-card ${presentation.className}"><div class="block-card-head"><div><h3>Блок ${index}</h3><p>Вопросы ${start}–${end} · ${end - start + 1} вопросов</p></div><span class="block-status">${presentation.label}</span></div><div class="block-result-note">${presentation.detail}</div><div class="block-actions"><button class="secondary" onclick="startBlock('${subjectId}',${start},${end},false)">Тренировка</button><button class="action" onclick="startBlock('${subjectId}',${start},${end},true)">Проверка блока</button></div></article>`);
+  }
+  const syncNote = stateUnavailable
+    ? `<p class="sync-note">Результаты проверок появятся после подключения подготовленной миграции базы.</p>`
+    : "";
+  view.innerHTML = `<div class="subject-tabs"><button class="subject-tab" onclick="renderSubjectOverview('${item.id}')">Обзор</button><button class="subject-tab active">Блоки</button></div><section class="subject-banner"><div><p class="eyebrow">${escapeHtml(item.name)}</p><h2>Последовательные блоки</h2><p class="info">По 50 вопросов. Для сдачи проверки нужно не менее 90%.</p></div><button class="secondary" onclick="renderSubjectOverview('${item.id}')">К предмету</button></section><div class="block-legend"><span>Серый · не начат</span><span>Красный · не сдан</span><span>Зелёный · сдан</span><span>Жёлтый · был сдан ранее</span></div>${syncNote}<section class="blocks-grid">${blocks.join("")}</section>`;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function startBlock(subjectId,start,end,isCheck){
+  let item;
+  try{
+    item = await ensureSubjectLoaded(subjectId);
+  }catch(error){
+    console.error(error);
+    alert("Не удалось открыть этот блок.");
+    return;
+  }
+  const selected = questions
+    .filter(question=>{
+      const number = Number(question.originalNum || question.num);
+      return Number.isFinite(number) && number >= start && number <= end;
+    })
+    .sort((a,b)=>Number(a.originalNum || a.num) - Number(b.originalNum || b.num));
+  if(!selected.length){
+    alert("В этом блоке нет вопросов.");
+    return;
+  }
+  mode = isCheck ? "exam" : "training";
+  currentAttemptKind = isCheck ? "block_exam" : "training";
+  currentBlockMeta = isCheck ? {subjectId,start,end,index:Math.floor((start - 1) / 50) + 1} : null;
+  document.querySelector(`input[name="mode"][value="${mode}"]`).checked = true;
+  updateModeSettings();
+  document.getElementById("status").textContent = `${isCheck ? "Проверка" : "Тренировка"} · ${item.name} · вопросы ${start}–${end}`;
+  originalTest = [...selected];
+  resetRun(selected);
+}
+
+function openCustomImport(){
+  activeLibraryId = "";
+  currentTestId = "";
+  currentTestName = "";
+  questions = [];
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
+  const setup = document.getElementById("quizSetupPanel");
+  setup.classList.remove("hidden");
+  document.getElementById("importControls").classList.remove("hidden");
+  document.getElementById("pdfSettings").classList.remove("hidden");
+  document.getElementById("setupSubjectName").textContent = "Новый тест";
+  document.getElementById("status").textContent = "Выберите PDF или DOCX.";
+}
 
 document.getElementById("file").addEventListener("change", updateFileUI);
 
@@ -1737,9 +2292,9 @@ function finishEarly(){
   if(confirm(message)) finishTest(false, true);
 }
 
-function startTestTimer(){
+function startTestTimer(preserveStartedAt = false){
   clearInterval(timerInterval);
-  testStartedAt = Date.now();
+  if(!preserveStartedAt) testStartedAt = Date.now();
   timerInterval = setInterval(() => {
     if(mode === "exam" && timerSeconds() <= 0){
       clearInterval(timerInterval);
@@ -1762,7 +2317,9 @@ async function start(){
   mode =
     document.querySelector(
       'input[name="mode"]:checked'
-    ).value;
+  ).value;
+  currentAttemptKind = mode === "exam" ? "legacy_exam" : "training";
+  currentBlockMeta = null;
 
   showTrainingTimer = document.getElementById("trainingTimerEnabled").checked;
 
@@ -1857,12 +2414,12 @@ async function start(){
 
   }else if(source === "rangeOrdered"){
     const from = parseInt(
-      document.getElementById("fromNum2").value,
+      document.getElementById("fromNum").value,
       10
     );
 
     const to = parseInt(
-      document.getElementById("toNum2").value,
+      document.getElementById("toNum").value,
       10
     );
 
@@ -1919,11 +2476,27 @@ function resetRun(qs){
     "block";
 
   document.getElementById("result").innerHTML = "";
+  document.getElementById("questionNavigator").classList.remove("hidden");
 
   document.querySelector(".app").classList.add("testing");
   window.scrollTo({top:0, behavior:"smooth"});
 
   showQ();
+  lastResultScreen = null;
+  liveAttemptToken = `attempt-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+  const attemptToken = liveAttemptToken;
+  setBrowserScreen({screen:"attempt",subjectId:activeLibraryId || null,token:attemptToken});
+  currentAttemptPromise = startActiveAttempt()
+    .then(attemptId=>{
+      if(history.state?.medquizScreen?.token === attemptToken){
+        setBrowserScreen({screen:"attempt",subjectId:activeLibraryId || null,token:attemptToken,attemptId:attemptId || null},{replace:true});
+      }
+      return attemptId;
+    })
+    .catch(error => {
+      console.warn("Не удалось сохранить незавершённую попытку",error);
+      return null;
+    });
 }
 
 function optionLetter(q, index){
@@ -1958,7 +2531,7 @@ function showQ(){
   let html =
     `${reviewBadge}<div class="question-head"><h3>${escapeHtml(q.num)}. ${
       escapeHtml(q.q)
-    }</h3><div class="question-actions"><button class="report-button" onclick="reportCurrentQuestion()" title="Отправить администратору" aria-label="Отправить вопрос администратору">⚑</button><button class="favorite-button" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>`;
+    }</h3><div class="question-actions"><button class="report-button" onclick="reportCurrentQuestion()" title="Отправить администратору" aria-label="Отправить вопрос администратору">⚑</button><button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>`;
 
   q.opts.forEach((option, index) => {
     html +=
@@ -1970,6 +2543,42 @@ function showQ(){
 
   document.getElementById("quiz").innerHTML = html;
   document.getElementById("result").innerHTML = "";
+  const savedAnswer = userAnswers[current];
+  if(savedAnswer !== null){
+    const buttons = document.querySelectorAll("#quiz .answer-option");
+    const selectedButton = buttons[savedAnswer];
+    if(selectedButton) selectedButton.classList.add("selected");
+    if(mode === "training"){
+      answered = true;
+      const correct = savedAnswer === q.correct;
+      if(selectedButton) selectedButton.classList.add(correct ? "correct" : "wrong");
+      if(!correct && buttons[q.correct]) buttons[q.correct].classList.add("correct");
+      const explanation = questionExplanation(q);
+      document.getElementById("result").innerHTML = `<strong>${correct ? "Правильно" : "Неправильно"}</strong>${explanation ? `<p class="info">${escapeHtml(explanation)}</p>` : ""}`;
+    }
+  }
+  renderQuestionNavigator();
+}
+
+function renderQuestionNavigator(){
+  const navigator = document.getElementById("questionNavigator");
+  if(!test.length){ navigator.classList.add("hidden"); return; }
+  navigator.classList.remove("hidden");
+  navigator.innerHTML = test.map((q,index)=>{
+    let state = index === current ? " current" : "";
+    if(userAnswers[index] !== null){
+      if(mode === "training") state += userAnswers[index] === q.correct ? " correct" : " wrong";
+      else state += " answered";
+    }
+    return `<button type="button" class="question-number${state}" onclick="goToQuestion(${index})" aria-label="Открыть вопрос ${index + 1}">${index + 1}</button>`;
+  }).join("");
+}
+
+function goToQuestion(index){
+  if(index < 0 || index >= test.length) return;
+  current = index;
+  showQ();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function answer(index, button){
@@ -2015,6 +2624,10 @@ function answer(index, button){
       document.getElementById("result").innerHTML = `<strong>${feedback}</strong>${explanation ? `<p class="info">${escapeHtml(explanation)}</p>` : ""}`;
     }
   }
+  renderQuestionNavigator();
+  persistCurrentAnswer(current,index).catch(error => {
+    console.warn("Не удалось сохранить ответ незавершённой попытки",error);
+  });
 }
 
 function nextQ(){
@@ -2049,73 +2662,164 @@ function finishTest(timedOut = false, finishedEarly = false){
       });
     }
   });
+  const completedAttemptKind = currentAttemptKind;
+  const completedBlockMeta = currentBlockMeta ? {...currentBlockMeta} : null;
 
   document.getElementById("next").style.display =
     "none";
 
   document.querySelector(".app").classList.remove("testing");
   document.getElementById("quizProgress").style.display = "none";
+  document.getElementById("questionNavigator").classList.add("hidden");
 
   document.getElementById("status").textContent =
     timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : "Тест завершён";
 
-  document.getElementById("quiz").innerHTML =
-    `<h2>${timedOut ? "Время вышло · " : finishedEarly ? "Завершено досрочно · " : ""}Итог: ${score} / ${test.length}</h2>
-     <p class="info">Затраченное время: ${formatDuration(elapsedSeconds)}</p>
-     <button class="action" onclick="retrySame()">Пройти заново те же вопросы</button>
-     <button class="action" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">${currentUserHasFullAccess ? "Пройти только ошибки" : "Повторение ошибок · полная версия"}</button>
-     <button class="action" onclick="start()">Новый тест с выбранными настройками</button>`;
-
-  let html = "<h3>Разбор ответов</h3>";
-
-  test.forEach((q, index) => {
-    const userAnswer = userAnswers[index];
-    const ok = userAnswer === q.correct;
-
-    html +=
-      `<div class="card">
-        <b>${index + 1}. ${
-          ok ? "Правильно" : "Неправильно"
-        }. ${escapeHtml(q.num)}. ${
-          escapeHtml(q.q)
-        }</b><br><br>`;
-
-    q.opts.forEach((option, optionIndex) => {
-      let cls = "optionReview";
-
-      if(optionIndex === q.correct){
-        cls += " correct";
-      }
-
-      if(
-        optionIndex === userAnswer &&
-        optionIndex !== q.correct
-      ){
-        cls += " wrong";
-      }
-
-      html +=
-        `<div class="${cls}">
-          ${escapeHtml(
-            optionLetter(q, optionIndex)
-          )})
-          ${escapeHtml(option)}
-        </div>`;
-    });
-
-    const explanation = questionExplanation(q);
-    if(explanation){
-      html += `<p class="info"><b>Объяснение:</b> ${escapeHtml(explanation)}</p>`;
-    }
-
-    html += "</div>";
-  });
-
-  document.getElementById("result").innerHTML = html;
+  const percent = test.length ? Math.round(score / test.length * 100) : 0;
+  const isBlockExam = completedAttemptKind === "block_exam";
+  const blockPassed = isBlockExam && !timedOut && !finishedEarly && percent >= 90;
+  const completedLabel = completedAttemptKind === "general_exam"
+    ? "Общий экзамен завершён"
+    : isBlockExam
+      ? blockPassed ? "Блок сдан" : "Блок не сдан"
+      : "Тренировка завершена";
+  const blockCopy = isBlockExam ? ` · ${blockPassed ? "Порог 90% достигнут" : "Для сдачи требуется 90%"}` : "";
+  const returnAction = isBlockExam ? "openBlocks(activeLibraryId)" : "renderSubjectOverview(activeLibraryId)";
+  document.getElementById("quiz").innerHTML = `<div class="attempt-result"><section class="result-summary ${isBlockExam ? blockPassed ? "block-passed" : "block-failed" : ""}"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(currentTestName || "Тренировка")}${isBlockExam && completedBlockMeta ? ` · блок ${completedBlockMeta.index}` : ""}</p><h2>${timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : completedLabel}</h2><p>${score} правильных из ${test.length} · Ошибок: ${mistakes.length}${blockCopy} · ${formatDuration(elapsedSeconds)}</p></div><div class="result-percent">${percent}%</div></section><div class="result-actions"><button class="action" onclick="reviewLatestAttempt()">Разобрать ответы</button><button class="secondary" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">Пройти только ошибки</button><button class="secondary" onclick="retrySame()">Пройти заново</button><button class="secondary" onclick="${returnAction}">${isBlockExam ? "Вернуться к блокам" : "Вернуться к предмету"}</button></div></div>`;
+  document.getElementById("result").innerHTML = "";
+  lastResultScreen = {
+    html:document.getElementById("quiz").innerHTML,
+    status:document.getElementById("status").textContent
+  };
+  setBrowserScreen({screen:"result",subjectId:activeLibraryId || null,attemptKind:completedAttemptKind},{replace:true});
   window.lastMistakes = mistakes;
-  saveCompletedAttempt().catch(error => {
+  const activeAttemptPromise = currentAttemptPromise;
+  currentAttemptPromise = null;
+  attemptReviewData = {
+    title:currentTestName || "Тренировка",
+    mode,
+    score,
+    total:test.length,
+    durationSeconds:elapsedSeconds,
+    questions:test.map((q,index)=>({
+      questionNumber:String(q.originalNum || q.num || index + 1),
+      questionText:q.q,
+      options:q.opts,
+      selectedIndex:userAnswers[index],
+      correctIndex:q.correct,
+      explanation:questionExplanation(q),
+      isCorrect:userAnswers[index] === q.correct
+    }))
+  };
+  saveCompletedAttempt({
+    elapsedSeconds,
+    finishedEarly:timedOut || finishedEarly,
+    activeAttemptPromise
+  }).then(async attemptId => {
+    lastSavedAttemptId = attemptId || null;
+    if(history.state?.medquizScreen?.screen === "result"){
+      setBrowserScreen({screen:"result",subjectId:activeLibraryId || null,attemptKind:completedAttemptKind,attemptId:attemptId || null},{replace:true});
+    }
+    if(completedAttemptKind === "block_exam" && completedBlockMeta){
+      await saveBlockResult(completedBlockMeta,attemptId,percent,blockPassed);
+    }
+  }).catch(error => {
     console.error("Не удалось сохранить попытку", error);
   });
+}
+
+async function saveBlockResult(blockMeta,attemptId,percent,passed){
+  if(!currentUser || !currentUserHasFullAccess || !attemptId) return;
+  const {data:previous,error:lookupError} = await supabaseClient
+    .from("medquiz_block_states")
+    .select("ever_passed,best_percent")
+    .eq("subject_id",blockMeta.subjectId)
+    .eq("block_start",blockMeta.start)
+    .maybeSingle();
+  if(lookupError){
+    if(missingLearningSchema(lookupError)) return;
+    throw lookupError;
+  }
+  const {error} = await supabaseClient.from("medquiz_block_states").upsert({
+    user_id:currentUser.id,
+    subject_id:blockMeta.subjectId,
+    block_start:blockMeta.start,
+    block_end:blockMeta.end,
+    has_checks:true,
+    ever_passed:Boolean(previous?.ever_passed || passed),
+    last_check_attempt_id:attemptId,
+    last_percent:percent,
+    best_percent:Math.max(Number(previous?.best_percent) || 0,percent),
+    updated_at:new Date().toISOString()
+  });
+  if(error){
+    if(missingLearningSchema(error)) return;
+    throw error;
+  }
+}
+
+function reviewLatestAttempt(){
+  if(!attemptReviewData) return;
+  renderAttemptReview(attemptReviewData,0);
+  setBrowserScreen({screen:"review",subjectId:activeLibraryId || null,source:"latest"});
+}
+
+async function openAttempt(attemptId){
+  if(!currentUser){ openAuthModal(); return; }
+  const [{data:attempt,error:attemptError},{data:rows,error:rowsError}] = await Promise.all([
+    supabaseClient.from("medquiz_attempts").select("*").eq("id",attemptId).single(),
+    supabaseClient.from("medquiz_attempt_questions").select("*").eq("attempt_id",attemptId).order("position",{ascending:true})
+  ]);
+  if(attemptError || rowsError || !rows?.length){
+    alert("Для этой старой попытки подробный снимок вопросов недоступен.");
+    return;
+  }
+  activeLibraryId = attempt.subject_id || activeLibraryId;
+  activeSpaceId = attempt.space_id || activeSpaceId;
+  renderSpaceControls();
+  const durationSeconds = attempt.duration_seconds || 0;
+  renderAttemptReview({
+    title:attempt.test_name,
+    mode:attempt.mode,
+    score:attempt.correct_answers,
+    total:attempt.total_questions,
+    durationSeconds,
+    questions:rows.map(row=>({
+      questionNumber:row.question_number,
+      questionText:row.question_text,
+      options:row.options,
+      selectedIndex:row.selected_index,
+      correctIndex:row.correct_index,
+      explanation:row.explanation || "",
+      isCorrect:row.is_correct
+    }))
+  },0);
+  setBrowserScreen({screen:"review",subjectId:activeLibraryId || null,attemptId});
+}
+
+function renderAttemptReview(data,index){
+  attemptReviewData = data;
+  attemptReviewIndex = Math.max(0,Math.min(index,data.questions.length - 1));
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
+  document.getElementById("next").style.display = "none";
+  document.getElementById("questionNavigator").classList.add("hidden");
+  document.getElementById("quizProgress").style.display = "none";
+  const q = data.questions[attemptReviewIndex];
+  const answers = q.options.map((option,optionIndex)=>{
+    let cls = "review-answer";
+    if(optionIndex === q.correctIndex) cls += " correct";
+    if(optionIndex === q.selectedIndex && optionIndex !== q.correctIndex) cls += " wrong";
+    const marker = optionIndex === q.selectedIndex ? "Ваш ответ · " : "";
+    return `<div class="${cls}">${marker}${escapeHtml(optionLetter({letters:null},optionIndex))}) ${escapeHtml(option)}</div>`;
+  }).join("");
+  const nav = data.questions.map((item,itemIndex)=>
+    `<button type="button" class="question-number ${itemIndex === attemptReviewIndex ? "current" : item.isCorrect ? "correct" : "wrong"}" onclick="renderAttemptReview(attemptReviewData,${itemIndex})">${itemIndex + 1}</button>`
+  ).join("");
+  document.getElementById("quiz").innerHTML = `<div class="attempt-review-layout"><article class="review-question"><p class="eyebrow">${escapeHtml(data.title)} · вопрос ${attemptReviewIndex + 1} из ${data.total}</p><h3>${escapeHtml(q.questionNumber)}. ${escapeHtml(q.questionText)}</h3>${answers}${q.explanation ? `<p class="info"><b>Объяснение:</b> ${escapeHtml(q.explanation)}</p>` : ""}<div class="result-actions"><button class="secondary" onclick="renderAttemptReview(attemptReviewData,${Math.max(0,attemptReviewIndex - 1)})" ${attemptReviewIndex === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="renderAttemptReview(attemptReviewData,${Math.min(data.questions.length - 1,attemptReviewIndex + 1)})" ${attemptReviewIndex === data.questions.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">К предмету</button></div></article><aside class="review-sidebar"><div class="question-navigator">${nav}</div></aside></div>`;
+  document.getElementById("result").innerHTML = "";
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function retrySame(){
@@ -2135,6 +2839,10 @@ function retryMistakes(){
     return;
   }
 
+  mode = "training";
+  currentAttemptKind = "training";
+  currentBlockMeta = null;
+  showTrainingTimer = true;
   resetRun(window.lastMistakes);
 }
 
@@ -2569,6 +3277,24 @@ async function signIn(){
   closeAuthModal();
 }
 
+async function signInWithGoogle(){
+  const button = document.getElementById("googleAuthButton");
+  button.disabled = true;
+  setAuthMessage("Открываем вход через Google…");
+  const {error} = await supabaseClient.auth.signInWithOAuth({
+    provider:"google",
+    options:{
+      redirectTo:authRedirectUrl(),
+      queryParams:{prompt:"select_account"}
+    }
+  });
+  if(error){
+    button.disabled = false;
+    const providerDisabled = String(error.message || "").toLowerCase().includes("provider is not enabled");
+    setAuthMessage(providerDisabled ? "Вход через Google пока не включён. Попробуйте позже или войдите по email." : authErrorMessage(error), true);
+  }
+}
+
 async function handleProfileClick(){
   if(!currentUser){
     openAuthModal();
@@ -2618,6 +3344,8 @@ async function applySession(session){
   accessButton.classList.toggle("full",currentUserHasFullAccess);
   accessButton.textContent = accessLabel(currentUserProfile);
   const name = currentUser?.user_metadata?.display_name ||
+    currentUser?.user_metadata?.full_name ||
+    currentUser?.user_metadata?.name ||
     currentUser?.email?.split("@")[0] || "Гость";
   document.getElementById("profileName").textContent = name;
   document.getElementById("profileAvatar").textContent = name.charAt(0).toUpperCase();
@@ -2644,6 +3372,7 @@ async function applySession(session){
 
 function renderGuestStats(){
   const values = document.querySelectorAll(".stats .stat strong");
+  if(values.length < 4) return;
   values[0].textContent = "0";
   values[1].textContent = "—";
   values[2].textContent = "0";
@@ -2656,17 +3385,28 @@ function renderGuestStats(){
 
 async function loadDashboardStats(){
   if(!currentUser || !currentUserHasFullAccess) return;
-  const [{data:attempts},{data:stats}] = await Promise.all([
-    supabaseClient.from("medquiz_attempts").select("total_questions,correct_answers"),
-    supabaseClient.from("medquiz_question_stats").select("mistake_count,correct_streak,favorite")
+  let [attemptResult,statsResult] = await Promise.all([
+    supabaseClient.from("medquiz_attempts").select("total_questions,correct_answers").eq("space_id",activeSpaceId),
+    supabaseClient.from("medquiz_question_stats").select("*").eq("space_id",activeSpaceId)
   ]);
-  const allAttempts = attempts || [];
-  const allStats = stats || [];
+  if((attemptResult.error || statsResult.error) && activeSpaceId === "dentistry"){
+    [attemptResult,statsResult] = await Promise.all([
+      supabaseClient.from("medquiz_attempts").select("total_questions,correct_answers"),
+      supabaseClient.from("medquiz_question_stats").select("*")
+    ]);
+  }
+  const allAttempts = attemptResult.data || [];
+  const allStats = statsResult.data || [];
   const answeredTotal = allAttempts.reduce((sum,item)=>sum + item.total_questions,0);
   const correctTotal = allAttempts.reduce((sum,item)=>sum + item.correct_answers,0);
-  const errors = allStats.filter(item=>item.mistake_count > 0 && item.correct_streak < 3).length;
+  const errors = allStats.filter(item=>
+    typeof item.active_error === "boolean"
+      ? item.active_error
+      : item.mistake_count > 0 && item.correct_streak < 3
+  ).length;
   const favorites = allStats.filter(item=>item.favorite).length;
   const values = document.querySelectorAll(".stats .stat strong");
+  if(values.length < 4) return;
   values[0].textContent = answeredTotal;
   values[1].textContent = answeredTotal ? Math.round(correctTotal / answeredTotal * 100) + "%" : "—";
   values[2].textContent = allAttempts.length;
@@ -2784,7 +3524,7 @@ async function loadTestScript(item){
   return numbered;
 }
 
-async function loadBuiltInTest(id){
+async function loadBuiltInTest(id,openSetup = false){
   const item = BUILT_IN_TESTS.find(testItem=>testItem.id === id);
   if(!item) return;
   document.getElementById("status").textContent = "Открываю тест…";
@@ -2802,8 +3542,8 @@ async function loadBuiltInTest(id){
       `Выбран тест «${item.name}». Доступно вопросов: ${data.length}.`;
     renderLibrary();
     await loadFavoritesForCurrentTest();
-    showSection("home");
-    document.querySelector(".upload-card").scrollIntoView({behavior:"smooth",block:"start"});
+    if(openSetup) showTrainingSetup(item);
+    else renderSubjectOverview(item.id);
   }catch(error){
     console.error(error);
     document.getElementById("status").textContent = "Ошибка: " + error.message;
@@ -2834,13 +3574,28 @@ async function toggleFavorite(){
   const q = test[current];
   const key = questionKey(q);
   const favorite = !favoriteKeys.has(key);
-  const {data:existing} = await supabaseClient
+  let {data:existing,error:lookupError} = await supabaseClient
     .from("medquiz_question_stats")
-    .select("mistake_count,correct_streak,last_answer_correct")
+    .select("mistake_count,correct_streak,last_answer_correct,active_error,exam_correct_streak,last_exam_answer_correct,space_id,subject_id")
     .eq("test_id", currentTestId)
     .eq("question_key", key)
     .maybeSingle();
-  const {error} = await supabaseClient.from("medquiz_question_stats").upsert({
+  let v2SchemaAvailable = !lookupError;
+  if(lookupError && missingLearningSchema(lookupError)){
+    v2SchemaAvailable = false;
+    const fallback = await supabaseClient
+      .from("medquiz_question_stats")
+      .select("mistake_count,correct_streak,last_answer_correct")
+      .eq("test_id",currentTestId)
+      .eq("question_key",key)
+      .maybeSingle();
+    existing = fallback.data;
+    lookupError = fallback.error;
+  }
+  if(lookupError){ alert("Не удалось открыть избранное."); return; }
+  const learning = window.MEDQUIZ_LEARNING;
+  const scope = learning.makeAttemptScope({testId:currentTestId});
+  const payload = {
     user_id:currentUser.id,
     test_id:currentTestId,
     question_key:key,
@@ -2849,17 +3604,177 @@ async function toggleFavorite(){
     last_answer_correct:existing?.last_answer_correct ?? null,
     favorite,
     updated_at:new Date().toISOString()
-  });
+  };
+  if(v2SchemaAvailable){
+    payload.space_id = existing?.space_id || scope.spaceId;
+    payload.subject_id = existing?.subject_id || q.subjectId || scope.subjectId;
+    payload.active_error = existing?.active_error || false;
+    payload.exam_correct_streak = existing?.exam_correct_streak || 0;
+    payload.last_exam_answer_correct = existing?.last_exam_answer_correct ?? null;
+  }
+  let {error} = await supabaseClient.from("medquiz_question_stats").upsert(payload);
+  if(error && missingLearningSchema(error)){
+    const legacyPayload = {...payload};
+    delete legacyPayload.space_id;
+    delete legacyPayload.subject_id;
+    delete legacyPayload.active_error;
+    delete legacyPayload.exam_correct_streak;
+    delete legacyPayload.last_exam_answer_correct;
+    const fallback = await supabaseClient.from("medquiz_question_stats").upsert(legacyPayload);
+    error = fallback.error;
+  }
   if(error){
     alert("Не удалось сохранить избранное.");
     return;
   }
   favorite ? favoriteKeys.add(key) : favoriteKeys.delete(key);
-  showQ();
+  if(mode === "study" && studyFilter === "favorites") setStudyFilter("favorites");
+  else if(mode === "study") renderStudyQuestion();
+  else showQ();
   await loadDashboardStats();
 }
 
-async function saveCompletedAttempt(){
+function missingLearningSchema(error){
+  const message = String(error?.message || "").toLowerCase();
+  return message.includes("space_id") ||
+    message.includes("subject_id") ||
+    message.includes("attempt_kind") ||
+    message.includes("active_error") ||
+    message.includes("medquiz_attempt_questions") ||
+    message.includes("medquiz_block_states");
+}
+
+async function startActiveAttempt(){
+  if(!currentUser || !currentUserHasFullAccess || !test.length) return null;
+  const learning = window.MEDQUIZ_LEARNING;
+  if(!learning) return null;
+  const safeTestId = currentTestId || "local-test";
+  const safeTestName = currentTestName || "Локальный тест";
+  const scope = await resolveAttemptScope(learning,safeTestId,safeTestName);
+  const numericNumbers = test.map(q=>Number(q.originalNum || q.num)).filter(Number.isFinite);
+  const startedAt = new Date(testStartedAt || Date.now()).toISOString();
+  const {data:attempt,error} = await supabaseClient.from("medquiz_attempts").insert({
+    user_id:currentUser.id,
+    test_id:safeTestId,
+    test_name:safeTestName,
+    mode,
+    total_questions:test.length,
+    correct_answers:0,
+    started_at:startedAt,
+    completed_at:null,
+    space_id:scope.spaceId,
+    subject_id:scope.subjectId,
+    attempt_kind:currentAttemptKind,
+    status:"active",
+    range_start:numericNumbers.length ? Math.min(...numericNumbers) : null,
+    range_end:numericNumbers.length ? Math.max(...numericNumbers) : null,
+    duration_seconds:0,
+    finished_early:false,
+    last_activity_at:startedAt
+  }).select("id").single();
+  if(error){
+    if(missingLearningSchema(error)) return null;
+    throw error;
+  }
+  const rows = test.map((q,index)=>({
+    attempt_id:attempt.id,
+    position:index + 1,
+    user_id:currentUser.id,
+    space_id:scope.spaceId,
+    subject_id:q.subjectId || scope.subjectId,
+    question_key:questionKey(q),
+    question_number:String(q.originalNum || q.num || index + 1),
+    question_text:q.q,
+    options:q.opts,
+    selected_index:userAnswers[index],
+    correct_index:q.correct,
+    is_correct:userAnswers[index] === q.correct,
+    explanation:questionExplanation(q) || null,
+    favorite_at_completion:favoriteKeys.has(questionKey(q)),
+    answered_at:null
+  }));
+  const {error:snapshotError} = await supabaseClient.from("medquiz_attempt_questions").insert(rows);
+  if(snapshotError) throw snapshotError;
+  return attempt.id;
+}
+
+async function persistCurrentAnswer(position,selectedIndex){
+  const pendingAttempt = currentAttemptPromise;
+  if(!pendingAttempt) return;
+  const attemptId = await pendingAttempt;
+  if(!attemptId || !currentUser) return;
+  const q = test[position];
+  if(!q) return;
+  const now = new Date().toISOString();
+  const [{error:questionError},{error:attemptError}] = await Promise.all([
+    supabaseClient.from("medquiz_attempt_questions").update({
+      selected_index:selectedIndex,
+      is_correct:selectedIndex === q.correct,
+      answered_at:now
+    }).eq("attempt_id",attemptId).eq("position",position + 1),
+    supabaseClient.from("medquiz_attempts").update({
+      last_activity_at:now,
+      duration_seconds:Math.max(0,Math.round((Date.now() - testStartedAt) / 1000))
+    }).eq("id",attemptId)
+  ]);
+  if(questionError) throw questionError;
+  if(attemptError) throw attemptError;
+}
+
+async function resumeAttempt(attemptId){
+  if(!currentUser) return;
+  const [{data:attempt,error:attemptError},{data:rows,error:rowsError}] = await Promise.all([
+    supabaseClient.from("medquiz_attempts").select("*").eq("id",attemptId).eq("status","active").single(),
+    supabaseClient.from("medquiz_attempt_questions").select("*").eq("attempt_id",attemptId).order("position",{ascending:true})
+  ]);
+  if(attemptError || rowsError || !rows?.length){
+    alert("Не удалось продолжить эту попытку.");
+    return;
+  }
+  currentTestId = attempt.test_id;
+  currentTestName = attempt.test_name;
+  activeLibraryId = attempt.subject_id || "";
+  activeSpaceId = attempt.space_id || activeSpaceId;
+  renderSpaceControls();
+  mode = attempt.mode || "training";
+  currentAttemptKind = attempt.attempt_kind || (mode === "exam" ? "legacy_exam" : "training");
+  currentBlockMeta = currentAttemptKind === "block_exam" && attempt.subject_id && attempt.range_start && attempt.range_end
+    ? {subjectId:attempt.subject_id,start:attempt.range_start,end:attempt.range_end,index:Math.floor((attempt.range_start - 1) / 50) + 1}
+    : null;
+  test = rows.map(row=>({
+    num:row.question_number,
+    originalNum:row.question_number,
+    q:row.question_text,
+    opts:row.options,
+    correct:row.correct_index,
+    explanation:row.explanation || "",
+    subjectId:row.subject_id
+  }));
+  questions = [...test];
+  originalTest = [...test];
+  userAnswers = rows.map(row=>row.selected_index);
+  current = Math.max(0,userAnswers.findIndex(answer=>answer === null));
+  if(!userAnswers.includes(null)) current = 0;
+  score = 0;
+  answered = false;
+  testStartedAt = new Date(attempt.started_at).getTime();
+  const pace = parseInt(document.querySelector('input[name="examPace"]:checked')?.value || "60",10);
+  testTimeLimit = mode === "exam" ? test.length * pace : 0;
+  currentAttemptPromise = Promise.resolve(attemptId);
+  liveAttemptToken = `saved-${attemptId}`;
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  document.getElementById("next").style.display = "block";
+  document.getElementById("result").innerHTML = "";
+  document.querySelector(".app").classList.add("testing");
+  startTestTimer(true);
+  await loadFavoritesForCurrentTest();
+  showQ();
+  setBrowserScreen({screen:"attempt",subjectId:activeLibraryId || null,token:liveAttemptToken,attemptId});
+}
+
+async function saveCompletedAttemptLegacy(){
   if(!currentUser || !currentUserHasFullAccess) return;
   const safeTestId = currentTestId || "local-test";
   const safeTestName = currentTestName || "Локальный тест";
@@ -2886,7 +3801,7 @@ async function saveCompletedAttempt(){
     .eq("test_id",safeTestId)
     .in("question_key",keys);
   const oldMap = new Map((oldStats || []).map(item=>[item.question_key,item]));
-  const statRows = answerRows.map(row=>{
+  const statRows = answerRows.filter(row=>row.selected_index !== null).map(row=>{
     const previous = oldMap.get(row.question_key) || {};
     return {
       user_id:currentUser.id,
@@ -2899,9 +3814,171 @@ async function saveCompletedAttempt(){
       updated_at:new Date().toISOString()
     };
   });
+  if(statRows.length){
+    const {error:statsError} = await supabaseClient.from("medquiz_question_stats").upsert(statRows);
+    if(statsError) throw statsError;
+  }
+  await loadDashboardStats();
+  return attempt.id;
+}
+
+async function resolveAttemptScope(learning, testId, testName){
+  const scope = learning.makeAttemptScope({testId});
+  if(scope.spaceId !== "custom" || scope.subjectId) return scope;
+
+  const {data:existing,error:lookupError} = await supabaseClient
+    .from("medquiz_subjects")
+    .select("id")
+    .eq("owner_user_id",currentUser.id)
+    .eq("legacy_test_id",testId)
+    .limit(1)
+    .maybeSingle();
+  if(lookupError) throw lookupError;
+  if(existing?.id) return {...scope,subjectId:existing.id};
+
+  const subjectId = learning.customSubjectId(currentUser.id,testId);
+  const {error:insertError} = await supabaseClient
+    .from("medquiz_subjects")
+    .insert({
+      id:subjectId,
+      space_id:"custom",
+      slug:"test-" + learning.stableHash(testId),
+      name:testName,
+      question_count:questions.length,
+      owner_user_id:currentUser.id,
+      legacy_test_id:testId
+    });
+  if(insertError && !String(insertError.message || "").toLowerCase().includes("duplicate")){
+    throw insertError;
+  }
+  return {...scope,subjectId};
+}
+
+async function saveCompletedAttempt(runMeta = {}){
+  if(!currentUser || !currentUserHasFullAccess) return;
+  const learning = window.MEDQUIZ_LEARNING;
+  if(!learning) return saveCompletedAttemptLegacy();
+
+  const safeTestId = currentTestId || "local-test";
+  const safeTestName = currentTestName || "Локальный тест";
+  let scope;
+  try{
+    scope = await resolveAttemptScope(learning,safeTestId,safeTestName);
+  }catch(error){
+    if(missingLearningSchema(error)) return saveCompletedAttemptLegacy();
+    throw error;
+  }
+  const attemptKind = currentAttemptKind;
+  const completedAt = new Date().toISOString();
+  const numericNumbers = test
+    .map(q => Number(q.originalNum || q.num))
+    .filter(Number.isFinite);
+  const attemptPayload = {
+    user_id:currentUser.id,
+    test_id:safeTestId,
+    test_name:safeTestName,
+    mode,
+    total_questions:test.length,
+    correct_answers:score,
+    started_at:new Date(testStartedAt || Date.now()).toISOString(),
+    completed_at:completedAt,
+    space_id:scope.spaceId,
+    subject_id:scope.subjectId,
+    attempt_kind:attemptKind,
+    status:runMeta.finishedEarly ? "completed_early" : "completed",
+    range_start:numericNumbers.length ? Math.min(...numericNumbers) : null,
+    range_end:numericNumbers.length ? Math.max(...numericNumbers) : null,
+    duration_seconds:Math.max(0, Number(runMeta.elapsedSeconds) || 0),
+    finished_early:Boolean(runMeta.finishedEarly),
+    last_activity_at:completedAt
+  };
+  const activeAttemptId = runMeta.activeAttemptPromise
+    ? await runMeta.activeAttemptPromise
+    : null;
+  const attemptQuery = activeAttemptId
+    ? supabaseClient.from("medquiz_attempts").update(attemptPayload).eq("id",activeAttemptId)
+    : supabaseClient.from("medquiz_attempts").insert(attemptPayload);
+  const {data:attempt,error:attemptError} = await attemptQuery.select("id").single();
+  if(attemptError){
+    if(missingLearningSchema(attemptError)) return saveCompletedAttemptLegacy();
+    throw attemptError;
+  }
+
+  const answerRows = test.map((q,index)=>({
+    attempt_id:attempt.id,
+    user_id:currentUser.id,
+    test_id:safeTestId,
+    question_key:questionKey(q),
+    selected_index:userAnswers[index],
+    correct_index:q.correct,
+    is_correct:userAnswers[index] === q.correct,
+    space_id:scope.spaceId,
+    subject_id:q.subjectId || scope.subjectId
+  }));
+  const {error:answersError} = await supabaseClient.from("medquiz_answers").insert(answerRows);
+  if(answersError) throw answersError;
+
+  const snapshotRows = test.map((q,index)=>({
+    attempt_id:attempt.id,
+    position:index + 1,
+    user_id:currentUser.id,
+    space_id:scope.spaceId,
+    subject_id:q.subjectId || scope.subjectId,
+    question_key:questionKey(q),
+    question_number:String(q.originalNum || q.num || index + 1),
+    question_text:q.q,
+    options:q.opts,
+    selected_index:userAnswers[index],
+    correct_index:q.correct,
+    is_correct:userAnswers[index] === q.correct,
+    explanation:questionExplanation(q) || null,
+    favorite_at_completion:favoriteKeys.has(questionKey(q)),
+    answered_at:completedAt
+  }));
+  const {error:snapshotError} = await supabaseClient
+    .from("medquiz_attempt_questions")
+    .upsert(snapshotRows);
+  if(snapshotError) throw snapshotError;
+
+  const keys = answerRows.map(row=>row.question_key);
+  const {data:oldStats,error:oldStatsError} = await supabaseClient
+    .from("medquiz_question_stats")
+    .select("question_key,mistake_count,correct_streak,favorite,active_error,exam_correct_streak,last_exam_answer_correct")
+    .eq("test_id",safeTestId)
+    .in("question_key",keys);
+  if(oldStatsError) throw oldStatsError;
+  const oldMap = new Map((oldStats || []).map(item=>[item.question_key,item]));
+  const statRows = answerRows.map(row=>{
+    const previous = oldMap.get(row.question_key) || {};
+    const nextError = learning.nextErrorState({
+      activeError:previous.active_error,
+      examCorrectStreak:previous.exam_correct_streak
+    },{
+      attemptKind,
+      isCorrect:row.is_correct
+    });
+    return {
+      user_id:currentUser.id,
+      test_id:safeTestId,
+      question_key:row.question_key,
+      space_id:scope.spaceId,
+      subject_id:row.subject_id,
+      mistake_count:(previous.mistake_count || 0) + (row.is_correct ? 0 : 1),
+      correct_streak:previous.correct_streak || 0,
+      active_error:nextError.activeError,
+      exam_correct_streak:nextError.examCorrectStreak,
+      last_exam_answer_correct:learning.isExamKind(attemptKind)
+        ? row.is_correct
+        : previous.last_exam_answer_correct ?? null,
+      favorite:previous.favorite || favoriteKeys.has(row.question_key),
+      last_answer_correct:row.is_correct,
+      updated_at:completedAt
+    };
+  });
   const {error:statsError} = await supabaseClient.from("medquiz_question_stats").upsert(statRows);
   if(statsError) throw statsError;
   await loadDashboardStats();
+  return attempt.id;
 }
 
 function requireAccountHtml(title){
@@ -2913,17 +3990,19 @@ async function showSection(section, button){
   if(button) button.classList.add("active");
   const dashboard = document.getElementById("dashboardView");
   const view = document.getElementById("sectionView");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
   if(section === "home"){
-    dashboard.classList.remove("hidden");
-    view.classList.add("hidden");
+    await renderSpaceDashboard();
     return;
   }
+  setBrowserScreen({screen:"section",section,subjectId:activeLibraryId || null});
   dashboard.classList.add("hidden");
   view.classList.remove("hidden");
   view.innerHTML = "<p>Загрузка…</p>";
   if(section === "tests"){
-    const items = BUILT_IN_TESTS.map(item=>`<div class="section-item"><div><strong>${escapeHtml(item.name)}</strong><p>${item.count} готовых вопросов</p></div><button class="secondary" onclick="loadBuiltInTest('${item.id}')">Выбрать</button></div>`).join("");
-    view.innerHTML = `<h2>Мои тесты</h2><p>Отдельные предметы, объединённые экзаменационные блоки и загруженный вами материал.</p><div class="section-list">${items}</div>`;
+    const items = activeSpaceId === "dentistry" ? SUBJECT_TESTS.map(item=>`<div class="section-item"><div><strong>${escapeHtml(item.name)}</strong><p>${item.count} вопросов</p></div><button class="secondary" onclick="openSubject('${item.id}')">Открыть</button></div>`).join("") : "";
+    const space = window.MEDQUIZ_LEARNING.SPACES.find(item=>item.id === activeSpaceId);
+    view.innerHTML = `<h2>Предметы · ${escapeHtml(space.nameRu)}</h2><p>Каждый предмет открывается как отдельное учебное пространство.</p><div class="section-list">${items || `<div class="empty-state">Предметов пока нет.</div>`}</div>`;
     return;
   }
   if(section === "admin"){
@@ -2945,18 +4024,26 @@ async function showSection(section, button){
     return;
   }
   if(section === "history") await renderHistory(view);
-  if(section === "errors") await renderQuestionStats(view,false);
-  if(section === "favorites") await renderQuestionStats(view,true);
+  const initialSubjectFilter = button ? "all" : activeLibraryId || "all";
+  if(section === "errors") await renderQuestionStats(view,false,initialSubjectFilter);
+  if(section === "favorites") await renderQuestionStats(view,true,initialSubjectFilter);
   if(section === "notifications") await renderNotifications(view);
 }
 
 async function renderHistory(view){
-  const {data,error} = await supabaseClient.from("medquiz_attempts").select("*").order("completed_at",{ascending:false}).limit(100);
+  let {data,error} = await supabaseClient.from("medquiz_attempts").select("*").eq("space_id",activeSpaceId).not("completed_at","is",null).order("completed_at",{ascending:false}).limit(100);
+  if(error && activeSpaceId === "dentistry" && missingLearningSchema(error)){
+    const fallback = await supabaseClient.from("medquiz_attempts").select("*").order("completed_at",{ascending:false}).limit(100);
+    data = fallback.data;
+    error = fallback.error;
+  }
   if(error){ view.innerHTML = `<p class="danger-text">${escapeHtml(error.message)}</p>`; return; }
   const items = (data || []).map(item=>{
     const percent = Math.round(item.correct_answers / item.total_questions * 100);
     const date = new Date(item.completed_at || item.started_at).toLocaleString("ru-RU");
-    return `<div class="section-item"><div><strong>${escapeHtml(item.test_name)}</strong><p>${date}</p></div><b>${item.correct_answers}/${item.total_questions} · ${percent}%</b></div>`;
+    const kind = item.attempt_kind === "general_exam" ? "Общий экзамен" : item.attempt_kind === "block_exam" ? "Проверка блока" : "Тренировка";
+    const range = item.range_start && item.range_end ? ` · вопросы ${item.range_start}–${item.range_end}` : "";
+    return `<button type="button" class="section-item question-practice-card" onclick="openAttempt('${item.id}')"><div><strong>${escapeHtml(item.test_name)}</strong><p>${kind}${range} · ${date}</p></div><b>${item.correct_answers}/${item.total_questions} · ${percent}%</b></button>`;
   }).join("");
   view.innerHTML = `<h2>История</h2><p>Все завершённые попытки вашего аккаунта.</p><div class="section-list">${items || `<div class="empty-state">История пока пуста.</div>`}</div>`;
 }
@@ -3310,23 +4397,105 @@ async function renderAdminAudit(workspace){
   list.innerHTML = rows || `<div class="empty-state">Действий пока нет.</div>`;
 }
 
-async function renderQuestionStats(view,favoritesOnly){
+function questionStatSubjectId(item){
+  if(item.subject_id) return item.subject_id;
+  return window.MEDQUIZ_LEARNING.classifyLegacyTest(item.test_id).subjectId;
+}
+
+function correctionProgressHtml(streak){
+  const safeStreak = Math.max(0,Math.min(3,Number(streak) || 0));
+  const dots = [1,2,3].map(step=>`<i class="${step <= safeStreak ? "done" : ""}"></i>`).join("");
+  return `<span class="correction-progress" aria-label="Экзаменационная серия ${safeStreak} из 3">${dots}<b>${safeStreak}/3</b></span>`;
+}
+
+async function openSubjectQuestionStats(subjectId,favoritesOnly){
+  const subject = SUBJECT_TESTS.find(item=>item.id === subjectId);
+  if(!subject) return renderSpaceDashboard();
+  activeLibraryId = subjectId;
+  setBrowserScreen({screen:"subject-section",subjectId,section:favoritesOnly ? "favorites" : "errors"});
+  clearInterval(timerInterval);
+  timerInterval = null;
+  document.querySelector(".app").classList.remove("testing");
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  const view = document.getElementById("sectionView");
+  view.classList.remove("hidden");
+  if(!currentUser){
+    view.innerHTML = requireAccountHtml(`${favoritesOnly ? "Избранное" : "Ошибки"} · ${escapeHtml(subject.name)}`);
+    return;
+  }
+  if(!currentUserHasFullAccess){
+    view.innerHTML = lockedFeatureHtml(`${favoritesOnly ? "Избранные вопросы" : "История ошибок"} · ${escapeHtml(subject.name)}`);
+    return;
+  }
+  try{
+    await ensureSubjectLoaded(subjectId);
+  }catch(error){
+    console.error(error);
+  }
+  await renderQuestionStats(view,favoritesOnly,subjectId,true);
+}
+
+async function renderQuestionStats(view,favoritesOnly,subjectFilter = "all",subjectLocked = false){
   let query = supabaseClient.from("medquiz_question_stats").select("*").order("updated_at",{ascending:false});
+  query = query.eq("space_id",activeSpaceId);
+  if(subjectLocked) query = query.eq("subject_id",subjectFilter);
   if(favoritesOnly) query = query.eq("favorite",true);
-  else query = query.gt("mistake_count",0).lt("correct_streak",3);
-  const {data,error} = await query;
+  else query = query.eq("active_error",true);
+  let {data,error} = await query;
+  if(error && activeSpaceId === "dentistry" && missingLearningSchema(error)){
+    let fallbackQuery = supabaseClient.from("medquiz_question_stats").select("*");
+    fallbackQuery = favoritesOnly
+      ? fallbackQuery.eq("favorite",true)
+      : fallbackQuery.gt("mistake_count",0).lt("correct_streak",3);
+    const fallback = await fallbackQuery.order("updated_at",{ascending:false});
+    data = fallback.data;
+    error = fallback.error;
+  }
   if(error){ view.innerHTML = `<p class="danger-text">${escapeHtml(error.message)}</p>`; return; }
-  const items = (data || []).map(item=>{
+  const allRows = (data || []).map(item=>({...item,_subjectId:questionStatSubjectId(item)}));
+  const rows = subjectFilter === "all"
+    ? allRows
+    : allRows.filter(item=>item._subjectId === subjectFilter);
+  const filterSubjects = SUBJECT_TESTS.filter(subject=>
+    allRows.some(item=>item._subjectId === subject.id)
+  );
+  const filters = [
+    `<button class="subject-tab ${subjectFilter === "all" ? "active" : ""}" onclick="renderQuestionStats(document.getElementById('sectionView'),${favoritesOnly},'all')">Все</button>`,
+    ...filterSubjects.map(subject=>{
+      const count = allRows.filter(item=>item._subjectId === subject.id).length;
+      return `<button class="subject-tab ${subjectFilter === subject.id ? "active" : ""}" onclick="renderQuestionStats(document.getElementById('sectionView'),${favoritesOnly},'${subject.id}')">${escapeHtml(subject.name)} · ${count}</button>`;
+    })
+  ].join("");
+  const items = rows.map(item=>{
     const q = questions.find(question=>questionKey(question) === item.question_key && currentTestId === item.test_id);
     const label = q ? `${q.num}. ${q.q}` : item.question_key.replace(/^.*?_/,"");
-    const progress = !favoritesOnly
-      ? ` · Верных подряд: ${Math.min(item.correct_streak || 0, 3)}/3`
-      : "";
-    return `<button type="button" class="section-item question-practice-card" data-test-id="${escapeHtml(item.test_id)}" data-question-key="${escapeHtml(item.question_key)}" onclick="startSingleSavedQuestion(this.dataset.testId,this.dataset.questionKey)"><div><strong>${escapeHtml(label)}</strong><p>Ошибок: ${item.mistake_count}${progress}${item.favorite ? " · ★ В избранном" : ""}</p></div><span class="practice-arrow">Тренироваться →</span></button>`;
+    const subject = SUBJECT_TESTS.find(subjectItem=>subjectItem.id === item._subjectId);
+    const activeError = typeof item.active_error === "boolean"
+      ? item.active_error
+      : item.mistake_count > 0 && item.correct_streak < 3;
+    const progress = activeError ? correctionProgressHtml(item.exam_correct_streak) : "";
+    return `<button type="button" class="section-item question-practice-card" data-test-id="${escapeHtml(item.test_id)}" data-question-key="${escapeHtml(item.question_key)}" onclick="startSingleSavedQuestion(this.dataset.testId,this.dataset.questionKey)"><div class="question-stat-copy"><strong>${escapeHtml(label)}</strong><p class="question-stat-meta">${subject ? `<span class="subject-label">${escapeHtml(subject.name)}</span>` : ""}<span>Ошибок: ${item.mistake_count || 0}</span>${progress}${item.favorite ? "<span>★ В избранном</span>" : ""}</p></div><span class="practice-arrow">Тренироваться →</span></button>`;
   }).join("");
   const title = favoritesOnly ? "Избранное" : "Мои ошибки";
-  const action = !favoritesOnly && data?.length && questions.length ? `<button class="action" onclick="startSavedErrors()">Пройти только ошибки текущего теста</button>` : "";
-  view.innerHTML = `<h2>${title}</h2><p>${favoritesOnly ? "Нажмите на вопрос, чтобы потренироваться по нему отдельно." : "Вопрос остаётся здесь, пока вы не ответите правильно три раза подряд. Нажмите на карточку, чтобы потренироваться только по этому вопросу."}</p>${action}<div class="section-list">${items || `<div class="empty-state">Здесь пока ничего нет.</div>`}</div>`;
+  const selectedSubject = SUBJECT_TESTS.find(subject=>subject.id === subjectFilter);
+  const action = rows.length && selectedSubject
+    ? `<div class="batch-practice"><p>${favoritesOnly ? "Тренировка по избранным вопросам" : "Обычная тренировка не увеличивает серию 3/3, но помогает подготовиться."}</p><button class="action" onclick="startSavedQuestionSet(${favoritesOnly},'${selectedSubject.id}')">${favoritesOnly ? "Пройти избранное" : "Тренироваться по ошибкам"} · ${rows.length}</button></div>`
+    : rows.length
+      ? `<div class="batch-practice"><p>Выберите один предмет, чтобы запустить тренировку по всему списку.</p></div>`
+      : "";
+  const heading = subjectLocked && selectedSubject ? `${title} · ${escapeHtml(selectedSubject.name)}` : title;
+  const backAction = subjectLocked && selectedSubject
+    ? `renderSubjectOverview('${selectedSubject.id}')`
+    : "renderSpaceDashboard()";
+  const backLabel = subjectLocked ? "К предмету" : "На главную";
+  const toolbar = subjectLocked
+    ? `<div class="question-stats-toolbar"><span class="question-stats-summary">Только этот предмет · показано: ${rows.length}</span></div>`
+    : `<div class="question-stats-toolbar"><div class="question-stats-filters">${filters}</div><span class="question-stats-summary">Показано: ${rows.length}</span></div>`;
+  const subjectTabs = subjectLocked && selectedSubject
+    ? `<div class="subject-tabs"><button class="subject-tab" onclick="renderSubjectOverview('${selectedSubject.id}')">Обзор</button><button class="subject-tab ${favoritesOnly ? "" : "active"}" onclick="openSubjectQuestionStats('${selectedSubject.id}',false)">Ошибки</button><button class="subject-tab ${favoritesOnly ? "active" : ""}" onclick="openSubjectQuestionStats('${selectedSubject.id}',true)">Избранное</button></div>`
+    : "";
+  view.innerHTML = `${subjectTabs}<div class="section-title-row"><div><h2>${heading}</h2><p>${favoritesOnly ? "Избранное хранится отдельно от статуса ошибки." : "Ошибка закрывается только после трёх правильных экзаменационных ответов подряд."}</p></div><button class="secondary" onclick="${backAction}">${backLabel}</button></div>${toolbar}${action}<div class="section-list">${items || `<div class="empty-state">${favoritesOnly ? "В этом предмете пока нет избранных вопросов." : "В этом предмете ошибок нет."}</div>`}</div>`;
 }
 
 async function startSingleSavedQuestion(testId, key){
@@ -3360,20 +4529,60 @@ async function startSingleSavedQuestion(testId, key){
   }
 
   mode = "training";
+  currentAttemptKind = "training";
+  currentBlockMeta = null;
   showTrainingTimer = true;
   originalTest = [selectedQuestion];
   document.getElementById("sectionView").classList.add("hidden");
   resetRun([selectedQuestion]);
 }
 
-async function startSavedErrors(){
-  if(!currentUser || !questions.length) return;
-  const {data} = await supabaseClient.from("medquiz_question_stats").select("question_key").eq("test_id",currentTestId).gt("mistake_count",0).lt("correct_streak",3);
+async function startSavedQuestionSet(favoritesOnly,subjectId){
+  if(!currentUser || !subjectId) return;
+  try{
+    await ensureSubjectLoaded(subjectId);
+    await loadFavoritesForCurrentTest();
+  }catch(error){
+    console.error(error);
+    alert("Не удалось загрузить выбранный предмет.");
+    return;
+  }
+  let query = supabaseClient
+    .from("medquiz_question_stats")
+    .select("question_key")
+    .eq("test_id",currentTestId);
+  query = favoritesOnly ? query.eq("favorite",true) : query.eq("active_error",true);
+  let {data,error} = await query;
+  if(error && missingLearningSchema(error)){
+    let fallbackQuery = supabaseClient
+      .from("medquiz_question_stats")
+      .select("question_key")
+      .eq("test_id",currentTestId);
+    fallbackQuery = favoritesOnly
+      ? fallbackQuery.eq("favorite",true)
+      : fallbackQuery.gt("mistake_count",0).lt("correct_streak",3);
+    const fallback = await fallbackQuery;
+    data = fallback.data;
+    error = fallback.error;
+  }
+  if(error){ alert(favoritesOnly ? "Не удалось загрузить избранное." : "Не удалось загрузить ошибки."); return; }
   const keys = new Set((data || []).map(item=>item.question_key));
   const selected = questions.filter(q=>keys.has(questionKey(q)));
-  if(!selected.length){ alert("Ошибок для этого теста нет."); return; }
+  if(!selected.length){ alert(favoritesOnly ? "Избранных вопросов в этом предмете нет." : "Ошибок в этом предмете нет."); return; }
   document.getElementById("sectionView").classList.add("hidden");
+  mode = "training";
+  currentAttemptKind = "training";
+  currentBlockMeta = null;
+  showTrainingTimer = true;
   resetRun(selected);
+}
+
+async function startSavedErrors(){
+  if(!activeLibraryId){
+    alert("Сначала выберите предмет.");
+    return;
+  }
+  await startSavedQuestionSet(false,activeLibraryId);
 }
 
 supabaseClient.auth.getSession().then(({data})=>applySession(data.session));
@@ -3381,7 +4590,11 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{
   if(event === "PASSWORD_RECOVERY") setTimeout(openPasswordModal,0);
   setTimeout(()=>applySession(session),0);
 });
-renderLibrary();
+renderSpaceControls();
+initializeBrowserNavigation().catch(error=>{
+  console.error("Не удалось открыть начальный экран",error);
+  renderSpaceDashboard();
+});
 </script>
 
 </body>
