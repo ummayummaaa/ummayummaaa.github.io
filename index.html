@@ -57,136 +57,35 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 @media(max-width:700px){.topbar{align-items:flex-start}.space-select{width:100%;margin-top:8px}.activity-card,.subject-banner,.blocks-entry-card,.result-summary{grid-template-columns:1fr}.blocks-entry-card .action{width:100%;min-width:0}.activity-score{text-align:left}.summary-grid{grid-template-columns:repeat(2,1fr)}.subject-grid,.blocks-grid{grid-template-columns:1fr}.section-title-row,.setup-heading,.question-stats-toolbar,.batch-practice{align-items:stretch;flex-direction:column}.question-stats-summary{white-space:normal}.block-actions{flex-direction:column}.activity-card h2{font-size:23px}}
 </style>
 <style id="fresh-garden-theme">
-/* Fresh Garden: a calm, simple learning interface shared by every section. */
-:root{
-  --navy:#29342d;
-  --muted:#667268;
-  --line:#dde4dc;
-  --brand:#477a50;
-  --brand-dark:#396841;
-  --mint:#eaf2e7;
-  --bg:#f6f8f5;
-  --surface:#fff;
-  --danger:#b95762;
-  --warning:#b98a36;
-  --shadow:0 5px 18px rgba(41,52,45,.055);
-}
-body{font-size:17px;background:var(--bg)}
-.app{grid-template-columns:240px minmax(0,1fr)}
+/* Fresh Garden: a simple, spacious learning workspace with room to grow. */
+:root{--navy:#29342d;--muted:#667268;--line:#dce4da;--brand:#477a50;--brand-dark:#376440;--mint:#eaf2e7;--bg:#f6f8f5;--surface:#fff;--danger:#b95762;--warning:#b98a36;--shadow:none}
+body{font-size:18px;background:var(--bg)}
+.app{grid-template-columns:250px minmax(0,1fr)}
 .sidebar{display:flex;flex-direction:column;padding:32px 18px;border-color:var(--line);background:#fff;backdrop-filter:none}
-.logo{margin:0 12px 43px;font-size:25px;letter-spacing:-.025em}
-.logo-mark{width:41px;height:41px;border-radius:9px;background:var(--brand);box-shadow:none}
-.sidebar nav{display:flex;flex:1;flex-direction:column;padding-bottom:94px}
-.nav-button{gap:13px;margin:2px 0;padding:11px 14px;border-radius:7px;color:#626f65;font-size:17px}
-.nav-button:hover{color:var(--brand-dark);background:#f4f7f2}
-.nav-button.active{color:var(--brand-dark);background:var(--mint)}
-#adminNav:not(.hidden){margin-top:auto;border-top:1px solid var(--line);border-radius:0;padding-top:15px}
-.profile-chip{left:18px;right:18px;bottom:22px;padding:15px 12px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:#fff}
-.avatar{background:var(--brand)}
-.nav-badge{color:#5f6961;background:#edf0ec}
-.main{max-width:1240px;padding:38px 44px 80px}
-.eyebrow{color:var(--brand);font-size:13px}
-.topbar h1{color:var(--navy)}
-.ghost-button,.action,.secondary{border-radius:7px}
-.action{background:var(--brand);box-shadow:none}
-.action:hover{background:var(--brand-dark)}
-.ghost-button,.secondary{border-color:var(--line);color:var(--navy)}
-.ghost-button:hover,.secondary:hover{border-color:#b8c8b5;background:#f8faf7}
-.panel,.card{border-color:var(--line);border-radius:10px;background:#fff;box-shadow:none}
-.hero-main{color:var(--navy);background:#edf4e9}
-.hero-main:after{display:none}
-.hero-main p{color:var(--muted)}
-.hero-main .action{color:#fff;background:var(--brand)}
-.activity-card{border:1px solid #d8e5d1;border-radius:10px;color:var(--navy);background:#edf4e9}
-.activity-card p{color:var(--muted)}
-.activity-card .eyebrow{color:var(--brand)!important}
-.activity-actions .action{color:#fff;background:var(--brand)}
-.activity-actions .action:hover{background:var(--brand-dark)}
-.activity-score .secondary{background:#fff}
-.error-count{color:#69736b}
-.summary-grid{gap:15px}
-.summary-item,.stat{padding:20px;border-radius:9px}
-.summary-item strong,.stat strong{font-size:28px}
-.summary-item span,.stat span{font-size:15px}
-.subject-grid{gap:16px}
-.subject-card{border-radius:10px;box-shadow:none}
-.subject-card h3{font-size:22px}
-.subject-card p{font-size:16px}
-.subject-meta span{border-radius:7px;color:#637066;background:#f1f4f0;font-size:14px}
-.subject-banner{border:1px solid #d8e5d1;border-radius:10px;background:#f2f6ef}
-.blocks-entry-card{border-color:#d2e0cc;border-radius:10px;background:#edf4e9}
-.mode-card{border-radius:10px}
-.mode-card.primary{border-color:#d3dfcf;color:var(--navy);background:#f1f6ee}
-.mode-card.primary .action{color:#fff;background:var(--brand)}
-.subject-tab{border-radius:7px}
-.subject-tab.active{border-color:#afc7aa;color:var(--brand-dark);background:var(--mint)}
-.space-switcher{border-radius:9px;background:#f3f6f2}
-.space-choice{border-radius:6px}
-.space-choice.active{background:var(--brand);box-shadow:none}
-.space-select{border-radius:7px}
-.section-panel,.admin-workspace{border-radius:10px}
-.section-item,.question-practice-card,.block-card,.admin-user,.admin-version{border-radius:9px}
-.question-practice-card:hover{border-color:var(--brand);background:#f7faf5;box-shadow:none;transform:none}
-.batch-practice,.admin-stage-note,.auth-note,.admin-access-form{background:#f2f6f0}
-.admin-identity,.admin-report-meta span{color:#657066;background:#f1f4f0}
-.admin-test-upload,.report-question-preview{background:#f3f6f2}
-.admin-report-card{border-color:var(--line);border-radius:9px}
-.admin-subtab.active{border-color:#afc7aa;background:var(--mint)}
-.status-pill{color:var(--brand-dark);background:#e8f3e7}
-.audit-item{border-left-color:var(--brand);background:#f4f7f2}
-.admin-tabs{border-radius:10px;background:#f2f5f1}
-.admin-tab{border-radius:6px}
-.admin-tab.active{background:var(--brand);box-shadow:none}
-.access-button{border-color:#a9c2a5;border-radius:7px;color:var(--brand-dark);background:var(--mint)}
-.access-button.full{border-color:var(--brand);background:var(--brand)}
-.trial-banner,.locked-panel{background:#f0f5ed}
-.dropzone,.subject-picker{border-color:#cfddca;border-radius:10px;background:#fafcf9;box-shadow:none}
-.subject-picker-icon{border-radius:8px;background:var(--brand);box-shadow:none}
-.subject-trigger{border-color:#c6d5c2;border-radius:7px}
-.subject-trigger:hover,.subject-trigger[aria-expanded="true"]{border-color:var(--brand);box-shadow:0 0 0 3px rgba(71,122,80,.1)}
-.subject-menu{border-color:var(--line);border-radius:9px;box-shadow:0 14px 35px rgba(41,52,45,.13)}
-.subject-option{border-radius:6px}
-.progress span{background:var(--brand)}
-.choice-row label{border-radius:7px;color:#536057;background:#fafbf9}
-.choice-row label:hover{border-color:#b0c4ab;background:#f4f7f2}
-.choice-row label:has(input[type=radio]:checked){border-color:var(--brand);background:var(--brand);box-shadow:none}
-.timer-settings{background:#f2f6f0}
-.selected{border-color:var(--brand)!important;background:#edf4e9!important}
-.empty-state,.empty-learning{border-color:#b9cab4;border-radius:10px;background:#fafcf9}
-.auth-card,.upgrade-card{border-radius:12px}
-.auth-card input,.google-auth-button{border-radius:7px}
-.question-navigator{border-radius:9px;background:#f7f9f6}
-.question-number{border-color:#cdd8cb;border-radius:6px;color:#5d695f}
-.question-number.current{border-color:var(--brand);background:var(--brand)}
-.question-number.answered{border-color:#9cb99d;color:var(--brand-dark);background:#edf5eb}
-.result-summary{border-radius:10px;background:var(--brand-dark)}
-.review-question{border-radius:10px}
-.review-answer{background:#f3f6f2}
-.app.testing{background:var(--bg)}
-.app.testing .quiz-shell{border-color:var(--line);border-radius:12px;box-shadow:none}
-.app.testing #quizProgress{border-color:var(--line);color:var(--muted)}
-.app.testing #quiz button{border-color:#d5ddd4;border-radius:9px;background:#fafbf9}
-.app.testing #quiz button:hover{border-color:#a9bda6;background:#f5f8f3}
-.app.testing #quiz button.selected{border-color:var(--brand)!important;background:#edf4e9!important}
-.app.testing #next{border-radius:9px;background:var(--navy)}
-.site-footer{border-color:var(--line)}
-.site-footer a:hover,.site-footer button:hover{color:var(--brand-dark)}
-@media(max-width:850px){
-  body{font-size:16px}
-  .main{padding:24px 18px 92px}
-  .mobile-nav{border-color:var(--line);border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 8px 26px rgba(41,52,45,.12)}
-  .mobile-nav .active{color:var(--brand)}
-}
-@media(max-width:700px){
-  .summary-item strong,.stat strong{font-size:26px}
-  .subject-card h3{font-size:21px}
-}
+.logo{margin:0 12px 42px;font-size:27px;letter-spacing:-.035em}.logo-mark{width:43px;height:43px;border-radius:9px;background:var(--brand);box-shadow:none}
+.sidebar nav{display:flex;flex:1;flex-direction:column;padding-bottom:100px}.nav-button{gap:13px;margin:2px 0;padding:13px 14px;border-radius:8px;color:#626f65;font-size:18px}.nav-button:hover{color:var(--brand-dark);background:#f4f7f2}.nav-button.active{color:var(--brand-dark);background:var(--mint)}.nav-icon{font-size:21px}
+#adminNav:not(.hidden){margin-top:auto;border-top:1px solid var(--line);border-radius:0;padding-top:17px}.profile-chip{left:18px;right:18px;bottom:22px;padding:17px 12px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:#fff}.profile-chip strong{font-size:18px}.avatar{background:var(--brand)}.nav-badge{color:#5f6961;background:#edf0ec}
+.main{max-width:1380px;padding:40px 48px 82px}.topbar{margin-bottom:38px}.eyebrow{color:var(--brand);font-size:14px}.topbar h1{color:var(--navy);font-size:clamp(32px,3vw,42px)}
+.ghost-button,.action,.secondary{min-height:48px;padding:12px 19px;border-radius:7px;font-size:17px}.action{background:var(--brand);box-shadow:none}.action:hover{background:var(--brand-dark)}.ghost-button,.secondary{border-color:var(--line);color:var(--navy)}.ghost-button:hover,.secondary:hover{border-color:#adc1aa;background:#f8faf7}.action:focus-visible,.secondary:focus-visible,.ghost-button:focus-visible,.subject-row:focus-visible,.mobile-garden-link:focus-visible{outline:3px solid rgba(185,138,54,.38);outline-offset:3px}
+.panel,.card{border-color:var(--line);border-radius:10px;background:#fff;box-shadow:none}.section-panel{padding:30px}.info{font-size:16px}.section-title-row h2{font-size:25px}.section-title-row p{font-size:17px}
+.learning-home{gap:0}.home-intro{margin-bottom:25px}.home-intro h2{margin:0 0 7px;font-size:32px;letter-spacing:-.035em}.home-intro p{margin:0;color:var(--muted);font-size:18px}.home-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:25px;align-items:start}
+.activity-card{display:block;margin-bottom:27px;padding:27px 29px;border:1px solid #d5e2d0;border-radius:10px;color:var(--navy);background:#edf4e9}.activity-card h2{margin:5px 0 8px;font-size:27px;letter-spacing:-.025em}.activity-card p{margin:4px 0;color:var(--muted);font-size:18px}.activity-card .eyebrow{color:var(--brand)!important}.activity-actions{align-items:center;margin-top:21px}.activity-actions .action{color:#fff;background:var(--brand)}.activity-actions .action:hover{background:var(--brand-dark)}
+.home-section-title{margin:0 0 14px;font-size:23px}.subject-list{overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#fff}.subject-row{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;padding:21px 23px;border:0;border-bottom:1px solid #e7ece5;color:var(--navy);background:#fff;text-align:left}.subject-row:last-child{border-bottom:0}.subject-row:hover{background:#f9fbf8}.subject-row-copy{min-width:0}.subject-row-title{display:block;margin:0 0 4px;font-size:22px;font-weight:750}.subject-row-description{display:block;color:var(--muted);font-size:16px}.subject-row-side{display:flex;align-items:center;gap:14px}.subject-meta{display:flex;gap:8px}.subject-meta span{padding:7px 9px;border-radius:6px;color:#637066;background:#f1f4f0;font-size:14px;white-space:nowrap}.subject-arrow{color:var(--brand);font-size:23px}
+.garden-card{overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#fff}.garden-heading{display:flex;align-items:center;justify-content:space-between;padding:23px 23px 17px}.garden-heading h2{margin:0;font-size:23px}.garden-soon{padding:4px 9px;border-radius:5px;color:#876421;background:#faf2df;font-size:13px;font-weight:700}.garden-space{display:grid;place-items:center;min-height:255px;margin:0 22px;padding:24px;border:1px dashed #bfd0b8;border-radius:8px;background:#f1f5ed;text-align:center}.garden-symbol{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 14px;border-radius:50%;color:var(--brand);background:#e3eddf;font-size:29px}.garden-space strong{display:block;font-size:20px}.garden-space p{max-width:220px;margin:8px auto 0;color:#74806f;font-size:16px;line-height:1.55}.garden-note{margin:0;padding:18px 22px 22px;color:var(--muted);font-size:15px}.mobile-garden-link{display:none}
+.home-statistics{margin-top:30px}.home-statistics .home-section-title{margin-bottom:14px}.summary-grid{gap:15px}.summary-item,.stat{padding:21px 22px;border-radius:9px}.summary-item strong,.stat strong{font-size:30px}.summary-item span,.stat span{font-size:16px}.home-error-link{margin-top:14px;color:var(--muted);font-size:16px}.home-error-link button{padding:0;border:0;color:var(--brand-dark);background:none;font:inherit;font-weight:700;text-decoration:underline}.error-count{color:var(--navy)}
+.subject-overview{gap:25px}.subject-tabs{gap:8px}.subject-tab{padding:10px 18px;border-radius:7px;font-size:17px}.subject-tab.active{border-color:#afc7aa;color:var(--brand-dark);background:var(--mint)}.subject-banner{padding:5px 0 1px;border:0;border-radius:0;background:transparent}.subject-banner h2{margin:5px 0 8px;font-size:34px}.subject-banner .info{font-size:18px}.blocks-entry-card{padding:25px 27px;border-color:#d2e0cc;border-radius:10px;background:#edf4e9}.blocks-entry-card h3{font-size:24px}.blocks-entry-card p{font-size:17px}.subject-section-title{margin:2px 0 -10px;font-size:22px}.subject-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.mode-card{display:flex;flex-direction:column;min-height:225px;padding:23px;border-radius:10px}.mode-card.primary{border-color:var(--line);color:var(--navy);background:#fff}.mode-card h3{font-size:23px}.mode-card p{flex:1;font-size:18px;line-height:1.55}.mode-card .action{color:#fff;background:var(--brand)}.mode-icon{display:inline-grid;place-items:center;width:35px;height:35px;margin-bottom:13px;border-radius:7px;color:var(--brand);background:var(--mint);font-size:19px}.mode-card.study .mode-icon{color:#8a6827;background:#faf2df}.subject-summary{margin-top:-4px}.subject-summary .summary-item{background:#fff}
+.space-switcher{border-radius:9px;background:#f3f6f2}.space-choice{border-radius:6px;font-size:14px}.space-choice.active{background:var(--brand);box-shadow:none}.space-select{border-radius:7px}.section-panel,.admin-workspace{border-radius:10px}.section-item,.question-practice-card,.block-card,.admin-user,.admin-version{border-radius:9px}.question-practice-card:hover{border-color:var(--brand);background:#f7faf5;box-shadow:none;transform:none}.batch-practice,.admin-stage-note,.auth-note,.admin-access-form{background:#f2f6f0}.admin-identity,.admin-report-meta span{color:#657066;background:#f1f4f0}.admin-test-upload,.report-question-preview{background:#f3f6f2}.admin-report-card{border-color:var(--line);border-radius:9px}.admin-subtab.active{border-color:#afc7aa;background:var(--mint)}.status-pill{color:var(--brand-dark);background:#e8f3e7}.audit-item{border-left-color:var(--brand);background:#f4f7f2}.admin-tabs{border-radius:10px;background:#f2f5f1}.admin-tab{border-radius:6px;font-size:15px}.admin-tab.active{background:var(--brand);box-shadow:none}.access-button{border-color:#a9c2a5;border-radius:7px;color:var(--brand-dark);background:var(--mint)}.access-button.full{border-color:var(--brand);background:var(--brand)}.trial-banner,.locked-panel{background:#f0f5ed}.dropzone,.subject-picker{border-color:#cfddca;border-radius:10px;background:#fafcf9;box-shadow:none}.subject-picker-icon{border-radius:8px;background:var(--brand);box-shadow:none}.subject-trigger{border-color:#c6d5c2;border-radius:7px}.subject-trigger:hover,.subject-trigger[aria-expanded="true"]{border-color:var(--brand);box-shadow:0 0 0 3px rgba(71,122,80,.1)}.subject-menu{border-color:var(--line);border-radius:9px;box-shadow:0 14px 35px rgba(41,52,45,.13)}.subject-option{border-radius:6px}.progress span{background:var(--brand)}.choice-row label{border-radius:7px;color:#536057;background:#fafbf9}.choice-row label:hover{border-color:#b0c4ab;background:#f4f7f2}.choice-row label:has(input[type=radio]:checked){border-color:var(--brand);background:var(--brand);box-shadow:none}.timer-settings{background:#f2f6f0}.selected{border-color:var(--brand)!important;background:#edf4e9!important}.empty-state,.empty-learning{border-color:#b9cab4;border-radius:10px;background:#fafcf9}.auth-card,.upgrade-card{border-radius:12px}.auth-card input,.google-auth-button{border-radius:7px}.question-navigator{border-radius:9px;background:#f7f9f6}.question-number{border-color:#cdd8cb;border-radius:6px;color:#5d695f}.question-number.current{border-color:var(--brand);background:var(--brand)}.question-number.answered{border-color:#9cb99d;color:var(--brand-dark);background:#edf5eb}.result-summary{border-radius:10px;background:var(--brand-dark)}.review-question{border-radius:10px}.review-answer{background:#f3f6f2}
+.app.testing{background:var(--bg)}.app.testing .quiz-shell{border-color:var(--line);border-radius:12px;box-shadow:none}.app.testing #quizProgress{border-color:var(--line);color:var(--muted)}.app.testing #quiz h3{font-size:clamp(23px,2vw,29px)}.app.testing #quiz button{min-height:54px;border-color:#d5ddd4;border-radius:9px;background:#fafbf9;font-size:clamp(17px,1.2vw,19px)}.app.testing #quiz button:hover{border-color:#a9bda6;background:#f5f8f3}.app.testing #quiz button.selected{border-color:var(--brand)!important;background:#edf4e9!important}.app.testing #next{border-radius:9px;background:var(--navy)}.site-footer{border-color:var(--line);font-size:14px}.site-footer a:hover,.site-footer button:hover{color:var(--brand-dark)}
+@media(max-width:1150px){.home-layout{grid-template-columns:minmax(0,1fr) 280px}.subject-row-side{align-items:flex-end;flex-direction:column}.subject-meta{flex-wrap:wrap;justify-content:flex-end}}
+@media(max-width:950px){.subject-actions{grid-template-columns:1fr}.mode-card{min-height:0}.home-layout{grid-template-columns:1fr}.desktop-garden{display:none}.mobile-garden-link{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding:17px 19px;border:1px solid #d5e2d0;border-radius:9px;color:var(--brand-dark);background:#fff;font-weight:700}.mobile-garden-link small{margin-left:8px;color:var(--muted);font-weight:400}}
+@media(max-width:850px){body{font-size:17px}.main{padding:25px 18px 96px}.topbar{margin-bottom:28px}.mobile-nav{border-color:var(--line);border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 8px 26px rgba(41,52,45,.12)}.mobile-nav .active{color:var(--brand)}}
+@media(max-width:700px){.home-intro h2{font-size:28px}.activity-card{padding:22px}.activity-card h2{font-size:24px}.subject-row{align-items:flex-start;padding:19px}.subject-row-side{gap:8px}.subject-meta{display:none}.summary-item strong,.stat strong{font-size:27px}.subject-banner h2{font-size:29px}.subject-banner{grid-template-columns:1fr}.blocks-entry-card{padding:21px}.mode-card h3{font-size:22px}.mode-card p{font-size:17px}.mobile-garden-link small{display:none}}
 </style>
 </head>
 
 <body><div class="app">
 <aside class="sidebar"><div class="logo"><span class="logo-mark">M</span>MedQuiz</div><nav>
-<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Предметы</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки</button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚙</span>Админка<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
+<button class="nav-button active" onclick="showSection('home',this)"><span class="nav-icon">⌂</span>Главная</button><button class="nav-button" onclick="showSection('tests',this)"><span class="nav-icon">▤</span>Предметы</button><button class="nav-button" onclick="showSection('errors',this)"><span class="nav-icon">↻</span>Ошибки<span id="sidebarErrorBadge" class="nav-badge hidden">0</span></button><button class="nav-button" onclick="showSection('favorites',this)"><span class="nav-icon">☆</span>Избранное</button><button class="nav-button" onclick="showSection('history',this)"><span class="nav-icon">◷</span>История</button><button id="adminNav" class="nav-button hidden" onclick="showSection('admin',this)"><span class="nav-icon">⚙</span>Админка<span id="adminBadge" class="nav-badge hidden">0</span></button></nav>
 <div class="profile-chip" onclick="handleProfileClick()"><span class="avatar" id="profileAvatar">Г</span><div><strong id="profileName">Гость</strong><div class="info" id="profileHint">Войти в аккаунт</div></div></div></aside>
 <main class="main"><header class="topbar"><div><p class="eyebrow">Персональный учебный кабинет</p><h1 id="welcomeTitle">Добрый день!</h1><select id="spaceSelect" class="space-select" aria-label="Учебное пространство" onchange="selectLearningSpace(this.value)"></select></div><div class="topbar-actions"><div id="spaceSwitcher" class="space-switcher" aria-label="Учебное пространство"></div><button id="accessButton" class="access-button hidden" onclick="openUpgradeModal()">Полная версия</button><button id="notificationButton" class="notification-button hidden" onclick="showSection('notifications',this)" title="Уведомления" aria-label="Уведомления">🔔<span id="notificationBadge" class="notification-count hidden">0</span></button><button class="ghost-button" id="authButton" onclick="openAuthModal()">Войти</button></div></header>
 <div id="dashboardView"><div id="learningHome" class="learning-home"></div></div>
@@ -440,7 +339,7 @@ async function selectLearningSpace(spaceId){
 function subjectCardsHtml(){
   const subjects = SUBJECT_TESTS.filter(item => activeSpaceId === "dentistry");
   return subjects.map(item =>
-    `<article class="subject-card"><div><h3>${escapeHtml(item.name)}</h3><p>${item.count} вопросов</p></div><div class="subject-meta"><span id="subjectBlocks-${item.id}">Сдано блоков: 0 из ${Math.ceil(item.count / 50)}</span><span id="subjectErrors-${item.id}">Ошибок: 0</span></div><button class="secondary" onclick="openSubject('${item.id}')">Открыть предмет</button></article>`
+    `<button type="button" class="subject-row" onclick="openSubject('${item.id}')"><span class="subject-row-copy"><span class="subject-row-title">${escapeHtml(item.name)}</span><span class="subject-row-description">${item.count} вопросов · ${Math.ceil(item.count / 50)} последовательных блоков</span></span><span class="subject-row-side"><span class="subject-meta"><span id="subjectBlocks-${item.id}">Сдано: 0 из ${Math.ceil(item.count / 50)}</span><span id="subjectErrors-${item.id}">Ошибок: 0</span></span><span class="subject-arrow" aria-hidden="true">→</span></span></button>`
   ).join("");
 }
 
@@ -468,12 +367,29 @@ async function renderSpaceDashboard(){
   const empty = activeSpaceId === "medicine"
     ? `<div class="empty-learning"><h2>Предметы появятся здесь</h2><p class="info">Базы Лечебного дела ещё не добавлены. Пространство уже отделено от Стоматологии.</p></div>`
     : `<div class="empty-learning"><h2>Добавьте свой тест</h2><p class="info">Импортированные материалы будут храниться отдельно от баз специальностей.</p><button class="action" onclick="openCustomImport()">Добавить тест</button></div>`;
-  home.innerHTML = `<section id="lastActivityCard" class="activity-card"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(space.nameRu)}</p><h2>Начните обучение</h2><p>Выберите предмет, чтобы открыть тренировку и историю результатов.</p><div class="activity-actions">${activeSpaceId === "dentistry" ? `<button class="action" onclick="openSubject('stomatologia')">Выбрать предмет</button>` : ""}</div></div><div class="activity-score"><strong class="error-count">0</strong><span>ошибок</span><button id="errorsButton" class="secondary" onclick="showSection('errors',this)" disabled>Открыть ошибки</button></div></section><section class="stats summary-grid"><div class="stat summary-item"><strong>0</strong><span>вопросов в попытках</span></div><div class="stat summary-item"><strong>—</strong><span>точность завершённых попыток</span></div><div class="stat summary-item"><strong>0</strong><span>завершено попыток</span></div><div class="stat summary-item"><strong>0</strong><span>в избранном</span></div></section><div class="section-title-row"><div><h2>${activeSpaceId === "custom" ? "Мои предметы" : "Предметы"}</h2><p>Откройте предмет, чтобы выбрать режим и диапазон.</p></div></div>${cards ? `<section class="subject-grid">${cards}</section>` : empty}`;
+  home.innerHTML = `<section class="home-intro"><h2>Моё обучение</h2><p>Продолжайте занятие или выберите предмет.</p></section>
+    <button type="button" class="mobile-garden-link" onclick="openGardenPlaceholder()"><span>Мой сад <small>место для будущих наград</small></span><span aria-hidden="true">→</span></button>
+    <div class="home-layout"><div class="home-learning-column">
+      <section id="lastActivityCard" class="activity-card"><p class="eyebrow">Продолжить обучение · ${escapeHtml(space.nameRu)}</p><h2>Начните обучение</h2><p>Выберите предмет, чтобы открыть тренировку и историю результатов.</p><div class="activity-actions">${activeSpaceId === "dentistry" ? `<button class="action" onclick="openSubject('stomatologia')">Выбрать предмет <span aria-hidden="true">→</span></button>` : ""}</div></section>
+      <h2 class="home-section-title">${activeSpaceId === "custom" ? "Мои предметы" : "Мои предметы"}</h2>
+      ${cards ? `<section class="subject-list">${cards}</section>` : empty}
+    </div>
+    <aside class="garden-card desktop-garden"><div class="garden-heading"><h2>Мой сад</h2><span class="garden-soon">Скоро</span></div><div class="garden-space"><div><span class="garden-symbol" aria-hidden="true">♧</span><strong>Здесь вырастет ваш сад</strong><p>Растения будут появляться по мере обучения.</p></div></div><p class="garden-note">Сейчас мы предусмотрели место. Награды и растения добавим отдельным этапом.</p></aside></div>
+    <section class="home-statistics"><h2 class="home-section-title">Общая статистика</h2><div class="stats summary-grid"><div class="stat summary-item"><strong id="dashboardAnsweredCount">0</strong><span>вопросов в попытках</span></div><div class="stat summary-item"><strong id="dashboardAccuracy">—</strong><span>точность завершённых попыток</span></div><div class="stat summary-item"><strong id="dashboardAttemptCount">0</strong><span>завершено попыток</span></div><div class="stat summary-item"><strong id="dashboardFavoriteCount">0</strong><span>в избранном</span></div></div><div class="home-error-link"><strong id="dashboardErrorCount" class="error-count">0</strong> ошибок для повторения · <button id="errorsButton" onclick="showSection('errors',this)" disabled>Открыть работу над ошибками</button></div></section>`;
   if(currentUser && currentUserHasFullAccess){
     await Promise.all([loadDashboardStats(),loadSpaceLastActivity(),loadSubjectCardProgress()]);
   }else{
     renderGuestStats();
   }
+}
+
+function openGardenPlaceholder(){
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  const view = document.getElementById("sectionView");
+  view.classList.remove("hidden");
+  view.innerHTML = `<div class="subject-overview"><button class="secondary" onclick="renderSpaceDashboard()">← На главную</button><section class="garden-card"><div class="garden-heading"><h2>Мой сад</h2><span class="garden-soon">Скоро</span></div><div class="garden-space"><div><span class="garden-symbol" aria-hidden="true">♧</span><strong>Здесь вырастет ваш сад</strong><p>Мы уже предусмотрели для него отдельное место на телефоне. Растения и награды добавим позже.</p></div></div><p class="garden-note">Обучайтесь в привычном режиме — будущая система поощрений не изменит работу тестов.</p></section></div>`;
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 async function loadSpaceLastActivity(){
@@ -552,14 +468,16 @@ function renderSubjectOverview(subjectId){
     </section>
     <section class="blocks-entry-card">
       <div><h3>Блоки по 50 вопросов</h3><p>${Math.ceil(item.count / 50)} последовательных блоков для изучения и отдельной проверки знаний.</p></div>
-      <button class="action" onclick="openBlocks('${item.id}')">Открыть блоки</button>
+      <button class="action" onclick="openBlocks('${item.id}')">Открыть блоки <span aria-hidden="true">→</span></button>
     </section>
+    <h2 class="subject-section-title">Другие режимы</h2>
     <section class="subject-actions">
-      <article class="mode-card"><h3>Тренировка</h3><p>Сразу показываем правильность и объяснение.</p><button class="secondary" onclick="openTrainingSetup('${item.id}')">Начать тренировку</button></article>
-      <article class="mode-card primary"><h3>Общий экзамен</h3><p>50 случайных вопросов. Ответы — после завершения.</p><button class="action" onclick="openGeneralExam('${item.id}')">Начать общий экзамен</button></article>
-      <article class="mode-card"><h3>Изучение</h3><p>Просмотр базы без влияния на прогресс.</p><button class="secondary" onclick="openStudyMode('${item.id}')">Открыть изучение</button></article>
+      <article class="mode-card"><span class="mode-icon" aria-hidden="true">↻</span><h3>Тренировка</h3><p>Сразу показываем правильность ответа и объяснение.</p><button class="secondary" onclick="openTrainingSetup('${item.id}')">Начать тренировку</button></article>
+      <article class="mode-card primary"><span class="mode-icon" aria-hidden="true">▤</span><h3>Общий экзамен</h3><p>50 случайных вопросов. Ответы — после завершения.</p><button class="action" onclick="openGeneralExam('${item.id}')">Начать общий экзамен</button></article>
+      <article class="mode-card study"><span class="mode-icon" aria-hidden="true">□</span><h3>Изучение</h3><p>Просмотр всей базы без влияния на прогресс.</p><button class="secondary" onclick="openStudyMode('${item.id}')">Открыть изучение</button></article>
     </section>
-    <section class="summary-grid">
+    <h2 class="subject-section-title">Моя статистика</h2>
+    <section class="summary-grid subject-summary">
       <div class="summary-item"><strong>${item.count}</strong><span>вопросов</span></div>
       <div class="summary-item"><strong id="subjectErrorCount">0</strong><span>ошибок</span></div>
       <div class="summary-item"><strong id="subjectFavoriteCount">0</strong><span>в избранном</span></div>
@@ -3497,16 +3415,22 @@ async function applySession(session){
 }
 
 function renderGuestStats(){
-  const values = document.querySelectorAll(".stats .stat strong");
-  if(values.length < 4) return;
-  values[0].textContent = "0";
-  values[1].textContent = "—";
-  values[2].textContent = "0";
-  values[3].textContent = "0";
-  document.querySelector(".error-count").textContent = "0";
+  const answered = document.getElementById("dashboardAnsweredCount");
+  const accuracy = document.getElementById("dashboardAccuracy");
+  const attempts = document.getElementById("dashboardAttemptCount");
+  const favorites = document.getElementById("dashboardFavoriteCount");
+  const errorCount = document.getElementById("dashboardErrorCount");
+  if(answered) answered.textContent = "0";
+  if(accuracy) accuracy.textContent = "—";
+  if(attempts) attempts.textContent = "0";
+  if(favorites) favorites.textContent = "0";
+  if(errorCount) errorCount.textContent = "0";
+  const sidebarBadge = document.getElementById("sidebarErrorBadge");
+  if(sidebarBadge) sidebarBadge.classList.add("hidden");
   const errorsButton = document.getElementById("errorsButton");
+  if(!errorsButton) return;
   errorsButton.disabled = !currentUser;
-  errorsButton.textContent = currentUser ? "Доступно в полной версии" : "Работа над ошибками";
+  errorsButton.textContent = currentUser ? "Доступно в полной версии" : "Открыть работу над ошибками";
 }
 
 async function loadDashboardStats(){
@@ -3531,16 +3455,25 @@ async function loadDashboardStats(){
       : item.mistake_count > 0 && item.correct_streak < 3
   ).length;
   const favorites = allStats.filter(item=>item.favorite).length;
-  const values = document.querySelectorAll(".stats .stat strong");
-  if(values.length < 4) return;
-  values[0].textContent = answeredTotal;
-  values[1].textContent = answeredTotal ? Math.round(correctTotal / answeredTotal * 100) + "%" : "—";
-  values[2].textContent = allAttempts.length;
-  values[3].textContent = favorites;
-  document.querySelector(".error-count").textContent = errors;
+  const answered = document.getElementById("dashboardAnsweredCount");
+  const accuracy = document.getElementById("dashboardAccuracy");
+  const attempts = document.getElementById("dashboardAttemptCount");
+  const favoriteCount = document.getElementById("dashboardFavoriteCount");
+  const errorCount = document.getElementById("dashboardErrorCount");
+  if(answered) answered.textContent = answeredTotal;
+  if(accuracy) accuracy.textContent = answeredTotal ? Math.round(correctTotal / answeredTotal * 100) + "%" : "—";
+  if(attempts) attempts.textContent = allAttempts.length;
+  if(favoriteCount) favoriteCount.textContent = favorites;
+  if(errorCount) errorCount.textContent = errors;
+  const sidebarBadge = document.getElementById("sidebarErrorBadge");
+  if(sidebarBadge){
+    sidebarBadge.textContent = errors;
+    sidebarBadge.classList.toggle("hidden", errors === 0);
+  }
   const errorsButton = document.getElementById("errorsButton");
+  if(!errorsButton) return;
   errorsButton.disabled = errors === 0;
-  errorsButton.textContent = "Работа над ошибками";
+  errorsButton.textContent = "Открыть работу над ошибками";
 }
 
 function renderLoadedTestCard(){
