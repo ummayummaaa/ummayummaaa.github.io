@@ -56,6 +56,132 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 @media(max-width:950px){.space-switcher{display:none}.space-select{display:block}.subject-actions{grid-template-columns:1fr}.attempt-review-layout{grid-template-columns:1fr}.review-sidebar{position:static}.review-sidebar .question-navigator{grid-template-columns:repeat(auto-fill,minmax(38px,1fr))}}
 @media(max-width:700px){.topbar{align-items:flex-start}.space-select{width:100%;margin-top:8px}.activity-card,.subject-banner,.blocks-entry-card,.result-summary{grid-template-columns:1fr}.blocks-entry-card .action{width:100%;min-width:0}.activity-score{text-align:left}.summary-grid{grid-template-columns:repeat(2,1fr)}.subject-grid,.blocks-grid{grid-template-columns:1fr}.section-title-row,.setup-heading,.question-stats-toolbar,.batch-practice{align-items:stretch;flex-direction:column}.question-stats-summary{white-space:normal}.block-actions{flex-direction:column}.activity-card h2{font-size:23px}}
 </style>
+<style id="fresh-garden-theme">
+/* Fresh Garden: a calm, simple learning interface shared by every section. */
+:root{
+  --navy:#29342d;
+  --muted:#667268;
+  --line:#dde4dc;
+  --brand:#477a50;
+  --brand-dark:#396841;
+  --mint:#eaf2e7;
+  --bg:#f6f8f5;
+  --surface:#fff;
+  --danger:#b95762;
+  --warning:#b98a36;
+  --shadow:0 5px 18px rgba(41,52,45,.055);
+}
+body{font-size:17px;background:var(--bg)}
+.app{grid-template-columns:240px minmax(0,1fr)}
+.sidebar{display:flex;flex-direction:column;padding:32px 18px;border-color:var(--line);background:#fff;backdrop-filter:none}
+.logo{margin:0 12px 43px;font-size:25px;letter-spacing:-.025em}
+.logo-mark{width:41px;height:41px;border-radius:9px;background:var(--brand);box-shadow:none}
+.sidebar nav{display:flex;flex:1;flex-direction:column;padding-bottom:94px}
+.nav-button{gap:13px;margin:2px 0;padding:11px 14px;border-radius:7px;color:#626f65;font-size:17px}
+.nav-button:hover{color:var(--brand-dark);background:#f4f7f2}
+.nav-button.active{color:var(--brand-dark);background:var(--mint)}
+#adminNav:not(.hidden){margin-top:auto;border-top:1px solid var(--line);border-radius:0;padding-top:15px}
+.profile-chip{left:18px;right:18px;bottom:22px;padding:15px 12px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:#fff}
+.avatar{background:var(--brand)}
+.nav-badge{color:#5f6961;background:#edf0ec}
+.main{max-width:1240px;padding:38px 44px 80px}
+.eyebrow{color:var(--brand);font-size:13px}
+.topbar h1{color:var(--navy)}
+.ghost-button,.action,.secondary{border-radius:7px}
+.action{background:var(--brand);box-shadow:none}
+.action:hover{background:var(--brand-dark)}
+.ghost-button,.secondary{border-color:var(--line);color:var(--navy)}
+.ghost-button:hover,.secondary:hover{border-color:#b8c8b5;background:#f8faf7}
+.panel,.card{border-color:var(--line);border-radius:10px;background:#fff;box-shadow:none}
+.hero-main{color:var(--navy);background:#edf4e9}
+.hero-main:after{display:none}
+.hero-main p{color:var(--muted)}
+.hero-main .action{color:#fff;background:var(--brand)}
+.activity-card{border:1px solid #d8e5d1;border-radius:10px;color:var(--navy);background:#edf4e9}
+.activity-card p{color:var(--muted)}
+.activity-card .eyebrow{color:var(--brand)!important}
+.activity-actions .action{color:#fff;background:var(--brand)}
+.activity-actions .action:hover{background:var(--brand-dark)}
+.activity-score .secondary{background:#fff}
+.error-count{color:#69736b}
+.summary-grid{gap:15px}
+.summary-item,.stat{padding:20px;border-radius:9px}
+.summary-item strong,.stat strong{font-size:28px}
+.summary-item span,.stat span{font-size:15px}
+.subject-grid{gap:16px}
+.subject-card{border-radius:10px;box-shadow:none}
+.subject-card h3{font-size:22px}
+.subject-card p{font-size:16px}
+.subject-meta span{border-radius:7px;color:#637066;background:#f1f4f0;font-size:14px}
+.subject-banner{border:1px solid #d8e5d1;border-radius:10px;background:#f2f6ef}
+.blocks-entry-card{border-color:#d2e0cc;border-radius:10px;background:#edf4e9}
+.mode-card{border-radius:10px}
+.mode-card.primary{border-color:#d3dfcf;color:var(--navy);background:#f1f6ee}
+.mode-card.primary .action{color:#fff;background:var(--brand)}
+.subject-tab{border-radius:7px}
+.subject-tab.active{border-color:#afc7aa;color:var(--brand-dark);background:var(--mint)}
+.space-switcher{border-radius:9px;background:#f3f6f2}
+.space-choice{border-radius:6px}
+.space-choice.active{background:var(--brand);box-shadow:none}
+.space-select{border-radius:7px}
+.section-panel,.admin-workspace{border-radius:10px}
+.section-item,.question-practice-card,.block-card,.admin-user,.admin-version{border-radius:9px}
+.question-practice-card:hover{border-color:var(--brand);background:#f7faf5;box-shadow:none;transform:none}
+.batch-practice,.admin-stage-note,.auth-note,.admin-access-form{background:#f2f6f0}
+.admin-identity,.admin-report-meta span{color:#657066;background:#f1f4f0}
+.admin-test-upload,.report-question-preview{background:#f3f6f2}
+.admin-report-card{border-color:var(--line);border-radius:9px}
+.admin-subtab.active{border-color:#afc7aa;background:var(--mint)}
+.status-pill{color:var(--brand-dark);background:#e8f3e7}
+.audit-item{border-left-color:var(--brand);background:#f4f7f2}
+.admin-tabs{border-radius:10px;background:#f2f5f1}
+.admin-tab{border-radius:6px}
+.admin-tab.active{background:var(--brand);box-shadow:none}
+.access-button{border-color:#a9c2a5;border-radius:7px;color:var(--brand-dark);background:var(--mint)}
+.access-button.full{border-color:var(--brand);background:var(--brand)}
+.trial-banner,.locked-panel{background:#f0f5ed}
+.dropzone,.subject-picker{border-color:#cfddca;border-radius:10px;background:#fafcf9;box-shadow:none}
+.subject-picker-icon{border-radius:8px;background:var(--brand);box-shadow:none}
+.subject-trigger{border-color:#c6d5c2;border-radius:7px}
+.subject-trigger:hover,.subject-trigger[aria-expanded="true"]{border-color:var(--brand);box-shadow:0 0 0 3px rgba(71,122,80,.1)}
+.subject-menu{border-color:var(--line);border-radius:9px;box-shadow:0 14px 35px rgba(41,52,45,.13)}
+.subject-option{border-radius:6px}
+.progress span{background:var(--brand)}
+.choice-row label{border-radius:7px;color:#536057;background:#fafbf9}
+.choice-row label:hover{border-color:#b0c4ab;background:#f4f7f2}
+.choice-row label:has(input[type=radio]:checked){border-color:var(--brand);background:var(--brand);box-shadow:none}
+.timer-settings{background:#f2f6f0}
+.selected{border-color:var(--brand)!important;background:#edf4e9!important}
+.empty-state,.empty-learning{border-color:#b9cab4;border-radius:10px;background:#fafcf9}
+.auth-card,.upgrade-card{border-radius:12px}
+.auth-card input,.google-auth-button{border-radius:7px}
+.question-navigator{border-radius:9px;background:#f7f9f6}
+.question-number{border-color:#cdd8cb;border-radius:6px;color:#5d695f}
+.question-number.current{border-color:var(--brand);background:var(--brand)}
+.question-number.answered{border-color:#9cb99d;color:var(--brand-dark);background:#edf5eb}
+.result-summary{border-radius:10px;background:var(--brand-dark)}
+.review-question{border-radius:10px}
+.review-answer{background:#f3f6f2}
+.app.testing{background:var(--bg)}
+.app.testing .quiz-shell{border-color:var(--line);border-radius:12px;box-shadow:none}
+.app.testing #quizProgress{border-color:var(--line);color:var(--muted)}
+.app.testing #quiz button{border-color:#d5ddd4;border-radius:9px;background:#fafbf9}
+.app.testing #quiz button:hover{border-color:#a9bda6;background:#f5f8f3}
+.app.testing #quiz button.selected{border-color:var(--brand)!important;background:#edf4e9!important}
+.app.testing #next{border-radius:9px;background:var(--navy)}
+.site-footer{border-color:var(--line)}
+.site-footer a:hover,.site-footer button:hover{color:var(--brand-dark)}
+@media(max-width:850px){
+  body{font-size:16px}
+  .main{padding:24px 18px 92px}
+  .mobile-nav{border-color:var(--line);border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 8px 26px rgba(41,52,45,.12)}
+  .mobile-nav .active{color:var(--brand)}
+}
+@media(max-width:700px){
+  .summary-item strong,.stat strong{font-size:26px}
+  .subject-card h3{font-size:21px}
+}
+</style>
 </head>
 
 <body><div class="app">
