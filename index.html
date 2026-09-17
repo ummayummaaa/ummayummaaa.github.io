@@ -189,6 +189,11 @@ function requireWritableAccount(){
   return false;
 }
 
+function normalizeAdminUserId(value){
+  const match = String(value || "").match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+  return match ? match[0].toLowerCase() : "";
+}
+
 function accountDataAvailable(){
   return Boolean(currentUser && (currentUserHasFullAccess || isAdminViewMode()));
 }
@@ -255,11 +260,13 @@ async function getViewedQuestionStats({spaceId = null,subjectId = null,kind = "a
 
 async function loadAdminViewedUser(userId){
   if(!currentUserIsAdmin) throw new Error("Доступ запрещён");
-  const {data,error} = await supabaseClient.rpc("medquiz_admin_get_user",{target_id:userId});
+  const normalizedUserId = normalizeAdminUserId(userId);
+  if(!normalizedUserId) throw new Error("Некорректный идентификатор пользователя");
+  const {data,error} = await supabaseClient.rpc("medquiz_admin_get_user",{target_id:normalizedUserId});
   if(error) throw error;
   const user = Array.isArray(data) ? data[0] : data;
   if(!user) throw new Error("Пользователь не найден");
-  return user;
+  return {...user,user_id:normalizeAdminUserId(user.user_id) || normalizedUserId};
 }
 
 function browserScreenHash(state){
@@ -4601,11 +4608,13 @@ async function loadAdminUsers(search,page = 1){
   const total = Number(data?.[0]?.total_count || 0);
   const totalPages = Math.max(1,Math.ceil(total / 25));
   const rows = (data || []).map(user=>{
+    const userId = normalizeAdminUserId(user.user_id);
+    if(!userId) return "";
     const blocked = user.account_status === "blocked";
     const lastActive = user.last_active_at ? new Date(user.last_active_at).toLocaleString("ru-RU") : "ещё не проходил тесты";
     const created = new Date(user.created_at).toLocaleDateString("ru-RU");
     const role = user.role === "admin" ? "Администратор" : "Студент";
-    return `<button type="button" class="admin-user" onclick="openAdminUserCard('${user.user_id}')"><div class="admin-user-head"><div><h4>${escapeHtml(user.display_name || "Без имени")}</h4><p>${escapeHtml(user.email || "Email не указан")} · ${role} · зарегистрирован ${created}</p><p>Попыток: ${Number(user.attempt_count || 0)} · последняя активность: ${lastActive}</p></div><span class="status-pill">${blocked ? "Заблокирован" : "Активен"}</span></div></button>`;
+    return `<button type="button" class="admin-user" onclick="openAdminUserCard('${userId}')"><div class="admin-user-head"><div><h4>${escapeHtml(user.display_name || "Без имени")}</h4><p>${escapeHtml(user.email || "Email не указан")} · ${role} · зарегистрирован ${created}</p><p>Попыток: ${Number(user.attempt_count || 0)} · последняя активность: ${lastActive}</p></div><span class="status-pill">${blocked ? "Заблокирован" : "Активен"}</span></div></button>`;
   }).join("");
   const pagination = total
     ? `<div class="admin-pagination"><span>Страница ${adminUsersPage} из ${totalPages} · пользователей: ${total}</span><div class="admin-pagination-actions"><button class="secondary" onclick="loadAdminUsers(adminUsersSearch,adminUsersPage-1)" ${adminUsersPage <= 1 ? "disabled" : ""}>Назад</button><button class="secondary" onclick="loadAdminUsers(adminUsersSearch,adminUsersPage+1)" ${adminUsersPage >= totalPages ? "disabled" : ""}>Дальше</button></div></div>`
