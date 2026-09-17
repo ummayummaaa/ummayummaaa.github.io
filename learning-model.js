@@ -145,6 +145,29 @@
     return {spaceId, subjectId:subjectId || null};
   }
 
+  function parseAdminViewHash(hash){
+    const parts = String(hash || "").replace(/^#/, "").split("/");
+    if(parts[0] !== "admin-view" || !parts[1]) return null;
+    let userId;
+    try{
+      userId = decodeURIComponent(parts[1]);
+    }catch(_error){
+      return null;
+    }
+    if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(userId)) return null;
+    return {userId, routeParts:parts.slice(2)};
+  }
+
+  function adminViewHash(userId, routeHash){
+    if(!userId) throw new Error("A viewed user id is required");
+    const route = String(routeHash || "#home").replace(/^#/, "") || "home";
+    return `#admin-view/${encodeURIComponent(userId)}/${route}`;
+  }
+
+  function canMutateAccount(viewedUserId){
+    return !viewedUserId;
+  }
+
   return Object.freeze({
     SPACE_STORAGE_KEY,
     DEFAULT_SPACE_ID,
@@ -159,6 +182,9 @@
     isExamKind,
     nextErrorState,
     blockStatus,
-    makeAttemptScope
+    makeAttemptScope,
+    parseAdminViewHash,
+    adminViewHash,
+    canMutateAccount
   });
 });
