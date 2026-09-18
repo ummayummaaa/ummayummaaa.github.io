@@ -1,2 +1,17 @@
 dist/
 .DS_Store
+
+# Local environment files. Keep the documented template in Git.
+.env
+.env.*
+!.env.example
+.envrc
+
+# Local credentials and private key material.
+credentials/
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+service-account*.json

@@ -1,0 +1,9 @@
+title = "MediQ secret scanning configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Supabase publishable keys are public browser configuration"
+targetRules = ["generic-api-key"]
+regexes = ['''^sb_publishable_[A-Za-z0-9_-]+$''']
