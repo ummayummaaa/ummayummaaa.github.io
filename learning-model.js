@@ -132,6 +132,18 @@
     return Number(blockState.lastPercent) >= 90 ? "passed" : "passed_before";
   }
 
+  function questionBlocks(questionCount, blockSize = 50){
+    const count = Math.max(0, Math.floor(Number(questionCount) || 0));
+    const size = Math.floor(Number(blockSize) || 0);
+    if(size < 1) throw new Error("Block size must be a positive integer");
+    const blocks = [];
+    for(let start = 1, index = 1; start <= count; start += size, index++){
+      const end = Math.min(count, start + size - 1);
+      blocks.push(Object.freeze({index,start,end,count:end - start + 1}));
+    }
+    return blocks;
+  }
+
   function makeAttemptScope(input){
     const legacy = classifyLegacyTest(input && input.testId);
     const spaceId = input && input.spaceId || legacy.spaceId;
@@ -182,6 +194,7 @@
     isExamKind,
     nextErrorState,
     blockStatus,
+    questionBlocks,
     makeAttemptScope,
     parseAdminViewHash,
     adminViewHash,
