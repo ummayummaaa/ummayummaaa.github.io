@@ -3488,6 +3488,8 @@ async function saveNewPassword(){
     message.classList.add("danger-text");
     return;
   }
+  const {error:sessionError} = await supabaseClient.auth.signOut({scope:"others"});
+  if(sessionError) console.warn("Не удалось завершить остальные сессии после смены пароля",sessionError);
   message.textContent = "Пароль изменён.";
   setTimeout(closePasswordModal,700);
 }
@@ -4665,9 +4667,50 @@ async function openAdminUserCard(userId){
     const lastActive = user.last_active_at ? new Date(user.last_active_at).toLocaleString("ru-RU") : "Активность не зафиксирована";
     const role = user.role === "admin" ? "Администратор" : "Студент";
     const status = user.account_status === "blocked" ? "Заблокирован" : "Активен";
-    workspace.innerHTML = `<div class="admin-user-card"><div class="section-title-row"><div><h3>Карточка пользователя</h3><p>Служебная информация без секретов и платёжных данных.</p></div><button class="secondary" onclick="renderAdminUsers(document.getElementById('adminWorkspace'))">← К списку</button></div><div class="admin-user-card-grid"><div class="admin-user-field"><span>Имя</span><strong>${escapeHtml(user.display_name || "Без имени")}</strong></div><div class="admin-user-field"><span>Email</span><strong>${escapeHtml(user.email || "Не указан")}</strong></div><div class="admin-user-field"><span>Роль</span><strong>${role}</strong></div><div class="admin-user-field"><span>Статус аккаунта</span><strong>${status}</strong></div><div class="admin-user-field"><span>Дата регистрации</span><strong>${date}</strong></div><div class="admin-user-field"><span>Последняя активность</span><strong>${lastActive}</strong></div><div class="admin-user-field"><span>Попыток</span><strong>${Number(user.attempt_count || 0)}</strong></div><div class="admin-user-field"><span>Доступ</span><strong>${escapeHtml(effectiveAccessText(user))}</strong></div></div>${user.account_status === "blocked" ? `<div class="admin-stage-note"><span class="admin-stage-icon">!</span><div><strong>Аккаунт заблокирован</strong><p>Данные можно безопасно просмотреть, но пользователь не может войти в кабинет.</p></div></div>` : ""}<div class="admin-user-card-actions"><button class="action" onclick="enterAdminView('${user.user_id}')">Просмотреть аккаунт</button><span class="readonly-note">Изменения отключены</span></div></div>`;
+    workspace.innerHTML = `<div class="admin-user-card"><div class="section-title-row"><div><h3>Карточка пользователя</h3><p>Служебная информация без секретов и платёжных данных.</p></div><button class="secondary" onclick="renderAdminUsers(document.getElementById('adminWorkspace'))">← К списку</button></div><div class="admin-user-card-grid"><div class="admin-user-field"><span>Имя</span><strong>${escapeHtml(user.display_name || "Без имени")}</strong></div><div class="admin-user-field"><span>Email</span><strong>${escapeHtml(user.email || "Не указан")}</strong></div><div class="admin-user-field"><span>Роль</span><strong>${role}</strong></div><div class="admin-user-field"><span>Статус аккаунта</span><strong>${status}</strong></div><div class="admin-user-field"><span>Дата регистрации</span><strong>${date}</strong></div><div class="admin-user-field"><span>Последняя активность</span><strong>${lastActive}</strong></div><div class="admin-user-field"><span>Попыток</span><strong>${Number(user.attempt_count || 0)}</strong></div><div class="admin-user-field"><span>Доступ</span><strong>${escapeHtml(effectiveAccessText(user))}</strong></div></div>${user.account_status === "blocked" ? `<div class="admin-stage-note"><span class="admin-stage-icon">!</span><div><strong>Аккаунт заблокирован</strong><p>Данные можно безопасно просмотреть, но пользователь не может войти в кабинет.</p></div></div>` : ""}<div class="admin-user-card-actions"><button class="action" onclick="enterAdminView('${user.user_id}')">Просмотреть аккаунт</button><button id="adminPasswordResetButton" class="secondary" onclick="sendAdminPasswordReset('${user.user_id}')">Отправить ссылку для сброса пароля</button><span class="readonly-note">Пароль остаётся известен только пользователю</span></div><p id="adminPasswordResetMessage" class="report-message" role="status" aria-live="polite"></p></div>`;
   }catch(error){
     workspace.innerHTML = `<div class="admin-view-error">${escapeHtml(error.message || "Пользователь не найден")}</div><button class="secondary" onclick="renderAdminUsers(document.getElementById('adminWorkspace'))">К списку пользователей</button>`;
+  }
+}
+
+async function sendAdminPasswordReset(userId){
+  if(!currentUserIsAdmin) return;
+  const normalizedUserId = normalizeAdminUserId(userId);
+  const button = document.getElementById("adminPasswordResetButton");
+  const message = document.getElementById("adminPasswordResetMessage");
+  if(!normalizedUserId){
+    if(message){
+      message.textContent = "Не удалось определить пользователя.";
+      message.classList.add("danger-text");
+    }
+    return;
+  }
+  try{
+    const user = await loadAdminViewedUser(normalizedUserId);
+    const email = String(user.email || "").trim();
+    if(!email) throw new Error("У пользователя не указан email.");
+    if(!confirm(`Отправить ссылку для сброса пароля на ${email}?`)) return;
+    if(button) button.disabled = true;
+    if(message){
+      message.textContent = "Отправляем письмо…";
+      message.classList.remove("danger-text");
+    }
+    const {error:resetError} = await supabaseClient.auth.resetPasswordForEmail(email,{
+      redirectTo:authRedirectUrl()
+    });
+    if(resetError) throw resetError;
+    const {error:auditError} = await supabaseClient.rpc("medquiz_admin_log_password_reset",{
+      target_id:normalizedUserId
+    });
+    if(auditError) throw new Error("Письмо отправлено, но запись не добавлена в журнал: " + auditError.message);
+    if(message) message.textContent = `Ссылка отправлена на ${email}.`;
+  }catch(error){
+    if(message){
+      message.textContent = "Не удалось отправить ссылку: " + authErrorMessage(error);
+      message.classList.add("danger-text");
+    }
+  }finally{
+    if(button) button.disabled = false;
   }
 }
 
@@ -4731,6 +4774,7 @@ const ADMIN_ACTION_LABELS = {
   access_revoked:"Отменён полный доступ",
   user_blocked:"Пользователь заблокирован",
   user_unblocked:"Пользователь разблокирован",
+  password_reset_email_sent:"Отправлена ссылка для сброса пароля",
   report_resolved:"Жалоба отмечена решённой",
   test_version_activated:"Загружена новая версия теста"
 };
