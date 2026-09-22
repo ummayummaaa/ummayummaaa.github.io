@@ -13,6 +13,11 @@ isolated local PostgreSQL 17 instance on 2026-09-22. Production was not changed.
 - The restored database contained 24 public RLS policies and 5 public triggers.
 - Storage metadata restored with 0 objects, matching the captured inventory.
 - The Dropbox copy had the exact expected size and SHA-256 checksum.
+- The Yandex Disk copy was downloaded independently; its external SHA-256 and
+  all five internal checksums matched.
+- The Yandex Disk copy restored into a second isolated PostgreSQL 17 instance
+  with 27 Auth tables, 3 Auth users, 16 public tables, 24 public RLS policies,
+  5 public triggers, and 0 Storage objects.
 
 The vanilla PostgreSQL restore reported only the expected absence of the
 Supabase-managed `supabase_vault` extension. A target Supabase project provides
@@ -33,6 +38,6 @@ user count, RLS policies, triggers, or Storage metadata verified above.
 9. Verify the Storage inventory and object checksums.
 10. Delete all plaintext temporary files after verification.
 
-The Yandex Disk chain must be re-downloaded and restored when the Mac is
-unlocked. The previously verified remote size matches the encrypted source, but
-that metadata check alone is not recorded as a full download-and-restore test.
+Both Dropbox and Yandex Disk recovery chains have now been independently
+verified. All plaintext restore files and downloaded test artifacts were removed
+after verification.
