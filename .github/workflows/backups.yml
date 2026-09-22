@@ -1,0 +1,91 @@
+name: Encrypted backups
+
+on:
+  workflow_dispatch:
+    inputs:
+      backup_type:
+        description: Backup type
+        required: true
+        default: database
+        type: choice
+        options:
+          - database
+          - git
+          - storage
+  schedule:
+    - cron: '17 2 * * *'
+    - cron: '37 3 * * 0'
+    - cron: '57 3 * * 0'
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_PROJECT_REF: hfgiknokcjrwyddflmtq
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      BACKUP_ENCRYPTION_KEY: ${{ secrets.BACKUP_ENCRYPTION_KEY }}
+      DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+      YANDEX_OAUTH_TOKEN: ${{ secrets.YANDEX_OAUTH_TOKEN }}
+      BACKUP_OUTPUT_DIR: ${{ runner.temp }}/mediq-backups
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select backup type
+        id: select
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            kind="${{ inputs.backup_type }}"
+          elif [[ "${{ github.event.schedule }}" == "17 2 * * *" ]]; then
+            kind="database"
+          elif [[ "${{ github.event.schedule }}" == "37 3 * * 0" ]]; then
+            kind="git"
+          else
+            kind="storage"
+          fi
+          echo "kind=$kind" >> "$GITHUB_OUTPUT"
+
+      - name: Check protected configuration
+        id: configured
+        shell: bash
+        run: |
+          missing=0
+          for name in SUPABASE_DB_URL BACKUP_ENCRYPTION_KEY DROPBOX_ACCESS_TOKEN YANDEX_OAUTH_TOKEN; do
+            if [[ -z "${!name:-}" ]]; then
+              missing=1
+            fi
+          done
+          if [[ "${{ steps.select.outputs.kind }}" == "storage" && -z "${SUPABASE_URL:-}" ]]; then
+            missing=1
+          fi
+          if [[ "$missing" == "1" ]]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Protected backup configuration is incomplete; run skipped."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install PostgreSQL client
+        if: steps.configured.outputs.ready == 'true' && steps.select.outputs.kind != 'git'
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Run encrypted backup
+        if: steps.configured.outputs.ready == 'true'
+        shell: bash
+        run: bash "scripts/backup/${{ steps.select.outputs.kind }}.sh"
+
+      - name: Retain run manifest
+        if: steps.configured.outputs.ready == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ steps.select.outputs.kind }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/mediq-backups
+          if-no-files-found: error
+          retention-days: 7
