@@ -81,6 +81,7 @@ body{font-size:16.5px;background:#fff}
 @media(max-width:950px){.subject-actions{grid-template-columns:1fr}.mode-card{min-height:0}.home-layout{grid-template-columns:1fr}.desktop-garden{display:none}.mobile-garden-link{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding:17px 19px;border:1px solid #d5e2d0;border-radius:9px;color:var(--brand-dark);background:#fff;font-weight:700}.mobile-garden-link small{margin-left:8px;color:var(--muted);font-weight:400}}
 @media(max-width:850px){body{font-size:16px}.main{padding:24px 18px 96px}.topbar{margin-bottom:27px}.mobile-nav{border-color:var(--line);border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 8px 26px rgba(41,52,45,.12)}.mobile-nav .active{color:var(--brand)}}
 @media(max-width:700px){.home-intro h2{font-size:28px}.activity-card{padding:22px}.activity-card h2{font-size:24px}.subject-row{align-items:flex-start;padding:19px}.subject-row-side{gap:8px}.subject-meta{display:none}.summary-item strong,.stat strong{font-size:27px}.subject-banner h2{font-size:29px}.subject-banner{grid-template-columns:1fr}.blocks-entry-card{padding:21px}.mode-card h3{font-size:22px}.mode-card p{font-size:17px}.mobile-garden-link small{display:none}.admin-view-banner{align-items:stretch;flex-direction:column;gap:6px;padding:8px 12px}.admin-view-banner-copy{justify-content:center}.admin-view-banner .secondary{width:100%}body.admin-viewing .app{padding-top:94px}body.admin-viewing .sidebar{top:94px;height:calc(100vh - 94px)}.admin-user-card-grid{grid-template-columns:1fr}}
+.ghost-button,.action,.secondary,.auth-link,.google-auth-button{cursor:pointer;transition:background .16s,border-color .16s,box-shadow .16s,transform .08s,opacity .16s}.ghost-button:hover,.secondary:hover{border-color:#a9bca4;background:#f7faf5}.ghost-button:focus-visible,.action:focus-visible,.secondary:focus-visible,.auth-link:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:2px}.ghost-button:active,.action:active,.secondary:active,.auth-link:active,.google-auth-button:active{transform:translateY(1px)}.ghost-button:disabled,.action:disabled,.secondary:disabled,.auth-link:disabled{cursor:not-allowed;opacity:.62;transform:none}.close-modal{cursor:pointer}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:18px 0 2px;padding:5px;border:1px solid var(--line);border-radius:10px;background:#f2f5f1}.auth-tab{min-height:42px;padding:9px 12px;border:0;border-radius:7px;color:var(--muted);background:transparent;font:inherit;font-weight:750;cursor:pointer;transition:background .16s,color .16s,transform .08s}.auth-tab:hover{color:var(--brand-dark);background:#fff}.auth-tab:active{transform:translateY(1px)}.auth-tab:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:1px}.auth-tab.active{color:#fff;background:var(--brand)}.auth-field-group{display:block}.site-notice{position:fixed;top:20px;left:50%;z-index:120;display:flex;align-items:flex-start;gap:12px;width:min(680px,calc(100% - 32px));padding:15px 16px;border:1px solid #a9c2a5;border-radius:10px;color:#243b2b;background:#f4f8f2;box-shadow:0 16px 42px rgba(41,52,45,.2);transform:translateX(-50%)}.site-notice.error{color:#8b2f2f;border-color:#efc8c8;background:#fff7f7}.site-notice-message{flex:1;margin:0;line-height:1.45}.site-notice-action{flex:0 0 auto;padding:7px 10px;border:1px solid currentColor;border-radius:7px;color:inherit;background:transparent;font:inherit;font-size:13px;font-weight:750;cursor:pointer}.site-notice-close{flex:0 0 auto;width:28px;height:28px;padding:0;border:0;color:inherit;background:transparent;font-size:21px;line-height:1;cursor:pointer}@media(max-width:560px){.site-notice{top:12px;flex-wrap:wrap}.site-notice-action{order:3;margin-left:auto}.auth-card{padding:23px}.auth-tabs{margin-top:15px}}
 </style>
 </head>
 
@@ -101,7 +102,8 @@ body{font-size:16.5px;background:#fff}
 <section id="sectionView" class="panel section-panel hidden"></section>
 <div class="quiz-shell"><p id="quizProgress" style="display:none"></p><div id="quiz"></div><div id="result"></div><div id="questionNavigator" class="question-navigator hidden"></div><button id="next" onclick="nextQ()" class="action" style="display:none">Следующий вопрос</button></div><footer class="site-footer"><a href="privacy.html">Конфиденциальность</a><a href="terms.html">Условия использования</a><button type="button" onclick="contactSupport()">Связаться с администратором</button></footer></main>
 <nav class="mobile-nav"><button class="active" onclick="showSection('home',this)">⌂<br>Главная</button><button onclick="showSection('tests',this)"><svg aria-hidden="true" viewBox="0 0 24 24" style="width:18px;height:18px;display:block;margin:0 auto 2px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round"><path d="M16 6 20 7v13l-8-2-8 2V7l4-1"/><path d="M8 4h8v12H8z"/><path d="M10 8h4M10 11h4"/></svg>Тесты</button><button onclick="showSection('errors',this)">↻<br>Ошибки</button><button id="adminMobileNav" class="hidden" onclick="showSection('admin',this)">⚙<br>Админка</button><button onclick="handleProfileClick()">○<br>Профиль</button></nav></div>
-<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeAuthModal()">×</button><h2>Личный кабинет</h2><p>Сохраняйте историю, ошибки и избранное на всех устройствах.</p><button id="googleAuthButton" class="google-auth-button" type="button" onclick="signInWithGoogle()"><svg class="google-auth-icon" aria-hidden="true" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.91h5.38a4.6 4.6 0 0 1-2 3.02v2.54h3.24c1.9-1.75 2.98-4.33 2.98-7.4Z"/><path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.37l-3.24-2.54c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.62A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.39 13.92A6 6 0 0 1 6.08 12c0-.67.12-1.32.31-1.92V7.46H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.54l3.35-2.62Z"/><path fill="#EA4335" d="M12 5.95c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.64 9.64 0 0 0 12 2a10 10 0 0 0-8.96 5.46l3.35 2.62C7.18 7.71 9.39 5.95 12 5.95Z"/></svg><span>Продолжить с Google</span></button><div class="auth-divider" aria-hidden="true"><span>или по email</span></div><label for="authName">Имя</label><input id="authName" autocomplete="name" placeholder="Как к вам обращаться"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 8 символов"><button class="auth-link" type="button" onclick="requestPasswordReset()">Забыли пароль?</button><div class="auth-actions"><button class="secondary" onclick="signIn()">Войти</button><button class="action" onclick="signUp()">Регистрация</button></div><p class="auth-note">Продолжая, вы принимаете <a href="terms.html">условия использования</a> и <a href="privacy.html">политику конфиденциальности</a>.</p><button id="resendConfirmationButton" class="auth-link hidden" type="button" onclick="resendConfirmationEmail()">Отправить письмо подтверждения ещё раз</button><p id="authMessage" class="auth-message" role="status" aria-live="polite"></p></div></div>
+<div id="siteNotice" class="site-notice hidden" role="status" aria-live="polite"><p id="siteNoticeMessage" class="site-notice-message"></p><button id="siteNoticeAction" class="site-notice-action hidden" type="button"></button><button class="site-notice-close" type="button" aria-label="Закрыть уведомление" onclick="hideSiteNotice()">×</button></div>
+<div id="authModal" class="modal-backdrop hidden" onclick="closeAuthModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" type="button" aria-label="Закрыть" onclick="closeAuthModal()">×</button><h2 id="authTitle">Вход</h2><p id="authIntro">Войдите, чтобы продолжить обучение на любом устройстве.</p><div class="auth-tabs" role="tablist" aria-label="Вход или регистрация"><button id="authSignInTab" class="auth-tab active" type="button" role="tab" aria-selected="true" aria-controls="authEmailFields" onclick="setAuthMode('signin')">Вход</button><button id="authSignUpTab" class="auth-tab" type="button" role="tab" aria-selected="false" aria-controls="authEmailFields" onclick="setAuthMode('signup')">Регистрация</button></div><button id="googleAuthButton" class="google-auth-button" type="button" onclick="signInWithGoogle()"><svg class="google-auth-icon" aria-hidden="true" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.91h5.38a4.6 4.6 0 0 1-2 3.02v2.54h3.24c1.9-1.75 2.98-4.33 2.98-7.4Z"/><path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.37l-3.24-2.54c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.62A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.39 13.92A6 6 0 0 1 6.08 12c0-.67.12-1.32.31-1.92V7.46H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.54l3.35-2.62Z"/><path fill="#EA4335" d="M12 5.95c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.64 9.64 0 0 0 12 2a10 10 0 0 0-8.96 5.46l3.35 2.62C7.18 7.71 9.39 5.95 12 5.95Z"/></svg><span>Продолжить с Google</span></button><div class="auth-divider" aria-hidden="true"><span>или по email</span></div><div id="authEmailFields" class="auth-field-group"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com"><label for="authPassword">Пароль</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 8 символов"><div id="authPasswordRepeatGroup" class="auth-field-group hidden"><label for="authPasswordRepeat">Повторите пароль</label><input id="authPasswordRepeat" type="password" autocomplete="new-password" placeholder="Введите пароль ещё раз"></div></div><button id="forgotPasswordButton" class="auth-link" type="button" onclick="requestPasswordReset()">Забыли пароль?</button><div class="auth-actions"><button id="authSubmitButton" class="action" type="button" onclick="submitAuthForm()">Войти</button></div><p class="auth-note">Продолжая, вы принимаете <a href="terms.html">условия использования</a> и <a href="privacy.html">политику конфиденциальности</a>.</p><p id="authMessage" class="auth-message" role="status" aria-live="polite"></p></div></div>
 <div id="passwordModal" class="modal-backdrop hidden" onclick="closePasswordModal(event)"><div class="auth-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closePasswordModal()">×</button><h2>Новый пароль</h2><p>Придумайте новый пароль длиной не менее 8 символов.</p><label for="newPassword">Новый пароль</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8"><label for="newPasswordRepeat">Повторите пароль</label><input id="newPasswordRepeat" type="password" autocomplete="new-password" minlength="8"><div class="auth-actions"><button class="action" onclick="saveNewPassword()">Сохранить пароль</button></div><p id="passwordMessage" class="auth-message"></p></div></div>
 <div id="reportModal" class="modal-backdrop hidden" onclick="closeReportModal(event)"><div class="report-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeReportModal()">×</button><h2>Сообщить об ошибке</h2><p>Обращение увидит администратор сайта.</p><div id="reportQuestionPreview" class="report-question-preview"></div><label for="reportReason">Причина</label><select id="reportReason"><option value="typo">Опечатка или техническая ошибка</option><option value="options_error">Ошибка в вариантах ответа</option><option value="outdated">Вопрос или ответ устарел</option><option value="exam_answer_changed">На экзамене был указан другой ответ</option><option value="other">Другое</option></select><label for="reportComment">Комментарий</label><textarea id="reportComment" placeholder="Опишите, что нужно проверить"></textarea><label for="reportFile">Подтверждающий файл</label><div class="report-file"><input id="reportFile" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,image/jpeg,image/png,image/webp,application/pdf"><span class="info">JPG, PNG, WebP или PDF, не более 10 МБ. Необязательно.</span></div><div class="report-actions"><button class="secondary" onclick="closeReportModal()">Отмена</button><button id="reportSubmitButton" class="action" onclick="submitQuestionReport()">Отправить</button></div><p id="reportMessage" class="report-message"></p></div></div>
 <div id="upgradeModal" class="modal-backdrop hidden" onclick="closeUpgradeModal(event)"><div class="upgrade-card" onclick="event.stopPropagation()"><button class="close-modal" onclick="closeUpgradeModal()">×</button><p class="eyebrow">MedQuiz</p><h2>Полная версия</h2><p id="accessSummary" class="info">Сохраняйте ошибки, избранное, историю и прогресс.</p><div id="trialBanner" class="trial-banner"><div><strong>7 дней бесплатно</strong><p>Без банковской карты и автоматического списания.</p></div><button id="trialButton" class="action" onclick="startFreeTrial()">Попробовать бесплатно</button></div><div id="subscriptionControls"></div><div class="plan-grid"><article class="plan-card"><h3>На месяц</h3><p>Полный доступ с автоматическим ежемесячным продлением.</p><button class="secondary" disabled>Скоро</button></article><article class="plan-card"><h3>На год</h3><p>Полный доступ на год со скидкой и автоматическим продлением.</p><button class="secondary" disabled>Скоро</button></article><article class="plan-card"><h3>Навсегда</h3><p>Все функции, будущие тесты и обновления без ограничения срока.</p><button class="secondary" disabled>Скоро</button></article></div><p id="upgradeMessage" class="report-message">Оплата будет подключена позже.</p></div></div>
@@ -3393,14 +3395,73 @@ async function cancelSubscriptionRenewal(subscriptionId){
   message.textContent = "Автоматическое продление отключено. Доступ сохранится до конца оплаченного периода.";
 }
 
+let authMode = "signin";
+let lastSignupEmail = "";
+let siteNoticeActionHandler = null;
+
+function setButtonBusy(button,busy,busyText=""){
+  if(!button) return;
+  if(busy){
+    button.dataset.idleText = button.textContent;
+    button.disabled = true;
+    if(busyText) button.textContent = busyText;
+    return;
+  }
+  button.disabled = false;
+  if(button.dataset.idleText){
+    button.textContent = button.dataset.idleText;
+    delete button.dataset.idleText;
+  }
+}
+
+function hideSiteNotice(){
+  document.getElementById("siteNotice").classList.add("hidden");
+  siteNoticeActionHandler = null;
+}
+
+function showSiteNotice(message,{error=false,actionLabel="",onAction=null}={}){
+  const notice = document.getElementById("siteNotice");
+  const action = document.getElementById("siteNoticeAction");
+  document.getElementById("siteNoticeMessage").textContent = message;
+  notice.classList.toggle("error",error);
+  notice.classList.remove("hidden");
+  siteNoticeActionHandler = typeof onAction === "function" ? onAction : null;
+  action.textContent = actionLabel;
+  action.classList.toggle("hidden",!actionLabel || !siteNoticeActionHandler);
+  action.onclick = async ()=>{
+    if(!siteNoticeActionHandler) return;
+    setButtonBusy(action,true,"Отправляем…");
+    try{ await siteNoticeActionHandler(); }
+    finally{ setButtonBusy(action,false); }
+  };
+}
+
+function setAuthMode(mode){
+  authMode = mode === "signup" ? "signup" : "signin";
+  const signingUp = authMode === "signup";
+  document.getElementById("authTitle").textContent = signingUp ? "Регистрация" : "Вход";
+  document.getElementById("authIntro").textContent = signingUp
+    ? "Создайте аккаунт, чтобы сохранять прогресс на всех устройствах."
+    : "Войдите, чтобы продолжить обучение на любом устройстве.";
+  document.getElementById("authSignInTab").classList.toggle("active",!signingUp);
+  document.getElementById("authSignInTab").setAttribute("aria-selected",String(!signingUp));
+  document.getElementById("authSignUpTab").classList.toggle("active",signingUp);
+  document.getElementById("authSignUpTab").setAttribute("aria-selected",String(signingUp));
+  document.getElementById("authPasswordRepeatGroup").classList.toggle("hidden",!signingUp);
+  document.getElementById("forgotPasswordButton").classList.toggle("hidden",signingUp);
+  document.getElementById("authSubmitButton").textContent = signingUp ? "Зарегистрироваться" : "Войти";
+  document.getElementById("authPassword").autocomplete = signingUp ? "new-password" : "current-password";
+  document.getElementById("authMessage").textContent = "";
+}
+
 function openAuthModal(){
   if(currentUser){
     handleProfileClick();
     return;
   }
   document.getElementById("authModal").classList.remove("hidden");
-  document.getElementById("authMessage").textContent = "";
-  document.getElementById("resendConfirmationButton").classList.add("hidden");
+  document.getElementById("googleAuthButton").disabled = false;
+  setAuthMode("signin");
 }
 
 function closeAuthModal(event){
@@ -3424,33 +3485,40 @@ function authErrorMessage(error){
   if(text.includes("email not confirmed")) return "Сначала подтвердите email по ссылке из письма.";
   if(text.includes("already registered")) return "Аккаунт с таким email уже существует.";
   if(text.includes("rate limit")) return "Слишком много попыток. Подождите немного и повторите.";
+  if(error?.code === "same_password" || text.includes("different from the old password")) return "Этот пароль уже установлен для вашего аккаунта. Вы можете продолжить вход с ним.";
   return error?.message || "Не удалось выполнить действие. Попробуйте ещё раз.";
 }
 
 async function requestPasswordReset(){
+  const button = document.getElementById("forgotPasswordButton");
   const email = document.getElementById("authEmail").value.trim();
   if(!email){
     setAuthMessage("Введите email, к которому привязан аккаунт.", true);
     return;
   }
   setAuthMessage("Отправляем письмо…");
-  const {error} = await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
-  if(error){
-    setAuthMessage(authErrorMessage(error), true);
-    return;
+  setButtonBusy(button,true,"Отправляем…");
+  try{
+    const {error} = await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
+    if(error){
+      setAuthMessage(authErrorMessage(error), true);
+      return;
+    }
+    closeAuthModal();
+    showSiteNotice("Если аккаунт с таким email существует, мы отправили ссылку для восстановления пароля. Проверьте входящие и папку «Спам».");
+  }finally{
+    setButtonBusy(button,false);
   }
-  setAuthMessage("Если аккаунт существует, на этот адрес придёт письмо для смены пароля.");
 }
 
-async function resendConfirmationEmail(){
-  const email = document.getElementById("authEmail").value.trim();
+async function resendConfirmationEmail(emailOverride=""){
+  const email = String(emailOverride || lastSignupEmail || document.getElementById("authEmail").value).trim();
   if(!email){
-    setAuthMessage("Введите email.", true);
+    showSiteNotice("Не удалось определить email для повторной отправки.",{error:true});
     return;
   }
-  setAuthMessage("Отправляем письмо…");
   const {error} = await supabaseClient.auth.resend({type:"signup",email,options:{emailRedirectTo:authRedirectUrl()}});
-  setAuthMessage(error ? authErrorMessage(error) : "Письмо подтверждения отправлено повторно.",Boolean(error));
+  showSiteNotice(error ? authErrorMessage(error) : "Письмо подтверждения отправлено повторно.",{error:Boolean(error)});
 }
 
 function openPasswordModal(){
@@ -3484,14 +3552,20 @@ async function saveNewPassword(){
   message.textContent = "Сохраняем…";
   const {error} = await supabaseClient.auth.updateUser({password});
   if(error){
+    const samePassword = error.code === "same_password" || String(error.message || "").toLowerCase().includes("different from the old password");
+    if(samePassword){
+      closePasswordModal();
+      showSiteNotice("Этот пароль уже установлен для вашего аккаунта. Вы можете продолжить вход с ним.");
+      return;
+    }
     message.textContent = authErrorMessage(error);
     message.classList.add("danger-text");
     return;
   }
   const {error:sessionError} = await supabaseClient.auth.signOut({scope:"others"});
   if(sessionError) console.warn("Не удалось завершить остальные сессии после смены пароля",sessionError);
-  message.textContent = "Пароль изменён.";
-  setTimeout(closePasswordModal,700);
+  closePasswordModal();
+  showSiteNotice("Пароль изменён. Вы можете продолжить работу с аккаунтом.");
 }
 
 function contactSupport(){
@@ -3504,36 +3578,47 @@ function contactSupport(){
 }
 
 async function signUp(){
+  const button = document.getElementById("authSubmitButton");
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
-  const displayName = document.getElementById("authName").value.trim();
+  const repeated = document.getElementById("authPasswordRepeat").value;
   if(!email || password.length < 8){
     setAuthMessage("Введите email и пароль не короче 8 символов.", true);
     return;
   }
-  setAuthMessage("Создаём аккаунт…");
-  const {data, error} = await supabaseClient.auth.signUp({
-    email,
-    password,
-    options:{
-      data:{display_name:displayName || email.split("@")[0]},
-      emailRedirectTo:location.origin + location.pathname
-    }
-  });
-  if(error){
-    setAuthMessage(authErrorMessage(error), true);
+  if(password !== repeated){
+    setAuthMessage("Пароли не совпадают.", true);
     return;
   }
-  if(data.session){
-    setAuthMessage("Аккаунт создан. Вход выполнен.");
-    setTimeout(closeAuthModal, 700);
-  }else{
-    setAuthMessage("Проверьте почту и подтвердите регистрацию.");
-    document.getElementById("resendConfirmationButton").classList.remove("hidden");
+  setAuthMessage("Создаём аккаунт…");
+  setButtonBusy(button,true,"Создаём аккаунт…");
+  try{
+    const {data, error} = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options:{emailRedirectTo:authRedirectUrl()}
+    });
+    if(error){
+      setAuthMessage(authErrorMessage(error), true);
+      return;
+    }
+    closeAuthModal();
+    if(data.session){
+      showSiteNotice("Аккаунт создан. Вход выполнен.");
+    }else{
+      lastSignupEmail = email;
+      showSiteNotice("Регистрация почти завершена. Мы отправили письмо на указанный email. Перейдите по ссылке в письме, чтобы подтвердить аккаунт.",{
+        actionLabel:"Отправить ещё раз",
+        onAction:()=>resendConfirmationEmail(email)
+      });
+    }
+  }finally{
+    setButtonBusy(button,false);
   }
 }
 
 async function signIn(){
+  const button = document.getElementById("authSubmitButton");
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
   if(!email || !password){
@@ -3541,12 +3626,21 @@ async function signIn(){
     return;
   }
   setAuthMessage("Входим…");
-  const {error} = await supabaseClient.auth.signInWithPassword({email,password});
-  if(error){
-    setAuthMessage(authErrorMessage(error), true);
-    return;
+  setButtonBusy(button,true,"Входим…");
+  try{
+    const {error} = await supabaseClient.auth.signInWithPassword({email,password});
+    if(error){
+      setAuthMessage(authErrorMessage(error), true);
+      return;
+    }
+    closeAuthModal();
+  }finally{
+    setButtonBusy(button,false);
   }
-  closeAuthModal();
+}
+
+function submitAuthForm(){
+  return authMode === "signup" ? signUp() : signIn();
 }
 
 async function signInWithGoogle(){
@@ -5006,6 +5100,13 @@ supabaseClient.auth.getSession().then(async ({data})=>{
 supabaseClient.auth.onAuthStateChange((event,session)=>{
   if(event === "PASSWORD_RECOVERY") setTimeout(openPasswordModal,0);
   setTimeout(()=>applySession(session),0);
+});
+["authEmail","authPassword","authPasswordRepeat"].forEach(id=>{
+  document.getElementById(id).addEventListener("keydown",event=>{
+    if(event.key !== "Enter") return;
+    event.preventDefault();
+    submitAuthForm();
+  });
 });
 renderSpaceControls();
 </script>
