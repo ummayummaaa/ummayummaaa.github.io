@@ -102,8 +102,12 @@ backup_ensure_yandex_directory() {
       continue
     fi
     error="$(jq -r '.error // empty' <<<"$body")"
-    if test "$status" = "409" && test "$error" = "DiskResourceAlreadyExistsError"; then
-      continue
+    if test "$status" = "409"; then
+      case "$error" in
+        DiskResourceAlreadyExistsError|DiskPathPointsToExistentDirectoryError)
+          continue
+          ;;
+      esac
     fi
     backup_die "Yandex Disk directory creation failed for $current_path (HTTP $status, $error)"
   done
