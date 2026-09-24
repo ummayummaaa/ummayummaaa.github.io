@@ -34,7 +34,7 @@ jobs:
       DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
       DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
       YANDEX_OAUTH_TOKEN: ${{ secrets.YANDEX_OAUTH_TOKEN }}
-      BACKUP_OUTPUT_DIR: ${{ runner.temp }}/mediq-backups
+      BACKUP_OUTPUT_DIR: ${{ github.workspace }}/.backup-output
     steps:
       - uses: actions/checkout@v4
         with:
@@ -96,6 +96,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backup-${{ steps.select.outputs.kind }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/mediq-backups
+          path: ${{ github.workspace }}/.backup-output
           if-no-files-found: error
           retention-days: 7
