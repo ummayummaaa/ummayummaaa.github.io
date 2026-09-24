@@ -137,12 +137,28 @@ backup_upload_yandex() {
   test "$remote_size" = "$local_size" || backup_die "Yandex Disk size verification failed for $remote_path"
 }
 
-backup_upload_both() {
-  local local_file="$1"
-  local remote_path="$2"
+backup_upload_pair() {
+  local archive_file="$1"
+  local archive_path="$2"
+  local checksum_file="$3"
+  local checksum_path="$4"
+  local dropbox_failed=0
+  local yandex_failed=0
   if test "${BACKUP_SKIP_UPLOAD:-0}" = "1"; then
     return 0
   fi
-  backup_upload_dropbox "$local_file" "$remote_path"
-  backup_upload_yandex "$local_file" "$remote_path"
+
+  if ! backup_upload_dropbox "$archive_file" "$archive_path" ||
+     ! backup_upload_dropbox "$checksum_file" "$checksum_path"; then
+    dropbox_failed=1
+  fi
+
+  if ! backup_upload_yandex "$archive_file" "$archive_path" ||
+     ! backup_upload_yandex "$checksum_file" "$checksum_path"; then
+    yandex_failed=1
+  fi
+
+  if test "$dropbox_failed" = "1" || test "$yandex_failed" = "1"; then
+    backup_die "backup upload incomplete (Dropbox failed: $dropbox_failed; Yandex Disk failed: $yandex_failed)"
+  fi
 }

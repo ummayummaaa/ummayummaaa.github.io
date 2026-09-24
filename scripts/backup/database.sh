@@ -49,6 +49,7 @@ backup_encrypt "$plain_archive" "$encrypted_archive"
 backup_verify_encrypted_tar "$encrypted_archive"
 printf '%s  %s\n' "$(backup_sha256 "$encrypted_archive")" "$(basename "$encrypted_archive")" > "$checksum_file"
 
-backup_upload_both "$encrypted_archive" "/MediQ Backups/database/daily/$(basename "$encrypted_archive")"
-backup_upload_both "$checksum_file" "/MediQ Backups/manifests/$(basename "$checksum_file")"
+backup_upload_pair \
+  "$encrypted_archive" "/MediQ Backups/database/daily/$(basename "$encrypted_archive")" \
+  "$checksum_file" "/MediQ Backups/manifests/$(basename "$checksum_file")"
 printf 'database_backup=%s\nchecksum=%s\n' "$encrypted_archive" "$checksum_file"

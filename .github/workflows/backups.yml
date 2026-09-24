@@ -36,7 +36,7 @@ jobs:
       YANDEX_OAUTH_TOKEN: ${{ secrets.YANDEX_OAUTH_TOKEN }}
       BACKUP_OUTPUT_DIR: ${{ github.workspace }}/.backup-output
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
