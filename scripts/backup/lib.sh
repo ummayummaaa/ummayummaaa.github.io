@@ -37,19 +37,41 @@ backup_verify_encrypted_tar() {
       --decrypt "$encrypted_file" 2>/dev/null | tar -tzf - >/dev/null
 }
 
+backup_dropbox_access_token() {
+  if test -n "${DROPBOX_ACCESS_TOKEN:-}"; then
+    printf '%s' "$DROPBOX_ACCESS_TOKEN"
+    return 0
+  fi
+
+  backup_require_env DROPBOX_APP_KEY
+  backup_require_env DROPBOX_APP_SECRET
+  backup_require_env DROPBOX_REFRESH_TOKEN
+
+  local response access_token
+  response="$(curl --fail --silent --show-error \
+    --user "$DROPBOX_APP_KEY:$DROPBOX_APP_SECRET" \
+    --data-urlencode 'grant_type=refresh_token' \
+    --data-urlencode "refresh_token=$DROPBOX_REFRESH_TOKEN" \
+    https://api.dropboxapi.com/oauth2/token)"
+  access_token="$(jq -r '.access_token // empty' <<<"$response")"
+  test -n "$access_token" || backup_die "Dropbox did not return an access token"
+  printf '%s' "$access_token"
+}
+
 backup_upload_dropbox() {
   local local_file="$1"
   local remote_path="$2"
-  local local_size response remote_size
-  backup_require_env DROPBOX_ACCESS_TOKEN
+  local local_size response remote_size access_token
+  access_token="$(backup_dropbox_access_token)"
   local_size="$(stat -f '%z' "$local_file" 2>/dev/null || stat -c '%s' "$local_file")"
   response="$(curl --fail --silent --show-error \
     -X POST https://content.dropboxapi.com/2/files/upload \
-    -H "Authorization: Bearer $DROPBOX_ACCESS_TOKEN" \
+    -H "Authorization: Bearer $access_token" \
     -H 'Content-Type: application/octet-stream' \
     -H "Dropbox-API-Arg: $(jq -nc --arg path "$remote_path" '{path:$path,mode:"add",autorename:false,mute:false,strict_conflict:true}')" \
     --data-binary "@$local_file")"
   remote_size="$(jq -r '.size // empty' <<<"$response")"
+  unset access_token
   test "$remote_size" = "$local_size" || backup_die "Dropbox size verification failed for $remote_path"
 }
 

@@ -30,6 +30,9 @@ jobs:
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       BACKUP_ENCRYPTION_KEY: ${{ secrets.BACKUP_ENCRYPTION_KEY }}
       DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+      DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+      DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+      DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
       YANDEX_OAUTH_TOKEN: ${{ secrets.YANDEX_OAUTH_TOKEN }}
       BACKUP_OUTPUT_DIR: ${{ runner.temp }}/mediq-backups
     steps:
@@ -57,11 +60,18 @@ jobs:
         shell: bash
         run: |
           missing=0
-          for name in SUPABASE_DB_URL BACKUP_ENCRYPTION_KEY DROPBOX_ACCESS_TOKEN YANDEX_OAUTH_TOKEN; do
+          for name in SUPABASE_DB_URL BACKUP_ENCRYPTION_KEY YANDEX_OAUTH_TOKEN; do
             if [[ -z "${!name:-}" ]]; then
               missing=1
             fi
           done
+          if [[ -z "${DROPBOX_ACCESS_TOKEN:-}" ]]; then
+            for name in DROPBOX_APP_KEY DROPBOX_APP_SECRET DROPBOX_REFRESH_TOKEN; do
+              if [[ -z "${!name:-}" ]]; then
+                missing=1
+              fi
+            done
+          fi
           if [[ "${{ steps.select.outputs.kind }}" == "storage" && -z "${SUPABASE_URL:-}" ]]; then
             missing=1
           fi
