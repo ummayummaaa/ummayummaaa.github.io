@@ -103,12 +103,3 @@ jobs:
         if: steps.configured.outputs.ready == 'true'
         shell: bash
         run: bash "scripts/backup/${{ steps.select.outputs.kind }}.sh"
-
-      - name: Retain run manifest
-        if: steps.configured.outputs.ready == 'true' && always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: backup-${{ steps.select.outputs.kind }}-${{ github.run_id }}
-          path: ${{ github.workspace }}/.backup-output
-          if-no-files-found: error
-          retention-days: 7

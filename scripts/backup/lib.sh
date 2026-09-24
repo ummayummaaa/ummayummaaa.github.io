@@ -19,6 +19,14 @@ backup_sha256() {
   shasum -a 256 "$1" | awk '{print $1}'
 }
 
+backup_file_size() {
+  if test "$(uname -s)" = "Darwin"; then
+    stat -f '%z' "$1"
+  else
+    stat -c '%s' "$1"
+  fi
+}
+
 backup_encrypt() {
   local source_file="$1"
   local encrypted_file="$2"
@@ -63,7 +71,7 @@ backup_upload_dropbox() {
   local remote_path="$2"
   local local_size response remote_size access_token
   access_token="$(backup_dropbox_access_token)"
-  local_size="$(stat -f '%z' "$local_file" 2>/dev/null || stat -c '%s' "$local_file")"
+  local_size="$(backup_file_size "$local_file")"
   response="$(curl --fail --silent --show-error \
     -X POST https://content.dropboxapi.com/2/files/upload \
     -H "Authorization: Bearer $access_token" \
@@ -80,7 +88,7 @@ backup_upload_yandex() {
   local remote_path="$2"
   local local_size upload_response upload_url metadata remote_size
   backup_require_env YANDEX_OAUTH_TOKEN
-  local_size="$(stat -f '%z' "$local_file" 2>/dev/null || stat -c '%s' "$local_file")"
+  local_size="$(backup_file_size "$local_file")"
   upload_response="$(curl --fail --silent --show-error --get \
     -H "Authorization: OAuth $YANDEX_OAUTH_TOKEN" \
     --data-urlencode "path=$remote_path" \
