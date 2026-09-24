@@ -83,11 +83,38 @@ backup_upload_dropbox() {
   test "$remote_size" = "$local_size" || backup_die "Dropbox size verification failed for $remote_path"
 }
 
+backup_ensure_yandex_directory() {
+  local directory_path="$1"
+  local current_path="" part response status body error
+  local -a path_parts
+  IFS='/' read -r -a path_parts <<<"${directory_path#/}"
+  for part in "${path_parts[@]}"; do
+    test -n "$part" || continue
+    current_path="$current_path/$part"
+    response="$(curl --silent --show-error --request PUT --get \
+      -H "Authorization: OAuth $YANDEX_OAUTH_TOKEN" \
+      --data-urlencode "path=$current_path" \
+      --write-out $'\\n%{http_code}' \
+      https://cloud-api.yandex.net/v1/disk/resources)"
+    status="${response##*$'\n'}"
+    body="${response%$'\n'*}"
+    if test "$status" = "201"; then
+      continue
+    fi
+    error="$(jq -r '.error // empty' <<<"$body")"
+    if test "$status" = "409" && test "$error" = "DiskResourceAlreadyExistsError"; then
+      continue
+    fi
+    backup_die "Yandex Disk directory creation failed for $current_path (HTTP $status, $error)"
+  done
+}
+
 backup_upload_yandex() {
   local local_file="$1"
   local remote_path="$2"
   local local_size upload_response upload_url metadata remote_size
   backup_require_env YANDEX_OAUTH_TOKEN
+  backup_ensure_yandex_directory "$(dirname "$remote_path")"
   local_size="$(backup_file_size "$local_file")"
   upload_response="$(curl --fail --silent --show-error --get \
     -H "Authorization: OAuth $YANDEX_OAUTH_TOKEN" \
