@@ -84,7 +84,7 @@ jobs:
 
       - name: Install PostgreSQL client
         if: steps.configured.outputs.ready == 'true' && steps.select.outputs.kind != 'git'
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client-17
 
       - name: Run encrypted backup
         if: steps.configured.outputs.ready == 'true'
