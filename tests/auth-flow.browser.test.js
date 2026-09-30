@@ -64,6 +64,52 @@ window.supabase = {createClient:()=>window.__mockClient};
   await page.addInitScript(mockSupabase);
   await page.goto(`http://127.0.0.1:${port}/index.html`,{waitUntil:"domcontentloaded"});
 
+  await page.evaluate(()=>{
+    document.getElementById("quizSetupPanel").classList.remove("hidden");
+    document.getElementById("importControls").classList.remove("hidden");
+  });
+  const clickChooserPromise = page.waitForEvent("filechooser");
+  await page.locator("#dropzone").click();
+  const clickChooser = await clickChooserPromise;
+  await clickChooser.setFiles({name:"sample.pdf",mimeType:"application/pdf",buffer:Buffer.from("%PDF-1.4")});
+  assert.equal(await page.locator("#selectedFileName").innerText(),"sample.pdf");
+  assert.equal(await page.locator("#dropzone").getAttribute("class"),"dropzone has-file");
+  await page.locator(".file-remove").click();
+  assert.equal(await page.locator("#file").evaluate(input=>input.files.length),0);
+
+  const keyboardChooserPromise = page.waitForEvent("filechooser");
+  await page.locator("#dropzone").focus();
+  await page.keyboard.press("Enter");
+  const keyboardChooser = await keyboardChooserPromise;
+  await keyboardChooser.setFiles([]);
+
+  await page.evaluate(()=>{
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(new File(["%PDF-1.4"],"dragged.pdf",{type:"application/pdf"}));
+    document.getElementById("dropzone").dispatchEvent(new DragEvent("dragenter",{
+      bubbles:true,
+      cancelable:true,
+      dataTransfer
+    }));
+  });
+  assert.equal(await page.locator("#dropzone").getAttribute("class"),"dropzone drag-active");
+  await page.evaluate(()=>{
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(new File(["%PDF-1.4"],"dragged.pdf",{type:"application/pdf"}));
+    document.getElementById("dropzone").dispatchEvent(new DragEvent("drop",{
+      bubbles:true,
+      cancelable:true,
+      dataTransfer
+    }));
+  });
+  assert.equal(await page.locator("#selectedFileName").innerText(),"dragged.pdf");
+  assert.equal(await page.locator("#dropzone").getAttribute("class"),"dropzone has-file");
+
+  await page.evaluate(()=>{
+    document.getElementById("quizSetupPanel").classList.add("hidden");
+    document.getElementById("importControls").classList.add("hidden");
+  });
+
   await page.locator("#authButton").click();
   assert.equal(await page.locator("#authTitle").innerText(),"Вход");
   assert.equal(await page.locator("#authName").count(),0);
