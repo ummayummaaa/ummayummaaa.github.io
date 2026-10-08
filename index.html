@@ -1014,7 +1014,7 @@ async function startBlock(subjectId,start,end,isCheck){
   }
   mode = isCheck ? "exam" : "training";
   currentAttemptKind = isCheck ? "block_exam" : "training";
-  currentBlockMeta = isCheck ? {subjectId,start,end,index:Math.floor((start - 1) / 50) + 1} : null;
+  currentBlockMeta = {subjectId,start,end,index:Math.floor((start - 1) / 50) + 1};
   document.querySelector(`input[name="mode"][value="${mode}"]`).checked = true;
   updateModeSettings();
   document.getElementById("status").textContent = `${isCheck ? "Проверка" : "Тренировка"} · ${item.name} · вопросы ${start}–${end}`;
@@ -3371,6 +3371,9 @@ async function start(){
 
 function resetRun(qs){
   if(!requireWritableAccount()) return;
+  document.getElementById("dashboardView").classList.add("hidden");
+  document.getElementById("quizSetupPanel").classList.add("hidden");
+  document.getElementById("sectionView").classList.add("hidden");
   test = [...qs];
   current = 0;
   score = 0;
@@ -3623,8 +3626,8 @@ function finishTest(timedOut = false, finishedEarly = false){
       ? blockPassed ? "Блок сдан" : "Блок не сдан"
       : "Тренировка завершена";
   const blockCopy = isBlockExam ? ` · ${blockPassed ? "Порог 90% достигнут" : "Для сдачи требуется 90%"}` : "";
-  const returnAction = isBlockExam ? "openBlocks(activeLibraryId)" : "renderSubjectOverview(activeLibraryId)";
-  document.getElementById("quiz").innerHTML = `<div class="attempt-result"><section class="result-summary ${isBlockExam ? blockPassed ? "block-passed" : "block-failed" : ""}"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(currentTestName || "Тренировка")}${isBlockExam && completedBlockMeta ? ` · блок ${completedBlockMeta.index}` : ""}</p><h2>${timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : completedLabel}</h2><p>${score} правильных из ${test.length} · Ошибок: ${mistakes.length}${blockCopy} · ${formatDuration(elapsedSeconds)}</p></div><div class="result-percent">${percent}%</div></section><div class="result-actions"><button class="action" onclick="reviewLatestAttempt()">Разобрать ответы</button><button class="secondary" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">Пройти только ошибки</button><button class="secondary" onclick="retrySame()">Пройти заново</button><button class="secondary" onclick="${returnAction}">${isBlockExam ? "Вернуться к блокам" : "Вернуться к предмету"}</button></div></div>`;
+  const returnAction = completedBlockMeta ? "openBlocks(activeLibraryId)" : "renderSubjectOverview(activeLibraryId)";
+  document.getElementById("quiz").innerHTML = `<div class="attempt-result"><section class="result-summary ${isBlockExam ? blockPassed ? "block-passed" : "block-failed" : ""}"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(currentTestName || "Тренировка")}${isBlockExam && completedBlockMeta ? ` · блок ${completedBlockMeta.index}` : ""}</p><h2>${timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : completedLabel}</h2><p>${score} правильных из ${test.length} · Ошибок: ${mistakes.length}${blockCopy} · ${formatDuration(elapsedSeconds)}</p></div><div class="result-percent">${percent}%</div></section><div class="result-actions"><button class="action" onclick="reviewLatestAttempt()">Разобрать ответы</button><button class="secondary" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">Пройти только ошибки</button><button class="secondary" onclick="retrySame()">Пройти заново</button><button class="secondary" onclick="${returnAction}">${completedBlockMeta ? "Вернуться к блокам" : "Вернуться к предмету"}</button></div></div>`;
   document.getElementById("result").innerHTML = "";
   lastResultScreen = {
     html:document.getElementById("quiz").innerHTML,
@@ -3801,7 +3804,6 @@ function retryMistakes(){
 
   mode = "training";
   currentAttemptKind = "training";
-  currentBlockMeta = null;
   showTrainingTimer = true;
   resetRun(window.lastMistakes);
 }
