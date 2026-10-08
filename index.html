@@ -2142,7 +2142,6 @@ function buildStudentDocxQuestions(paragraphs){
   const problems = [];
   let currentQuestion = null;
   let section = "question";
-  let expectedNumber = 1;
 
   function addProblem(question,reason){
     if(!question.problems.includes(reason)) question.problems.push(reason);
@@ -2244,10 +2243,6 @@ function buildStudentDocxQuestions(paragraphs){
         problems:[],
         startParagraph:paragraph.paragraphIndex
       };
-      if(number !== expectedNumber){
-        addProblem(currentQuestion,`ожидался номер ${expectedNumber}, указан ${number}`);
-      }
-      expectedNumber = number + 1;
       section = "question";
       return;
     }
@@ -2301,7 +2296,7 @@ function buildStudentDocxQuestions(paragraphs){
   if(!rawQuestions.length){
     problems.push({
       num:"—",
-      reasons:["не найдено ни одного вопроса, начинающегося с номера в формате 1."]
+      reasons:["не найдено ни одного вопроса с номером перед текстом, например 16."]
     });
   }
   return {rawQuestions,acceptedQuestions,problems};

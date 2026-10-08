@@ -159,6 +159,17 @@ window.supabase = {createClient:()=>window.__mockClient};
   );
   assert.equal(parsed.rawQuestions.length,11);
 
+  const arbitraryNumbers = await page.evaluate(()=>buildStudentDocxQuestions(
+    [16, 18, 7].flatMap((number,index)=>[
+      {text:number + ". Вопрос",paragraphIndex:index * 3 + 1,runs:[{text:number + ". Вопрос",bold:false}]},
+      {text:"A) Верно",paragraphIndex:index * 3 + 2,runs:[{text:"A) Верно",bold:true}]},
+      {text:"B) Неверно",paragraphIndex:index * 3 + 3,runs:[{text:"B) Неверно",bold:false}]}
+    ])
+  ));
+  assert.deepEqual(arbitraryNumbers.problems,[]);
+  assert.deepEqual(arbitraryNumbers.acceptedQuestions.map(q=>q.originalNum),[16,18,7]);
+
+
   await page.evaluate(()=>{
     document.getElementById("quizSetupPanel").classList.remove("hidden");
     document.getElementById("importControls").classList.remove("hidden");
