@@ -118,7 +118,7 @@ body{font-size:16.5px;background:#fff}
 <section id="quizSetupPanel" class="panel upload-card setup-shell hidden"><div class="setup-heading"><div><p class="eyebrow">Тренировка</p><h2>Настройте диапазон</h2></div><div id="setupSubjectName" class="setup-subject">Предмет</div></div>
 <div id="importControls" class="hidden">
 <div class="file-picker"><input class="file-input" type="file" id="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"><button class="dropzone" id="dropzone" type="button" aria-controls="file" onclick="openFilePicker()"><span class="upload-icon">⇧</span><span class="upload-copy"><span class="upload-prompt"><strong>Выбрать PDF или DOCX</strong><span class="info">Нажмите здесь или перетащите файл в эту область</span></span><span class="selected-file"><span id="selectedFileName"></span></span></span></button><button class="file-remove" type="button" title="Убрать файл" aria-label="Убрать выбранный файл" onclick="clearSelectedFile(event)">×</button></div>
-<div class="import-guidance"><div><strong>Правила для нового DOCX</strong><p>Вопросы: 1., 2., 3. Варианты: A), B), C) или А., Б., В. Полностью выделите жирным ровно один вариант вместе с буквой. Объяснение можно начать с «Объяснение:» или «Обоснование.», источник — со строки «Источник:». Максимальный размер файла — 20 МБ.</p></div><a class="secondary" href="student-test-example.docx" download>Скачать пример DOCX</a></div>
+<div class="import-guidance"><div><strong>Как подготовить тест для MedQuiz</strong><p>Оформление вопросов, правильных ответов и объяснений в PDF и Word.</p></div><a class="secondary" href="test-file-guide.html" target="_blank" rel="noopener">Открыть инструкцию ↗</a></div>
 <div id="importValidation" class="import-validation hidden" role="status" aria-live="polite"></div>
 </div>
 <div class="settings-grid"><div class="setting-block"><p><b>Режим теста</b></p><div class="choice-row"><label><input type="radio" name="mode" value="training" checked onchange="updateModeSettings()">Тренировочный</label><label><input type="radio" name="mode" value="exam" onchange="updateModeSettings()">Экзаменационный</label></div><div id="trainingTimerSettings" class="timer-settings"><label class="timer-toggle"><input id="trainingTimerEnabled" type="checkbox" checked><span>Показывать затраченное время</span></label></div><div id="examTimerSettings" class="timer-settings hidden"><span class="info">Время на один вопрос</span><div class="choice-row"><label><input type="radio" name="examPace" value="60" checked>1 мин</label><label><input type="radio" name="examPace" value="90">1,5 мин</label><label><input type="radio" name="examPace" value="120">2 мин</label></div></div><p><b>Количество вопросов</b></p><div class="choice-row"><label><input type="radio" name="count" value="20">20</label><label><input type="radio" name="count" value="50" checked>50</label><label><input type="radio" name="count" value="100">100</label><label><input type="radio" name="count" value="150">150</label><label><input type="radio" name="count" value="200">200</label></div></div>
@@ -1170,9 +1170,14 @@ async function validateStudentFileBeforeStart(file,fileType,token){
     });
     if(token !== studentImportValidationToken || file !== selectedImportFile) return;
     const diagnostics = cachedDiagnostics || lastDiagnostics || {};
-    const problems = fileType === "docx" ? diagnostics.studentProblems || [] : [];
-    const questionCount = diagnostics.rawCount || parsed.length;
-    if(!questionCount) throw new Error("В файле не найдено ни одного вопроса.");
+    const problems = fileType === "docx" ? diagnostics.studentProblems || [] : [
+      ...(diagnostics.noCorrect || []).map(num=>({num,reasons:["не найден правильный ответ: выделите один вариант целиком жирным или зелёным фоном"]})),
+      ...(diagnostics.manyCorrect || []).map(num=>({num,reasons:["выделено несколько правильных ответов"]})),
+      ...(diagnostics.tooFewOptions || []).map(num=>({num,reasons:["найдено менее двух вариантов ответа"]})),
+      ...(diagnostics.excluded || []).map(num=>({num,reasons:["в тексте найдены символы галочки или крестика"]}))
+    ];
+    const questionCount = parsed.length;
+    if(!questionCount && !problems.length) throw new Error("В файле не найдено ни одного вопроса. Проверьте нумерацию и наличие текстового слоя.");
     studentImportValidation = {
       status:problems.length ? "invalid" : "recognized",
       questionCount,
@@ -2339,11 +2344,9 @@ async function parseStudentDOCX(file){
    ============================================================ */
 
 function isBold(item, styles){
-  const fontName = item.fontName || "";
-  const fontFamily = styles[item.fontName]?.fontFamily || "";
-
-  return /bold|black|heavy|semibold|f2/i.test(fontName) ||
-         /bold|black|heavy|semibold|f2/i.test(fontFamily);
+  const style = styles[item.fontName] || {};
+  return Number(style.fontWeight) >= 600 ||
+    /bold|black|heavy|semibold/i.test([item.fontName, style.fontFamily, style.originalFontName].join(" "));
 }
 
 function isGreenPixel(r, g, b, a){
@@ -2356,11 +2359,6 @@ function isGreenPixel(r, g, b, a){
     r < 235 &&
     b < 235
   );
-}
-
-function isDarkPixel(r, g, b, a){
-  if(a < 50) return false;
-  return r < 95 && g < 95 && b < 95;
 }
 
 function pixelDensity(
@@ -2551,9 +2549,9 @@ function greenAtRawIndex(
     canvasWidth,
     canvasHeight,
     point.x - 30,
-    box.y1 - h,
+    box.y1 - h * 0.15,
     point.x + 90,
-    box.y2 + h,
+    box.y2 + h * 0.15,
     isGreenPixel
   );
 
@@ -2568,9 +2566,9 @@ function greenAtRawIndex(
       canvasWidth,
       canvasHeight,
       firstBox.x1 - 20,
-      box.y1 - h,
+      box.y1 - h * 0.15,
       firstBox.x1 + 100,
-      box.y2 + h,
+      box.y2 + h * 0.15,
       isGreenPixel
     );
   }
@@ -2582,9 +2580,9 @@ function greenAtRawIndex(
     canvasWidth,
     canvasHeight,
     wholeLineBox.x1 - 10,
-    wholeLineBox.y1 - h * 0.7,
+    wholeLineBox.y1 - h * 0.15,
     wholeLineBox.x2 + 10,
-    wholeLineBox.y2 + h * 0.7,
+    wholeLineBox.y2 + h * 0.15,
     isGreenPixel
   );
 
@@ -2595,68 +2593,23 @@ function greenAtRawIndex(
   );
 }
 
-function visualCheckOrCrossBeforeLine(
-  line,
-  viewport,
-  imageData,
-  canvasWidth,
-  canvasHeight
-){
-  const first = line.row[0];
-  if(!first) return false;
-
-  const box = getItemViewportBox(first, viewport);
-  const h = Math.max(14, box.y2 - box.y1);
-
-  const densityLeft = pixelDensity(
-    imageData,
-    canvasWidth,
-    canvasHeight,
-    box.x1 - 55,
-    box.y1 - h * 0.9,
-    box.x1 - 2,
-    box.y2 + h * 0.9,
-    isDarkPixel
-  );
-
-  const densityNear = pixelDensity(
-    imageData,
-    canvasWidth,
-    canvasHeight,
-    box.x1 - 20,
-    box.y1 - h * 0.9,
-    box.x1 + 20,
-    box.y2 + h * 0.9,
-    isDarkPixel
-  );
-
-  return densityLeft > 0.035 || densityNear > 0.07;
-}
-
 function splitPdfLineIntoPieces(line, rendered, styles){
   const raw = line.rawText;
   const pieces = [];
 
-  const checkOrCross =
-    hasCheckOrCross(raw) ||
-    visualCheckOrCrossBeforeLine(
-      line,
-      rendered.viewport,
-      rendered.imageData,
-      rendered.width,
-      rendered.height
-    );
+  // A dark patch beside a line is often an ordinary letter, not an annotation.
+  const checkOrCross = hasCheckOrCross(raw);
 
   const bold = line.row.some(item => isBold(item, styles));
 
-  const regex = /([A-F]\))/g;
+  const regex = /(?:^|\s)([A-FАБВГДЕ][).])(?=\s|$)/gu;
   const matches = [];
   let match;
 
   while((match = regex.exec(raw)) !== null){
     matches.push({
       marker:match[1],
-      index:match.index
+      index:match.index + match[0].indexOf(match[1])
     });
   }
 
@@ -2697,10 +2650,10 @@ function splitPdfLineIntoPieces(line, rendered, styles){
     const optionRaw =
       raw.slice(optionStart, optionEnd);
 
-    const letter = currentMatch.marker[0];
+    const letter = normalizeStudentOptionLetter(currentMatch.marker[0]);
 
     const optionText = normalizeText(
-      optionRaw.replace(/^([A-F]\))\s*/, "")
+      optionRaw.replace(/^[A-FАБВГДЕ][).]\s*/u, "")
     );
 
     const green = greenAtRawIndex(
@@ -2712,13 +2665,18 @@ function splitPdfLineIntoPieces(line, rendered, styles){
       rendered.height
     );
 
+    const optionItems = line.ranges.filter(range =>
+      range.end > optionStart && range.start < optionEnd &&
+      raw.slice(Math.max(range.start, optionStart), Math.min(range.end, optionEnd)).trim()
+    );
+    const optionBold = optionItems.length > 0 && optionItems.every(range => isBold(range.item, styles));
     pieces.push({
       type:"option",
       letter,
       text:optionText,
       marked:green,
       green,
-      bold,
+      bold:optionBold,
       checkOrCross,
       page:line.pageNumber
     });
@@ -2755,6 +2713,9 @@ function applyPdfPiecesToQuestions(allPieces){
       q:normalizeText(text || ""),
       opts:[],
       hasCheckOrCross:!!checkOrCross,
+      explanation:"",
+      explanationSource:"",
+      section:"question",
       page:page || null,
       source:"pdf"
     };
@@ -2796,9 +2757,16 @@ function applyPdfPiecesToQuestions(allPieces){
 
     if(!q) return;
 
-    if(checkOrCross){
-      q.hasCheckOrCross = true;
+    const explanationMatch = text.match(/^(?:Объяснение|Обоснование)\s*[:.]\s*(.*)$/i);
+    const sourceMatch = text.match(/^Источник\s*:\s*(.*)$/i);
+    if(explanationMatch){ q.section = "explanation"; text = explanationMatch[1]; }
+    if(sourceMatch){ q.section = "source"; text = sourceMatch[1]; }
+    if(q.section === "explanation" || q.section === "source"){
+      const field = q.section === "source" ? "explanationSource" : "explanation";
+      q[field] = normalizeText(q[field] + " " + text);
+      return;
     }
+    if(checkOrCross){ q.hasCheckOrCross = true; }
 
     if(q.opts.length){
       const last = q.opts[q.opts.length - 1];
@@ -2942,7 +2910,7 @@ async function parsePDF(file){
   await ensurePdfJs();
   const buffer = await file.arrayBuffer();
   const pdf =
-    await pdfjsLib.getDocument({data:buffer}).promise;
+    await pdfjsLib.getDocument({data:buffer, fontExtraProperties:true}).promise;
 
   const allPieces = [];
   const scale = 2;
@@ -2958,6 +2926,15 @@ async function parsePDF(file){
     const rendered =
       await renderPageToImageData(page, scale);
 
+    // PDF.js uses generated font IDs; resolve the original embedded font name.
+    for(const item of textContent.items){
+      try{
+        const font = page.commonObjs.get(item.fontName);
+        const style = styles[item.fontName] || (styles[item.fontName] = {});
+        style.originalFontName = font.name || "";
+        style.fontWeight = font.black ? 900 : font.bold ? 700 : 400;
+      }catch(error){ /* Keep the available text style if no font object exists. */ }
+    }
     const rows = {};
 
     textContent.items.forEach(item => {
@@ -3011,6 +2988,12 @@ async function parsePDF(file){
   const rawQuestions =
     applyPdfPiecesToQuestions(allPieces);
 
+  if(detect === "auto"){
+    rawQuestions.forEach(q => {
+      const hasGreen = q.opts.some(option => option.green);
+      q.opts.forEach(option => { option.marked = hasGreen ? option.green : option.bold; });
+    });
+  }
   const cleanQuestions = rawQuestions.filter(q => {
     if(q.hasCheckOrCross) return false;
     if(q.opts.some(o => o.hasCheckOrCross)) return false;
@@ -3032,6 +3015,8 @@ async function parsePDF(file){
       correct:q.opts.findIndex(
         o => o.letter === correctOption.letter
       ),
+      explanation:q.explanation || "",
+      explanationSource:q.explanationSource || "",
       source:"pdf"
     };
   });
