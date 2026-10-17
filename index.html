@@ -68,6 +68,7 @@ body{font-size:16.5px;background:#fff}
 @media(max-width:850px){body{font-size:16px}.main{padding:24px 18px 96px}.topbar{margin-bottom:27px}.mobile-nav{border-color:var(--line);border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 8px 26px rgba(41,52,45,.12)}.mobile-nav .active{color:var(--brand)}}
 @media(max-width:700px){.home-intro h2{font-size:28px}.activity-card{padding:22px}.activity-card h2{font-size:24px}.subject-row{align-items:flex-start;padding:19px}.subject-row-side{gap:8px}.subject-meta{display:none}.summary-item strong,.stat strong{font-size:27px}.subject-banner h2{font-size:29px}.subject-banner{grid-template-columns:1fr}.blocks-entry-card{padding:21px}.mode-card h3{font-size:22px}.mode-card p{font-size:17px}.mobile-garden-link small{display:none}.admin-view-banner{align-items:stretch;flex-direction:column;gap:6px;padding:8px 12px}.admin-view-banner-copy{justify-content:center}.admin-view-banner .secondary{width:100%}body.admin-viewing .app{padding-top:94px}body.admin-viewing .sidebar{top:94px;height:calc(100vh - 94px)}.admin-user-card-grid{grid-template-columns:1fr}}
 .ghost-button,.action,.secondary,.auth-link,.google-auth-button{cursor:pointer;transition:background .16s,border-color .16s,box-shadow .16s,transform .08s,opacity .16s}.ghost-button:hover,.secondary:hover{border-color:#a9bca4;background:#f7faf5}.ghost-button:focus-visible,.action:focus-visible,.secondary:focus-visible,.auth-link:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:2px}.ghost-button:active,.action:active,.secondary:active,.auth-link:active,.google-auth-button:active{transform:translateY(1px)}.ghost-button:disabled,.action:disabled,.secondary:disabled,.auth-link:disabled{cursor:not-allowed;opacity:.62;transform:none}.close-modal{cursor:pointer}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:18px 0 2px;padding:5px;border:1px solid var(--line);border-radius:10px;background:#f2f5f1}.auth-tab{min-height:42px;padding:9px 12px;border:0;border-radius:7px;color:var(--muted);background:transparent;font:inherit;font-weight:750;cursor:pointer;transition:background .16s,color .16s,transform .08s}.auth-tab:hover{color:var(--brand-dark);background:#fff}.auth-tab:active{transform:translateY(1px)}.auth-tab:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:1px}.auth-tab.active{color:#fff;background:var(--brand)}.auth-field-group{display:block}.site-notice{position:fixed;top:20px;left:50%;z-index:120;display:flex;align-items:flex-start;gap:12px;width:min(680px,calc(100% - 32px));padding:15px 16px;border:1px solid #a9c2a5;border-radius:10px;color:#243b2b;background:#f4f8f2;box-shadow:0 16px 42px rgba(41,52,45,.2);transform:translateX(-50%)}.site-notice.error{color:#8b2f2f;border-color:#efc8c8;background:#fff7f7}.site-notice-message{flex:1;margin:0;line-height:1.45}.site-notice-action{flex:0 0 auto;padding:7px 10px;border:1px solid currentColor;border-radius:7px;color:inherit;background:transparent;font:inherit;font-size:13px;font-weight:750;cursor:pointer}.site-notice-close{flex:0 0 auto;width:28px;height:28px;padding:0;border:0;color:inherit;background:transparent;font-size:21px;line-height:1;cursor:pointer}@media(max-width:560px){.site-notice{top:12px;flex-wrap:wrap}.site-notice-action{order:3;margin-left:auto}.auth-card{padding:23px}.auth-tabs{margin-top:15px}}
+.question-actions{flex-wrap:wrap;align-items:center;max-width:100%}.question-actions .copy-ai-button{width:auto;max-width:100%;min-height:44px;margin:0;padding:9px 12px;border-radius:10px;font-size:14px;line-height:1.3}.copy-ai-status{flex-basis:100%;font-size:13px;text-align:right}.copy-ai-status:empty{display:none}@media(max-width:900px){.question-head{flex-wrap:wrap}.question-actions{margin-left:auto}}
 </style>
 <style id="mobile-layout-fixes">
 @media (max-width:850px){
@@ -891,7 +892,7 @@ function renderStudyQuestion(){
   const q = test[current];
   const favorite = favoriteKeys.has(questionKey(q));
   const options = q.opts.map((option,index)=>`<div class="review-answer ${index === q.correct ? "correct" : ""}">${escapeHtml(optionLetter(q,index))}) ${escapeHtml(option)}${index === q.correct ? " · правильный ответ" : ""}</div>`).join("");
-  document.getElementById("quiz").innerHTML = `<div class="question-head"><h3>${escapeHtml(q.num)}. ${escapeHtml(q.q)}</h3><div class="question-actions"><button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>${options}`;
+  document.getElementById("quiz").innerHTML = `<div class="question-head"><h3>${escapeHtml(q.num)}. ${escapeHtml(q.q)}</h3><div class="question-actions">${questionAiCopyButton()}<button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>${options}`;
   document.getElementById("result").innerHTML = `${questionExplanationHtml(q)}<div class="result-actions"><button class="secondary" onclick="goToStudyQuestion(${Math.max(0,current - 1)})" ${current === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="goToStudyQuestion(${Math.min(test.length - 1,current + 1)})" ${current === test.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">К предмету</button></div>`;
   const navigator = document.getElementById("questionNavigator");
   navigator.classList.remove("hidden");
@@ -3433,6 +3434,68 @@ function questionExplanationHtml(q){
   return explanationBlock + sourceBlock;
 }
 
+function questionAiCopyText(){
+  const language = (document.documentElement.lang || "ru").toLowerCase().split(/[-_]/)[0];
+  const translations = {
+    ru: {
+      label: "Скопировать вопрос для ИИ", copied: "Скопировано", failed: "Не удалось скопировать вопрос. Попробуйте ещё раз.",
+      prompt: "Это тест по стоматологии для подтверждения диплома в Греции. Выбери правильный ответ, объясни почему и кратко разбери остальные варианты. Если вопрос неоднозначен или устарел, укажи это; не выдумывай факты и источники. Ответь по-русски."
+    },
+    el: {
+      label: "Αντιγραφή ερώτησης για AI", copied: "Αντιγράφηκε", failed: "Η αντιγραφή απέτυχε. Δοκιμάστε ξανά.",
+      prompt: "Αυτή είναι ερώτηση εξετάσεων οδοντιατρικής για αναγνώριση πτυχίου στην Ελλάδα. Επίλεξε τη σωστή απάντηση, εξήγησε γιατί και σχολίασε σύντομα τις υπόλοιπες επιλογές. Αν η ερώτηση είναι αμφίσημη ή παρωχημένη, επισήμανέ το· μην επινοείς στοιχεία ή πηγές. Απάντησε στα ελληνικά."
+    },
+    en: {
+      label: "Copy question for AI", copied: "Copied", failed: "Could not copy the question. Please try again.",
+      prompt: "This is a dentistry exam question for diploma recognition in Greece. Choose the correct answer, explain why, and briefly discuss the other options. Flag any ambiguity or outdated information; do not invent facts or sources. Answer in English."
+    }
+  };
+  return translations[language] || translations.ru;
+}
+
+function questionAiCopyButton(){
+  return `<button type="button" class="copy-ai-button" onclick="copyQuestionForAi(this)">${escapeHtml(questionAiCopyText().label)}</button><span class="copy-ai-status" role="status"></span>`;
+}
+
+function buildQuestionAiPrompt(q){
+  return `${questionAiCopyText().prompt}\n\n${q.num == null ? "" : `${q.num}. `}${q.q}\n\n${q.opts.map((option,index)=>`${optionLetter(q,index)}) ${option}`).join("\n")}`;
+}
+
+async function copyQuestionForAi(button){
+  const q = test[current];
+  if(!q) return;
+  const text = buildQuestionAiPrompt(q);
+  const labels = questionAiCopyText();
+  button.disabled = true;
+  const status = button.parentElement.querySelector(".copy-ai-status");
+  if(status) status.textContent = "";
+  try{
+    try{
+      await navigator.clipboard.writeText(text);
+    }catch(error){
+      const previousFocus = document.activeElement;
+      const field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.cssText = "position:fixed;left:-9999px;top:0";
+      document.body.appendChild(field);
+      try{
+        field.select();
+        field.setSelectionRange(0, field.value.length);
+        if(!document.execCommand("copy")) throw new Error("Copy failed");
+      }finally{
+        field.remove();
+        previousFocus?.focus({preventScroll:true});
+      }
+    }
+    if(status) status.textContent = labels.copied;
+  }catch(error){
+    if(status) status.textContent = labels.failed;
+  }finally{
+    button.disabled = false;
+  }
+}
+
 function showQ(){
   answered = false;
 
@@ -3454,7 +3517,7 @@ function showQ(){
   let html =
     `${reviewBadge}<div class="question-head"><h3>${escapeHtml(q.num)}. ${
       escapeHtml(q.q)
-    }</h3><div class="question-actions"><button class="report-button" onclick="reportCurrentQuestion()" title="Отправить администратору" aria-label="Отправить вопрос администратору">⚑</button><button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>`;
+    }</h3><div class="question-actions">${questionAiCopyButton()}<button class="report-button" onclick="reportCurrentQuestion()" title="Отправить администратору" aria-label="Отправить вопрос администратору">⚑</button><button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>`;
 
   q.opts.forEach((option, index) => {
     html +=
