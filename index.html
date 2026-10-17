@@ -68,7 +68,8 @@ body{font-size:16.5px;background:#fff}
 @media(max-width:850px){body{font-size:16px}.main{padding:24px 18px 96px}.topbar{margin-bottom:27px}.mobile-nav{border-color:var(--line);border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 8px 26px rgba(41,52,45,.12)}.mobile-nav .active{color:var(--brand)}}
 @media(max-width:700px){.home-intro h2{font-size:28px}.activity-card{padding:22px}.activity-card h2{font-size:24px}.subject-row{align-items:flex-start;padding:19px}.subject-row-side{gap:8px}.subject-meta{display:none}.summary-item strong,.stat strong{font-size:27px}.subject-banner h2{font-size:29px}.subject-banner{grid-template-columns:1fr}.blocks-entry-card{padding:21px}.mode-card h3{font-size:22px}.mode-card p{font-size:17px}.mobile-garden-link small{display:none}.admin-view-banner{align-items:stretch;flex-direction:column;gap:6px;padding:8px 12px}.admin-view-banner-copy{justify-content:center}.admin-view-banner .secondary{width:100%}body.admin-viewing .app{padding-top:94px}body.admin-viewing .sidebar{top:94px;height:calc(100vh - 94px)}.admin-user-card-grid{grid-template-columns:1fr}}
 .ghost-button,.action,.secondary,.auth-link,.google-auth-button{cursor:pointer;transition:background .16s,border-color .16s,box-shadow .16s,transform .08s,opacity .16s}.ghost-button:hover,.secondary:hover{border-color:#a9bca4;background:#f7faf5}.ghost-button:focus-visible,.action:focus-visible,.secondary:focus-visible,.auth-link:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:2px}.ghost-button:active,.action:active,.secondary:active,.auth-link:active,.google-auth-button:active{transform:translateY(1px)}.ghost-button:disabled,.action:disabled,.secondary:disabled,.auth-link:disabled{cursor:not-allowed;opacity:.62;transform:none}.close-modal{cursor:pointer}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:18px 0 2px;padding:5px;border:1px solid var(--line);border-radius:10px;background:#f2f5f1}.auth-tab{min-height:42px;padding:9px 12px;border:0;border-radius:7px;color:var(--muted);background:transparent;font:inherit;font-weight:750;cursor:pointer;transition:background .16s,color .16s,transform .08s}.auth-tab:hover{color:var(--brand-dark);background:#fff}.auth-tab:active{transform:translateY(1px)}.auth-tab:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:1px}.auth-tab.active{color:#fff;background:var(--brand)}.auth-field-group{display:block}.site-notice{position:fixed;top:20px;left:50%;z-index:120;display:flex;align-items:flex-start;gap:12px;width:min(680px,calc(100% - 32px));padding:15px 16px;border:1px solid #a9c2a5;border-radius:10px;color:#243b2b;background:#f4f8f2;box-shadow:0 16px 42px rgba(41,52,45,.2);transform:translateX(-50%)}.site-notice.error{color:#8b2f2f;border-color:#efc8c8;background:#fff7f7}.site-notice-message{flex:1;margin:0;line-height:1.45}.site-notice-action{flex:0 0 auto;padding:7px 10px;border:1px solid currentColor;border-radius:7px;color:inherit;background:transparent;font:inherit;font-size:13px;font-weight:750;cursor:pointer}.site-notice-close{flex:0 0 auto;width:28px;height:28px;padding:0;border:0;color:inherit;background:transparent;font-size:21px;line-height:1;cursor:pointer}@media(max-width:560px){.site-notice{top:12px;flex-wrap:wrap}.site-notice-action{order:3;margin-left:auto}.auth-card{padding:23px}.auth-tabs{margin-top:15px}}
-.question-actions{flex-wrap:wrap;align-items:center;max-width:100%}.copy-ai-button svg{width:23px;height:23px;pointer-events:none}.copy-ai-button:focus-visible{outline:3px solid rgba(71,122,80,.3);outline-offset:3px}.copy-ai-status{flex-basis:100%;font-size:13px;text-align:right}.copy-ai-status:empty{display:none}@media(max-width:900px){.question-head{flex-wrap:wrap}.question-actions{margin-left:auto}}
+.question-head>h3{min-width:0;flex:1;overflow-wrap:anywhere}.question-actions{position:relative;flex-wrap:nowrap;align-items:center;width:max-content;max-width:100%;gap:8px}.question-actions button{height:48px!important;min-height:48px!important;width:48px!important;box-sizing:border-box;cursor:pointer;color:var(--muted)!important;border:1px solid var(--line)!important;background:#fff!important;box-shadow:none!important;transition:background .15s,border-color .15s,color .15s,transform .15s}.question-actions button svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.question-actions button:hover{color:var(--brand-dark)!important;border-color:#a9bda6!important;background:#f5f8f3!important}.question-actions button:active{transform:scale(.94)}.question-actions button:focus-visible{outline:3px solid rgba(71,122,80,.3);outline-offset:3px}.question-actions button:disabled{cursor:wait;opacity:.55;transform:none}.question-actions .favorite-button.active{color:#956414!important;border-color:#d8bb7e!important;background:#fff8e9!important}.question-actions .favorite-button.active svg{fill:currentColor}.copy-ai-status{position:fixed;z-index:120;left:50%;top:20px;transform:translateX(-50%);width:max-content;max-width:min(280px,calc(100vw - 52px));padding:9px 12px;border:1px solid #cbdac7;border-radius:9px;background:#f4f8f2;color:#29462c;box-shadow:0 4px 14px rgba(41,52,45,.12);font-size:13px;font-weight:500;line-height:1.4;overflow-wrap:anywhere;text-align:left;pointer-events:none}.copy-ai-status[data-error="true"]{color:#8b2f2f;background:#fff7f7;border-color:#efc8c8}.copy-ai-status:empty{display:none}@media(max-width:900px){.question-head{flex-wrap:wrap}.question-head>h3{flex-basis:100%}.question-actions{margin-left:auto}}@media(prefers-reduced-motion:reduce){.question-actions button{transition:none}}
+
 </style>
 <style id="mobile-layout-fixes">
 @media (max-width:850px){
@@ -892,7 +893,7 @@ function renderStudyQuestion(){
   const q = test[current];
   const favorite = favoriteKeys.has(questionKey(q));
   const options = q.opts.map((option,index)=>`<div class="review-answer ${index === q.correct ? "correct" : ""}">${escapeHtml(optionLetter(q,index))}) ${escapeHtml(option)}${index === q.correct ? " · правильный ответ" : ""}</div>`).join("");
-  document.getElementById("quiz").innerHTML = `<div class="question-head"><h3>${escapeHtml(q.num)}. ${escapeHtml(q.q)}</h3><div class="question-actions">${questionAiCopyButton()}<button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>${options}`;
+  document.getElementById("quiz").innerHTML = `<div class="question-head"><h3>${escapeHtml(q.num)}. ${escapeHtml(q.q)}</h3><div class="question-actions">${questionAiCopyButton()}${questionFavoriteButton(favorite)}</div></div>${options}`;
   document.getElementById("result").innerHTML = `${questionExplanationHtml(q)}<div class="result-actions"><button class="secondary" onclick="goToStudyQuestion(${Math.max(0,current - 1)})" ${current === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="goToStudyQuestion(${Math.min(test.length - 1,current + 1)})" ${current === test.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">К предмету</button></div>`;
   const navigator = document.getElementById("questionNavigator");
   navigator.classList.remove("hidden");
@@ -3453,9 +3454,33 @@ function questionAiCopyText(){
   return translations[language] || translations.ru;
 }
 
+function questionActionIcon(kind){
+  const paths = {
+    copy: '<rect x="8" y="8" width="12" height="13" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"></path>',
+    report: '<path d="M5 21V4m0 0c5-4 9 4 14 0v11c-5 4-9-4-14 0"></path>',
+    favorite: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"></path>'
+  };
+  return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[kind]}</svg>`;
+}
+
+function questionActionLabels(){
+  const language = (document.documentElement.lang || "ru").toLowerCase().split(/[-_]/)[0];
+  return ({ru:{report:"Отправить администратору",add:"Добавить в избранное",remove:"Убрать из избранного"},el:{report:"Αποστολή στον διαχειριστή",add:"Προσθήκη στα αγαπημένα",remove:"Αφαίρεση από τα αγαπημένα"},en:{report:"Send to administrator",add:"Add to favorites",remove:"Remove from favorites"}})[language] || {report:"Отправить администратору",add:"Добавить в избранное",remove:"Убрать из избранного"};
+}
+
+function questionFavoriteButton(favorite){
+  const label = escapeHtml(questionActionLabels()[favorite ? "remove" : "add"]);
+  return `<button type="button" class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" title="${label}" aria-label="${label}" aria-pressed="${favorite}">${questionActionIcon("favorite")}</button>`;
+}
+
+function questionReportButton(){
+  const label = escapeHtml(questionActionLabels().report);
+  return `<button type="button" class="report-button" onclick="reportCurrentQuestion()" title="${label}" aria-label="${label}">${questionActionIcon("report")}</button>`;
+}
+
 function questionAiCopyButton(){
   const label = escapeHtml(questionAiCopyText().label);
-  return `<button type="button" class="copy-ai-button" onclick="copyQuestionForAi(this)" title="${label}" aria-label="${label}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="8" width="12" height="13" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"></path></svg></button><span class="copy-ai-status" role="status"></span>`;
+  return `<button type="button" class="copy-ai-button" onclick="copyQuestionForAi(this)" title="${label}" aria-label="${label}">${questionActionIcon("copy")}</button><span class="copy-ai-status" role="status"></span>`;
 }
 
 function buildQuestionAiPrompt(q){
@@ -3469,7 +3494,11 @@ async function copyQuestionForAi(button){
   const labels = questionAiCopyText();
   button.disabled = true;
   const status = button.parentElement.querySelector(".copy-ai-status");
-  if(status) status.textContent = "";
+  if(status){
+    clearTimeout(status.dismissTimer);
+    status.textContent = "";
+    delete status.dataset.error;
+  }
   try{
     try{
       await navigator.clipboard.writeText(text);
@@ -3491,9 +3520,13 @@ async function copyQuestionForAi(button){
     }
     if(status) status.textContent = labels.copied;
   }catch(error){
-    if(status) status.textContent = labels.failed;
+    if(status){
+      status.textContent = labels.failed;
+      status.dataset.error = "true";
+    }
   }finally{
     button.disabled = false;
+    if(status) status.dismissTimer = setTimeout(()=>{status.textContent = "";}, status.dataset.error === "true" ? 6000 : 2200);
   }
 }
 
@@ -3518,7 +3551,7 @@ function showQ(){
   let html =
     `${reviewBadge}<div class="question-head"><h3>${escapeHtml(q.num)}. ${
       escapeHtml(q.q)
-    }</h3><div class="question-actions">${questionAiCopyButton()}<button class="report-button" onclick="reportCurrentQuestion()" title="Отправить администратору" aria-label="Отправить вопрос администратору">⚑</button><button class="favorite-button ${favorite ? "active" : ""}" onclick="toggleFavorite()" aria-label="Избранное">${favorite ? "★" : "☆"}</button></div></div>`;
+    }</h3><div class="question-actions">${questionAiCopyButton()}${questionReportButton()}${questionFavoriteButton(favorite)}</div></div>`;
 
   q.opts.forEach((option, index) => {
     html +=
