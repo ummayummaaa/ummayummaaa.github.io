@@ -4859,14 +4859,28 @@ function withoutExplanationSources(rows){
   });
 }
 
+function captureAttemptState(){
+  return {
+    currentUser:currentUser ? {...currentUser} : null,
+    currentUserHasFullAccess,
+    currentTestId,currentTestName,mode,currentAttemptKind,testStartedAt,score,
+    test:test.map(q=>({...q,opts:[...q.opts]})),
+    userAnswers:[...userAnswers],
+    favoriteKeys:new Set(favoriteKeys),
+    questions:[...questions]
+  };
+}
+
 async function startActiveAttempt(){
+  const {currentUser,currentUserHasFullAccess,currentTestId,currentTestName,mode,
+    currentAttemptKind,testStartedAt,test,userAnswers,favoriteKeys,questions} = captureAttemptState();
   if(!canMutateCurrentAccount()) return null;
   if(!currentUser || !currentUserHasFullAccess || !test.length) return null;
   const learning = window.MEDQUIZ_LEARNING;
   if(!learning) return null;
   const safeTestId = currentTestId || "local-test";
   const safeTestName = currentTestName || "Локальный тест";
-  const scope = await resolveAttemptScope(learning,safeTestId,safeTestName);
+  const scope = await resolveAttemptScope(learning,safeTestId,safeTestName,{userId:currentUser.id,questionCount:questions.length});
   const numericNumbers = test.map(q=>Number(q.originalNum || q.num)).filter(Number.isFinite);
   const startedAt = new Date(testStartedAt || Date.now()).toISOString();
   const {data:attempt,error} = await supabaseClient.from("medquiz_attempts").insert({
@@ -4924,11 +4938,11 @@ async function startActiveAttempt(){
 async function persistCurrentAnswer(position,selectedIndex){
   if(!canMutateCurrentAccount()) return;
   const pendingAttempt = currentAttemptPromise;
-  if(!pendingAttempt) return;
+  const q = test[position];
+  const startedAt = testStartedAt;
+  if(!pendingAttempt || !q) return;
   const attemptId = await pendingAttempt;
   if(!attemptId || !currentUser) return;
-  const q = test[position];
-  if(!q) return;
   const now = new Date().toISOString();
   const [{error:questionError},{error:attemptError}] = await Promise.all([
     supabaseClient.from("medquiz_attempt_questions").update({
@@ -4938,7 +4952,7 @@ async function persistCurrentAnswer(position,selectedIndex){
     }).eq("attempt_id",attemptId).eq("position",position + 1),
     supabaseClient.from("medquiz_attempts").update({
       last_activity_at:now,
-      duration_seconds:Math.max(0,Math.round((Date.now() - testStartedAt) / 1000))
+      duration_seconds:Math.max(0,Math.round((Date.now() - startedAt) / 1000))
     }).eq("id",attemptId)
   ]);
   if(questionError) throw questionError;
@@ -4999,7 +5013,9 @@ async function resumeAttempt(attemptId){
   setBrowserScreen({screen:"attempt",subjectId:activeLibraryId || null,token:liveAttemptToken,attemptId});
 }
 
-async function saveCompletedAttemptLegacy(){
+async function saveCompletedAttemptLegacy(snapshot = captureAttemptState()){
+  const {currentUser,currentUserHasFullAccess,currentTestId,currentTestName,mode,
+    test,userAnswers,score,favoriteKeys} = snapshot;
   if(!canMutateCurrentAccount()) return null;
   if(!currentUser || !currentUserHasFullAccess) return;
   const safeTestId = currentTestId || "local-test";
@@ -5048,21 +5064,21 @@ async function saveCompletedAttemptLegacy(){
   return attempt.id;
 }
 
-async function resolveAttemptScope(learning, testId, testName){
+async function resolveAttemptScope(learning, testId, testName, {userId = currentUser?.id,questionCount = questions.length} = {}){
   const scope = learning.makeAttemptScope({testId});
   if(scope.spaceId !== "custom" || scope.subjectId) return scope;
 
   const {data:existing,error:lookupError} = await supabaseClient
     .from("medquiz_subjects")
     .select("id")
-    .eq("owner_user_id",currentUser.id)
+    .eq("owner_user_id",userId)
     .eq("legacy_test_id",testId)
     .limit(1)
     .maybeSingle();
   if(lookupError) throw lookupError;
   if(existing?.id) return {...scope,subjectId:existing.id};
 
-  const subjectId = learning.customSubjectId(currentUser.id,testId);
+  const subjectId = learning.customSubjectId(userId,testId);
   const {error:insertError} = await supabaseClient
     .from("medquiz_subjects")
     .insert({
@@ -5070,8 +5086,8 @@ async function resolveAttemptScope(learning, testId, testName){
       space_id:"custom",
       slug:"test-" + learning.stableHash(testId),
       name:testName,
-      question_count:questions.length,
-      owner_user_id:currentUser.id,
+      question_count:questionCount,
+      owner_user_id:userId,
       legacy_test_id:testId
     });
   if(insertError && !String(insertError.message || "").toLowerCase().includes("duplicate")){
@@ -5081,18 +5097,21 @@ async function resolveAttemptScope(learning, testId, testName){
 }
 
 async function saveCompletedAttempt(runMeta = {}){
+  const snapshot = captureAttemptState();
+  const {currentUser,currentUserHasFullAccess,currentTestId,currentTestName,mode,
+    currentAttemptKind,testStartedAt,test,userAnswers,score,favoriteKeys,questions} = snapshot;
   if(!canMutateCurrentAccount()) return null;
   if(!currentUser || !currentUserHasFullAccess) return;
   const learning = window.MEDQUIZ_LEARNING;
-  if(!learning) return saveCompletedAttemptLegacy();
+  if(!learning) return saveCompletedAttemptLegacy(snapshot);
 
   const safeTestId = currentTestId || "local-test";
   const safeTestName = currentTestName || "Локальный тест";
   let scope;
   try{
-    scope = await resolveAttemptScope(learning,safeTestId,safeTestName);
+    scope = await resolveAttemptScope(learning,safeTestId,safeTestName,{userId:currentUser.id,questionCount:questions.length});
   }catch(error){
-    if(missingLearningSchema(error)) return saveCompletedAttemptLegacy();
+    if(missingLearningSchema(error)) return saveCompletedAttemptLegacy(snapshot);
     throw error;
   }
   const attemptKind = currentAttemptKind;
@@ -5127,7 +5146,7 @@ async function saveCompletedAttempt(runMeta = {}){
     : supabaseClient.from("medquiz_attempts").insert(attemptPayload);
   const {data:attempt,error:attemptError} = await attemptQuery.select("id").single();
   if(attemptError){
-    if(missingLearningSchema(attemptError)) return saveCompletedAttemptLegacy();
+    if(missingLearningSchema(attemptError)) return saveCompletedAttemptLegacy(snapshot);
     throw attemptError;
   }
 
