@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="site-config.js"></script>
 <script src="learning-model.js"></script>
+<script src="doatap-exam.js"></script>
 
 
 <style>
@@ -41,6 +42,7 @@ button,input{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-
 .question-number.current{color:#fff;border-color:#267bca;background:#267bca}
 @media(max-width:950px){.space-switcher{display:none}.space-select{display:block}.subject-actions{grid-template-columns:1fr}.attempt-review-layout{grid-template-columns:1fr}.review-sidebar{position:static}.review-sidebar .question-navigator{grid-template-columns:repeat(auto-fill,minmax(38px,1fr))}}
 @media(max-width:700px){.topbar{align-items:flex-start}.space-select{width:100%;margin-top:8px}.activity-card,.subject-banner,.blocks-entry-card,.result-summary{grid-template-columns:1fr}.blocks-entry-card .action{width:100%;min-width:0}.activity-score{text-align:left}.summary-grid{grid-template-columns:repeat(2,1fr)}.subject-grid,.blocks-grid{grid-template-columns:1fr}.section-title-row,.setup-heading,.question-stats-toolbar,.batch-practice{align-items:stretch;flex-direction:column}.question-stats-summary{white-space:normal}.block-actions{flex-direction:column}.activity-card h2{font-size:23px}}
+.doatap-groups{display:grid;gap:16px;margin:28px 0}.doatap-group{border:1px solid #d5e7df;border-radius:18px;padding:20px;background:#fff;min-width:0}.doatap-group h3{margin:0 0 8px}.doatap-group p{overflow-wrap:anywhere}.doatap-subjects{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.doatap-subjects button{white-space:normal;text-align:left}.doatap-group .action{white-space:normal}.doatap-rules{font-size:14px;line-height:1.6}.doatap-result-details{background:#eff8f4;color:#173d32;padding:16px;border-radius:12px;margin:16px 0}.answer-option.doatap-unknown{border-style:dashed}
 </style>
 <style id="fresh-garden-theme">
 /* Fresh Garden: a simple, spacious learning workspace with room to grow. */
@@ -70,6 +72,7 @@ body{font-size:16.5px;background:#fff}
 .ghost-button,.action,.secondary,.auth-link,.google-auth-button{cursor:pointer;transition:background .16s,border-color .16s,box-shadow .16s,transform .08s,opacity .16s}.ghost-button:hover,.secondary:hover{border-color:#a9bca4;background:#f7faf5}.ghost-button:focus-visible,.action:focus-visible,.secondary:focus-visible,.auth-link:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:2px}.ghost-button:active,.action:active,.secondary:active,.auth-link:active,.google-auth-button:active{transform:translateY(1px)}.ghost-button:disabled,.action:disabled,.secondary:disabled,.auth-link:disabled{cursor:not-allowed;opacity:.62;transform:none}.close-modal{cursor:pointer}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:18px 0 2px;padding:5px;border:1px solid var(--line);border-radius:10px;background:#f2f5f1}.auth-tab{min-height:42px;padding:9px 12px;border:0;border-radius:7px;color:var(--muted);background:transparent;font:inherit;font-weight:750;cursor:pointer;transition:background .16s,color .16s,transform .08s}.auth-tab:hover{color:var(--brand-dark);background:#fff}.auth-tab:active{transform:translateY(1px)}.auth-tab:focus-visible{outline:3px solid rgba(71,122,80,.2);outline-offset:1px}.auth-tab.active{color:#fff;background:var(--brand)}.auth-field-group{display:block}.site-notice{position:fixed;top:20px;left:50%;z-index:120;display:flex;align-items:flex-start;gap:12px;width:min(680px,calc(100% - 32px));padding:15px 16px;border:1px solid #a9c2a5;border-radius:10px;color:#243b2b;background:#f4f8f2;box-shadow:0 16px 42px rgba(41,52,45,.2);transform:translateX(-50%)}.site-notice.error{color:#8b2f2f;border-color:#efc8c8;background:#fff7f7}.site-notice-message{flex:1;margin:0;line-height:1.45}.site-notice-action{flex:0 0 auto;padding:7px 10px;border:1px solid currentColor;border-radius:7px;color:inherit;background:transparent;font:inherit;font-size:13px;font-weight:750;cursor:pointer}.site-notice-close{flex:0 0 auto;width:28px;height:28px;padding:0;border:0;color:inherit;background:transparent;font-size:21px;line-height:1;cursor:pointer}@media(max-width:560px){.site-notice{top:12px;flex-wrap:wrap}.site-notice-action{order:3;margin-left:auto}.auth-card{padding:23px}.auth-tabs{margin-top:15px}}
 .question-head>h3{min-width:0;flex:1;overflow-wrap:anywhere}.question-actions{position:relative;flex-wrap:nowrap;align-items:center;width:max-content;max-width:100%;gap:8px}.question-actions button{height:48px!important;min-height:48px!important;width:48px!important;box-sizing:border-box;cursor:pointer;color:var(--muted)!important;border:1px solid var(--line)!important;background:#fff!important;box-shadow:none!important;transition:background .15s,border-color .15s,color .15s,transform .15s}.question-actions button svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.question-actions button:hover{color:var(--brand-dark)!important;border-color:#a9bda6!important;background:#f5f8f3!important}.question-actions button:active{transform:scale(.94)}.question-actions button:focus-visible{outline:3px solid rgba(71,122,80,.3);outline-offset:3px}.question-actions button:disabled{cursor:wait;opacity:.55;transform:none}.question-actions .favorite-button.active{color:#956414!important;border-color:#d8bb7e!important;background:#fff8e9!important}.question-actions .favorite-button.active svg{fill:currentColor}.copy-ai-status{position:fixed;z-index:120;left:50%;top:20px;transform:translateX(-50%);width:max-content;max-width:min(280px,calc(100vw - 52px));padding:9px 12px;border:1px solid #cbdac7;border-radius:9px;background:#f4f8f2;color:#29462c;box-shadow:0 4px 14px rgba(41,52,45,.12);font-size:13px;font-weight:500;line-height:1.4;overflow-wrap:anywhere;text-align:left;pointer-events:none}.copy-ai-status[data-error="true"]{color:#8b2f2f;background:#fff7f7;border-color:#efc8c8}.copy-ai-status:empty{display:none}@media(max-width:900px){.question-head{flex-wrap:wrap}.question-head>h3{flex-basis:100%}.question-actions{margin-left:auto}}@media(prefers-reduced-motion:reduce){.question-actions button{transition:none}}
 
+.doatap-groups{display:grid;gap:16px;margin:28px 0}.doatap-group{border:1px solid #d5e7df;border-radius:18px;padding:20px;background:#fff;min-width:0}.doatap-group h3{margin:0 0 8px}.doatap-group p{overflow-wrap:anywhere}.doatap-subjects{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.doatap-subjects button{white-space:normal;text-align:left}.doatap-group .action{white-space:normal}.doatap-rules{font-size:14px;line-height:1.6}.doatap-result-details{background:#eff8f4;color:#173d32;padding:16px;border-radius:12px;margin:16px 0}.answer-option.doatap-unknown{border-style:dashed}
 </style>
 <style id="mobile-layout-fixes">
 @media (max-width:850px){
@@ -108,6 +111,7 @@ body{font-size:16.5px;background:#fff}
   .quiz-progress-actions{flex-wrap:wrap;justify-content:flex-end}
   .app.testing #quizProgress{align-items:flex-start}
 }
+.doatap-groups{display:grid;gap:16px;margin:28px 0}.doatap-group{border:1px solid #d5e7df;border-radius:18px;padding:20px;background:#fff;min-width:0}.doatap-group h3{margin:0 0 8px}.doatap-group p{overflow-wrap:anywhere}.doatap-subjects{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.doatap-subjects button{white-space:normal;text-align:left}.doatap-group .action{white-space:normal}.doatap-rules{font-size:14px;line-height:1.6}.doatap-result-details{background:#eff8f4;color:#173d32;padding:16px;border-radius:12px;margin:16px 0}.answer-option.doatap-unknown{border-style:dashed}
 </style>
 
 <style id="quiz-navigation-feedback">
@@ -127,6 +131,7 @@ body{font-size:16.5px;background:#fff}
 .app.testing .quiz-side-navigation{position:fixed;inset:auto 12px max(12px,env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:420px;margin:0 auto;padding:8px 10px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 6px 24px rgba(41,52,45,.13)}
 .quiz-step{position:static;flex:0 0 44px;width:44px;height:44px;transform:none;box-shadow:none}.quiz-step-progress{display:block;color:var(--muted);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}.app.testing .main{padding-bottom:100px}
 }
+.doatap-groups{display:grid;gap:16px;margin:28px 0}.doatap-group{border:1px solid #d5e7df;border-radius:18px;padding:20px;background:#fff;min-width:0}.doatap-group h3{margin:0 0 8px}.doatap-group p{overflow-wrap:anywhere}.doatap-subjects{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.doatap-subjects button{white-space:normal;text-align:left}.doatap-group .action{white-space:normal}.doatap-rules{font-size:14px;line-height:1.6}.doatap-result-details{background:#eff8f4;color:#173d32;padding:16px;border-radius:12px;margin:16px 0}.answer-option.doatap-unknown{border-style:dashed}
 </style>
 </head>
 
@@ -532,6 +537,50 @@ const BUILT_IN_TESTS = [
   }
 ];
 
+function isDoatapExam(){
+  return mode === "exam" && window.MEDQUIZ_DOATAP.isExamId(currentTestId);
+}
+
+function doatapGroupsHtml(){
+  if(activeSpaceId !== "dentistry") return "";
+  return `<section class="doatap-groups" aria-label="Экзаменационные темы Duotap"><h2 class="home-section-title">Экзаменационные темы Duotap</h2><p class="info">Три группы предметов по структуре ΔΟΑΤΑΠ. В итоговом экзамене — по 50 случайных вопросов из каждого предмета.</p>${window.MEDQUIZ_DOATAP.GROUPS.map(group=>{
+    const count=group.subjects.length*50;
+    return `<article class="doatap-group"><h3>${escapeHtml(group.name)}</h3><p class="info" lang="el">${escapeHtml(group.greek)}</p><div class="doatap-subjects">${group.subjects.map(id=>{const subject=SUBJECT_TESTS.find(item=>item.id===id);return `<button type="button" class="secondary" onclick="openSubject('${id}')">${escapeHtml(subject.name)}</button>`;}).join("")}</div><p>${count} вопросов · ${formatDuration(count*90)} · проходной результат 50%</p><p class="doatap-rules">Потеря от максимума: ошибка −1,20 балла; «Я не знаю ответ» или пропуск −1 балл. Начисление: правильный ответ +1, ошибка −0,20, незнание 0. Ответы и объяснения — после завершения.</p>${isAdminViewMode() ? `<span class="readonly-note">Недоступно при просмотре</span>` : `<button type="button" class="action" onclick="openDoatapExam('${group.id}',this)">Пройти итоговый экзамен Duotap</button>`}</article>`;
+  }).join("")}<p class="info"><a href="https://www.doatap.gr/wp-content/uploads/2023/01/fek.pdf" target="_blank" rel="noopener noreferrer">Официальный регламент ΔΟΑΤΑΠ: статьи 5 и 7</a></p></section>`;
+}
+
+async function openDoatapExam(groupId,button){
+  if(!requireWritableAccount()) return;
+  if(!currentUserHasFullAccess){openUpgradeModal();return;}
+  const group=window.MEDQUIZ_DOATAP.GROUPS.find(item=>item.id===groupId);
+  if(!group) return;
+  if(button) button.disabled=true;
+  try{
+    const pools={};
+    // Load sequentially: bundled question files share one global export.
+    for(const id of group.subjects){
+      const subject=SUBJECT_TESTS.find(item=>item.id===id);
+      pools[id]=await applyRememberedAnswers(await loadQuestionFile(subject));
+    }
+    const selected=window.MEDQUIZ_DOATAP.selectQuestions(group,pools).map(q=>({...q,subjectName:SUBJECT_TESTS.find(item=>item.id===q.subjectId).name}));
+    activeSpaceId="dentistry";
+    activeLibraryId=group.id;
+    currentTestId=window.MEDQUIZ_DOATAP.PREFIX+group.id;
+    currentTestName="Экзаменационный тест Duotap · "+group.name;
+    mode="exam";
+    currentAttemptKind="general_exam";
+    currentBlockMeta=null;
+    questions=selected;
+    originalTest=selected;
+    renderSpaceControls();
+    await loadFavoritesForCurrentTest();
+    resetRun(originalTest);
+  }catch(error){
+    console.error(error);
+    alert("Не удалось подготовить экзамен Duotap. "+error.message);
+  }finally{if(button) button.disabled=false;}
+}
+
 function renderSpaceControls(){
   const spaces = window.MEDQUIZ_LEARNING.SPACES;
   document.getElementById("spaceSwitcher").innerHTML = spaces.map(space =>
@@ -590,6 +639,7 @@ async function renderSpaceDashboard(){
       <section id="lastActivityCard" class="activity-card"><p class="eyebrow">Продолжить обучение · ${escapeHtml(space.nameRu)}</p><h2>Начните обучение</h2><p>Выберите предмет, чтобы открыть тренировку и историю результатов.</p><div class="activity-actions">${activeSpaceId === "dentistry" ? `<button class="action" onclick="openSubject('stomatologia')">Выбрать предмет <span aria-hidden="true">→</span></button>` : ""}</div></section>
       <h2 class="home-section-title">${activeSpaceId === "custom" ? "Мои предметы" : "Мои предметы"}</h2>
       ${cards ? `<section class="subject-list">${cards}</section>` : empty}
+      ${doatapGroupsHtml()}
     </div>
     <aside class="garden-card desktop-garden"><div class="garden-heading"><h2>Мой сад</h2><span class="garden-soon">Скоро</span></div><div class="garden-space"><div><span class="garden-symbol" aria-hidden="true">🌱</span><strong>Первый росток</strong><p>Здесь появятся растения и учебные награды.</p></div></div><p class="garden-note">Сейчас мы предусмотрели место. Награды и растения добавим отдельным этапом.</p></aside></div>
     <section class="home-statistics"><h2 class="home-section-title">Общая статистика</h2><div class="stats summary-grid"><div class="stat summary-item"><strong id="dashboardAnsweredCount">0</strong><span>вопросов в попытках</span></div><div class="stat summary-item"><strong id="dashboardAccuracy">—</strong><span>точность завершённых попыток</span></div><div class="stat summary-item"><strong id="dashboardAttemptCount">0</strong><span>завершено попыток</span></div><div class="stat summary-item"><strong id="dashboardFavoriteCount">0</strong><span>в избранном</span></div></div><div class="home-error-link"><strong id="dashboardErrorCount" class="error-count">0</strong> ошибок для повторения · <button id="errorsButton" onclick="showSection('errors',this)" disabled>Открыть работу над ошибками</button></div></section>`;
@@ -634,16 +684,17 @@ async function loadSpaceLastActivity(){
   if(!card) return;
   const completed = data.status !== "active";
   const percent = data.total_questions ? Math.round(data.correct_answers / data.total_questions * 100) : 0;
-  const range = data.range_start && data.range_end ? ` · вопросы ${data.range_start}–${data.range_end}` : "";
+  const isDoatapActivity=String(data.test_name).startsWith("Экзаменационный тест Duotap");
+  const range = !isDoatapActivity && data.range_start && data.range_end ? ` · вопросы ${data.range_start}–${data.range_end}` : "";
   const isGeneralExam = data.attempt_kind === "general_exam";
   const isBlockExam = data.attempt_kind === "block_exam";
   card.querySelector("h2").textContent = completed
-    ? (isGeneralExam ? "Последний общий экзамен" : isBlockExam ? "Последняя проверка блока" : "Последняя тренировка")
-    : (isGeneralExam ? "Незавершённый общий экзамен" : isBlockExam ? "Незавершённая проверка блока" : "Незавершённая тренировка");
+    ? (isDoatapActivity ? "Последний экзамен Duotap" : isGeneralExam ? "Последний общий экзамен" : isBlockExam ? "Последняя проверка блока" : "Последняя тренировка")
+    : (isDoatapActivity ? "Незавершённый экзамен Duotap" : isGeneralExam ? "Незавершённый общий экзамен" : isBlockExam ? "Незавершённая проверка блока" : "Незавершённая тренировка");
   card.querySelector("p:nth-of-type(2)").textContent = `${data.test_name}${range}`;
   const actions = card.querySelector(".activity-actions");
   actions.innerHTML = completed
-    ? `<button class="action" onclick="openAttempt('${data.id}')">Результат: ${data.correct_answers}/${data.total_questions} · ${percent}%</button>${data.subject_id ? `<button class="secondary" onclick="openSubject('${data.subject_id}')">Открыть предмет</button>` : ""}`
+    ? `<button class="action" onclick="openAttempt('${data.id}')">${String(data.test_name).startsWith("Экзаменационный тест Duotap") ? "Результат экзамена Duotap" : `Результат: ${data.correct_answers}/${data.total_questions} · ${percent}%`}</button>${data.subject_id ? `<button class="secondary" onclick="openSubject('${data.subject_id}')">Открыть предмет</button>` : ""}`
     : isAdminViewMode()
       ? `<button class="action" onclick="openAttempt('${data.id}')">Открыть сохранённую попытку</button>${data.subject_id ? `<button class="secondary" onclick="openSubject('${data.subject_id}')">Открыть предмет</button>` : ""}`
       : `<button class="action" onclick="resumeAttempt('${data.id}')">Продолжить попытку</button>`;
@@ -895,7 +946,7 @@ function renderStudyQuestion(){
   const favorite = favoriteKeys.has(questionKey(q));
   const options = q.opts.map((option,index)=>`<div class="review-answer ${index === q.correct ? "correct" : ""}">${escapeHtml(optionLetter(q,index))}) ${escapeHtml(option)}${index === q.correct ? " · правильный ответ" : ""}</div>`).join("");
   document.getElementById("quiz").innerHTML = `<div class="question-head"><h3>${escapeHtml(q.num)}. ${escapeHtml(q.q)}</h3><div class="question-actions">${questionAiCopyButton()}${questionFavoriteButton(favorite)}</div></div>${options}`;
-  document.getElementById("result").innerHTML = `${questionExplanationHtml(q)}<div class="result-actions"><button class="secondary" onclick="goToStudyQuestion(${Math.max(0,current - 1)})" ${current === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="goToStudyQuestion(${Math.min(test.length - 1,current + 1)})" ${current === test.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">К предмету</button></div>`;
+  document.getElementById("result").innerHTML = `${questionExplanationHtml(q)}<div class="result-actions"><button class="secondary" onclick="goToStudyQuestion(${Math.max(0,current - 1)})" ${current === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="goToStudyQuestion(${Math.min(test.length - 1,current + 1)})" ${current === test.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="${data.doatapResult ? "renderSpaceDashboard()" : "renderSubjectOverview(activeLibraryId)"}">${data.doatapResult ? "К экзаменационным темам" : "К предмету"}</button></div>`;
   const navigator = document.getElementById("questionNavigator");
   navigator.classList.remove("hidden");
   navigator.innerHTML = test.map((_item,index)=>`<button type="button" class="question-number ${index === current ? "current" : ""}" onclick="goToStudyQuestion(${index})">${index + 1}</button>`).join("");
@@ -3378,7 +3429,7 @@ function resetRun(qs){
   answered = false;
   userAnswers = new Array(test.length).fill(null);
   const pace = parseInt(document.querySelector('input[name="examPace"]:checked')?.value || "60", 10);
-  testTimeLimit = mode === "exam" ? test.length * pace : 0;
+  testTimeLimit = mode === "exam" ? test.length * (isDoatapExam() ? 90 : pace) : 0;
   startTestTimer();
 
   document.getElementById("next").style.display =
@@ -3550,13 +3601,13 @@ function showQ(){
     ? `<span class="review-badge">Требуется проверка</span>`
     : "";
   let html =
-    `${reviewBadge}<div class="question-head"><h3>${escapeHtml(q.num)}. ${
+    `${isDoatapExam() ? `<p class="eyebrow">Экзаменационный тест Duotap · ${escapeHtml(q.subjectName || SUBJECT_TESTS.find(item=>item.id===q.subjectId)?.name || "")}</p><p class="doatap-rules">Ошибка: потеря 1,20 балла · «Я не знаю ответ»: потеря 1 балла от максимума.</p>` : ""}${reviewBadge}<div class="question-head"><h3>${escapeHtml(q.num)}. ${
       escapeHtml(q.q)
     }</h3><div class="question-actions">${questionAiCopyButton()}${questionReportButton()}${questionFavoriteButton(favorite)}</div></div>`;
 
   q.opts.forEach((option, index) => {
     html +=
-      `<button class="answer-option" onclick="answer(${index}, this)">
+      `<button class="answer-option${isDoatapExam() && option === window.MEDQUIZ_DOATAP.UNKNOWN ? " doatap-unknown" : ""}" onclick="answer(${index}, this)">
         ${escapeHtml(optionLetter(q, index))})
         ${escapeHtml(option)}
       </button>`;
@@ -3710,17 +3761,18 @@ function finishTest(timedOut = false, finishedEarly = false){
   document.getElementById("status").textContent =
     timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : "Тест завершён";
 
-  const percent = test.length ? Math.round(score / test.length * 100) : 0;
+  const doatapResult=isDoatapExam() ? window.MEDQUIZ_DOATAP.tally(test,userAnswers) : null;
+  const percent = doatapResult ? window.MEDQUIZ_DOATAP.format(doatapResult.percent) : test.length ? Math.round(score / test.length * 100) : 0;
   const isBlockExam = completedAttemptKind === "block_exam";
   const blockPassed = isBlockExam && !timedOut && !finishedEarly && percent >= 90;
-  const completedLabel = completedAttemptKind === "general_exam"
+  const completedLabel = doatapResult ? "Экзаменационный тест Duotap завершён" : completedAttemptKind === "general_exam"
     ? "Общий экзамен завершён"
     : isBlockExam
       ? blockPassed ? "Блок сдан" : "Блок не сдан"
       : "Тренировка завершена";
   const blockCopy = isBlockExam ? ` · ${blockPassed ? "Порог 90% достигнут" : "Для сдачи требуется 90%"}` : "";
-  const returnAction = completedBlockMeta ? "openBlocks(activeLibraryId)" : "renderSubjectOverview(activeLibraryId)";
-  document.getElementById("quiz").innerHTML = `<div class="attempt-result"><section class="result-summary ${isBlockExam ? blockPassed ? "block-passed" : "block-failed" : ""}"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(currentTestName || "Тренировка")}${isBlockExam && completedBlockMeta ? ` · блок ${completedBlockMeta.index}` : ""}</p><h2>${timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : completedLabel}</h2><p>${score} правильных из ${test.length} · Ошибок: ${mistakes.length}${blockCopy} · ${formatDuration(elapsedSeconds)}</p></div><div class="result-percent">${percent}%</div></section><div class="result-actions"><button class="action" onclick="reviewLatestAttempt()">Разобрать ответы</button><button class="secondary" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">Пройти только ошибки</button><button class="secondary" onclick="retrySame()">Пройти заново</button><button class="secondary" onclick="${returnAction}">${completedBlockMeta ? "Вернуться к блокам" : "Вернуться к предмету"}</button></div></div>`;
+  const returnAction = doatapResult ? "renderSpaceDashboard()" : completedBlockMeta ? "openBlocks(activeLibraryId)" : "renderSubjectOverview(activeLibraryId)";
+  document.getElementById("quiz").innerHTML = `<div class="attempt-result"><section class="result-summary ${isBlockExam ? blockPassed ? "block-passed" : "block-failed" : ""}"><div><p class="eyebrow" style="color:#bff3ed">${escapeHtml(currentTestName || "Тренировка")}${isBlockExam && completedBlockMeta ? ` · блок ${completedBlockMeta.index}` : ""}</p><h2>${timedOut ? "Время вышло" : finishedEarly ? "Попытка завершена досрочно" : completedLabel}</h2><p>${score} правильных из ${test.length} · Ошибок: ${doatapResult ? doatapResult.wrong : mistakes.length}${blockCopy} · ${formatDuration(elapsedSeconds)}</p></div><div class="result-percent">${percent}%</div></section>${doatapResult ? `<p class="doatap-result-details">${escapeHtml(window.MEDQUIZ_DOATAP.summary(doatapResult))}</p>` : ""}<div class="result-actions"><button class="action" onclick="reviewLatestAttempt()">Разобрать ответы</button><button class="secondary" onclick="${currentUserHasFullAccess ? "retryMistakes()" : "openUpgradeModal()"}">Пройти только ошибки</button><button class="secondary" onclick="retrySame()">Пройти заново</button><button class="secondary" onclick="${returnAction}">${doatapResult ? "К экзаменационным темам" : completedBlockMeta ? "Вернуться к блокам" : "Вернуться к предмету"}</button></div></div>`;
   document.getElementById("result").innerHTML = "";
   lastResultScreen = {
     html:document.getElementById("quiz").innerHTML,
@@ -3732,6 +3784,7 @@ function finishTest(timedOut = false, finishedEarly = false){
   currentAttemptPromise = null;
   attemptReviewData = {
     title:currentTestName || "Тренировка",
+    doatapResult,
     mode,
     score,
     total:test.length,
@@ -3833,6 +3886,7 @@ async function openAttempt(attemptId){
   const durationSeconds = attempt.duration_seconds || 0;
   renderAttemptReview({
     title:attempt.test_name,
+    doatapResult:window.MEDQUIZ_DOATAP.isExamId(attempt.test_id) ? window.MEDQUIZ_DOATAP.tally(rows.map(row=>({opts:row.options,correct:row.correct_index})),rows.map(row=>row.selected_index)) : null,
     mode:attempt.mode,
     score:attempt.correct_answers,
     total:attempt.total_questions,
@@ -3861,6 +3915,7 @@ function renderAttemptReview(data,index){
   document.getElementById("questionNavigator").classList.add("hidden");
   document.getElementById("quizProgress").style.display = "none";
   const q = data.questions[attemptReviewIndex];
+  const doatapSummary=data.doatapResult ? `<p class="doatap-result-details">${escapeHtml(window.MEDQUIZ_DOATAP.summary(data.doatapResult))}</p>` : "";
   const answers = q.options.map((option,optionIndex)=>{
     let cls = "review-answer";
     if(optionIndex === q.correctIndex) cls += " correct";
@@ -3871,7 +3926,7 @@ function renderAttemptReview(data,index){
   const nav = data.questions.map((item,itemIndex)=>
     `<button type="button" class="question-number ${itemIndex === attemptReviewIndex ? "current" : item.isCorrect ? "correct" : "wrong"}" onclick="renderAttemptReview(attemptReviewData,${itemIndex})">${itemIndex + 1}</button>`
   ).join("");
-  document.getElementById("quiz").innerHTML = `<div class="attempt-review-layout"><article class="review-question"><p class="eyebrow">${escapeHtml(data.title)} · вопрос ${attemptReviewIndex + 1} из ${data.total}</p><h3>${escapeHtml(q.questionNumber)}. ${escapeHtml(q.questionText)}</h3>${answers}${questionExplanationHtml(q)}<div class="result-actions"><button class="secondary" onclick="renderAttemptReview(attemptReviewData,${Math.max(0,attemptReviewIndex - 1)})" ${attemptReviewIndex === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="renderAttemptReview(attemptReviewData,${Math.min(data.questions.length - 1,attemptReviewIndex + 1)})" ${attemptReviewIndex === data.questions.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="renderSubjectOverview(activeLibraryId)">К предмету</button></div></article><aside class="review-sidebar"><div class="question-navigator">${nav}</div></aside></div>`;
+  document.getElementById("quiz").innerHTML = `<div class="attempt-review-layout"><article class="review-question">${doatapSummary}<p class="eyebrow">${escapeHtml(data.title)} · вопрос ${attemptReviewIndex + 1} из ${data.total}</p><h3>${escapeHtml(q.questionNumber)}. ${escapeHtml(q.questionText)}</h3>${answers}${questionExplanationHtml(q)}<div class="result-actions"><button class="secondary" onclick="renderAttemptReview(attemptReviewData,${Math.max(0,attemptReviewIndex - 1)})" ${attemptReviewIndex === 0 ? "disabled" : ""}>Назад</button><button class="action" onclick="renderAttemptReview(attemptReviewData,${Math.min(data.questions.length - 1,attemptReviewIndex + 1)})" ${attemptReviewIndex === data.questions.length - 1 ? "disabled" : ""}>Дальше</button><button class="secondary" onclick="${data.doatapResult ? "renderSpaceDashboard()" : "renderSubjectOverview(activeLibraryId)"}">${data.doatapResult ? "К экзаменационным темам" : "К предмету"}</button></div></article><aside class="review-sidebar"><div class="question-navigator">${nav}</div></aside></div>`;
   document.getElementById("result").innerHTML = "";
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -3895,6 +3950,12 @@ function retryMistakes(){
     return;
   }
 
+  if(isDoatapExam()){
+    window.lastMistakes=window.lastMistakes.map(q=>({...q,opts:q.opts.slice(0,-1),letters:q.letters?.slice(0,-1)}));
+    currentTestId="library-"+window.MEDQUIZ_DOATAP.groupId(currentTestId);
+    currentTestName="Работа над ошибками · "+currentTestName;
+    originalTest=window.lastMistakes;
+  }
   mode = "training";
   currentAttemptKind = "training";
   showTrainingTimer = true;
@@ -3902,7 +3963,7 @@ function retryMistakes(){
 }
 
 function questionKey(q){
-  return String(q.num) + "_" + String(q.q).slice(0, 90);
+  return q.savedQuestionKey || String(q.num) + "_" + String(q.q).slice(0, 90);
 }
 
 function reviewQuestionKey(q){
@@ -4985,6 +5046,7 @@ async function resumeAttempt(attemptId){
   test = rows.map(row=>({
     num:row.question_number,
     originalNum:row.question_number,
+    savedQuestionKey:row.question_key,
     q:row.question_text,
     opts:row.options,
     correct:row.correct_index,
@@ -5000,7 +5062,7 @@ async function resumeAttempt(attemptId){
   answered = false;
   testStartedAt = new Date(attempt.started_at).getTime();
   const pace = parseInt(document.querySelector('input[name="examPace"]:checked')?.value || "60",10);
-  testTimeLimit = mode === "exam" ? test.length * pace : 0;
+  testTimeLimit = mode === "exam" ? test.length * (isDoatapExam() ? 90 : pace) : 0;
   currentAttemptPromise = Promise.resolve(attemptId);
   liveAttemptToken = `saved-${attemptId}`;
   document.getElementById("dashboardView").classList.add("hidden");
@@ -5323,9 +5385,10 @@ async function renderHistory(view){
   const items = (data || []).map(item=>{
     const percent = Math.round(item.correct_answers / item.total_questions * 100);
     const date = new Date(item.completed_at || item.started_at).toLocaleString("ru-RU");
-    const kind = item.attempt_kind === "general_exam" ? "Общий экзамен" : item.attempt_kind === "block_exam" ? "Проверка блока" : "Тренировка";
-    const range = item.range_start && item.range_end ? ` · вопросы ${item.range_start}–${item.range_end}` : "";
-    return `<button type="button" class="section-item question-practice-card" onclick="openAttempt('${item.id}')"><div><strong>${escapeHtml(item.test_name)}</strong><p>${kind}${range} · ${date}</p></div><b>${item.correct_answers}/${item.total_questions} · ${percent}%</b></button>`;
+    const doatapHistory=window.MEDQUIZ_DOATAP.isExamId(item.test_id);
+    const kind = doatapHistory ? "Экзаменационный тест Duotap" : item.attempt_kind === "general_exam" ? "Общий экзамен" : item.attempt_kind === "block_exam" ? "Проверка блока" : "Тренировка";
+    const range = !doatapHistory && item.range_start && item.range_end ? ` · вопросы ${item.range_start}–${item.range_end}` : "";
+    return `<button type="button" class="section-item question-practice-card" onclick="openAttempt('${item.id}')"><div><strong>${escapeHtml(item.test_name)}</strong><p>${kind}${range} · ${date}</p></div><b>${doatapHistory ? `${item.correct_answers}/${item.total_questions} правильных · баллы в разборе` : `${item.correct_answers}/${item.total_questions} · ${percent}%`}</b></button>`;
   }).join("");
   view.innerHTML = `<h2>История</h2><p>${isAdminViewMode() ? "Завершённые попытки выбранного пользователя. Доступны только для чтения." : "Все завершённые попытки вашего аккаунта."}</p><div class="section-list">${items || `<div class="empty-state">История пока пуста.</div>`}</div>`;
 }

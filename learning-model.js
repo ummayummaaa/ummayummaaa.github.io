@@ -53,7 +53,7 @@
   }
 
   function classifyLegacyTest(testId){
-    const normalized = normalizedLegacyId(testId);
+    const normalized = normalizedLegacyId(testId).replace(/^doatap-/, "");
     const subject = SUBJECT_BY_ID.get(normalized);
     if(subject){
       return {spaceId:subject.spaceId, subjectId:subject.id, kind:"subject"};
