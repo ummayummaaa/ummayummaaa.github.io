@@ -228,7 +228,8 @@ const SUPABASE_URL = "https://hfgiknokcjrwyddflmtq.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kxI2RbWK_CIzq0pf0dWQmw_KhBqipHv";
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_PUBLISHABLE_KEY,
+  {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}
 );
 const SITE_CONFIG = window.MEDQUIZ_CONFIG || {};
 let currentUser = null;
@@ -4454,7 +4455,8 @@ async function handleProfileClick(){
     return;
   }
   if(confirm("Выйти из аккаунта? Локальный тест останется открыт.")){
-    await supabaseClient.auth.signOut();
+    const {error} = await supabaseClient.auth.signOut({scope:"local"});
+    if(error) showSiteNotice("Не удалось выйти из аккаунта. Проверьте подключение и повторите попытку.",{error:true});
   }
 }
 
@@ -5940,8 +5942,28 @@ async function startSavedErrors(){
   await startSavedQuestionSet(false,activeLibraryId);
 }
 
-supabaseClient.auth.getSession().then(async ({data})=>{
-  await applySession(data.session);
+let sessionRestorePromise = null;
+function restoreSession(){
+  if(sessionRestorePromise) return sessionRestorePromise;
+  sessionRestorePromise = (async ()=>{
+    const {data,error} = await supabaseClient.auth.getSession();
+    // A temporary connection failure must not turn a saved login into a guest.
+    if(error) throw error;
+    await applySession(data.session);
+  })().finally(()=>{sessionRestorePromise = null;});
+  return sessionRestorePromise;
+}
+function retrySessionRestore(){
+  restoreSession().catch(error=>console.warn("Не удалось восстановить вход. Повторим при возвращении на страницу или подключении к сети.",error));
+}
+window.addEventListener("online",retrySessionRestore);
+window.addEventListener("pageshow",event=>{
+  if(event.persisted) retrySessionRestore();
+});
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState === "visible") retrySessionRestore();
+});
+restoreSession().then(async ()=>{
   await initializeBrowserNavigation();
 }).catch(error=>{
   console.error("Не удалось открыть начальный экран",error);
@@ -5949,6 +5971,8 @@ supabaseClient.auth.getSession().then(async ({data})=>{
 });
 supabaseClient.auth.onAuthStateChange((event,session)=>{
   if(event === "PASSWORD_RECOVERY") setTimeout(openPasswordModal,0);
+  // Refreshing a token preserves the account; it does not need a profile reload.
+  if(event === "TOKEN_REFRESHED" && session?.user?.id === currentUser?.id) return;
   setTimeout(()=>applySession(session),0);
 });
 ["authEmail","authPassword","authPasswordRepeat"].forEach(id=>{
